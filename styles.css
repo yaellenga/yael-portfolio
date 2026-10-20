@@ -1,0 +1,179 @@
+/* =========================================================
+   Design tokens — every value comes from the Figma frame
+   "Desktop - 2" (1440 × 1024).
+   ========================================================= */
+:root {
+  /* Colors */
+  --color-background: #e3ddd1;
+  --color-brown: #816861;
+
+  /* Fonts */
+  --font-title: "Khand", sans-serif;
+  --font-letters: "Kanit", sans-serif;
+
+  /* Scale unit: 1 Figma pixel.
+     The page is drawn at 1440 × 1024 and shrinks to fit any screen,
+     so the whole design always shows on one screen. */
+  --u: min(100vw / 1440, 100vh / 1024);
+
+  /* Sizes (in Figma pixels × --u) */
+  --page-width: calc(1440 * var(--u));
+  --page-height: calc(1024 * var(--u));
+  --title-size: calc(84 * var(--u));
+  --title-box-height: calc(96 * var(--u));
+  --name-size: calc(44 * var(--u));
+  --letter-size: calc(55 * var(--u));
+  --grid-width: calc(870 * var(--u));
+  --grid-height: calc(619 * var(--u));
+  --grid-border: calc(7 * var(--u));
+  --grid-line: calc(2 * var(--u));
+
+  /* Spacing (in Figma pixels × --u) */
+  --space-above-title: calc(81 * var(--u));
+  --space-title-to-grid: calc(76 * var(--u));
+  --space-grid-to-name: calc(39 * var(--u));
+}
+
+/* On phones, use the visible screen height (without the browser bars) */
+@supports (height: 100dvh) {
+  :root {
+    --u: min(100vw / 1440, 100dvh / 1024);
+  }
+}
+
+/* =========================================================
+   Page
+   ========================================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center; /* keeps the design in the middle of the screen */
+  overflow: hidden; /* one screen, no scrolling */
+  background-color: var(--color-background);
+  color: var(--color-brown);
+}
+
+/* The 1440 × 1024 frame from Figma */
+.page {
+  width: var(--page-width);
+  height: var(--page-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: var(--space-above-title);
+  text-align: center;
+}
+
+/* "The Work's Ready, The Website's Not" */
+.title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: var(--title-size);
+  letter-spacing: 0.05em;
+  line-height: normal;
+  white-space: nowrap;
+  height: var(--title-box-height); /* the title box height from Figma */
+}
+
+/* "Yael Lenga" */
+.name {
+  margin-top: var(--space-grid-to-name);
+  font-family: var(--font-title);
+  font-weight: 400;
+  font-size: var(--name-size);
+  letter-spacing: 0.05em;
+  line-height: normal;
+}
+
+/* =========================================================
+   Word search grid: 10 columns × 7 rows
+   ========================================================= */
+.word-search {
+  position: relative; /* the highlights are placed inside it */
+  width: var(--grid-width);
+  height: var(--grid-height);
+  margin-top: var(--space-title-to-grid);
+  border: var(--grid-border) solid var(--color-brown);
+}
+
+/* The letters sit on top of the highlights */
+.letters {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+}
+
+/* One square of the grid */
+.letters span {
+  display: grid;
+  place-items: center;
+  border-right: var(--grid-line) solid var(--color-brown);
+  border-bottom: var(--grid-line) solid var(--color-brown);
+  font-family: var(--font-letters);
+  font-weight: 600;
+  font-size: var(--letter-size);
+  line-height: 1;
+}
+
+/* No inner line next to the thick outer border */
+.letters span:nth-child(10n) {
+  border-right: none;
+}
+
+.letters span:nth-last-child(-n + 10) {
+  border-bottom: none;
+}
+
+/* =========================================================
+   Highlights (the colored shapes from Figma, in /images).
+   Positions are in % of the inside of the grid (856 × 605).
+   ========================================================= */
+.highlight {
+  position: absolute;
+}
+
+.highlight-portfolio {
+  left: 10.05%;
+  top: 15.87%;
+  width: 89.84%;
+  height: 11.4%;
+}
+
+.highlight-coming {
+  left: 20.44%;
+  top: 0.66%;
+  width: 8.53%;
+  height: 84.46%;
+}
+
+.highlight-soon {
+  left: 41%;
+  top: 73.39%;
+  width: 38.9%;
+  height: 11.07%;
+}
+
+.highlight-stay-tuned {
+  left: 0.58%;
+  top: 87.6%;
+  width: 89.6%;
+  height: 11.57%;
+}
+
+/* Hidden on screen, but read aloud by screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
