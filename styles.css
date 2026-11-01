@@ -167,10 +167,18 @@ body.home {
 .subtitle-part-1 { --x: 821;  --y: 771; --w: 343; }
 .subtitle-part-2 { --x: 1089; --y: 835; --w: 360; }
 
-/* The underlined link to the process page */
+/* The link to the process page: no underline until you hover it */
 .subtitle-part-2 a {
   color: inherit;
-  text-decoration: underline;
+  text-decoration: none;
+  text-decoration-thickness: from-font; /* underline thickness and position as in Figma */
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none; /* keeps the underline whole under the ":)" */
+}
+
+.subtitle-part-2 a:hover,
+.subtitle-part-2 a:focus-visible {
+  text-decoration-line: underline;
 }
 
 /* "Yael Lenga" in handwriting */
