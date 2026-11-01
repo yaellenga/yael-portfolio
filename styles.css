@@ -1,6 +1,6 @@
 /* =========================================================
    Design tokens — every value comes from the Figma frames
-   "Coming soon" (1440 × 1024) and "Process" (1440 wide).
+   "Coming soon" (1440 × 982) and "Process" (1440 wide).
    ========================================================= */
 :root {
   /* Colors */
@@ -8,37 +8,37 @@
   --color-brown: #503730;
   --color-white: #ffffff;
 
+  /* Home page color blocks */
+  --color-block-orange: rgba(254, 88, 8, 0.77);
+  --color-block-purple: #6245b0;
+  --color-block-teal: #07e8c1;
+  --color-block-green: #80cd45;
+  --color-block-yellow: #ffd42f;
+  --color-block-lavender: #a4b1e0;
+  --color-block-red: #ff485d;
+  --color-block-cyan: #5ce3fe;
+
   /* Process entry colors — add a new one here for each new week */
   --color-entry-green: #00deb8;
   --color-entry-red: #ff485d;
 
   /* Fonts */
   --font-text: "Advent Pro", sans-serif;
-  --font-letters: "Kanit", sans-serif;
+  --font-handwriting: "Mynerve", cursive;
 
-  /* Scale unit: 1 Figma pixel.
-     The page is drawn at 1440 × 1024 and shrinks to fit any screen,
+  /* Home page scale unit: 1 Figma pixel.
+     The page is drawn at 1440 × 982 and shrinks to fit any screen,
      so the whole design always shows on one screen. */
-  --u: min(100vw / 1440, 100vh / 1024);
+  --u: min(100vw / 1440, 100vh / 982);
 
-  /* Sizes (in Figma pixels × --u) */
+  /* Home page sizes (in Figma pixels × --u) */
   --page-width: calc(1440 * var(--u));
-  --page-height: calc(1024 * var(--u));
-  --title-size: calc(74 * var(--u));
-  --title-line-height: calc(90 * var(--u));
-  --text-size: calc(44 * var(--u));
-  --text-box-height: calc(96 * var(--u)); /* height of the title and subtitle boxes */
-  --letter-size: calc(39.932 * var(--u));
-  --grid-width: calc(766 * var(--u));
-  --grid-height: calc(545.273 * var(--u));
-  --grid-border: calc(5.082 * var(--u));
-  --grid-line: calc(1.452 * var(--u));
-
-  /* Spacing (in Figma pixels × --u) */
-  --space-above-title: calc(59 * var(--u));
-  --space-title-to-subtitle: calc(29 * var(--u));
-  --space-subtitle-to-grid: calc(20 * var(--u));
-  --space-grid-to-name: calc(51.727 * var(--u));
+  --page-height: calc(982 * var(--u));
+  --title-size: calc(90 * var(--u));
+  --title-line-height: calc(112 * var(--u));
+  --subtitle-size: calc(60 * var(--u));
+  --subtitle-line-height: calc(64 * var(--u));
+  --name-size: calc(60 * var(--u));
 
   /* Process page unit: 1 Figma pixel.
      This page scrolls, so it only scales with the screen width. */
@@ -75,7 +75,7 @@
 /* On phones, use the visible screen height (without the browser bars) */
 @supports (height: 100dvh) {
   :root {
-    --u: min(100vw / 1440, 100dvh / 1024);
+    --u: min(100vw / 1440, 100dvh / 982);
   }
 }
 
@@ -101,131 +101,87 @@ body.home {
   overflow: hidden; /* no scrolling */
 }
 
-/* The 1440 × 1024 frame from Figma */
+/* The 1440 × 982 frame from Figma */
 .page {
+  position: relative; /* blocks and text are placed inside it */
   width: var(--page-width);
   height: var(--page-height);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: var(--space-above-title);
-  text-align: center;
+  overflow: hidden;
+  color: var(--color-brown);
 }
 
-/* "The Work's Ready, The Website's Not" */
-.title {
-  height: var(--text-box-height);
+/* Anything placed at an exact spot from Figma.
+   Each one sets --x, --y (and --w / --h) in Figma pixels. */
+.placed {
+  position: absolute;
+  left: calc(var(--x) * var(--u));
+  top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+}
+
+/* =========================================================
+   Color blocks (4 columns, 360 wide)
+   ========================================================= */
+.block {
+  height: calc(var(--h) * var(--u));
+}
+
+/* Column 1 */
+.block-orange   { --x: -1;   --y: 0;   --w: 360; --h: 491; background-color: var(--color-block-orange); }
+.block-purple   { --x: -1;   --y: 491; --w: 360; --h: 491; background-color: var(--color-block-purple); }
+/* Column 2 (the gray space under the green block holds the name) */
+.block-teal     { --x: 359;  --y: 0;   --w: 360; --h: 368; background-color: var(--color-block-teal); }
+.block-green    { --x: 359;  --y: 367; --w: 360; --h: 492; background-color: var(--color-block-green); }
+/* Column 3 */
+.block-yellow   { --x: 719;  --y: 0;   --w: 360; --h: 614; background-color: var(--color-block-yellow); }
+.block-lavender { --x: 719;  --y: 614; --w: 360; --h: 368; background-color: var(--color-block-lavender); }
+/* Column 4 */
+.block-red      { --x: 1079; --y: 0;   --w: 361; --h: 368; background-color: var(--color-block-red); }
+.block-cyan     { --x: 1079; --y: 368; --w: 361; --h: 614; background-color: var(--color-block-cyan); }
+
+/* =========================================================
+   Text
+   ========================================================= */
+
+/* "The Work's Ready, / The Website is Not" — two parts in two blocks */
+.title-part {
   font-family: var(--font-text);
   font-weight: 700;
   font-size: var(--title-size);
   line-height: var(--title-line-height);
-  letter-spacing: 0.05em;
-  white-space: nowrap;
+  letter-spacing: 0.03em;
 }
 
-/* "In the meantime, check out my process" */
-.subtitle {
-  height: var(--text-box-height);
-  margin-top: var(--space-title-to-subtitle);
+.title-part-1 { --x: 424; --y: 9;   --w: 356; }
+.title-part-2 { --x: 745; --y: 234; --w: 360; }
+
+/* "In the meantime, check out my process :)" — two parts side by side */
+.subtitle-part {
   font-family: var(--font-text);
   font-weight: 400;
-  font-size: var(--text-size);
-  line-height: normal;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
+  font-size: var(--subtitle-size);
+  line-height: var(--subtitle-line-height);
+  letter-spacing: 0.03em;
 }
 
-/* The underlined "check out my process" link */
-.subtitle a {
+.subtitle-part-1 { --x: 821;  --y: 771; --w: 343; }
+.subtitle-part-2 { --x: 1089; --y: 835; --w: 360; }
+
+/* The underlined link to the process page */
+.subtitle-part-2 a {
   color: inherit;
   text-decoration: underline;
 }
 
-/* "Yael Lenga" */
+/* "Yael Lenga" in handwriting */
 .name {
-  margin-top: var(--space-grid-to-name);
-  font-family: var(--font-text);
+  --x: 395;
+  --y: 896;
+  --w: 336;
+  font-family: var(--font-handwriting);
   font-weight: 400;
-  font-size: var(--text-size);
-  line-height: normal;
-  letter-spacing: 0.05em;
-}
-
-/* =========================================================
-   Word search grid: 10 columns × 7 rows
-   ========================================================= */
-.word-search {
-  position: relative; /* the highlights are placed inside it */
-  width: var(--grid-width);
-  height: var(--grid-height);
-  margin-top: var(--space-subtitle-to-grid);
-  border: var(--grid-border) solid var(--color-brown);
-}
-
-/* The letters sit on top of the highlights */
-.letters {
-  position: relative;
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(7, 1fr);
-}
-
-/* One square of the grid */
-.letters span {
-  display: grid;
-  place-items: center;
-  border-right: var(--grid-line) solid var(--color-brown);
-  border-bottom: var(--grid-line) solid var(--color-brown);
-  font-family: var(--font-letters);
-  font-weight: 600;
-  font-size: var(--letter-size);
-  line-height: 1;
-}
-
-/* No inner line next to the thick outer border */
-.letters span:nth-child(10n) {
-  border-right: none;
-}
-
-.letters span:nth-last-child(-n + 10) {
-  border-bottom: none;
-}
-
-/* =========================================================
-   Highlights (the colored shapes from Figma, in /images).
-   Positions are in % of the inside of the grid (755.8 × 535.1).
-   ========================================================= */
-.highlight {
-  position: absolute;
-}
-
-.highlight-portfolio {
-  left: 10.29%;
-  top: 14.7%;
-  width: 89.57%;
-  height: 11.41%;
-}
-
-.highlight-coming {
-  left: 20.57%;
-  top: 0.84%;
-  width: 8.43%;
-  height: 84.13%;
-}
-
-.highlight-soon {
-  left: 41%;
-  top: 73.23%;
-  width: 38.78%;
-  height: 11.09%;
-}
-
-.highlight-stay-tuned {
-  left: 1.06%;
-  top: 86.6%;
-  width: 89.34%;
-  height: 11.58%;
+  font-size: var(--name-size);
+  line-height: 0.9;
 }
 
 /* =========================================================
