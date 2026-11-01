@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yael Lenga — Process</title>
+
+  <!-- Fonts from Google Fonts: Advent Pro (all text on this page) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="process-header">
+    <h1 class="process-title">Process</h1>
+  </header>
+
+  <main>
+    <!--
+      HOW TO ADD A NEW WEEK
+      1. Copy one <article> block and paste it at the bottom (after the last one).
+      2. Change the date (both the datetime="" and the text), the title and the images.
+      3. Pick a color: add it in styles.css under "Process entry colors",
+         then use it in style="--entry-color: var(--color-entry-...)".
+      One image appears next to the title; two or more appear in a row under it.
+    -->
+
+    <article class="entry" style="--entry-color: var(--color-entry-green)">
+      <p class="entry-date"><time datetime="2026-10-19">19.10</time></p>
+      <h2 class="entry-title">Coming soon</h2>
+      <!-- Short text: coming once it's designed in Figma -->
+      <div class="entry-images">
+        <img src="images/process-19-10-coming-soon.png" alt="The coming soon page: a word search with the words coming, soon, portfolio and stay tuned">
+      </div>
+    </article>
+
+    <article class="entry" style="--entry-color: var(--color-entry-red)">
+      <p class="entry-date"><time datetime="2026-10-26">26.10</time></p>
+      <h2 class="entry-title">visual options</h2>
+      <!-- Short text: coming once it's designed in Figma -->
+      <div class="entry-images">
+        <img src="images/process-26-10-option-1.png" alt="Visual option 1: a portfolio page with colorful blocks and the trac. project">
+        <img src="images/process-26-10-option-2.png" alt="Visual option 2: a dark portfolio page presenting the trac. project">
+      </div>
+    </article>
+  </main>
+</body>
+</html>

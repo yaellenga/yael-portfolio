@@ -1,11 +1,16 @@
 /* =========================================================
-   Design tokens — every value comes from the Figma frame
-   "Coming soon" (1440 × 1024).
+   Design tokens — every value comes from the Figma frames
+   "Coming soon" (1440 × 1024) and "Process" (1440 wide).
    ========================================================= */
 :root {
   /* Colors */
   --color-background: #dadada;
   --color-brown: #503730;
+  --color-white: #ffffff;
+
+  /* Process entry colors — add a new one here for each new week */
+  --color-entry-green: #00deb8;
+  --color-entry-red: #ff485d;
 
   /* Fonts */
   --font-text: "Advent Pro", sans-serif;
@@ -34,6 +39,37 @@
   --space-title-to-subtitle: calc(29 * var(--u));
   --space-subtitle-to-grid: calc(20 * var(--u));
   --space-grid-to-name: calc(51.727 * var(--u));
+
+  /* Process page unit: 1 Figma pixel.
+     This page scrolls, so it only scales with the screen width. */
+  --w: calc(100vw / 1440);
+
+  /* Process page sizes (in Figma pixels × --w) */
+  --process-title-size: calc(200 * var(--w));
+  --process-title-line-height: calc(90 * var(--w));
+  --process-header-height: calc(154 * var(--w));
+  --entry-text-size: calc(56 * var(--w));
+  --entry-line-height: calc(90 * var(--w));
+  --entry-tab-width: calc(225 * var(--w));
+  --entry-tab-height: calc(88 * var(--w));
+  --entry-corner: calc(9 * var(--w));
+  --entry-title-column: calc(429 * var(--w));
+  --entry-image-width: calc(634 * var(--w));
+  --entry-image-height: calc(449 * var(--w));
+  --entry-row-image-width: calc(577 * var(--w));
+  --entry-row-image-height: calc(409 * var(--w));
+
+  /* Process page spacing (in Figma pixels × --w) */
+  --space-process-title-top: calc(47 * var(--w));
+  --space-process-title-left: calc(302 * var(--w));
+  --space-entry-top: calc(33 * var(--w));
+  --space-entry-left: calc(60 * var(--w));
+  --space-entry-bottom: calc(51 * var(--w));
+  --space-entry-bottom-row: calc(105 * var(--w));
+  --space-title-to-image: calc(14 * var(--w));
+  --space-title-to-row: calc(38 * var(--w));
+  --space-row-indent: calc(112 * var(--w));
+  --space-row-gap: calc(57 * var(--w));
 }
 
 /* On phones, use the visible screen height (without the browser bars) */
@@ -52,13 +88,17 @@
 }
 
 body {
+  background-color: var(--color-background);
+  color: var(--color-brown);
+}
+
+/* Home page: one screen, design in the middle */
+body.home {
   min-height: 100vh;
   min-height: 100dvh;
   display: grid;
-  place-items: center; /* keeps the design in the middle of the screen */
-  overflow: hidden; /* one screen, no scrolling */
-  background-color: var(--color-background);
-  color: var(--color-brown);
+  place-items: center;
+  overflow: hidden; /* no scrolling */
 }
 
 /* The 1440 × 1024 frame from Figma */
@@ -186,6 +226,103 @@ body {
   top: 86.6%;
   width: 89.34%;
   height: 11.58%;
+}
+
+/* =========================================================
+   Process page
+   ========================================================= */
+
+/* Gray strip at the top with the big "Process" title.
+   The first entry's color band covers the bottom of the letters. */
+.process-header {
+  height: var(--process-header-height);
+  overflow: hidden;
+}
+
+.process-title {
+  padding-top: var(--space-process-title-top);
+  padding-left: var(--space-process-title-left);
+  font-family: var(--font-text);
+  font-weight: 800;
+  font-size: var(--process-title-size);
+  line-height: var(--process-title-line-height);
+  letter-spacing: 0.39em;
+  white-space: nowrap;
+}
+
+/* One week = one entry: a full-width color band with a date tab on top.
+   Each entry sets its own color with --entry-color in process.html. */
+.entry {
+  position: relative; /* later entries' tabs sit on top of earlier bands */
+  display: grid;
+  grid-template-columns: var(--entry-title-column) auto;
+  align-items: start;
+  padding: var(--space-entry-top) 0 var(--space-entry-bottom) var(--space-entry-left);
+  background-color: var(--entry-color);
+  color: var(--color-white);
+}
+
+/* The date, in the tab above the band */
+.entry-date {
+  position: absolute;
+  left: 0;
+  bottom: 100%; /* sits right on top of the band */
+  width: var(--entry-tab-width);
+  height: var(--entry-tab-height);
+  padding-left: var(--space-entry-left);
+  border-top-right-radius: var(--entry-corner);
+  background-color: var(--entry-color);
+}
+
+/* The small curve where the tab meets the band */
+.entry-date::after {
+  content: "";
+  position: absolute;
+  left: 100%;
+  bottom: 0;
+  width: var(--entry-corner);
+  height: var(--entry-corner);
+  background: radial-gradient(circle at top right, transparent var(--entry-corner), var(--entry-color) var(--entry-corner));
+}
+
+.entry-date,
+.entry-title {
+  font-family: var(--font-text);
+  font-weight: 700;
+  font-size: var(--entry-text-size);
+  line-height: var(--entry-line-height);
+  letter-spacing: 0.05em;
+}
+
+/* One image: next to the title */
+.entry-images {
+  display: flex;
+  gap: var(--space-row-gap);
+  margin-top: var(--space-title-to-image);
+}
+
+.entry-images img {
+  display: block;
+  width: var(--entry-image-width);
+  height: var(--entry-image-height);
+  object-fit: cover;
+}
+
+/* Two or more images: in a row under the title */
+.entry:has(.entry-images img:nth-child(2)) {
+  grid-template-columns: auto;
+  padding-bottom: var(--space-entry-bottom-row);
+}
+
+.entry:has(.entry-images img:nth-child(2)) .entry-images {
+  margin-top: var(--space-title-to-row);
+  margin-left: var(--space-row-indent);
+}
+
+.entry:has(.entry-images img:nth-child(2)) .entry-images img {
+  width: var(--entry-row-image-width);
+  height: var(--entry-row-image-height);
+  object-position: top; /* show the top of tall screenshots */
 }
 
 /* Hidden on screen, but read aloud by screen readers */
