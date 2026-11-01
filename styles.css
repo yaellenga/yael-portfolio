@@ -1,14 +1,14 @@
 /* =========================================================
    Design tokens — every value comes from the Figma frame
-   "Desktop - 2" (1440 × 1024).
+   "Coming soon" (1440 × 1024).
    ========================================================= */
 :root {
   /* Colors */
-  --color-background: #e3ddd1;
-  --color-brown: #816861;
+  --color-background: #dadada;
+  --color-brown: #503730;
 
   /* Fonts */
-  --font-title: "Khand", sans-serif;
+  --font-text: "Advent Pro", sans-serif;
   --font-letters: "Kanit", sans-serif;
 
   /* Scale unit: 1 Figma pixel.
@@ -19,19 +19,21 @@
   /* Sizes (in Figma pixels × --u) */
   --page-width: calc(1440 * var(--u));
   --page-height: calc(1024 * var(--u));
-  --title-size: calc(84 * var(--u));
-  --title-box-height: calc(96 * var(--u));
-  --name-size: calc(44 * var(--u));
-  --letter-size: calc(55 * var(--u));
-  --grid-width: calc(870 * var(--u));
-  --grid-height: calc(619 * var(--u));
-  --grid-border: calc(7 * var(--u));
-  --grid-line: calc(2 * var(--u));
+  --title-size: calc(74 * var(--u));
+  --title-line-height: calc(90 * var(--u));
+  --text-size: calc(44 * var(--u));
+  --text-box-height: calc(96 * var(--u)); /* height of the title and subtitle boxes */
+  --letter-size: calc(39.932 * var(--u));
+  --grid-width: calc(766 * var(--u));
+  --grid-height: calc(545.273 * var(--u));
+  --grid-border: calc(5.082 * var(--u));
+  --grid-line: calc(1.452 * var(--u));
 
   /* Spacing (in Figma pixels × --u) */
-  --space-above-title: calc(81 * var(--u));
-  --space-title-to-grid: calc(76 * var(--u));
-  --space-grid-to-name: calc(39 * var(--u));
+  --space-above-title: calc(59 * var(--u));
+  --space-title-to-subtitle: calc(29 * var(--u));
+  --space-subtitle-to-grid: calc(20 * var(--u));
+  --space-grid-to-name: calc(51.727 * var(--u));
 }
 
 /* On phones, use the visible screen height (without the browser bars) */
@@ -72,23 +74,41 @@ body {
 
 /* "The Work's Ready, The Website's Not" */
 .title {
-  font-family: var(--font-title);
+  height: var(--text-box-height);
+  font-family: var(--font-text);
   font-weight: 700;
   font-size: var(--title-size);
+  line-height: var(--title-line-height);
   letter-spacing: 0.05em;
-  line-height: normal;
   white-space: nowrap;
-  height: var(--title-box-height); /* the title box height from Figma */
+}
+
+/* "In the meantime, check out my process" */
+.subtitle {
+  height: var(--text-box-height);
+  margin-top: var(--space-title-to-subtitle);
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: var(--text-size);
+  line-height: normal;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* The underlined "check out my process" link */
+.subtitle a {
+  color: inherit;
+  text-decoration: underline;
 }
 
 /* "Yael Lenga" */
 .name {
   margin-top: var(--space-grid-to-name);
-  font-family: var(--font-title);
+  font-family: var(--font-text);
   font-weight: 400;
-  font-size: var(--name-size);
-  letter-spacing: 0.05em;
+  font-size: var(--text-size);
   line-height: normal;
+  letter-spacing: 0.05em;
 }
 
 /* =========================================================
@@ -98,7 +118,7 @@ body {
   position: relative; /* the highlights are placed inside it */
   width: var(--grid-width);
   height: var(--grid-height);
-  margin-top: var(--space-title-to-grid);
+  margin-top: var(--space-subtitle-to-grid);
   border: var(--grid-border) solid var(--color-brown);
 }
 
@@ -134,38 +154,38 @@ body {
 
 /* =========================================================
    Highlights (the colored shapes from Figma, in /images).
-   Positions are in % of the inside of the grid (856 × 605).
+   Positions are in % of the inside of the grid (755.8 × 535.1).
    ========================================================= */
 .highlight {
   position: absolute;
 }
 
 .highlight-portfolio {
-  left: 10.05%;
-  top: 15.87%;
-  width: 89.84%;
-  height: 11.4%;
+  left: 10.29%;
+  top: 14.7%;
+  width: 89.57%;
+  height: 11.41%;
 }
 
 .highlight-coming {
-  left: 20.44%;
-  top: 0.66%;
-  width: 8.53%;
-  height: 84.46%;
+  left: 20.57%;
+  top: 0.84%;
+  width: 8.43%;
+  height: 84.13%;
 }
 
 .highlight-soon {
   left: 41%;
-  top: 73.39%;
-  width: 38.9%;
-  height: 11.07%;
+  top: 73.23%;
+  width: 38.78%;
+  height: 11.09%;
 }
 
 .highlight-stay-tuned {
-  left: 0.58%;
-  top: 87.6%;
-  width: 89.6%;
-  height: 11.57%;
+  left: 1.06%;
+  top: 86.6%;
+  width: 89.34%;
+  height: 11.58%;
 }
 
 /* Hidden on screen, but read aloud by screen readers */
