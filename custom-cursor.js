@@ -1,4 +1,4 @@
-// Home page: shows a special mouse over each project screen.
+// Shows a special mouse: over each project screen on the home page, and on the about page.
 // A screen gets one by having data-cursor="name" in the HTML.
 // Each name has a picture (listed below) and a size (.cursor-name in styles.css).
 
@@ -6,6 +6,7 @@ const cursorPictures = {
   'trac': 'images/cursor-trac.svg',
   'lets-talk': 'images/cursor-lets-talk.svg',
   'hamotzi': 'images/cursor-hamotzi.png',
+  'about': 'images/cursor-about.png',
 };
 
 const projectCursor = document.querySelector('.project-cursor');
