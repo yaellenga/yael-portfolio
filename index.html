@@ -15,69 +15,72 @@
 <body>
   <h1 class="visually-hidden">Cool stuff by Yael Lenga</h1>
 
-  <!-- Two columns. When you scroll, the left one moves up and the right one moves down.
-       The two halves of each project image meet in the middle along the way. -->
+  <!-- Two columns of 4 screens each. When you scroll, the left one moves up and the right one moves down.
+       The two halves of each project meet in the middle along the way. -->
   <main class="split">
 
-    <!-- LEFT COLUMN (moves up) -->
+    <!-- LEFT COLUMN (starts at Screen 1, moves up) -->
     <div class="split-column split-left">
-      <div class="placed box left-green"></div>
-      <div class="placed box left-blue"></div>
-      <div class="placed box left-orange"></div>
 
-      <p class="placed handwriting cool-stuff" aria-hidden="true">Cool stuff by</p>
+      <!-- Screen 1 · Cool stuff by -->
+      <section class="screen screen-orange">
+        <p class="placed pin-bottom handwriting cool-stuff" aria-hidden="true">Cool stuff by</p>
+      </section>
 
-      <!-- Hamotzi: left half of the image -->
-      <div class="placed box crop left-hamotzi">
-        <img src="images/home-hamotzi.jpg" alt="Hamotzi — video art">
-      </div>
+      <!-- Screen 2 · Hamotzi (left half of the image) -->
+      <section class="screen">
+        <img class="screen-photo left-hamotzi" src="images/home-hamotzi.jpg" alt="Hamotzi — video art">
+      </section>
 
-      <!-- trac.: the app on a phone -->
-      <div class="placed box left-trac-phone">
-        <img class="whole-image" src="images/home-trac-phone.png" alt="The trac. app home screen on a phone">
-      </div>
+      <!-- Screen 3 · trac. (the app on a phone) -->
+      <section class="screen screen-blue">
+        <div class="placed box left-trac-phone">
+          <img class="whole-image" src="images/home-trac-phone.png" alt="The trac. app home screen on a phone">
+        </div>
+      </section>
 
-      <!-- Lets Talk About It: right half of the illustration -->
-      <div class="placed box crop left-lets-talk">
-        <img src="images/home-lets-talk.png" alt="">
-      </div>
+      <!-- Screen 4 · Lets Talk About It (right half of the illustration) -->
+      <section class="screen screen-green">
+        <div class="placed box crop left-lets-talk">
+          <img src="images/home-lets-talk.png" alt="">
+        </div>
+      </section>
     </div>
 
-    <!-- RIGHT COLUMN (moves down) -->
+    <!-- RIGHT COLUMN (starts at Screen 4, moves down) -->
     <div class="split-column split-right">
-      <!-- Last screen of the right column = what you see first -->
-      <div class="placed box crop right-table-photo">
-        <img src="images/home-table-photo.jpg" alt="A festive table with flowers, candles, pumpkins and pine cones">
-      </div>
 
-      <div class="placed box right-green"></div>
+      <!-- Screen 1 · Lets Talk About It (left half of the illustration, Hebrew title, label) -->
+      <section class="screen screen-green">
+        <p class="placed pin-bottom project-label label-lets-talk">lets talk about it<br>web&amp;app design<br>illustration</p>
+        <p class="placed pin-bottom project-year year-lets-talk">2026</p>
+        <div class="placed box crop right-lets-talk">
+          <img src="images/home-lets-talk.png" alt="Lets Talk About It — illustration of a boy lying on the grass">
+        </div>
+        <div class="placed box right-lets-talk-name">
+          <img class="whole-image" src="images/home-lets-talk-title.png" alt="בואי נדבר על זה" lang="he">
+        </div>
+      </section>
 
-      <p class="placed handwriting home-name" aria-hidden="true">Yael Lenga</p>
+      <!-- Screen 2 · trac. (photo and label) -->
+      <section class="screen">
+        <img class="screen-photo right-trac-photo" src="images/home-trac-photo.jpg" alt="A musician playing guitar in a home studio">
+        <p class="placed pin-bottom project-label label-trac">trac.<br>ux\ui<br>app design</p>
+        <p class="placed pin-bottom project-year year-trac">2024</p>
+      </section>
 
-      <!-- Hamotzi: right half of the image -->
-      <div class="placed box crop right-hamotzi">
-        <img src="images/home-hamotzi.jpg" alt="">
-      </div>
-      <p class="placed project-label label-hamotzi">Hamotzi<br>video art<br>art direction&amp;filming</p>
-      <p class="placed project-year year-hamotzi">2024</p>
+      <!-- Screen 3 · Hamotzi (right half of the image and label) -->
+      <section class="screen">
+        <img class="screen-photo right-hamotzi" src="images/home-hamotzi.jpg" alt="">
+        <p class="placed pin-bottom project-label label-hamotzi">Hamotzi<br>video art<br>art direction&amp;filming</p>
+        <p class="placed pin-bottom project-year year-hamotzi">2024</p>
+      </section>
 
-      <!-- trac.: photo -->
-      <div class="placed box crop right-trac-photo">
-        <img src="images/home-trac-photo.jpg" alt="A musician playing guitar in a home studio">
-      </div>
-      <p class="placed project-label label-trac">trac.<br>ux\ui<br>app design</p>
-      <p class="placed project-year year-trac">2024</p>
-
-      <!-- Lets Talk About It: label, left half of the illustration and the Hebrew title -->
-      <p class="placed project-label label-lets-talk">lets talk about it<br>web&amp;app design<br>illustration</p>
-      <p class="placed project-year year-lets-talk">2026</p>
-
-      <div class="placed box crop right-lets-talk">
-        <img src="images/home-lets-talk.png" alt="Lets Talk About It — illustration of a boy lying on the grass">
-      </div>
-      <div class="placed box right-lets-talk-name">
-        <img class="whole-image" src="images/home-lets-talk-title.png" alt="בואי נדבר על זה" lang="he">
-      </div>
+      <!-- Screen 4 · Yael Lenga (what you see first) -->
+      <section class="screen">
+        <img class="screen-photo right-table-photo" src="images/home-table-photo.jpg" alt="A festive table with flowers, candles, pumpkins and pine cones">
+        <p class="placed pin-bottom handwriting home-name" aria-hidden="true">Yael Lenga</p>
+      </section>
     </div>
 
   </main>

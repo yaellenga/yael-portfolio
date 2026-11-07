@@ -28,10 +28,15 @@
      The page is drawn 1440 wide and always fills the screen width. */
   --u: calc(100vw / 1440);
 
+  /* Home page: every "Screen" in the columns is as tall as the browser window */
+  --screen-height: 100vh;
+
+  /* How much the photos grow when the window is taller than the Figma frame
+     (split-scroll.js works it out; 1 = Figma size) */
+  --cover-scale: 1;
+
   /* Home page sizes (in Figma pixels × --u) */
   --column-width: calc(720 * var(--u));
-  --left-column-height: calc(3867 * var(--u));
-  --right-column-height: calc(3864 * var(--u));
   --handwriting-size: calc(55 * var(--u));
   --label-size: calc(20 * var(--u));
   --year-size: calc(15 * var(--u));
@@ -81,39 +86,58 @@ body {
   color: var(--color-brown);
 }
 
+/* On phones, use the screen height without the browser bars,
+   so the screens don't jump while the bars hide and show */
+@supports (height: 100svh) {
+  :root {
+    --screen-height: 100svh;
+  }
+}
+
 /* =========================================================
    Home page: two columns that scroll in opposite directions.
+   Each column is 4 "Screens" (like the Figma frames Screen 1–4),
+   and each screen is as tall as the browser window.
    The left column moves up and the right column moves down,
    at the same speed (split-scroll.js moves them).
    ========================================================= */
 
 /* Gives the page its scroll length: as tall as a column */
 .split {
-  height: var(--right-column-height);
+  height: calc(4 * var(--screen-height));
 }
 
 /* Both columns stay fixed on screen; the script slides them */
 .split-column {
   position: fixed;
   width: var(--column-width);
-  overflow: hidden; /* like the Figma frames, hide what sticks out */
 }
 
-/* Left column: starts at its top */
+/* Left column: starts at its top (Screen 1) */
 .split-left {
   top: 0;
   left: 0;
-  height: var(--left-column-height);
 }
 
-/* Right column: starts at its bottom */
+/* Right column: starts at its bottom (Screen 4) */
 .split-right {
   bottom: 0;
   left: var(--column-width);
-  height: var(--right-column-height);
 }
 
-/* Anything placed at an exact spot from Figma.
+/* One screen: as tall as the window, hides what sticks out */
+.screen {
+  position: relative;
+  height: var(--screen-height);
+  overflow: hidden;
+}
+
+/* Screen backgrounds */
+.screen-orange { background-color: var(--color-home-orange); }
+.screen-blue   { background-color: var(--color-home-blue); }
+.screen-green  { background-color: var(--color-home-green); }
+
+/* Anything placed at an exact spot from Figma, measured from the top of its screen.
    Each one sets --x, --y, --width (and --height) in Figma pixels. */
 .placed {
   position: absolute;
@@ -122,7 +146,13 @@ body {
   width: calc(var(--width) * var(--u));
 }
 
-/* Placed boxes that also have a height (color blocks and images) */
+/* Pinned to the bottom of its screen (Constraints: Bottom in Figma).
+   --from-bottom = how far its top is from the bottom of the screen, in Figma pixels. */
+.pin-bottom {
+  top: calc(var(--screen-height) - var(--from-bottom) * var(--u));
+}
+
+/* Placed boxes that also have a height */
 .box {
   height: calc(var(--height) * var(--u));
 }
@@ -149,31 +179,58 @@ body {
   height: 100%;
 }
 
-/* ---------- Left column (top to bottom) ---------- */
-.left-orange      { --x: 0;   --y: 0;    --width: 720; --height: 964; background-color: var(--color-home-orange); }
-.left-hamotzi     { --x: 0;   --y: 964;  --width: 720; --height: 971;
-                    --img-left: -31.56%; --img-top: -1.34%; --img-width: 244.78%; --img-height: 101.34%; }
-.left-blue        { --x: 0;   --y: 1930; --width: 720; --height: 974; background-color: var(--color-home-blue); }
-.left-trac-phone  { --x: 188; --y: 2030; --width: 352.888; --height: 765.039; }
-.left-green       { --x: 0;   --y: 2903; --width: 720; --height: 964; background-color: var(--color-home-green); }
-.left-lets-talk   { --x: 174; --y: 2883; --width: 546; --height: 900;
-                    --img-left: -33.16%; --img-top: 0%; --img-width: 205.6%; --img-height: 132.17%; }
+/* A photo that fills its whole screen (Constraints: Stretch in Figma).
+   It is placed as in Figma around the middle of the screen, and grows
+   (--cover-scale) when the window is taller than the Figma frame.
+   It grows around --origin-x, so the two halves of a project image
+   stay joined in the middle of the page.
+   Each one sets --img-x, --img-y, --img-w, --img-h, --origin-x in Figma pixels
+   (--img-y is measured from the middle of the screen). */
+.screen-photo {
+  position: absolute;
+  left: calc(var(--img-x) * var(--u));
+  top: calc(50% + var(--img-y) * var(--u));
+  width: calc(var(--img-w) * var(--u));
+  height: calc(var(--img-h) * var(--u));
+  max-width: none;
+  transform-origin: calc((var(--origin-x) - var(--img-x)) * var(--u)) calc(var(--img-y) * -1 * var(--u));
+  transform: scale(var(--cover-scale));
+}
 
-/* ---------- Right column (top to bottom) ---------- */
-.right-green          { --x: 0;   --y: 0;    --width: 720; --height: 964; background-color: var(--color-home-green); }
-.right-lets-talk      { --x: -3;  --y: -20;  --width: 314; --height: 900;
+/* ---------- Left column ---------- */
+
+/* Screen 2: Hamotzi, left half (grows around the middle of the page) */
+.left-hamotzi    { --img-x: -227.2; --img-y: -495; --img-w: 1762.4; --img-h: 984; --origin-x: 720; }
+
+/* Screen 3: trac. phone, centered (Constraints: Center) */
+.left-trac-phone {
+  --x: 188; --width: 352.888; --height: 765.039;
+  top: calc((var(--screen-height) - var(--height) * var(--u)) / 2);
+}
+
+/* Screen 4: Lets Talk About It, right half (Constraints: Top) */
+.left-lets-talk  { --x: 174; --y: -20; --width: 546; --height: 900;
+                   --img-left: -33.16%; --img-top: 0%; --img-width: 205.6%; --img-height: 132.17%; }
+
+/* ---------- Right column ---------- */
+
+/* Screen 1: Lets Talk About It, left half and the Hebrew title (Constraints: Top) */
+.right-lets-talk      { --x: -3;  --y: -20; --width: 314; --height: 900;
                         --img-left: -230.59%; --img-top: 0%; --img-width: 357.5%; --img-height: 132.17%; }
-.right-lets-talk-name { --x: -61; --y: 94;   --width: 378; --height: 104; }
-.right-trac-photo     { --x: 0;   --y: 964;  --width: 720; --height: 969;
-                        --img-left: -15.5%; --img-top: 0%; --img-width: 219.83%; --img-height: 108.32%; }
-.right-hamotzi        { --x: 0;   --y: 1933; --width: 720; --height: 968;
-                        --img-left: -130.69%; --img-top: -1.38%; --img-width: 244.1%; --img-height: 101.34%; }
-.right-table-photo    { --x: 0;   --y: 2900; --width: 720; --height: 964;
-                        --img-left: -26.95%; --img-top: -26.7%; --img-width: 157.52%; --img-height: 158.1%; }
+.right-lets-talk-name { --x: -61; --y: 94;  --width: 378; --height: 104; }
+
+/* Screen 2: trac. photo */
+.right-trac-photo  { --img-x: -111.6; --img-y: -482; --img-w: 1582.8; --img-h: 1049.6; --origin-x: 360; }
+
+/* Screen 3: Hamotzi, right half (grows around the middle of the page) */
+.right-hamotzi     { --img-x: -941;   --img-y: -495.4; --img-w: 1757.5; --img-h: 981; --origin-x: 0; }
+
+/* Screen 4: table photo */
+.right-table-photo { --img-x: -194;   --img-y: -739.4; --img-w: 1134.1; --img-h: 1524.1; --origin-x: 360; }
 
 /* ---------- Text ---------- */
 
-/* "Cool stuff by" and "Yael Lenga" in handwriting */
+/* "Cool stuff by" and "Yael Lenga" in handwriting, pinned to the bottom */
 .handwriting {
   font-family: var(--font-handwriting);
   font-weight: 400;
@@ -182,7 +239,7 @@ body {
 }
 
 .cool-stuff {
-  --x: 398; --y: 878; --width: 391;
+  --x: 398; --from-bottom: 86; --width: 391;
   color: var(--color-black);
   text-decoration: underline;
   text-decoration-thickness: from-font; /* underline as in Figma */
@@ -190,11 +247,11 @@ body {
 }
 
 .home-name {
-  --x: 20; --y: 3778; --width: 265;
+  --x: 20; --from-bottom: 86; --width: 265;
   color: var(--color-white);
 }
 
-/* Project labels on the right column: name, type, year */
+/* Project labels on the right column: name, type, year (pinned to the bottom) */
 .project-label,
 .project-year {
   font-family: var(--font-label);
@@ -214,12 +271,12 @@ body {
   line-height: 1.49;
 }
 
-.label-lets-talk      { --x: 498; --y: 765;  --width: 182; }
-.year-lets-talk       { --x: 498; --y: 833;  --width: 67; }
-.label-trac           { --x: 498; --y: 1808; --width: 182; }
-.year-trac            { --x: 498; --y: 1871; --width: 67; }
-.label-hamotzi        { --x: 496; --y: 2755; --width: 182; }
-.year-hamotzi         { --x: 496; --y: 2818; --width: 67; }
+.label-lets-talk { --x: 498; --from-bottom: 199; --width: 182; }
+.year-lets-talk  { --x: 498; --from-bottom: 131; --width: 67; }
+.label-trac      { --x: 498; --from-bottom: 120; --width: 182; }
+.year-trac       { --x: 498; --from-bottom: 57;  --width: 67; }
+.label-hamotzi   { --x: 496; --from-bottom: 142; --width: 182; }
+.year-hamotzi    { --x: 496; --from-bottom: 79;  --width: 67; }
 
 /* =========================================================
    Process page
