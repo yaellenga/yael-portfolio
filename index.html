@@ -3,38 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yael Lenga — Coming Soon</title>
+  <title>Yael Lenga</title>
 
-  <!-- Fonts from Google Fonts: Advent Pro (title, subtitle) and Mynerve (name) -->
+  <!-- Fonts from Google Fonts: Mynerve (handwriting) and Carlito (project labels) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;700&family=Mynerve&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@700&family=Mynerve&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="home">
-  <main class="page">
-    <!-- Background color blocks -->
-    <div class="placed block block-orange"></div>
-    <div class="placed block block-purple"></div>
-    <div class="placed block block-teal"></div>
-    <div class="placed block block-green"></div>
-    <div class="placed block block-yellow"></div>
-    <div class="placed block block-lavender"></div>
-    <div class="placed block block-red"></div>
-    <div class="placed block block-cyan"></div>
+<body>
+  <h1 class="visually-hidden">Cool stuff by Yael Lenga</h1>
 
-    <h1>
-      <span class="placed title-part title-part-1">The Work’s Ready,</span>
-      <span class="placed title-part title-part-2">The Website<br>is Not</span>
-    </h1>
+  <!-- Two columns. When you scroll, the left one moves up and the right one moves down.
+       The two halves of each project image meet in the middle along the way. -->
+  <main class="split">
 
-    <p>
-      <span class="placed subtitle-part subtitle-part-1">In the meantime,</span>
-      <span class="placed subtitle-part subtitle-part-2"><a href="process.html">check out my process :)</a></span>
-    </p>
+    <!-- LEFT COLUMN (moves up) -->
+    <div class="split-column split-left">
+      <div class="placed box left-green"></div>
+      <div class="placed box left-blue"></div>
+      <div class="placed box left-orange"></div>
 
-    <p class="placed name">Yael Lenga</p>
+      <p class="placed handwriting cool-stuff" aria-hidden="true">Cool stuff by</p>
+
+      <!-- Hamotzi: left half of the image -->
+      <div class="placed box crop left-hamotzi">
+        <img src="images/home-hamotzi.jpg" alt="Hamotzi — video art">
+      </div>
+
+      <!-- trac.: the app on a phone -->
+      <div class="placed box left-trac-phone">
+        <img class="whole-image" src="images/home-trac-phone.png" alt="The trac. app home screen on a phone">
+      </div>
+
+      <!-- Lets Talk About It: right half of the illustration -->
+      <div class="placed box crop left-lets-talk">
+        <img src="images/home-lets-talk.png" alt="">
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN (moves down) -->
+    <div class="split-column split-right">
+      <!-- Last screen of the right column = what you see first -->
+      <div class="placed box crop right-table-photo">
+        <img src="images/home-table-photo.jpg" alt="A festive table with flowers, candles, pumpkins and pine cones">
+      </div>
+
+      <div class="placed box right-green"></div>
+
+      <p class="placed handwriting home-name" aria-hidden="true">Yael Lenga</p>
+
+      <!-- Hamotzi: right half of the image -->
+      <div class="placed box crop right-hamotzi">
+        <img src="images/home-hamotzi.jpg" alt="">
+      </div>
+      <p class="placed project-label label-hamotzi">Hamotzi<br>video art<br>art direction&amp;filming</p>
+      <p class="placed project-year year-hamotzi">2024</p>
+
+      <!-- trac.: photo -->
+      <div class="placed box crop right-trac-photo">
+        <img src="images/home-trac-photo.jpg" alt="A musician playing guitar in a home studio">
+      </div>
+      <p class="placed project-label label-trac">trac.<br>ux\ui<br>app design</p>
+      <p class="placed project-year year-trac">2024</p>
+
+      <!-- Lets Talk About It: label, left half of the illustration and the Hebrew title -->
+      <p class="placed project-label label-lets-talk">lets talk about it<br>web&amp;app design<br>illustration</p>
+      <p class="placed project-year year-lets-talk">2026</p>
+
+      <div class="placed box crop right-lets-talk">
+        <img src="images/home-lets-talk.png" alt="Lets Talk About It — illustration of a boy lying on the grass">
+      </div>
+      <div class="placed box right-lets-talk-name">
+        <img class="whole-image" src="images/home-lets-talk-title.png" alt="בואי נדבר על זה" lang="he">
+      </div>
+    </div>
+
   </main>
+
+  <script src="split-scroll.js"></script>
 </body>
 </html>

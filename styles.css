@@ -1,22 +1,19 @@
 /* =========================================================
    Design tokens — every value comes from the Figma frames
-   "Coming soon" (1440 × 982) and "Process" (1440 wide).
+   "index\homepage" (1440 × 964, two scrolling columns)
+   and "Process" (1440 wide).
    ========================================================= */
 :root {
   /* Colors */
   --color-background: #dadada;
   --color-brown: #503730;
   --color-white: #ffffff;
+  --color-black: #000000;
 
-  /* Home page color blocks */
-  --color-block-orange: rgba(254, 88, 8, 0.77);
-  --color-block-purple: #6245b0;
-  --color-block-teal: #07e8c1;
-  --color-block-green: #80cd45;
-  --color-block-yellow: #ffd42f;
-  --color-block-lavender: #a4b1e0;
-  --color-block-red: #ff485d;
-  --color-block-cyan: #5ce3fe;
+  /* Home page column colors */
+  --color-home-orange: #fe5808;
+  --color-home-blue: #acd0ef;
+  --color-home-green: #98ed51;
 
   /* Process entry colors — add a new one here for each new week */
   --color-entry-green: #00deb8;
@@ -25,20 +22,19 @@
   /* Fonts */
   --font-text: "Advent Pro", sans-serif;
   --font-handwriting: "Mynerve", cursive;
+  --font-label: "Carlito", sans-serif;
 
   /* Home page scale unit: 1 Figma pixel.
-     The page is drawn at 1440 × 982 and shrinks to fit any screen,
-     so the whole design always shows on one screen. */
-  --u: min(100vw / 1440, 100vh / 982);
+     The page is drawn 1440 wide and always fills the screen width. */
+  --u: calc(100vw / 1440);
 
   /* Home page sizes (in Figma pixels × --u) */
-  --page-width: calc(1440 * var(--u));
-  --page-height: calc(982 * var(--u));
-  --title-size: calc(90 * var(--u));
-  --title-line-height: calc(112 * var(--u));
-  --subtitle-size: calc(60 * var(--u));
-  --subtitle-line-height: calc(64 * var(--u));
-  --name-size: calc(60 * var(--u));
+  --column-width: calc(720 * var(--u));
+  --left-column-height: calc(3867 * var(--u));
+  --right-column-height: calc(3864 * var(--u));
+  --handwriting-size: calc(55 * var(--u));
+  --label-size: calc(20 * var(--u));
+  --year-size: calc(15 * var(--u));
 
   /* Process page unit: 1 Figma pixel.
      This page scrolls, so it only scales with the screen width. */
@@ -72,13 +68,6 @@
   --space-row-gap: calc(57 * var(--w));
 }
 
-/* On phones, use the visible screen height (without the browser bars) */
-@supports (height: 100dvh) {
-  :root {
-    --u: min(100vw / 1440, 100dvh / 982);
-  }
-}
-
 /* =========================================================
    Page
    ========================================================= */
@@ -92,105 +81,145 @@ body {
   color: var(--color-brown);
 }
 
-/* Home page: one screen, design in the middle */
-body.home {
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: grid;
-  place-items: center;
-  overflow: hidden; /* no scrolling */
+/* =========================================================
+   Home page: two columns that scroll in opposite directions.
+   The left column moves up and the right column moves down,
+   at the same speed (split-scroll.js moves them).
+   ========================================================= */
+
+/* Gives the page its scroll length: as tall as a column */
+.split {
+  height: var(--right-column-height);
 }
 
-/* The 1440 × 982 frame from Figma */
-.page {
-  position: relative; /* blocks and text are placed inside it */
-  width: var(--page-width);
-  height: var(--page-height);
-  overflow: hidden;
-  color: var(--color-brown);
+/* Both columns stay fixed on screen; the script slides them */
+.split-column {
+  position: fixed;
+  width: var(--column-width);
+  overflow: hidden; /* like the Figma frames, hide what sticks out */
+}
+
+/* Left column: starts at its top */
+.split-left {
+  top: 0;
+  left: 0;
+  height: var(--left-column-height);
+}
+
+/* Right column: starts at its bottom */
+.split-right {
+  bottom: 0;
+  left: var(--column-width);
+  height: var(--right-column-height);
 }
 
 /* Anything placed at an exact spot from Figma.
-   Each one sets --x, --y (and --w / --h) in Figma pixels. */
+   Each one sets --x, --y, --width (and --height) in Figma pixels. */
 .placed {
   position: absolute;
   left: calc(var(--x) * var(--u));
   top: calc(var(--y) * var(--u));
-  width: calc(var(--w) * var(--u));
+  width: calc(var(--width) * var(--u));
 }
 
-/* =========================================================
-   Color blocks (4 columns, 360 wide)
-   ========================================================= */
-.block {
-  height: calc(var(--h) * var(--u));
+/* Placed boxes that also have a height (color blocks and images) */
+.box {
+  height: calc(var(--height) * var(--u));
 }
 
-/* Column 1 */
-.block-orange   { --x: -1;   --y: 0;   --w: 360; --h: 491; background-color: var(--color-block-orange); }
-.block-purple   { --x: -1;   --y: 491; --w: 360; --h: 491; background-color: var(--color-block-purple); }
-/* Column 2 (the gray space under the green block holds the name) */
-.block-teal     { --x: 359;  --y: 0;   --w: 360; --h: 368; background-color: var(--color-block-teal); }
-.block-green    { --x: 359;  --y: 367; --w: 360; --h: 492; background-color: var(--color-block-green); }
-/* Column 3 */
-.block-yellow   { --x: 719;  --y: 0;   --w: 360; --h: 614; background-color: var(--color-block-yellow); }
-.block-lavender { --x: 719;  --y: 614; --w: 360; --h: 368; background-color: var(--color-block-lavender); }
-/* Column 4 */
-.block-red      { --x: 1079; --y: 0;   --w: 361; --h: 368; background-color: var(--color-block-red); }
-.block-cyan     { --x: 1079; --y: 368; --w: 361; --h: 614; background-color: var(--color-block-cyan); }
-
-/* =========================================================
-   Text
-   ========================================================= */
-
-/* "The Work's Ready, / The Website is Not" — two parts in two blocks */
-.title-part {
-  font-family: var(--font-text);
-  font-weight: 700;
-  font-size: var(--title-size);
-  line-height: var(--title-line-height);
-  letter-spacing: 0.03em;
+/* An image cropped inside its box, the same way Figma crops it.
+   Each one sets --img-left, --img-top, --img-width, --img-height in %. */
+.crop {
+  overflow: hidden;
 }
 
-.title-part-1 { --x: 424; --y: 9;   --w: 356; }
-.title-part-2 { --x: 745; --y: 234; --w: 360; }
-
-/* "In the meantime, check out my process :)" — two parts side by side */
-.subtitle-part {
-  font-family: var(--font-text);
-  font-weight: 400;
-  font-size: var(--subtitle-size);
-  line-height: var(--subtitle-line-height);
-  letter-spacing: 0.03em;
+.crop img {
+  position: absolute;
+  left: var(--img-left);
+  top: var(--img-top);
+  width: var(--img-width);
+  height: var(--img-height);
+  max-width: none;
 }
 
-.subtitle-part-1 { --x: 821;  --y: 771; --w: 343; }
-.subtitle-part-2 { --x: 1089; --y: 835; --w: 360; }
-
-/* The link to the process page: no underline until you hover it */
-.subtitle-part-2 a {
-  color: inherit;
-  text-decoration: none;
-  text-decoration-thickness: from-font; /* underline thickness and position as in Figma */
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none; /* keeps the underline whole under the ":)" */
+/* An image shown whole, filling its box */
+.whole-image {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.subtitle-part-2 a:hover,
-.subtitle-part-2 a:focus-visible {
-  text-decoration-line: underline;
-}
+/* ---------- Left column (top to bottom) ---------- */
+.left-orange      { --x: 0;   --y: 0;    --width: 720; --height: 964; background-color: var(--color-home-orange); }
+.left-hamotzi     { --x: 0;   --y: 964;  --width: 720; --height: 971;
+                    --img-left: -31.56%; --img-top: -1.34%; --img-width: 244.78%; --img-height: 101.34%; }
+.left-blue        { --x: 0;   --y: 1930; --width: 720; --height: 974; background-color: var(--color-home-blue); }
+.left-trac-phone  { --x: 188; --y: 2030; --width: 352.888; --height: 765.039; }
+.left-green       { --x: 0;   --y: 2903; --width: 720; --height: 964; background-color: var(--color-home-green); }
+.left-lets-talk   { --x: 174; --y: 2883; --width: 546; --height: 900;
+                    --img-left: -33.16%; --img-top: 0%; --img-width: 205.6%; --img-height: 132.17%; }
 
-/* "Yael Lenga" in handwriting */
-.name {
-  --x: 395;
-  --y: 896;
-  --w: 336;
+/* ---------- Right column (top to bottom) ---------- */
+.right-green          { --x: 0;   --y: 0;    --width: 720; --height: 964; background-color: var(--color-home-green); }
+.right-lets-talk      { --x: -3;  --y: -20;  --width: 314; --height: 900;
+                        --img-left: -230.59%; --img-top: 0%; --img-width: 357.5%; --img-height: 132.17%; }
+.right-lets-talk-name { --x: -61; --y: 94;   --width: 378; --height: 104; }
+.right-trac-photo     { --x: 0;   --y: 964;  --width: 720; --height: 969;
+                        --img-left: -15.5%; --img-top: 0%; --img-width: 219.83%; --img-height: 108.32%; }
+.right-hamotzi        { --x: 0;   --y: 1933; --width: 720; --height: 968;
+                        --img-left: -130.69%; --img-top: -1.38%; --img-width: 244.1%; --img-height: 101.34%; }
+.right-table-photo    { --x: 0;   --y: 2900; --width: 720; --height: 964;
+                        --img-left: -26.95%; --img-top: -26.7%; --img-width: 157.52%; --img-height: 158.1%; }
+
+/* ---------- Text ---------- */
+
+/* "Cool stuff by" and "Yael Lenga" in handwriting */
+.handwriting {
   font-family: var(--font-handwriting);
   font-weight: 400;
-  font-size: var(--name-size);
+  font-size: var(--handwriting-size);
   line-height: 0.9;
 }
+
+.cool-stuff {
+  --x: 398; --y: 878; --width: 391;
+  color: var(--color-black);
+  text-decoration: underline;
+  text-decoration-thickness: from-font; /* underline as in Figma */
+  text-underline-position: from-font;
+}
+
+.home-name {
+  --x: 20; --y: 3778; --width: 265;
+  color: var(--color-white);
+}
+
+/* Project labels on the right column: name, type, year */
+.project-label,
+.project-year {
+  font-family: var(--font-label);
+  font-weight: 700;
+  color: var(--color-white);
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.project-label {
+  font-size: var(--label-size);
+  line-height: 1;
+}
+
+.project-year {
+  font-size: var(--year-size);
+  line-height: 1.49;
+}
+
+.label-lets-talk      { --x: 498; --y: 765;  --width: 182; }
+.year-lets-talk       { --x: 498; --y: 833;  --width: 67; }
+.label-trac           { --x: 498; --y: 1808; --width: 182; }
+.year-trac            { --x: 498; --y: 1871; --width: 67; }
+.label-hamotzi        { --x: 496; --y: 2755; --width: 182; }
+.year-hamotzi         { --x: 496; --y: 2818; --width: 67; }
 
 /* =========================================================
    Process page
