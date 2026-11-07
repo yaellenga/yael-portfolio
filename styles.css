@@ -158,7 +158,7 @@ body {
 
 /* Screen backgrounds */
 .screen-orange { background-color: var(--color-home-orange); }
-.screen-blue   { }
+.screen-blue   { background-color: var(--color-home-blue); }
 .screen-green  { background-color: var(--color-home-green); }
 .screen-white  { background-color: var(--color-white); }
 
