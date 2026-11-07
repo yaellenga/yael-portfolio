@@ -15,8 +15,10 @@
   --color-home-blue: #acd0ef;
   --color-home-green: #98ed51;
 
-  /* Project page colors */
+  /* Project page colors (orange, blue and green are the same as the home page) */
   --color-project-cream: #fdfaf2;
+  --color-project-pink: #ffbfc0;
+  --color-project-yellow: #ffd22e;
 
   /* About page color */
   --color-about-blue: #5ce3fe;
@@ -56,7 +58,7 @@
   --project-title-size: calc(30 * var(--u));
   --project-text-size: calc(20 * var(--u));
   --project-text-spacing: calc(0.6 * var(--u));
-  --trac-column-height: calc(2689 * var(--u)); /* height of the trac. right column */
+  --trac-column-height: calc(3437 * var(--u)); /* height of the trac. right column */
 
   /* Process page unit: 1 Figma pixel.
      This page scrolls, so it only scales with the screen width. */
@@ -156,7 +158,7 @@ body {
 
 /* Screen backgrounds */
 .screen-orange { background-color: var(--color-home-orange); }
-.screen-blue   { background-color: var(--color-home-blue); }
+.screen-blue   { }
 .screen-green  { background-color: var(--color-home-green); }
 .screen-white  { background-color: var(--color-white); }
 
@@ -438,6 +440,20 @@ body {
   white-space: nowrap;
 }
 
+/* The colored blocks under the credits ("prototype", "landing page", "research"):
+   text centered, 21 Figma pixels from the top of the block */
+.project-part {
+  padding-top: calc(21 * var(--u));
+  text-align: center;
+}
+
+/* Plain colored blocks */
+.block-pink   { background-color: var(--color-project-pink); }
+.block-blue   { background-color: var(--color-home-blue); }
+.block-orange { background-color: var(--color-home-orange); }
+.block-green  { background-color: var(--color-home-green); }
+.block-yellow { background-color: var(--color-project-yellow); }
+
 /* An image block in the right half, filling its box */
 .project-image {
   display: block;
@@ -453,20 +469,29 @@ body {
 .trac-header      { --x: 258; --y: 180; --width: 530.68; }
 .trac-intro       { --x: 258; --y: 282; --width: 421; }
 .trac-credits     { --x: 258; --y: 428; --width: 267; }
+.trac-part-prototype { --x: 259; --y: 537; --width: 240; --height: 76; }
+.trac-part-landing   { --x: 259; --y: 613; --width: 240; --height: 76; }
+.trac-part-research  { --x: 259; --y: 689; --width: 240; --height: 76; }
 .trac-contact     { --x: 57;  --from-bottom: 61; }
 .trac-linkedin    { --x: 146; --from-bottom: 61; }
 .trac-cv          { --x: 242; --from-bottom: 61; }
 .trac-next        { --x: 620; --from-bottom: 63; }
 
 /* ---------- trac. right half (y = from the top of the column) ---------- */
-.trac-screens     { --x: 0;   --y: 0;    --width: 720; --height: 919; }
-.trac-problem     { --x: 360; --y: 919;  --width: 360; --height: 522; }
-.trac-problem-title { --x: 38; --y: 1013; --width: 303; }
-.trac-mic         { --x: 0;   --y: 1188; --width: 360; --height: 663; }
-.trac-my-part     { --x: 385; --y: 1474; --width: 309; }
-.trac-banner      { --x: 0;   --y: 1851; --width: 720; --height: 442; }
-.trac-solution    { --x: 48;  --y: 2405; --width: 285; }
-.trac-steps       { --x: 360; --y: 2293; --width: 360; --height: 396; }
+.trac-screens       { --x: 0;   --y: 0;    --width: 720; --height: 918; }
+.trac-problem       { --x: 0;   --y: 918;  --width: 360; --height: 270; }
+.trac-problem-title { --x: 396; --y: 1013; --width: 303; }
+.trac-green-block   { --x: 0;   --y: 1188; --width: 540; --height: 468; }
+.trac-blue-block    { --x: 540; --y: 1188; --width: 180; --height: 468; }
+.trac-headphones    { --x: 443; --y: 1353; --width: 194.545; --height: 128.717; }
+.trac-problem-text  { --x: 59;  --y: 1283; --width: 289; }
+.trac-solution      { --x: 191; --y: 1703; --width: 360; }
+.trac-steps         { --x: 0;   --y: 1858; --width: 720; --height: 396; }
+.trac-yellow-block  { --x: 0;   --y: 2254; --width: 360; --height: 594; }
+.trac-mic           { --x: 94;  --y: 2400; --width: 172.193; --height: 260.714; }
+.trac-my-part       { --x: 385; --y: 2369; --width: 309; }
+.trac-banner        { --x: 0;   --y: 2848; --width: 720; --height: 442; }
+.trac-amp           { --x: 0;   --y: 3290; --width: 720; --height: 147; }
 
 /* =========================================================
    About page (about.html): one screen, drawn 1440 wide.
