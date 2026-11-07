@@ -22,25 +22,28 @@
     <!-- LEFT COLUMN (starts at Screen 1, moves up) -->
     <div class="split-column split-left">
 
-      <!-- Screen 1 · Cool stuff by -->
-      <section class="screen screen-orange">
+      <!-- Screen 1 · Cool stuff by (table photo) -->
+      <section class="screen">
+        <img class="screen-photo" src="images/home-table-photo.jpg" alt="A festive table with flowers, candles, pumpkins and pine cones">
         <p class="placed pin-bottom handwriting cool-stuff" aria-hidden="true">Cool stuff by</p>
       </section>
 
-      <!-- Screen 2 · Hamotzi (left half of the image) -->
-      <section class="screen">
-        <img class="screen-photo left-hamotzi" src="images/home-hamotzi.jpg" alt="Hamotzi — video art">
-      </section>
-
-      <!-- Screen 3 · trac. (the app on a phone) -->
-      <section class="screen screen-blue">
-        <div class="placed box left-trac-phone">
+      <!-- Screen 2 · trac. (the app on a phone) — opens the trac. page -->
+      <a class="screen screen-link screen-blue has-project-cursor" href="trac.html" data-cursor="trac">
+        <div class="placed box center-y left-trac-phone">
           <img class="whole-image" src="images/home-trac-phone.png" alt="The trac. app home screen on a phone">
+        </div>
+      </a>
+
+      <!-- Screen 3 · Hamotzi (left half of the picture) -->
+      <section class="screen screen-white has-project-cursor" data-cursor="hamotzi">
+        <div class="placed box crop center-y left-hamotzi">
+          <img src="images/home-hamotzi.jpg" alt="Hamotzi — a hand rolling up the sleeve of a white shirt over a snake tattoo">
         </div>
       </section>
 
       <!-- Screen 4 · Lets Talk About It (right half of the illustration) -->
-      <section class="screen screen-green">
+      <section class="screen screen-green has-project-cursor" data-cursor="lets-talk">
         <div class="placed box crop left-lets-talk">
           <img src="images/home-lets-talk.png" alt="">
         </div>
@@ -51,7 +54,7 @@
     <div class="split-column split-right">
 
       <!-- Screen 1 · Lets Talk About It (left half of the illustration, Hebrew title, label) -->
-      <section class="screen screen-green">
+      <section class="screen screen-green has-project-cursor" data-cursor="lets-talk">
         <p class="placed pin-bottom project-label label-lets-talk">lets talk about it<br>web&amp;app design<br>illustration</p>
         <p class="placed pin-bottom project-year year-lets-talk">2026</p>
         <div class="placed box crop right-lets-talk">
@@ -62,29 +65,36 @@
         </div>
       </section>
 
-      <!-- Screen 2 · trac. (photo and label) -->
-      <section class="screen">
-        <img class="screen-photo right-trac-photo" src="images/home-trac-photo.jpg" alt="A musician playing guitar in a home studio">
-        <p class="placed pin-bottom project-label label-trac">trac.<br>ux\ui<br>app design</p>
-        <p class="placed pin-bottom project-year year-trac">2024</p>
-      </section>
-
-      <!-- Screen 3 · Hamotzi (right half of the image and label) -->
-      <section class="screen">
-        <img class="screen-photo right-hamotzi" src="images/home-hamotzi.jpg" alt="">
+      <!-- Screen 2 · Hamotzi (right half of the picture and label) -->
+      <section class="screen screen-white has-project-cursor" data-cursor="hamotzi">
+        <div class="placed box crop center-y right-hamotzi">
+          <img src="images/home-hamotzi.jpg" alt="">
+        </div>
         <p class="placed pin-bottom project-label label-hamotzi">Hamotzi<br>video art<br>art direction&amp;filming</p>
         <p class="placed pin-bottom project-year year-hamotzi">2024</p>
       </section>
 
+      <!-- Screen 3 · trac. (photo and label) — opens the trac. page -->
+      <a class="screen screen-link has-project-cursor" href="trac.html" data-cursor="trac">
+        <img class="screen-photo right-trac-photo" src="images/home-trac-photo.jpg" alt="A musician playing guitar in a home studio">
+        <p class="placed pin-bottom project-label label-trac">trac.<br>ux\ui<br>app design</p>
+        <p class="placed pin-bottom project-year year-trac">2024</p>
+      </a>
+
       <!-- Screen 4 · Yael Lenga (what you see first) -->
-      <section class="screen">
-        <img class="screen-photo right-table-photo" src="images/home-table-photo.jpg" alt="A festive table with flowers, candles, pumpkins and pine cones">
-        <p class="placed pin-bottom handwriting home-name" aria-hidden="true">Yael Lenga</p>
+      <section class="screen screen-orange">
+        <p class="placed pin-bottom handwriting home-name">
+          <a class="handwriting-link" href="about.html">Yael Lenga</a>
+        </p>
       </section>
     </div>
 
   </main>
 
+  <!-- The special mouse shown over a project screen (see custom-cursor.js) -->
+  <img class="project-cursor" src="images/cursor-trac.svg" alt="" aria-hidden="true">
+
   <script src="split-scroll.js"></script>
+  <script src="custom-cursor.js"></script>
 </body>
 </html>
