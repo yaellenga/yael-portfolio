@@ -36,6 +36,12 @@
   --color-entry-green: #00deb8;
   --color-entry-red: #ff485d;
 
+  /* Keyboard focus: a black frame with a white frame inside it,
+     so it shows on light and dark backgrounds. Not scaled with the page. */
+  --color-focus: var(--color-black);
+  --color-focus-inner: var(--color-white);
+  --focus-width: 3px;
+
   /* Fonts */
   --font-text: "Advent Pro", sans-serif;
   --font-handwriting: "Mynerve", cursive;
@@ -139,6 +145,14 @@ body {
   color: var(--color-brown);
 }
 
+/* Keyboard focus (Tab key): a white frame right around the item,
+   and a black frame around that. Only shows for the keyboard, not for mouse clicks. */
+:focus-visible {
+  outline: var(--focus-width) solid var(--color-focus);
+  outline-offset: var(--focus-width);
+  box-shadow: 0 0 0 var(--focus-width) var(--color-focus-inner);
+}
+
 /* On phones, use the screen height without the browser bars,
    so the screens don't jump while the bars hide and show */
 @supports (height: 100svh) {
@@ -178,9 +192,25 @@ body {
   left: var(--column-width);
 }
 
-/* A screen that is also a link to a project page (the trac. screens) */
+/* A screen that is also a link to a project page (trac., Hamotzi) */
 .screen-link {
   display: block;
+}
+
+/* A whole screen fills its column, so a frame around it would be hidden.
+   Instead, its focus frame is drawn on top of it, along its inside edges. */
+.screen-link:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.screen-link:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: var(--focus-width) solid var(--color-focus);
+  box-shadow: inset 0 0 0 var(--focus-width) var(--color-focus-inner);
+  pointer-events: none;
 }
 
 /* One screen: as tall as the window, hides what sticks out */
