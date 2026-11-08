@@ -307,10 +307,17 @@ body {
 
 /* ---------- Special mouse over the project screens ---------- */
 
-/* Hide the regular mouse over a screen that has its own mouse
-   (also over the links inside it, which would show a hand) */
+/* Hide the regular mouse over a screen that has its own mouse */
 .has-project-cursor,
 .has-project-cursor * { cursor: none; }
+
+/* But over a link inside it (like "Cool stuff by"), show the regular link mouse */
+.has-project-cursor a,
+.has-project-cursor a * { cursor: pointer; }
+
+/* ...and hide the special mouse picture right away while over that link,
+   so only the regular mouse shows (custom-cursor.js does this too) */
+body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 
 /* The special mouse: follows the pointer (custom-cursor.js moves it),
    centered on the pointer. Clicks pass through it. Hidden until needed. */

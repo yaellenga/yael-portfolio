@@ -18,7 +18,11 @@ function updateCursor() {
   const underMouse = document.elementFromPoint(mouseX, mouseY);
   const screen = underMouse ? underMouse.closest('[data-cursor]') : null;
 
-  if (screen) {
+  // Over a link inside the area (like "Cool stuff by"), show the regular mouse instead
+  const link = underMouse ? underMouse.closest('a') : null;
+  const overLinkInside = screen && link && link !== screen && screen.contains(link);
+
+  if (screen && !overLinkInside) {
     const name = screen.dataset.cursor;
     projectCursor.src = cursorPictures[name];
     projectCursor.className = `project-cursor cursor-${name} is-visible`;

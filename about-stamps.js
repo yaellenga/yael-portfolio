@@ -4,6 +4,9 @@
 const aboutPage = document.querySelector('.about-page');
 
 aboutPage.addEventListener('click', (event) => {
+  // No stamp when clicking a link (there the regular mouse is showing)
+  if (event.target.closest('a')) return;
+
   const unit = window.innerWidth / 1440; // 1 Figma pixel, same as --u in styles.css
   const pageBox = aboutPage.getBoundingClientRect();
 
