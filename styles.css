@@ -880,6 +880,25 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   gap: var(--space-medium);
 }
 
+/* Special mice and stamps: a box to try each one in.
+   It is a stamp area too, so stamps are placed inside it. */
+.guide-try {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-extra-large);
+}
+
+.guide-about-blue {
+  background-color: var(--color-about-blue);
+}
+
+/* The mouse picture at its real size (--width and --height come from .cursor-…) */
+.guide-cursor {
+  display: block;
+  width: calc(var(--width) * var(--u));
+  height: calc(var(--height) * var(--u));
+}
+
 /* Text block: a title and paragraphs */
 .guide-text-block {
   display: flex;

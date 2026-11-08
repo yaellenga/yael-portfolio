@@ -201,10 +201,56 @@
           </div>
         </div>
       </div>
+
+      <!-- Special mice: each project's own mouse. Move the mouse over a box to try it. -->
+      <div class="guide-group">
+        <p class="project-bold-text">Special mice</p>
+        <p class="project-text">Each box shows the mouse picture at its real size. Move the mouse over it to try it.</p>
+        <div class="guide-swatches">
+          <div class="guide-swatch">
+            <p class="project-text">.cursor-trac</p>
+            <div class="guide-try screen-blue has-project-cursor" data-cursor="trac">
+              <img class="guide-cursor cursor-trac" src="images/cursor-trac.svg" alt="The trac. mouse: the trac. logo">
+            </div>
+          </div>
+          <div class="guide-swatch">
+            <p class="project-text">.cursor-hamotzi</p>
+            <div class="guide-try screen-white has-project-cursor" data-cursor="hamotzi">
+              <img class="guide-cursor cursor-hamotzi" src="images/cursor-hamotzi.png" alt="The Hamotzi mouse: the word המוציא">
+            </div>
+          </div>
+          <div class="guide-swatch">
+            <p class="project-text">.cursor-lets-talk</p>
+            <div class="guide-try screen-green has-project-cursor" data-cursor="lets-talk">
+              <img class="guide-cursor cursor-lets-talk" src="images/cursor-lets-talk.svg" alt="The Lets Talk About It mouse: a compass">
+            </div>
+          </div>
+          <div class="guide-swatch">
+            <p class="project-text">.cursor-about</p>
+            <div class="guide-try guide-about-blue has-project-cursor" data-cursor="about">
+              <img class="guide-cursor cursor-about" src="images/cursor-about.png" alt="The about mouse: a photo of Yael">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stamps: from the about page. Click in the box to try it. -->
+      <div class="guide-group">
+        <p class="project-bold-text">Stamps</p>
+        <p class="project-text">.about-stamp — every click leaves a copy of the about mouse. It stays 3.5 seconds, then fades out over 2 seconds.</p>
+        <div class="guide-try guide-about-blue stamp-area has-project-cursor" data-cursor="about">
+          <p class="project-text">Click anywhere in this box</p>
+        </div>
+      </div>
     </section>
 
   </main>
 
+  <!-- The special mouse, for trying the mice and stamps above -->
+  <img class="project-cursor" src="images/cursor-trac.svg" alt="" aria-hidden="true">
+
   <script src="guide.js"></script>
+  <script src="custom-cursor.js"></script>
+  <script src="about-stamps.js"></script>
 </body>
 </html>
