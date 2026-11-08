@@ -17,7 +17,6 @@
 
   /* Project page colors (orange, blue and green are the same as the home page) */
   --color-project-cream: #fdfaf2;
-  --color-project-pink: #ffbfc0;
   --color-project-yellow: #ffd22e;
 
   /* About page color */
@@ -442,17 +441,8 @@ body {
   white-space: nowrap;
 }
 
-/* The colored blocks under the credits ("prototype", "landing page", "research"):
-   text centered, 21 Figma pixels from the top of the block */
-.project-part {
-  padding-top: calc(21 * var(--u));
-  text-align: center;
-}
-
 /* Plain colored blocks */
-.block-pink   { background-color: var(--color-project-pink); }
 .block-blue   { background-color: var(--color-home-blue); }
-.block-orange { background-color: var(--color-home-orange); }
 .block-green  { background-color: var(--color-home-green); }
 .block-yellow { background-color: var(--color-project-yellow); }
 
@@ -471,9 +461,6 @@ body {
 .trac-header      { --x: 258; --y: 180; --width: 530.68; }
 .trac-intro       { --x: 258; --y: 282; --width: 421; }
 .trac-credits     { --x: 258; --y: 428; --width: 267; }
-.trac-part-prototype { --x: 259; --y: 537; --width: 240; --height: 76; }
-.trac-part-landing   { --x: 259; --y: 613; --width: 240; --height: 76; }
-.trac-part-research  { --x: 259; --y: 689; --width: 240; --height: 76; }
 .trac-contact     { --x: 57;  --from-bottom: 61; }
 .trac-linkedin    { --x: 146; --from-bottom: 61; }
 .trac-cv          { --x: 242; --from-bottom: 61; }
@@ -549,6 +536,21 @@ body {
   font-size: var(--about-big-size);
   line-height: 1;
   text-transform: capitalize;
+}
+
+/* A stamp left by a click: a copy of the mouse photo, centered on the click
+   (about-stamps.js adds it). It stays for 3.5 seconds, then fades out over 2 seconds. */
+.about-stamp {
+  --width: 65;
+  --height: 101;
+  z-index: 5; /* above the text, below the mouse */
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: stamp-fade 2s ease 3.5s forwards;
+}
+
+@keyframes stamp-fade {
+  to { opacity: 0; }
 }
 
 .about-cool-stuff { --x: 434;  --y: 40; }
