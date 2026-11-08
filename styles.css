@@ -15,9 +15,19 @@
   --color-home-blue: #acd0ef;
   --color-home-green: #98ed51;
 
-  /* Project page colors (orange, blue and green are the same as the home page) */
+  /* Project pages: the background every project shares */
   --color-project-cream: #fdfaf2;
-  --color-project-yellow: #ffd22e;
+
+  /* trac. colors (each project has its own colors) */
+  --color-trac-orange: #fe5808;
+  --color-trac-blue: #acd0ef;
+  --color-trac-green: #98ed51;
+  --color-trac-yellow: #ffd22e;
+
+  /* Hamotzi colors */
+  --color-hamotzi-light-grey: #d3d3d3;
+  --color-hamotzi-dark-grey: #434343;
+  --color-hamotzi-beige-grey: #bcb3b0;
 
   /* About page color */
   --color-about-blue: #5ce3fe;
@@ -58,6 +68,31 @@
   --project-text-size: calc(20 * var(--u));
   --project-text-spacing: calc(0.6 * var(--u));
   --trac-column-height: calc(3437 * var(--u)); /* height of the trac. right column */
+  --hamotzi-column-height: calc(1558 * var(--u)); /* height of the Hamotzi right column */
+
+  /* Project pages, left half: the same spots on every project page.
+     Plain Figma pixels (used as --x / --y / --from-bottom, which .placed multiplies by --u). */
+  --project-left-margin: 57;           /* left edge of the name, type and Contact */
+  --project-left-content: 258;         /* left edge of the headline, intro and credits */
+  --project-left-nav-top: 42;          /* "More stuff by Yael Lenga" from the top */
+  --project-left-nav-first: 86;        /* "More stuff by" from the left */
+  --project-left-nav-second: 365;      /* "Yael Lenga" from the left */
+  --project-left-name-top: 183;        /* project name from the top */
+  --project-left-type-top: 233;        /* type and year from the top */
+  --project-left-header-top: 180;      /* headline from the top */
+  --project-left-intro-top: 282;       /* intro text from the top */
+  --project-left-credits-top: 428;     /* credits from the top */
+  --project-left-footer-bottom: 61;    /* Contact, LinkedIn, Cv: top, from the bottom */
+  --project-left-linkedin: 146;        /* LinkedIn from the left */
+  --project-left-cv: 242;              /* Cv from the left */
+  --project-left-next: 620;            /* Next from the left */
+  --project-left-next-bottom: 63;      /* Next: top, from the bottom */
+
+  /* Spacing scale: distances that repeat in the Figma design (Figma pixels × --u) */
+  --space-small: calc(20 * var(--u));
+  --space-medium: calc(42 * var(--u));
+  --space-large: calc(57 * var(--u));
+  --space-extra-large: calc(86 * var(--u));
 
   /* Process page unit: 1 Figma pixel.
      This page scrolls, so it only scales with the screen width. */
@@ -361,7 +396,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   position: relative;
   margin-left: var(--column-width);
   width: var(--column-width);
-  height: var(--trac-column-height);
+  height: var(--story-height); /* each project page sets its own (see below) */
   background-color: var(--color-project-cream);
   color: var(--color-black);
 }
@@ -449,9 +484,9 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 }
 
 /* Plain colored blocks */
-.block-blue   { background-color: var(--color-home-blue); }
-.block-green  { background-color: var(--color-home-green); }
-.block-yellow { background-color: var(--color-project-yellow); }
+.block-blue   { background-color: var(--color-trac-blue); }
+.block-green  { background-color: var(--color-trac-green); }
+.block-yellow { background-color: var(--color-trac-yellow); }
 
 /* An image block in the right half, filling its box */
 .project-image {
@@ -460,20 +495,21 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   height: 100%;
 }
 
-/* ---------- trac. left half ---------- */
-.trac-more-stuff  { --x: 86;  --y: 42; }
-.trac-my-name     { --x: 365; --y: 42; }
-.trac-name        { --x: 57;  --y: 183; --width: 177; }
-.trac-type        { --x: 57;  --y: 233; --width: 177; }
-.trac-header      { --x: 258; --y: 180; --width: 530.68; }
-.trac-intro       { --x: 258; --y: 282; --width: 421; }
-.trac-credits     { --x: 258; --y: 428; --width: 267; }
-.trac-contact     { --x: 57;  --from-bottom: 61; }
-.trac-linkedin    { --x: 146; --from-bottom: 61; }
-.trac-cv          { --x: 242; --from-bottom: 61; }
-.trac-next        { --x: 620; --from-bottom: 63; }
+/* ---------- Left half: the same spots on every project page ---------- */
+.info-more-stuff  { --x: var(--project-left-nav-first);  --y: var(--project-left-nav-top); }
+.info-my-name     { --x: var(--project-left-nav-second); --y: var(--project-left-nav-top); }
+.info-name        { --x: var(--project-left-margin);  --y: var(--project-left-name-top);    --width: 177; }
+.info-type        { --x: var(--project-left-margin);  --y: var(--project-left-type-top);    --width: 177; }
+.info-header      { --x: var(--project-left-content); --y: var(--project-left-header-top);  --width: 530.68; }
+.info-intro       { --x: var(--project-left-content); --y: var(--project-left-intro-top);   --width: 421; }
+.info-credits     { --x: var(--project-left-content); --y: var(--project-left-credits-top); --width: 302; }
+.info-contact     { --x: var(--project-left-margin);   --from-bottom: var(--project-left-footer-bottom); }
+.info-linkedin    { --x: var(--project-left-linkedin); --from-bottom: var(--project-left-footer-bottom); }
+.info-cv          { --x: var(--project-left-cv);       --from-bottom: var(--project-left-footer-bottom); }
+.info-next        { --x: var(--project-left-next);     --from-bottom: var(--project-left-next-bottom); }
 
 /* ---------- trac. right half (y = from the top of the column) ---------- */
+.trac-story         { --story-height: var(--trac-column-height); }
 .trac-screens       { --x: 0;   --y: 0;    --width: 720; --height: 918; }
 .trac-problem       { --x: 0;   --y: 918;  --width: 360; --height: 270; }
 .trac-problem-title { --x: 396; --y: 1013; --width: 303; }
@@ -488,6 +524,14 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .trac-my-part       { --x: 385; --y: 2369; --width: 309; }
 .trac-banner        { --x: 0;   --y: 2848; --width: 720; --height: 442; }
 .trac-amp           { --x: 0;   --y: 3290; --width: 720; --height: 147; }
+
+/* ---------- Hamotzi right half: five rows of stills (y = from the top of the column) ---------- */
+.hamotzi-story      { --story-height: var(--hamotzi-column-height); }
+.hamotzi-opening    { --x: 0; --y: 0;    --width: 720; --height: 257; }
+.hamotzi-plate      { --x: 0; --y: 257;  --width: 720; --height: 236; }
+.hamotzi-hot        { --x: 0; --y: 493;  --width: 720; --height: 404; }
+.hamotzi-credits-stills { --x: 0; --y: 897; --width: 720; --height: 256; }
+.hamotzi-street     { --x: 0; --y: 1153; --width: 720; --height: 405; }
 
 /* =========================================================
    About page (about.html): one screen, drawn 1440 wide.
@@ -673,4 +717,142 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+/* =========================================================
+   Style guide page (styleguide.html): shows the colors, spacing,
+   text styles and components of this file.
+   Every size here comes from a variable above.
+   ========================================================= */
+
+.guide {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-extra-large);
+  padding: var(--space-extra-large);
+  background-color: var(--color-project-cream);
+  color: var(--color-black);
+}
+
+/* One part of the guide (Colors, Spacing, ...) */
+.guide-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-large);
+}
+
+/* A smaller group inside a part, with its own heading */
+.guide-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+}
+
+/* ---------- Colors ---------- */
+.guide-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-medium);
+}
+
+.guide-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+}
+
+/* The color square; guide.js sets --swatch to the color variable */
+.guide-swatch-color {
+  width: var(--space-extra-large);
+  height: var(--space-extra-large);
+  background-color: var(--swatch);
+  outline: thin solid var(--color-black); /* so white shows on cream */
+}
+
+/* ---------- Spacing ---------- */
+.guide-space {
+  display: flex;
+  align-items: center;
+  gap: var(--space-medium);
+}
+
+/* A black bar as long as the distance; guide.js sets --space-value */
+.guide-space-bar {
+  flex-shrink: 0;
+  width: var(--space-value);
+  height: var(--space-small);
+  background-color: var(--color-black);
+}
+
+/* ---------- Text styles ---------- */
+
+/* Clips styles that are wider than the page (like the Process title) */
+.guide-sample {
+  overflow: hidden;
+}
+
+/* White text styles are shown on black, in a box as wide as the text */
+.guide-dark {
+  align-self: flex-start;
+  padding: var(--space-small);
+  background-color: var(--color-black);
+}
+
+/* In the guide's lists, a name and its sample sit close together
+   (the empty line between paragraphs is only for real text blocks) */
+.guide-group > .project-text + .project-text,
+.guide-swatch > .project-text + .project-text {
+  margin-top: 0;
+}
+
+/* ---------- Components ---------- */
+
+/* Short and long versions side by side */
+.guide-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-extra-large);
+}
+
+/* Work cards are as big as on the home page, so they go one under the other */
+.guide-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-medium);
+}
+
+.guide-card {
+  width: var(--column-width);
+}
+
+/* Navigation: the handwriting links on top, the small links at the bottom */
+.guide-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-large);
+}
+
+.guide-nav-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-small) var(--space-medium);
+}
+
+/* Page header: name and type on the left, headline and intro on the right */
+.guide-page-header {
+  display: flex;
+  gap: var(--space-large);
+}
+
+.guide-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-medium);
+}
+
+/* Text block: a title and paragraphs */
+.guide-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
 }

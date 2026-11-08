@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Style guide — Yael Lenga</title>
+
+  <!-- All the site's fonts: Mynerve (handwriting), Carlito (text), Advent Pro (Process page) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=Mynerve&family=Advent+Pro:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- The style guide: everything here comes from styles.css -->
+  <main class="guide">
+
+    <h1 class="project-header">Style guide</h1>
+
+    <!-- COLORS: guide.js fills this from the color variables in styles.css -->
+    <section class="guide-section">
+      <h2 class="project-title">Colors</h2>
+      <div id="guide-colors" class="guide-section"></div>
+    </section>
+
+    <!-- SPACING: guide.js fills this from the spacing variables in styles.css -->
+    <section class="guide-section">
+      <h2 class="project-title">Spacing</h2>
+      <div id="guide-spacing" class="guide-group"></div>
+    </section>
+
+    <!-- PROJECT PAGE LEFT HALF: guide.js fills this from the --project-left- variables -->
+    <section class="guide-section">
+      <h2 class="project-title">Project page — left half</h2>
+      <p class="project-text">The same spots on every project page, in Figma pixels.</p>
+      <div id="guide-project-left" class="guide-group"></div>
+    </section>
+
+    <!-- TEXT STYLES: each class from styles.css, with its name -->
+    <section class="guide-section">
+      <h2 class="project-title">Text styles</h2>
+
+      <div class="guide-group">
+        <p class="project-bold-text">Home page</p>
+        <p class="project-text">.handwriting</p>
+        <p class="handwriting">Cool stuff by</p>
+        <p class="project-text">.project-label</p>
+        <div class="guide-dark"><p class="project-label">trac.<br>ux\ui<br>app design</p></div>
+        <p class="project-text">.project-year</p>
+        <div class="guide-dark"><p class="project-year">2025</p></div>
+      </div>
+
+      <div class="guide-group">
+        <p class="project-bold-text">Project page</p>
+        <p class="project-text">.project-handwriting</p>
+        <p class="project-handwriting">More stuff by</p>
+        <p class="project-text">.project-name</p>
+        <p class="project-name">trac.</p>
+        <p class="project-text">.project-header</p>
+        <p class="project-header">A songwriting app for independent musicians</p>
+        <p class="project-text">.project-title</p>
+        <p class="project-title">too many versions</p>
+        <p class="project-text">.project-bold-text</p>
+        <p class="project-bold-text">student project with mia gaon</p>
+        <p class="project-text">.project-text</p>
+        <p class="project-text">trac. is an app that keeps your songwriting organized while you keep creating.</p>
+        <p class="project-text">.project-footer-item</p>
+        <p class="project-footer-item">Contact</p>
+      </div>
+
+      <div class="guide-group">
+        <p class="project-bold-text">About page</p>
+        <p class="project-text">.about-handwriting</p>
+        <p class="about-handwriting">Cool stuff by</p>
+        <p class="project-text">.about-text</p>
+        <p class="about-text">Fun facts</p>
+        <p class="project-text">.about-links</p>
+        <p class="about-links">LinkedIn</p>
+        <p class="project-text">.about-big</p>
+        <p class="about-big">Short paragraph about me</p>
+      </div>
+
+      <div class="guide-group">
+        <p class="project-bold-text">Process page</p>
+        <p class="project-text">.process-title</p>
+        <div class="guide-sample"><p class="process-title">Process</p></div>
+        <p class="project-text">.entry-title</p>
+        <p class="entry-title">Week 1</p>
+      </div>
+    </section>
+
+    <!-- COMPONENTS: each one with short content and with long content -->
+    <section class="guide-section">
+      <h2 class="project-title">Components</h2>
+
+      <!-- Work card: a project screen from the home page -->
+      <div class="guide-group">
+        <p class="project-bold-text">Work card</p>
+        <div class="guide-cards">
+          <p class="project-text">Short</p>
+          <a class="screen screen-link guide-card" href="trac.html">
+            <img class="screen-photo right-trac-photo" src="images/home-trac-photo.jpg" alt="A musician playing guitar in a home studio">
+            <p class="placed pin-bottom project-label label-trac">trac.<br>ux\ui<br>app design</p>
+            <p class="placed pin-bottom project-year year-trac">2025</p>
+          </a>
+          <p class="project-text">Long</p>
+          <a class="screen screen-link guide-card" href="trac.html">
+            <img class="screen-photo right-trac-photo" src="images/home-trac-photo.jpg" alt="A musician playing guitar in a home studio">
+            <p class="placed pin-bottom project-label label-trac">trac. — a songwriting app for independent musicians<br>ux\ui, branding and landing page<br>app design and full-flow prototype</p>
+            <p class="placed pin-bottom project-year year-trac">2024–2025</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation: the links at the top and bottom of a project page -->
+      <div class="guide-group">
+        <p class="project-bold-text">Navigation</p>
+        <div class="guide-pair">
+          <div class="guide-nav">
+            <p class="project-text">Short</p>
+            <div class="guide-nav-row">
+              <a class="project-handwriting handwriting-link" href="index.html">More stuff by</a>
+              <a class="project-handwriting handwriting-link" href="about.html">Yael Lenga</a>
+            </div>
+            <div class="guide-nav-row">
+              <p class="project-footer-item">Contact</p>
+              <p class="project-footer-item">LinkedIn</p>
+              <p class="project-footer-item">Cv</p>
+              <p class="project-footer-item">Next</p>
+            </div>
+          </div>
+          <div class="guide-nav">
+            <p class="project-text">Long</p>
+            <div class="guide-nav-row">
+              <a class="project-handwriting handwriting-link" href="index.html">More cool stuff made by</a>
+              <a class="project-handwriting handwriting-link" href="about.html">Yael Lenga, designer</a>
+            </div>
+            <div class="guide-nav-row">
+              <p class="project-footer-item">Contact Me</p>
+              <p class="project-footer-item">LinkedIn</p>
+              <p class="project-footer-item">Instagram</p>
+              <p class="project-footer-item">Behance</p>
+              <p class="project-footer-item">Download My Cv</p>
+              <p class="project-footer-item">Next Project: Hamotzi</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page header: the top of a project page -->
+      <div class="guide-group">
+        <p class="project-bold-text">Page header</p>
+        <div class="guide-pair">
+          <div class="guide-stack">
+            <p class="project-text">Short</p>
+            <div class="guide-page-header">
+              <div>
+                <h3 class="project-name">trac.</h3>
+                <p class="project-bold-text">uX\uI<br>app design<br>2025</p>
+              </div>
+              <div class="guide-stack">
+                <p class="project-header">A songwriting app</p>
+                <p class="project-text">An app for writing songs.</p>
+                <p class="project-bold-text">student project</p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-stack">
+            <p class="project-text">Long</p>
+            <div class="guide-page-header">
+              <div>
+                <h3 class="project-name">Lets talk about it</h3>
+                <p class="project-bold-text">web&amp;app design<br>illustration<br>branding<br>2026</p>
+              </div>
+              <div class="guide-stack">
+                <p class="project-header">A songwriting app for independent musicians who write everywhere</p>
+                <p class="project-text">trac. is an app that keeps your songwriting organized while you keep creating. Write lyrics, capture ideas, record drafts, and build your projects without the usual mess in between. Everything stays in one place, from the first idea to the studio.</p>
+                <p class="project-bold-text">student project with mia gaon, startup course</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text block: a title and running text, like in the right half of a project page -->
+      <div class="guide-group">
+        <p class="project-bold-text">Text block</p>
+        <div class="guide-pair">
+          <div class="guide-text-block">
+            <p class="project-text">Short</p>
+            <h3 class="project-title">My part</h3>
+            <p class="project-text">I designed the visual language.</p>
+          </div>
+          <div class="guide-text-block">
+            <p class="project-text">Long</p>
+            <h3 class="project-title">too many versions<br>too many places<br>&amp;&nbsp; too easy to lose</h3>
+            <p class="project-text">I designed this app end-to-end alongside a fellow designer friend. We shared responsibility across the process, from research and small-scale studies to ideation, prototyping, and defining the app’s visual language.</p>
+            <p class="project-text">I took lead on key parts of the design process, in development of the visual language, designing the landing page, and building the final full-flow prototype.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="guide.js"></script>
+</body>
+</html>
