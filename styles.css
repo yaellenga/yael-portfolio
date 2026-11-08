@@ -69,7 +69,7 @@
   /* Project pages (like "project page- trac"), also in Figma pixels × --u */
   --project-handwriting-size: calc(45 * var(--u));
   --project-name-size: calc(40 * var(--u));
-  --project-header-size: calc(35 * var(--u));
+  --project-header-size: calc(30 * var(--u));
   --project-title-size: calc(30 * var(--u));
   --project-text-size: calc(20 * var(--u));
   --project-text-spacing: calc(0.6 * var(--u));
@@ -530,7 +530,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .info-my-name     { --x: var(--project-left-nav-second); --y: var(--project-left-nav-top); }
 .info-name        { --x: var(--project-left-margin);  --y: var(--project-left-name-top);    --width: 177; }
 .info-type        { --x: var(--project-left-margin);  --y: var(--project-left-type-top);    --width: 177; }
-.info-header      { --x: var(--project-left-content); --y: var(--project-left-header-top);  --width: 530.68; }
+.info-header      { --x: var(--project-left-content); --y: var(--project-left-header-top);  --width: 454.87; }
 .info-intro       { --x: var(--project-left-content); --y: var(--project-left-intro-top);   --width: 421; }
 .info-credits     { --x: var(--project-left-content); --y: var(--project-left-credits-top); --width: 302; }
 .info-contact     { --x: var(--project-left-margin);   --from-bottom: var(--project-left-footer-bottom); }
