@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="phone-layout">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,8 +41,12 @@
   <main class="project-story trac-story">
 
     <!-- The app home screen and five more screens, on pink -->
+    <!-- On a phone (screen held upright) this shows only the app on pink -->
     <div class="placed box trac-screens">
-      <img class="project-image" src="images/trac-screens.jpg" alt="The trac. app home screen on a phone, with five more app screens below it">
+      <picture>
+        <source media="(orientation: portrait)" srcset="images/trac-phone-app.jpg">
+        <img class="project-image" src="images/trac-screens.jpg" alt="The trac. app home screen on a phone, with five more app screens below it">
+      </picture>
     </div>
 
     <!-- The problem: crumpled notes, the title, and the text on green -->
@@ -60,6 +64,11 @@
     <p class="placed project-bold-text trac-solution">Our Solution:<br>Write lyrics, capture ideas, record drafts and build your projects without the usual mess in between.</p>
     <div class="placed box trac-steps">
       <img class="project-image" src="images/trac-steps.jpg" alt="Write, record, refine">
+    </div>
+
+    <!-- Phone only: the five app screens, under Write / Record / Refine -->
+    <div class="placed box trac-phone-screens">
+      <img class="project-image" src="images/trac-phone-screens.jpg" alt="Five more screens of the trac. app">
     </div>
 
     <!-- My part in the project, next to a microphone on yellow -->

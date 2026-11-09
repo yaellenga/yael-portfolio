@@ -28,6 +28,9 @@
   --color-hamotzi-light-grey: #d3d3d3;
   --color-hamotzi-dark-grey: #434343;
   --color-hamotzi-beige-grey: #bcb3b0;
+  --color-hamotzi-charcoal: #313131;    /* boxes behind TRADITION and SIN */
+  --color-hamotzi-off-white: #fdfdfd;   /* text on the charcoal boxes */
+  --color-hamotzi-graphite: #353535;    /* text on the cream box (CRIME) */
 
   /* About page color */
   --color-about-blue: #5ce3fe;
@@ -74,7 +77,10 @@
   --project-text-size: calc(20 * var(--u));
   --project-text-spacing: calc(0.6 * var(--u));
   --trac-column-height: calc(3437 * var(--u)); /* height of the trac. right column */
-  --hamotzi-column-height: calc(1558 * var(--u)); /* height of the Hamotzi right column */
+  --hamotzi-column-height: calc(1992 * var(--u)); /* height of the Hamotzi right column */
+
+  /* Phone: running text never gets smaller than this (real pixels on the screen) */
+  --text-min-size: 12px;
 
   /* Project pages, left half: the same spots on every project page.
      Plain Figma pixels (used as --x / --y / --from-bottom, which .placed multiplies by --u). */
@@ -85,7 +91,7 @@
   --project-left-nav-second: 365;      /* "Yael Lenga" from the left */
   --project-left-name-top: 183;        /* project name from the top */
   --project-left-type-top: 233;        /* type and year from the top */
-  --project-left-header-top: 180;      /* headline from the top */
+  --project-left-header-top: 190;      /* headline from the top */
   --project-left-intro-top: 282;       /* intro text from the top */
   --project-left-credits-top: 428;     /* credits from the top */
   --project-left-footer-bottom: 61;    /* Contact, LinkedIn, Cv: top, from the bottom */
@@ -518,6 +524,13 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .block-green  { background-color: var(--color-trac-green); }
 .block-yellow { background-color: var(--color-trac-yellow); }
 
+/* A <picture> (one image for computers, another for phones) fills its box too */
+.box > picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 /* An image block in the right half, filling its box */
 .project-image {
   display: block;
@@ -555,13 +568,118 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .trac-banner        { --x: 0;   --y: 2848; --width: 720; --height: 442; }
 .trac-amp           { --x: 0;   --y: 3290; --width: 720; --height: 147; }
 
-/* ---------- Hamotzi right half: five rows of stills (y = from the top of the column) ---------- */
+/* The five small app screens: only on the phone (on computers they are inside .trac-screens) */
+.trac-phone-screens { --x: 0;   --y: 2537; --width: 720; --height: 200; display: none; }
+
+/* =========================================================
+   Phone (screen held upright), for pages with a phone design in Figma.
+   Those pages have class="phone-layout" on <html>.
+   The phone frame is 720 wide, so 1 Figma pixel = the screen width ÷ 720.
+   ========================================================= */
+@media (orientation: portrait) {
+  :root.phone-layout {
+    --u: calc(100vw / 720);
+
+    /* Running text: as in Figma, but never smaller than --text-min-size */
+    --project-text-size: max(var(--text-min-size), calc(20 * var(--u)));
+
+    /* Left-half spots in the phone frame */
+    --project-left-nav-top: 40;
+    --project-left-name-top: 133;
+    --project-left-type-top: 183;
+    --project-left-header-top: 130;
+    --project-left-intro-top: 232;
+    --project-left-credits-top: 378;
+    --project-left-footer-bottom: 53;
+    --project-left-next-bottom: 55;
+
+    /* Height of the whole trac. page on the phone */
+    --trac-phone-height: calc(3886 * var(--u));
+  }
+
+  /* The info sits on top of the page (see-through), as tall as the page,
+     so its bottom bar ends up at the end of the page and scrolls with it */
+  .phone-layout .project-info {
+    position: absolute;
+    z-index: 1;
+    height: var(--story-height);
+    --screen-height: var(--story-height); /* pin-bottom = from the bottom of the page */
+    background-color: transparent;
+    pointer-events: none; /* taps go through to the page… */
+  }
+
+  .phone-layout .project-info a {
+    pointer-events: auto; /* …except on the links */
+  }
+
+  /* "More stuff by Yael Lenga" stays at the top of the screen, with no background */
+  .phone-layout .info-more-stuff,
+  .phone-layout .info-my-name {
+    position: fixed;
+  }
+
+  /* One column: the story starts at the left edge, under the info */
+  .phone-layout .project-story {
+    margin-left: 0;
+  }
+
+  .phone-layout .project-info,
+  .phone-layout .trac-story { --story-height: var(--trac-phone-height); }
+
+  /* trac. on the phone: the same blocks, moved down, in the phone frame's order */
+  .phone-layout .trac-screens        { --y: 447;  --height: 721; }
+  .phone-layout .trac-problem        { --y: 1168; }
+  .phone-layout .trac-problem-title  { --y: 1263; }
+  .phone-layout .trac-green-block    { --y: 1438; }
+  .phone-layout .trac-blue-block     { --y: 1438; }
+  .phone-layout .trac-headphones     { --y: 1603; }
+  .phone-layout .trac-problem-text   { --y: 1533; }
+  .phone-layout .trac-solution       { --y: 1953; }
+  .phone-layout .trac-steps          { --y: 2108; }
+  .phone-layout .trac-phone-screens  { display: block; }
+  .phone-layout .trac-yellow-block   { --y: 2768; }
+  .phone-layout .trac-mic            { --y: 2914; }
+  .phone-layout .trac-my-part        { --y: 2883; }
+  .phone-layout .trac-banner         { --y: 3362; }
+  .phone-layout .trac-amp            { display: none; }
+}
+
+/* No mouse (phones, tablets): no special mice */
+@media (hover: none) {
+  .project-cursor,
+  .project-cursor.is-visible { display: none; }
+}
+
+/* ---------- Hamotzi right half (y = from the top of the column) ---------- */
 .hamotzi-story      { --story-height: var(--hamotzi-column-height); }
-.hamotzi-opening    { --x: 0; --y: 0;    --width: 720; --height: 257; }
-.hamotzi-plate      { --x: 0; --y: 257;  --width: 720; --height: 236; }
-.hamotzi-hot        { --x: 0; --y: 493;  --width: 720; --height: 404; }
-.hamotzi-credits-stills { --x: 0; --y: 897; --width: 720; --height: 256; }
-.hamotzi-street     { --x: 0; --y: 1153; --width: 720; --height: 405; }
+.hamotzi-opening    { --x: 0;   --y: 0;    --width: 720; --height: 257; }
+.hamotzi-plate      { --x: 0;   --y: 257;  --width: 720; --height: 236; }
+.hamotzi-hot        { --x: 0;   --y: 493;  --width: 720; --height: 404; }
+
+/* TRADITION / CRIME / SIN: three boxes, each word centered in its box */
+.hamotzi-word {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.hamotzi-tradition  { --x: 0;   --y: 897;  --width: 240; --height: 178; }
+.hamotzi-crime      { --x: 240; --y: 897;  --width: 240; --height: 178; }
+.hamotzi-sin        { --x: 480; --y: 897;  --width: 240; --height: 178; }
+
+.block-hamotzi-charcoal { background-color: var(--color-hamotzi-charcoal); color: var(--color-hamotzi-off-white); }
+.block-hamotzi-cream    { background-color: var(--color-project-cream);    color: var(--color-hamotzi-graphite); }
+
+/* Two stills, each on a colored box, next to the text about the idea */
+.block-hamotzi-beige { background-color: var(--color-hamotzi-beige-grey); }
+.block-hamotzi-dark  { background-color: var(--color-hamotzi-dark-grey); }
+.hamotzi-idea       { --x: 46;  --y: 1247; --width: 263; }
+.hamotzi-chip-box   { --x: 360; --y: 1075; --width: 360; --height: 256; }
+.hamotzi-chip       { --x: 390; --y: 1120; --width: 302; --height: 170; }
+.hamotzi-challah-box { --x: 360; --y: 1331; --width: 360; --height: 256; }
+.hamotzi-challah    { --x: 390; --y: 1374; --width: 302; --height: 170; }
+
+.hamotzi-street     { --x: 0;   --y: 1587; --width: 720; --height: 405; }
 
 /* =========================================================
    About page (about.html): one screen, drawn 1440 wide.
