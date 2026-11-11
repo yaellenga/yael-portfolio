@@ -38,6 +38,13 @@
       <div id="guide-project-left" class="guide-group"></div>
     </section>
 
+    <!-- PROJECT PAGE NEW LAYOUT: guide.js fills this from the --project-top- and --project-texts- variables -->
+    <section class="guide-section">
+      <h2 class="project-title">Project page — top area and text column</h2>
+      <p class="project-text">The new layout (trac.): the same spots on every project page, in Figma pixels.</p>
+      <div id="guide-project-top" class="guide-group"></div>
+    </section>
+
     <!-- TEXT STYLES: each class from styles.css, with its name -->
     <section class="guide-section">
       <h2 class="project-title">Text styles</h2>
@@ -68,6 +75,20 @@
         <p class="project-text">trac. is an app that keeps your songwriting organized while you keep creating.</p>
         <p class="project-text">.project-footer-item</p>
         <p class="project-footer-item">Contact</p>
+      </div>
+
+      <div class="guide-group">
+        <p class="project-bold-text">Project page — new layout (trac.)</p>
+        <p class="project-text">.top-link</p>
+        <p class="top-link">Contact</p>
+        <p class="project-text">.top-label</p>
+        <p class="top-label">Student Project<br>With Mia Gaon</p>
+        <p class="project-text">.stack-title</p>
+        <p class="stack-title guide-uppercase">A songwriting app for independent musicians</p>
+        <p class="project-text">.stack-big-title</p>
+        <p class="stack-big-title guide-uppercase">too many versions</p>
+        <p class="project-text">.stack-text</p>
+        <p class="stack-text guide-uppercase">trac. is an app that keeps your songwriting organized while you keep creating.</p>
       </div>
 
       <div class="guide-group">
@@ -198,6 +219,40 @@
             <h3 class="project-title">too many versions<br>too many places<br>&amp;&nbsp; too easy to lose</h3>
             <p class="project-text">I designed this app end-to-end alongside a fellow designer friend. We shared responsibility across the process, from research and small-scale studies to ideation, prototyping, and defining the app’s visual language.</p>
             <p class="project-text">I took lead on key parts of the design process, in development of the visual language, designing the landing page, and building the final full-flow prototype.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stacking texts (project page, new layout): how the left column looks at the end of the scroll.
+           On the page they come down one by one while you scroll (stack-scroll.js). -->
+      <div class="guide-group">
+        <p class="project-bold-text">Stacking texts (end of the scroll)</p>
+        <div class="guide-pair">
+          <div class="guide-stack">
+            <p class="project-text">Short</p>
+            <div class="guide-text-stack">
+              <p class="stack-text">I designed this app.</p>
+              <h3 class="stack-big-title">too easy to lose</h3>
+              <div>
+                <p class="stack-title">A songwriting app</p>
+                <p class="stack-text stack-after-title">An app for writing songs.</p>
+              </div>
+            </div>
+          </div>
+          <div class="guide-stack">
+            <p class="project-text">Long</p>
+            <div class="guide-text-stack">
+              <p class="stack-text">I designed this app end-to-end alongside a fellow designer. We shared responsibility across the process, from research and small-scale studies to ideation, prototyping, and defining the app’s visual language.</p>
+              <div>
+                <h3 class="stack-big-title">too many versions<br>too many places<br>&amp;&nbsp; too easy to lose</h3>
+                <p class="stack-text stack-bold stack-new-paragraph">Our Solution:<br>Write lyrics, capture ideas, record drafts and build your projects without the usual mess in between.</p>
+              </div>
+              <p class="stack-text">When creating music, short or quick materials are created along the way. Musicians often keep these materials across many platforms.</p>
+              <div>
+                <p class="stack-title">A songwriting app for independent musicians</p>
+                <p class="stack-text stack-after-title">trac. is an app that keeps your songwriting organized while you keep creating.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

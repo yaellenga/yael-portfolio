@@ -97,3 +97,16 @@ for (const { name, value } of variables.filter(v => v.name.startsWith('--project
   row.append(bar, makeText('project-text', `${name}   ${value}`));
   projectLeftArea.appendChild(row);
 }
+
+// ---------- Project page, new layout: top area and text column ----------
+const projectTopArea = document.querySelector('#guide-project-top');
+
+for (const { name, value } of variables.filter(v => v.name.startsWith('--project-top-') || v.name.startsWith('--project-texts-'))) {
+  const row = document.createElement('div');
+  row.className = 'guide-space';
+  const bar = document.createElement('div');
+  bar.className = 'guide-space-bar';
+  bar.style.setProperty('--space-value', `calc(var(${name}) * var(--u))`);
+  row.append(bar, makeText('project-text', `${name}   ${value}`));
+  projectTopArea.appendChild(row);
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="phone-layout">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,83 +12,92 @@
 
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="project-page">
 
-  <!-- LEFT HALF: stays in place while the page scrolls -->
-  <header class="project-info">
-    <p class="placed project-handwriting info-more-stuff">
-      <a class="handwriting-link" href="index.html">More stuff by</a>
+  <!-- TOP AREA: stays at the top of the window while the page scrolls -->
+  <header class="project-top">
+    <p class="placed project-handwriting top-more-stuff">
+      <a class="handwriting-link" href="index.html">More stuff</a>
     </p>
-    <p class="placed project-handwriting info-my-name">
+    <p class="placed project-handwriting top-my-name">
       <a class="handwriting-link" href="about.html">Yael Lenga</a>
     </p>
 
-    <h1 class="placed project-name info-name">trac.</h1>
-    <p class="placed project-bold-text info-type">uX\uI<br>app design<br>2025</p>
+    <!-- Contact, LinkedIn, Cv: their destinations will be added later -->
+    <p class="placed top-link top-contact">Contact</p>
+    <p class="placed top-link top-linkedin">LinkedIn</p>
+    <p class="placed top-link top-cv">Cv</p>
 
-    <h2 class="placed project-header info-header">A songwriting app for<br>independent musicians</h2>
-    <p class="placed project-text info-intro">trac. is an app that keeps your songwriting organized while you keep creating. Write lyrics, capture ideas, record drafts, and build your projects without the usual mess in between.</p>
-    <p class="placed project-bold-text info-credits">student project with mia gaon</p>
+    <h1 class="placed box top-logo trac-logo">
+      <img class="whole-image" src="images/trac-logo.svg" alt="trac.">
+    </h1>
 
-    <!-- Bottom links: their destinations will be added later -->
-    <p class="placed pin-bottom project-footer-item info-contact">Contact</p>
-    <p class="placed pin-bottom project-footer-item info-linkedin">LinkedIn</p>
-    <p class="placed pin-bottom project-footer-item info-cv">Cv</p>
-    <p class="placed pin-bottom project-footer-item info-next">Next</p>
+    <p class="placed top-label top-type">App Design</p>
+    <p class="placed top-label top-credits">Student Project With Mia Gaon</p>
+    <p class="placed top-label top-type-second">Ux\Ui</p>
+    <p class="placed top-label top-year">2025</p>
   </header>
 
-  <!-- RIGHT HALF: scrolls normally -->
-  <main class="project-story trac-story">
-
-    <!-- The app home screen and five more screens, on pink -->
-    <!-- On a phone (screen held upright) this shows only the app on pink -->
-    <div class="placed box trac-screens">
-      <picture>
-        <source media="(orientation: portrait)" srcset="images/trac-phone-app.jpg">
-        <img class="project-image" src="images/trac-screens.jpg" alt="The trac. app home screen on a phone, with five more app screens below it">
-      </picture>
+  <!-- LEFT COLUMN: the texts. The first one sits at the bottom;
+       each of the others comes down from the top when the part of the right panel
+       it belongs to (data-appears-with) comes into the window, and stops at its spot from Figma
+       (--stop-from-bottom: its top, from the bottom of the window, in Figma pixels).
+       stack-scroll.js moves them. -->
+  <div class="project-texts">
+    <div class="stack-box stack-first">
+      <h2 class="stack-title">A songwriting app for independent musicians</h2>
+      <p class="stack-text stack-after-title">trac. is an app that keeps your songwriting organized while you keep creating. Write lyrics, capture ideas, record drafts, and build your projects without the usual mess in between.</p>
     </div>
 
-    <!-- The problem: crumpled notes, the title, and the text on green -->
-    <div class="placed box trac-problem">
-      <img class="project-image" src="images/trac-problem.jpg" alt="Crumpled paper notes with handwritten lyrics">
-    </div>
-    <h2 class="placed project-title trac-problem-title">too many versions<br>too many places<br>&amp;&nbsp; too easy to lose</h2>
-
-    <div class="placed box block-green trac-green-block"></div>
-    <div class="placed box block-blue trac-blue-block"></div>
-    <img class="placed box trac-headphones" src="images/trac-headphones.svg" alt="">
-    <p class="placed project-text trac-problem-text">When creating music, short or quick materials are created and used along the way. Musicians often keep these materials across many platforms.<br>When materials are inaccessible, lost, sometimes ruined, or forgotten, the workflow becomes frustrating and challenging.</p>
-
-    <!-- The solution -->
-    <p class="placed project-bold-text trac-solution">Our Solution:<br>Write lyrics, capture ideas, record drafts and build your projects without the usual mess in between.</p>
-    <div class="placed box trac-steps">
-      <img class="project-image" src="images/trac-steps.jpg" alt="Write, record, refine">
+    <div class="stack-box" data-appears-with=".trac-notes-green" style="--stop-from-bottom: 263">
+      <p class="stack-text">When creating music, short or quick materials are created along the way. Musicians often keep these materials across many platforms.<br>Inaccessible materials, lost, ruined or forgotten, make the workflow more challenging.</p>
     </div>
 
-    <!-- Phone only: the five app screens, under Write / Record / Refine -->
-    <div class="placed box trac-phone-screens">
-      <img class="project-image" src="images/trac-phone-screens.jpg" alt="Five more screens of the trac. app">
+    <div class="stack-box" data-appears-with=".trac-write-box" style="--stop-from-bottom: 501">
+      <h2 class="stack-big-title">too many versions<br>too many places<br>&amp;&nbsp; too easy to lose</h2>
+      <p class="stack-text stack-bold stack-new-paragraph">Our Solution:<br>Write lyrics, capture ideas, record drafts and build your projects without the usual mess in between.</p>
     </div>
 
-    <!-- My part in the project, next to a microphone on yellow -->
-    <div class="placed box block-yellow trac-yellow-block"></div>
-    <img class="placed box trac-mic" src="images/trac-mic-icon.svg" alt="">
-    <div class="placed trac-my-part">
-      <p class="project-text">I designed this app end-to-end alongside a fellow designer friend. We shared responsibility across the process, from research and small-scale studies to ideation, prototyping, and defining the app’s visual language.</p>
-      <p class="project-text">I took lead on key parts of the design process, in development of the visual language, designing the landing page, and building the final full-flow prototype.</p>
+    <div class="stack-box" data-appears-with=".trac-icon-mic" style="--stop-from-bottom: 652">
+      <p class="stack-text">I designed this app end-to-end alongside a fellow designer. We shared responsibility across the process, from research and small-scale studies to ideation, prototyping, and defining the app’s visual language.</p>
+      <p class="stack-text stack-new-paragraph">I took lead on key parts of the design process, in development of the visual language, designing the landing page, and building the final full-flow prototype.</p>
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL: images from the project, scrolls up like a normal page -->
+  <main class="project-panel trac-panel">
+
+    <!-- The app home screen, big, with five more screens below it, on yellow -->
+    <div class="placed box trac-app-screens">
+      <img class="project-image" src="images/trac-app-screens.jpg" alt="The trac. app home screen on a big phone, with five more app screens below it, on yellow">
     </div>
 
-    <!-- The trac. banner -->
-    <div class="placed box trac-banner">
-      <img class="project-image" src="images/trac-banner.jpg" alt="trac. — Songwriting, but simpler. Never lose a beat again.">
-    </div>
+    <!-- Crumpled notes on green and blue -->
+    <div class="placed box block-green trac-notes-green"></div>
+    <div class="placed box block-blue trac-notes-blue"></div>
+    <img class="placed box trac-notes" src="images/trac-notes.png" alt="Crumpled paper notes and sticky notes with handwritten lyrics">
 
-    <!-- A green amplifier at the bottom of the page -->
-    <div class="placed box trac-amp">
-      <img class="project-image" src="images/trac-amp.jpg" alt="">
+    <!-- Write / Record / Refine, each on a colored box -->
+    <div class="placed box block-orange trac-write-box"></div>
+    <div class="placed box block-blue trac-record-box"></div>
+    <div class="placed box block-pink trac-refine-box"></div>
+    <img class="placed box trac-word-write" src="images/trac-word-write.svg" alt="Write">
+    <img class="placed box trac-word-record" src="images/trac-word-record.svg" alt="Record">
+    <img class="placed box trac-word-refine" src="images/trac-word-refine.svg" alt="Refine">
+
+    <!-- The small logo and three icons from the app -->
+    <img class="placed box trac-icon-logo" src="images/trac-icon-logo.svg" alt="">
+    <img class="placed box trac-icon-mic" src="images/trac-icon-mic.svg" alt="">
+    <img class="placed box trac-icon-drum" src="images/trac-icon-drum.svg" alt="">
+    <img class="placed box trac-icon-headphones" src="images/trac-icon-headphones.svg" alt="">
+
+    <!-- The black banner -->
+    <div class="placed box trac-banner-black">
+      <img class="project-image" src="images/trac-banner-black.jpg" alt="A musician on a crowded train looking at a phone, next to: Songwriting, but simpler. Never lose a beat again.">
     </div>
   </main>
 
+  <script src="stack-scroll.js"></script>
+  <script src="nav-slide.js"></script>
 </body>
 </html>

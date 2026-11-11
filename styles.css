@@ -23,6 +23,7 @@
   --color-trac-blue: #acd0ef;
   --color-trac-green: #98ed51;
   --color-trac-yellow: #ffd22e;
+  --color-trac-pink: #ffbfc0;
 
   /* Hamotzi colors */
   --color-hamotzi-light-grey: #d3d3d3;
@@ -76,7 +77,8 @@
   --project-title-size: calc(30 * var(--u));
   --project-text-size: calc(20 * var(--u));
   --project-text-spacing: calc(0.6 * var(--u));
-  --trac-column-height: calc(3437 * var(--u)); /* height of the trac. right column */
+  --project-small-text-size: calc(12 * var(--u)); /* the texts in the left column */
+  --trac-panel-height: calc(2800 * var(--u)); /* height of the trac. right panel */
   --hamotzi-column-height: calc(1992 * var(--u)); /* height of the Hamotzi right column */
 
   /* Phone: running text never gets smaller than this (real pixels on the screen) */
@@ -99,6 +101,29 @@
   --project-left-cv: 242;              /* Cv from the left */
   --project-left-next: 620;            /* Next from the left */
   --project-left-next-bottom: 63;      /* Next: top, from the bottom */
+
+  /* Project pages, top area and text column (the new layout, trac.).
+     The same spots on every project page. Plain Figma pixels. */
+  --project-top-height: 314;           /* the top area; the right panel starts under it */
+  --project-top-nav-top: 31;           /* "More stuff" and "Yael Lenga" from the top */
+  --project-top-nav-left: 35;          /* "More stuff" from the left */
+  --project-top-my-name: 1193;         /* "Yael Lenga" from the left */
+  --project-top-links-top: 87;         /* Contact, LinkedIn, Cv from the top */
+  --project-top-contact: 1176;         /* Contact from the left */
+  --project-top-linkedin: 1271;        /* LinkedIn from the left */
+  --project-top-cv: 1379;              /* Cv from the left */
+  --project-top-logo-top: 63;          /* the project logo from the top */
+  --project-top-labels-top: 245;       /* type, credits and year from the top */
+  --project-top-type: 36;              /* type ("App Design") from the left */
+  --project-top-credits: 482;          /* credits from the left */
+  --project-top-type-second: 964;      /* second type ("Ux\Ui") from the left */
+  --project-top-year: 1365;            /* year from the left */
+  --project-texts-width: 360;          /* the text column (the right panel starts here) */
+  --project-texts-left: 35;            /* the texts from the left */
+  --project-texts-text-width: 317;     /* width of the texts */
+  --project-texts-first-bottom: 137;   /* the first text: its top, from the bottom of the window */
+  --nav-slide-time: 0.6s;             /* "More stuff" and "Yael Lenga" slide to their about-page spots before leaving the page */
+  --project-texts-wait: 200;           /* how far to scroll after a panel part comes in, before its text starts coming down */
 
   /* Spacing scale: distances that repeat in the Figma design (Figma pixels × --u) */
   --space-small: calc(20 * var(--u));
@@ -298,8 +323,19 @@ body {
 
 /* Screen 2: trac. headline and phone, both centered (Constraints: Center) */
 .left-trac-headline { --x: 129; --from-center: -391; --width: 591; --height: 299; }
-.left-trac-phone    { --x: 248; --from-center: -42; --width: 224.629; --height: 486.981;
-                      border-radius: calc(27.436 * var(--u)); overflow: hidden; } /* round phone corners, as in Figma */
+/* The phone shrinks when the window is short, so it is never cut at the bottom.
+   --phone-unit = 1 Figma pixel, but never more than the screen height ÷ 964 (the Figma screen height).
+   It stays centered on the same spot as in Figma. */
+.left-trac-phone {
+  --phone-unit: min(var(--u), calc(var(--screen-height) / 964));
+  position: absolute;
+  left: calc(360.31 * var(--u) - 112.31 * var(--phone-unit)); /* 360.31 = middle of the phone in Figma */
+  top: calc(50% - 42 * var(--phone-unit));
+  width: calc(224.629 * var(--phone-unit));
+  height: calc(486.981 * var(--phone-unit));
+  border-radius: calc(27.436 * var(--phone-unit)); /* round phone corners, as in Figma */
+  overflow: hidden;
+}
 
 /* Screen 3: Hamotzi, left half of the picture (centered, meets the right half in the middle) */
 .left-hamotzi    { --x: 319; --from-center: -405; --width: 401; --height: 540;
@@ -523,6 +559,8 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .block-blue   { background-color: var(--color-trac-blue); }
 .block-green  { background-color: var(--color-trac-green); }
 .block-yellow { background-color: var(--color-trac-yellow); }
+.block-orange { background-color: var(--color-trac-orange); }
+.block-pink   { background-color: var(--color-trac-pink); }
 
 /* A <picture> (one image for computers, another for phones) fills its box too */
 .box > picture {
@@ -551,25 +589,157 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .info-cv          { --x: var(--project-left-cv);       --from-bottom: var(--project-left-footer-bottom); }
 .info-next        { --x: var(--project-left-next);     --from-bottom: var(--project-left-next-bottom); }
 
-/* ---------- trac. right half (y = from the top of the column) ---------- */
-.trac-story         { --story-height: var(--trac-column-height); }
-.trac-screens       { --x: 0;   --y: 0;    --width: 720; --height: 918; }
-.trac-problem       { --x: 0;   --y: 918;  --width: 360; --height: 270; }
-.trac-problem-title { --x: 396; --y: 1013; --width: 303; }
-.trac-green-block   { --x: 0;   --y: 1188; --width: 540; --height: 468; }
-.trac-blue-block    { --x: 540; --y: 1188; --width: 180; --height: 468; }
-.trac-headphones    { --x: 443; --y: 1353; --width: 194.545; --height: 128.717; }
-.trac-problem-text  { --x: 59;  --y: 1283; --width: 289; }
-.trac-solution      { --x: 191; --y: 1703; --width: 360; }
-.trac-steps         { --x: 0;   --y: 1858; --width: 720; --height: 396; }
-.trac-yellow-block  { --x: 0;   --y: 2254; --width: 360; --height: 594; }
-.trac-mic           { --x: 94;  --y: 2400; --width: 172.193; --height: 260.714; }
-.trac-my-part       { --x: 385; --y: 2369; --width: 309; }
-.trac-banner        { --x: 0;   --y: 2848; --width: 720; --height: 442; }
-.trac-amp           { --x: 0;   --y: 3290; --width: 720; --height: 147; }
+/* =========================================================
+   Project page, new layout (trac.html):
+   a top area that stays still, a text column on the left
+   whose texts move down and stack (stack-scroll.js),
+   and a wide right panel that scrolls up like a normal page.
+   ========================================================= */
 
-/* The five small app screens: only on the phone (on computers they are inside .trac-screens) */
-.trac-phone-screens { --x: 0;   --y: 2537; --width: 720; --height: 200; display: none; }
+.project-page {
+  background-color: var(--color-project-cream);
+  color: var(--color-black);
+}
+
+/* Top area: fixed to the top of the window, over everything */
+.project-top {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(var(--project-top-height) * var(--u));
+  background-color: var(--color-project-cream);
+}
+
+.top-more-stuff   { --x: var(--project-top-nav-left);  --y: var(--project-top-nav-top); }
+
+/* "More stuff" and "Yael Lenga" slide to their spots on the about page when clicked (nav-slide.js) */
+.top-more-stuff,
+.top-my-name {
+  transition: transform var(--nav-slide-time) ease-in-out;
+}
+.top-my-name      { --x: var(--project-top-my-name);   --y: var(--project-top-nav-top); }
+.top-contact      { --x: var(--project-top-contact);   --y: var(--project-top-links-top); }
+.top-linkedin     { --x: var(--project-top-linkedin);  --y: var(--project-top-links-top); }
+.top-cv           { --x: var(--project-top-cv);        --y: var(--project-top-links-top); }
+.top-logo         { --y: var(--project-top-logo-top); } /* each project sets --x and the size of its logo */
+.top-type         { --x: var(--project-top-type);        --y: var(--project-top-labels-top); }
+.top-credits      { --x: var(--project-top-credits);     --y: var(--project-top-labels-top); --width: 130; }
+.top-type-second  { --x: var(--project-top-type-second); --y: var(--project-top-labels-top); }
+.top-year         { --x: var(--project-top-year);        --y: var(--project-top-labels-top); }
+
+/* Contact, LinkedIn, Cv: small handwriting under "Yael Lenga" */
+.top-link {
+  font-family: var(--font-handwriting);
+  font-weight: 400;
+  font-size: var(--project-text-size);
+  line-height: 1.49;
+  white-space: nowrap;
+}
+
+/* Type, credits and year: bold labels under the logo */
+.top-label {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--project-text-size);
+  line-height: 1;
+  white-space: nowrap;
+}
+.top-credits { white-space: normal; }
+
+/* The logo is the page's main title, so the heading itself has no extra spacing */
+.top-logo { margin: 0; }
+
+/* Text column: fixed under the top area, on the left. Texts outside it are hidden. */
+.project-texts {
+  position: fixed;
+  top: calc(var(--project-top-height) * var(--u));
+  bottom: 0;
+  left: 0;
+  width: calc(var(--project-texts-width) * var(--u));
+  overflow: hidden;
+  background-color: var(--color-project-cream);
+}
+
+/* One text in the column. The script moves all of them except the first. */
+.stack-box {
+  position: absolute;
+  top: 0;
+  left: calc(var(--project-texts-left) * var(--u));
+  width: calc(var(--project-texts-text-width) * var(--u));
+  text-transform: uppercase;
+}
+
+/* The first text sits at the bottom of the column and never moves */
+.stack-first {
+  top: calc(100% - var(--project-texts-first-bottom) * var(--u));
+}
+
+/* Bold title of the first text */
+.stack-title {
+  width: calc(228 * var(--u)); /* breaks into two lines, as in Figma */
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--project-text-size);
+  line-height: 0.9;
+}
+
+/* Big bold title ("too many versions…") */
+.stack-big-title {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--project-title-size);
+  line-height: 1.24;
+}
+
+/* The small running text */
+.stack-text {
+  font-family: var(--font-label);
+  font-weight: 400;
+  font-size: var(--project-small-text-size);
+  line-height: 1.24;
+}
+
+.stack-bold { font-weight: 700; }
+
+/* Space between a title and its text, and an empty line before a new paragraph */
+.stack-after-title   { margin-top: calc(10 * var(--u)); }
+.stack-new-paragraph { margin-top: 1.24em; }
+
+/* Right panel: starts under the top area, next to the text column, scrolls up */
+.project-panel {
+  position: relative;
+  margin-top: calc(var(--project-top-height) * var(--u));
+  margin-left: calc(var(--project-texts-width) * var(--u));
+  width: calc(100% - var(--project-texts-width) * var(--u));
+  height: var(--panel-height); /* each project sets its own (see below) */
+  background-color: var(--color-project-cream);
+}
+
+/* ---------- trac. right panel (y = from the top of the panel) ---------- */
+.trac-panel           { --panel-height: var(--trac-panel-height); }
+.trac-logo            { --x: 495; --width: 419.093; --height: 144.694; }
+
+.trac-app-screens     { --x: 0;   --y: 0;    --width: 1080; --height: 892; }
+
+.trac-notes-green     { --x: 0;   --y: 892;  --width: 720; --height: 561; }
+.trac-notes-blue      { --x: 720; --y: 892;  --width: 360; --height: 561; }
+.trac-notes           { --x: 170; --y: 944;  --width: 720; --height: 457; }
+
+.trac-write-box       { --x: 0;   --y: 1453; --width: 360; --height: 406; }
+.trac-record-box      { --x: 360; --y: 1453; --width: 360; --height: 406; }
+.trac-refine-box      { --x: 720; --y: 1453; --width: 360; --height: 406; }
+.trac-word-write      { --x: 111.358; --y: 1637.44; --width: 112; --height: 37; }
+.trac-word-record     { --x: 479; --y: 1631; --width: 154; --height: 48; }
+.trac-word-refine     { --x: 832; --y: 1631; --width: 134; --height: 48; }
+
+.trac-icon-logo       { --x: 73;  --y: 1982;    --width: 89;  --height: 31; }
+.trac-icon-mic        { --x: 302; --y: 1928.48; --width: 92;  --height: 138; }
+.trac-icon-drum       { --x: 534; --y: 1941.06; --width: 149; --height: 111; }
+.trac-icon-headphones { --x: 823; --y: 1950.49; --width: 153; --height: 102; }
+
+.trac-banner-black    { --x: 0;   --y: 2124; --width: 1080; --height: 676; }
 
 /* =========================================================
    Phone (screen held upright), for pages with a phone design in Figma.
@@ -592,9 +762,6 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
     --project-left-credits-top: 378;
     --project-left-footer-bottom: 53;
     --project-left-next-bottom: 55;
-
-    /* Height of the whole trac. page on the phone */
-    --trac-phone-height: calc(3886 * var(--u));
   }
 
   /* The info sits on top of the page (see-through), as tall as the page,
@@ -622,26 +789,6 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   .phone-layout .project-story {
     margin-left: 0;
   }
-
-  .phone-layout .project-info,
-  .phone-layout .trac-story { --story-height: var(--trac-phone-height); }
-
-  /* trac. on the phone: the same blocks, moved down, in the phone frame's order */
-  .phone-layout .trac-screens        { --y: 447;  --height: 721; }
-  .phone-layout .trac-problem        { --y: 1168; }
-  .phone-layout .trac-problem-title  { --y: 1263; }
-  .phone-layout .trac-green-block    { --y: 1438; }
-  .phone-layout .trac-blue-block     { --y: 1438; }
-  .phone-layout .trac-headphones     { --y: 1603; }
-  .phone-layout .trac-problem-text   { --y: 1533; }
-  .phone-layout .trac-solution       { --y: 1953; }
-  .phone-layout .trac-steps          { --y: 2108; }
-  .phone-layout .trac-phone-screens  { display: block; }
-  .phone-layout .trac-yellow-block   { --y: 2768; }
-  .phone-layout .trac-mic            { --y: 2914; }
-  .phone-layout .trac-my-part        { --y: 2883; }
-  .phone-layout .trac-banner         { --y: 3362; }
-  .phone-layout .trac-amp            { display: none; }
 }
 
 /* No mouse (phones, tablets): no special mice */
@@ -944,6 +1091,19 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   align-self: flex-start;
   padding: var(--space-small);
   background-color: var(--color-black);
+}
+
+/* Samples of the left-column texts: uppercase, as inside the column */
+.guide-uppercase { text-transform: uppercase; }
+
+/* The stacking texts as they look at the end of the scroll: one under the other.
+   (On a project page each text's spot comes from Figma: --stop-from-bottom.) */
+.guide-text-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+  width: calc(var(--project-texts-text-width) * var(--u));
+  text-transform: uppercase;
 }
 
 /* In the guide's lists, a name and its sample sit close together
