@@ -47,15 +47,36 @@
     </div>
   </div>
 
-  <!-- Two stills from the title sequence, on the left above the text -->
-  <img class="placed box hamotzi-side-still-top" src="images/hamotzi-side-still-top.jpg" alt="A challah and a coin on a lace tablecloth, with an actor's name in Hebrew">
-  <img class="placed box hamotzi-side-still-bottom" src="images/hamotzi-side-still-bottom.jpg" alt="A poker chip on a lace tablecloth, with an actor's name in Hebrew">
+  <!-- Stills from the title sequence, on the left above the text.
+       Only this strip scrolls (when there are more stills than fit); the rest of the page stays still. -->
+  <div class="hamotzi-stills">
+    <img class="hamotzi-still" src="images/hamotzi-side-still-top.jpg" alt="A challah and a coin on a lace tablecloth, with an actor's name in Hebrew">
+    <img class="hamotzi-still" src="images/hamotzi-side-still-bottom.jpg" alt="A poker chip on a lace tablecloth, with an actor's name in Hebrew">
+  </div>
 
-  <!-- RIGHT: the title sequence. For now a still from it (the HOT logo); the video will go here. -->
-  <main class="placed box hamotzi-video">
-    <img class="project-image" src="images/hamotzi-video-frame.jpg" alt="The HOT logo with a red and pink stripe on black, from the start of the title sequence">
+  <!-- RIGHT: the title sequence video, with a play button and an enlarge button (video-player.js).
+       Until it plays, it shows a still from its start (the HOT logo).
+       The video file goes in images/hamotzi-video.mp4 -->
+  <main class="placed hamotzi-video video-player">
+    <video class="video-player-video" src="images/hamotzi-video.mp4" poster="images/hamotzi-video-frame.jpg"
+           preload="none" playsinline aria-label="The Hamotzi title sequence"></video>
+
+    <button class="video-button video-play" type="button" aria-label="Play the video">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+    </button>
+
+    <button class="video-button video-enlarge" type="button" aria-label="Enlarge the video">
+      <!-- Enlarge: four corners pointing out -->
+      <svg class="video-icon-enlarge" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
+      <!-- Make small again: four corners pointing in -->
+      <svg class="video-icon-shrink" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5"/></svg>
+    </button>
   </main>
 
+  <!-- Dims the rest of the screen while the video is enlarged; clicking it makes the video small again -->
+  <div class="video-backdrop"></div>
+
+  <script src="video-player.js"></script>
   <script src="nav-slide.js"></script>
 </body>
 </html>

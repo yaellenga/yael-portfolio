@@ -9,6 +9,7 @@ const colorGroups = {
   'hamotzi': 'Hamotzi',
   'focus': 'Keyboard focus',
   'mockup': 'Desktop mockup',
+  'dim': 'Video player',
   'home': 'Home page',
   'about': 'About page',
   'entry': 'Process page',

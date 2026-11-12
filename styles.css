@@ -50,6 +50,9 @@
   --color-mockup-dot-green: #28c840;
   --color-mockup-shadow: rgba(0, 0, 0, 0.18);
 
+  /* Dims the screen behind an enlarged video */
+  --color-dim: rgba(0, 0, 0, 0.8);
+
   /* About page color */
   --color-about-blue: #5ce3fe;
 
@@ -138,6 +141,9 @@
   --project-texts-left: 35;            /* the texts from the left */
   --project-texts-text-width: 317;     /* width of the texts */
   --project-texts-first-bottom: 137;   /* the first text: its top, from the bottom of the window */
+  --video-play-size: 90;               /* the play button (a square) */
+  --video-enlarge-size: 44;            /* the enlarge button (a square) */
+  --project-video-bottom: 41;          /* space under the video, so it always fits on the screen */
   --nav-slide-time: 0.6s;             /* "More stuff" and "Yael Lenga" slide to their about-page spots before leaving the page */
   --project-texts-wait: 200;           /* how far to scroll after a panel part comes in, before its text starts coming down */
 
@@ -752,12 +758,119 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 /* ---------- Hamotzi page (hamotzi.html): the new layout, one screen, no panel ---------- */
 .hamotzi-page {
   --project-texts-first-bottom: 180;  /* the text: its top, from the bottom of the window */
+  --hamotzi-stills-top: 242;          /* the stills strip: from the top */
+  --hamotzi-stills-gap: 12;           /* between the stills, and between the strip and the text */
 }
 .hamotzi-logo               { --x: 499; --y: 36.86; --width: 424; --height: 121.27; }
 .hamotzi-credits            { --width: 146; }
-.hamotzi-side-still-top     { --x: 35;  --y: 242; --width: 306;  --height: 172; object-fit: cover; }
-.hamotzi-side-still-bottom  { --x: 35;  --y: 426; --width: 306;  --height: 172; object-fit: cover; }
-.hamotzi-video              { --x: 360; --y: 240; --width: 1080; --height: 607; }
+
+/* The stills on the left: a strip from under the top area down to just above the text.
+   Only this strip scrolls; the video and everything else stay in place.
+   (No scroll bar is shown; the mouse wheel or a swipe scrolls it.) */
+.hamotzi-stills {
+  position: fixed;
+  top: calc(var(--hamotzi-stills-top) * var(--u));
+  bottom: calc((var(--project-texts-first-bottom) + var(--hamotzi-stills-gap)) * var(--u));
+  left: calc(var(--project-texts-left) * var(--u));
+  width: calc(306 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--hamotzi-stills-gap) * var(--u));
+  overflow-y: auto;
+  scrollbar-width: none; /* hide the scroll bar (Firefox, Chrome) */
+}
+.hamotzi-stills::-webkit-scrollbar { display: none; } /* hide the scroll bar (Safari) */
+
+.hamotzi-still {
+  display: block;
+  flex: none;
+  width: 100%;
+  aspect-ratio: 306 / 172;
+  object-fit: cover;
+}
+/* The video: at its Figma spot, but it shrinks (keeping its shape) when the window is short,
+   so it always fits on the screen, with --project-video-bottom of space under it */
+.hamotzi-video {
+  --x: 360; --y: 240;
+  width: min(calc(1080 * var(--u)),
+             (var(--screen-height) - (240 + var(--project-video-bottom)) * var(--u)) * 1080 / 607);
+  aspect-ratio: 1080 / 607;
+}
+
+/* ---------- Video player: play and enlarge buttons (video-player.js) ---------- */
+.video-player { background-color: var(--color-black); }
+
+.video-player-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+/* Square buttons, cream with a black icon. On hover they invert (black with a cream icon),
+   like the black square letter in the Hamotzi logo. */
+.video-button {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background-color: var(--color-project-cream);
+  color: var(--color-black);
+  cursor: pointer;
+}
+.video-button:hover {
+  background-color: var(--color-black);
+  color: var(--color-project-cream);
+}
+.video-button svg { width: 55%; height: 55%; }
+
+/* Play: in the middle of the video; hidden while it plays */
+.video-play {
+  left: 50%;
+  top: 50%;
+  width: calc(var(--video-play-size) * var(--u));
+  height: calc(var(--video-play-size) * var(--u));
+  transform: translate(-50%, -50%);
+}
+.video-player.is-playing .video-play { display: none; }
+
+/* Enlarge: in the bottom-right corner */
+.video-enlarge {
+  right: var(--space-small);
+  bottom: var(--space-small);
+  width: calc(var(--video-enlarge-size) * var(--u));
+  height: calc(var(--video-enlarge-size) * var(--u));
+}
+.video-icon-shrink { display: none; }
+.video-player.is-enlarged .video-icon-enlarge { display: none; }
+.video-player.is-enlarged .video-icon-shrink { display: block; }
+
+/* Enlarged: in the middle of the screen, as big as fits, above everything */
+.video-player.is-enlarged {
+  position: fixed;
+  z-index: 12;
+  left: 50%;
+  top: 50%;
+  width: min(90vw, 90vh * 1080 / 607);
+  transform: translate(-50%, -50%);
+}
+
+/* The dim layer behind the enlarged video */
+.video-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 11;
+  background-color: var(--color-dim);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--nav-slide-time) ease;
+}
+.video-backdrop.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
 
 /* ---------- Desktop mockup: a computer showing a live website (desktop-mockup.js) ----------
    Its size is set by --mockup-width; every other part is a share of it,
@@ -1239,6 +1352,25 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   align-self: flex-start;
   padding: var(--space-small);
   background-color: var(--color-black);
+}
+
+/* Video player buttons, on black like on the video */
+.guide-video-buttons {
+  display: flex;
+  align-items: center;
+  gap: var(--space-small);
+  align-self: flex-start;
+  padding: var(--space-small);
+  background-color: var(--color-black);
+}
+.guide-video-button { position: static; }
+.guide-video-play {
+  width: calc(var(--video-play-size) * var(--u));
+  height: calc(var(--video-play-size) * var(--u));
+}
+.guide-video-enlarge {
+  width: calc(var(--video-enlarge-size) * var(--u));
+  height: calc(var(--video-enlarge-size) * var(--u));
 }
 
 /* Samples of the left-column texts: uppercase, as inside the column */
