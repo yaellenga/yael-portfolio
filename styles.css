@@ -33,6 +33,24 @@
   --color-hamotzi-off-white: #fdfdfd;   /* text on the charcoal boxes */
   --color-hamotzi-graphite: #353535;    /* text on the cream box (CRIME) */
 
+  /* Desktop mockup: the computer that shows a live website (lets-talk.html) */
+  --color-mockup-bezel: #1b1b1d;        /* the black frame around the screen */
+  --color-mockup-body: #d9d9dc;         /* the chin and the stand */
+  --color-mockup-body-dark: #b9b9be;    /* the shaded sides of the chin and the stand */
+  --color-mockup-camera: #2e2e33;
+  --color-mockup-camera-ring: #0d0d0f;
+  --color-mockup-bar: #ececee;          /* the browser bar */
+  --color-mockup-bar-line: #d4d4d8;     /* the line under the browser bar */
+  --color-mockup-button: #55555a;       /* reload / new tab icons */
+  --color-mockup-button-hover: #dcdce0;
+  --color-mockup-address: #3a3a3f;      /* the address text */
+  --color-mockup-lock: #8a8a90;         /* the lock icon in the address */
+  --color-mockup-spinner: #e6e6e9;      /* the spinner's track, while the site loads */
+  --color-mockup-dot-red: #ff5f57;
+  --color-mockup-dot-yellow: #febc2e;
+  --color-mockup-dot-green: #28c840;
+  --color-mockup-shadow: rgba(0, 0, 0, 0.18);
+
   /* About page color */
   --color-about-blue: #5ce3fe;
 
@@ -715,6 +733,182 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   width: calc(100% - var(--project-texts-width) * var(--u));
   height: var(--panel-height); /* each project sets its own (see below) */
   background-color: var(--color-project-cream);
+}
+
+/* ---------- Lets Talk About It page (lets-talk.html): the new layout, one screen, no panel ---------- */
+.lets-talk-page {
+  --project-top-height: 285;          /* the top area ends where the computer starts */
+  --project-top-labels-top: 171;      /* the logo is shorter here, so the labels are higher */
+  --project-texts-first-bottom: 180;  /* the text: its top, from the bottom of the window */
+}
+.lets-talk-logo    { --x: 378; --y: 6.34; --width: 666; --height: 182; }
+.lets-talk-credits { --width: 161; }
+
+/* The square in the middle; the computer sits in its center */
+.lets-talk-mockup {
+  --x: 172; --y: 285; --width: 1097; --height: 552;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ---------- Desktop mockup: a computer showing a live website (desktop-mockup.js) ----------
+   Its size is set by --mockup-width; every other part is a share of it,
+   so the whole computer (screen, chin, neck and foot) fits the square's height. */
+.mockup-computer {
+  --mockup-width: calc(707 * var(--u));
+  width: var(--mockup-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0 calc(19.3 * var(--u)) calc(25.7 * var(--u)) var(--color-mockup-shadow));
+}
+
+.mockup-monitor {
+  position: relative;
+  width: 100%;
+  padding: 1.6%;
+  border-radius: calc(var(--mockup-width) * 0.0164) calc(var(--mockup-width) * 0.0164) 0 0;
+  background-color: var(--color-mockup-bezel);
+}
+
+/* The camera dot at the top of the frame */
+.mockup-monitor::before {
+  content: "";
+  position: absolute;
+  top: 0.6%;
+  left: 50%;
+  width: calc(var(--mockup-width) * 0.0055);
+  height: calc(var(--mockup-width) * 0.0055);
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-color: var(--color-mockup-camera);
+  box-shadow: inset 0 0 0 1px var(--color-mockup-camera-ring);
+}
+
+/* The screen: 16 by 10, like a computer screen */
+.mockup-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: calc(var(--mockup-width) * 0.0036);
+  background-color: var(--color-white);
+}
+
+/* Inside the screen everything is drawn 1440 wide and then shrunk (desktop-mockup.js),
+   so the sizes in here are in "screen pixels" of that 1440-wide screen */
+.mockup-viewport {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  transform-origin: top left;
+  background-color: var(--color-white);
+}
+
+.mockup-browser-bar {
+  flex: 0 0 52px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 18px;
+  background-color: var(--color-mockup-bar);
+  border-bottom: 1px solid var(--color-mockup-bar-line);
+}
+
+.mockup-dots { display: flex; gap: 8px; }
+.mockup-dots span { width: 13px; height: 13px; border-radius: 50%; }
+.mockup-dots span:nth-child(1) { background-color: var(--color-mockup-dot-red); }
+.mockup-dots span:nth-child(2) { background-color: var(--color-mockup-dot-yellow); }
+.mockup-dots span:nth-child(3) { background-color: var(--color-mockup-dot-green); }
+
+.mockup-button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-mockup-button);
+  cursor: pointer;
+}
+.mockup-button:hover { background-color: var(--color-mockup-button-hover); }
+.mockup-button svg { width: 16px; height: 16px; }
+
+.mockup-address {
+  flex: 1;
+  max-width: 640px;
+  height: 32px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  background-color: var(--color-white);
+  color: var(--color-mockup-address);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.mockup-address svg { flex: none; width: 12px; height: 12px; color: var(--color-mockup-lock); }
+
+/* The website itself fills the rest of the screen */
+.mockup-site { position: relative; flex: 1; }
+
+.mockup-frame {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background-color: var(--color-white);
+}
+
+/* A spinner on white until the website has loaded */
+.mockup-loader {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background-color: var(--color-white);
+  transition: opacity 0.3s;
+}
+.mockup-loader.is-hidden { opacity: 0; pointer-events: none; }
+
+.mockup-spinner {
+  width: 38px;
+  height: 38px;
+  border: 4px solid var(--color-mockup-spinner);
+  border-top-color: var(--color-home-green);
+  border-radius: 50%;
+  animation: mockup-spin 0.8s linear infinite;
+}
+@keyframes mockup-spin { to { transform: rotate(360deg); } }
+
+/* The chin under the screen, the neck and the foot of the stand */
+.mockup-chin {
+  width: 100%;
+  height: calc(var(--mockup-width) * 0.0527);
+  border-radius: 0 0 calc(var(--mockup-width) * 0.0164) calc(var(--mockup-width) * 0.0164);
+  background: linear-gradient(var(--color-mockup-body), var(--color-mockup-body-dark));
+}
+.mockup-neck {
+  width: 18%;
+  height: calc(var(--mockup-width) * 0.0818);
+  background: linear-gradient(90deg, var(--color-mockup-body-dark), var(--color-mockup-body) 30%, var(--color-mockup-body) 70%, var(--color-mockup-body-dark));
+  clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%);
+}
+.mockup-foot {
+  width: 30%;
+  height: calc(var(--mockup-width) * 0.0091);
+  border-radius: 0 0 calc(var(--mockup-width) * 0.0073) calc(var(--mockup-width) * 0.0073);
+  background-color: var(--color-mockup-body-dark);
 }
 
 /* ---------- trac. right panel (y = from the top of the panel) ---------- */

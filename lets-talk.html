@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lets Talk About It — Yael Lenga</title>
+
+  <!-- Fonts from Google Fonts: Mynerve (handwriting) and Carlito (text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=Mynerve&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="project-page lets-talk-page">
+
+  <!-- TOP AREA: the same as on every project page in the new layout -->
+  <header class="project-top">
+    <p class="placed project-handwriting top-more-stuff">
+      <a class="handwriting-link" href="index.html">More stuff</a>
+    </p>
+    <p class="placed project-handwriting top-my-name">
+      <a class="handwriting-link" href="about.html">Yael Lenga</a>
+    </p>
+
+    <!-- Contact, LinkedIn, Cv: their destinations will be added later -->
+    <p class="placed top-link top-contact">Contact</p>
+    <p class="placed top-link top-linkedin">LinkedIn</p>
+    <p class="placed top-link top-cv">Cv</p>
+
+    <!-- The project name in Hebrew: "בואי נדבר על זה" (Lets talk about it) -->
+    <h1 class="placed box top-logo lets-talk-logo">
+      <img class="whole-image" src="images/lets-talk-logo.svg" alt="בואי נדבר על זה — Lets Talk About It" lang="he">
+    </h1>
+
+    <p class="placed top-label top-type">Podcast Website</p>
+    <p class="placed top-label top-credits lets-talk-credits">Student Project With Hillel Buchris</p>
+    <p class="placed top-label top-type-second">Web&amp;App Design<br>Illustration</p>
+    <p class="placed top-label top-year">2026</p>
+  </header>
+
+  <!-- LEFT COLUMN: one text, at the bottom -->
+  <div class="project-texts">
+    <div class="stack-box stack-first">
+      <h2 class="stack-title">A songwriting app for independent musicians</h2>
+      <p class="stack-text stack-after-title">A title sequence for a fictional TV series. Drawing the viewer into an ultra religious world of crime showcasing complexity of a layered world.<br>The titles explore where faith and crime meet, comparing the two worlds through shared gestures, objects, and rituals until the line between them blurs.</p>
+    </div>
+  </div>
+
+  <!-- MIDDLE: a computer showing the real podcast website, live.
+       You can scroll and click inside its screen (desktop-mockup.js fits the site into it). -->
+  <main class="placed box lets-talk-mockup">
+    <div class="mockup-computer" data-site="https://boi-nidber-al-zeh.vercel.app/">
+      <div class="mockup-monitor">
+        <div class="mockup-screen">
+          <!-- The site is drawn as on a 1440-wide screen, then shrunk to fit -->
+          <div class="mockup-viewport">
+
+            <!-- A browser bar: three dots, reload, the address, open in a new tab -->
+            <div class="mockup-browser-bar">
+              <div class="mockup-dots"><span></span><span></span><span></span></div>
+              <button class="mockup-button mockup-reload" type="button" title="Reload">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+              </button>
+              <div class="mockup-address">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 9V7a5 5 0 0 0-10 0v2H5v13h14V9h-2Zm-8-2a3 3 0 0 1 6 0v2H9V7Z"/></svg>
+                <span class="mockup-address-text"></span>
+              </div>
+              <a class="mockup-button mockup-new-tab" target="_blank" rel="noopener" title="Open in a new tab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>
+              </a>
+            </div>
+
+            <!-- The website itself, with a spinner until it has loaded -->
+            <div class="mockup-site">
+              <iframe class="mockup-frame" title="The Lets Talk About It podcast website, live" loading="lazy"
+                      allow="clipboard-write; fullscreen; autoplay"></iframe>
+              <div class="mockup-loader"><div class="mockup-spinner"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mockup-chin"></div>
+      <div class="mockup-neck"></div>
+      <div class="mockup-foot"></div>
+    </div>
+  </main>
+
+  <script src="desktop-mockup.js"></script>
+  <script src="nav-slide.js"></script>
+</body>
+</html>

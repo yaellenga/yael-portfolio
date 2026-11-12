@@ -8,6 +8,7 @@ const colorGroups = {
   'trac': 'trac.',
   'hamotzi': 'Hamotzi',
   'focus': 'Keyboard focus',
+  'mockup': 'Desktop mockup',
   'home': 'Home page',
   'about': 'About page',
   'entry': 'Process page',
