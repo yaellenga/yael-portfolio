@@ -95,8 +95,7 @@
   --project-text-size: calc(20 * var(--u));
   --project-text-spacing: calc(0.6 * var(--u));
   --project-small-text-size: calc(12 * var(--u)); /* the texts in the left column */
-  --trac-panel-height: calc(2800 * var(--u)); /* height of the trac. right panel */
-  --hamotzi-column-height: calc(1992 * var(--u)); /* height of the Hamotzi right column */
+  --trac-panel-height: calc(2874 * var(--u)); /* height of the trac. right panel */
 
   /* Phone: running text never gets smaller than this (real pixels on the screen) */
   --text-min-size: 12px;
@@ -121,16 +120,16 @@
 
   /* Project pages, top area and text column (the new layout, trac.).
      The same spots on every project page. Plain Figma pixels. */
-  --project-top-height: 314;           /* the top area; the right panel starts under it */
-  --project-top-nav-top: 31;           /* "More stuff" and "Yael Lenga" from the top */
+  --project-top-height: 240;           /* the top area; the right panel starts under it */
+  --project-top-nav-top: 21;           /* "More stuff" and "Yael Lenga" from the top */
   --project-top-nav-left: 35;          /* "More stuff" from the left */
   --project-top-my-name: 1193;         /* "Yael Lenga" from the left */
   --project-top-links-top: 87;         /* Contact, LinkedIn, Cv from the top */
   --project-top-contact: 1176;         /* Contact from the left */
   --project-top-linkedin: 1271;        /* LinkedIn from the left */
   --project-top-cv: 1379;              /* Cv from the left */
-  --project-top-logo-top: 63;          /* the project logo from the top */
-  --project-top-labels-top: 245;       /* type, credits and year from the top */
+  --project-top-logo-top: 53.49;       /* the project logo from the top */
+  --project-top-labels-top: 171;       /* type, credits and year from the top */
   --project-top-type: 36;              /* type ("App Design") from the left */
   --project-top-credits: 482;          /* credits from the left */
   --project-top-type-second: 964;      /* second type ("Ux\Ui") from the left */
@@ -737,7 +736,6 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 /* ---------- Lets Talk About It page (lets-talk.html): the new layout, one screen, no panel ---------- */
 .lets-talk-page {
   --project-top-height: 285;          /* the top area ends where the computer starts */
-  --project-top-labels-top: 171;      /* the logo is shorter here, so the labels are higher */
   --project-texts-first-bottom: 180;  /* the text: its top, from the bottom of the window */
 }
 .lets-talk-logo    { --x: 378; --y: 6.34; --width: 666; --height: 182; }
@@ -750,6 +748,16 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   justify-content: center;
   align-items: center;
 }
+
+/* ---------- Hamotzi page (hamotzi.html): the new layout, one screen, no panel ---------- */
+.hamotzi-page {
+  --project-texts-first-bottom: 180;  /* the text: its top, from the bottom of the window */
+}
+.hamotzi-logo               { --x: 499; --y: 36.86; --width: 424; --height: 121.27; }
+.hamotzi-credits            { --width: 146; }
+.hamotzi-side-still-top     { --x: 35;  --y: 242; --width: 306;  --height: 172; object-fit: cover; }
+.hamotzi-side-still-bottom  { --x: 35;  --y: 426; --width: 306;  --height: 172; object-fit: cover; }
+.hamotzi-video              { --x: 360; --y: 240; --width: 1080; --height: 607; }
 
 /* ---------- Desktop mockup: a computer showing a live website (desktop-mockup.js) ----------
    Its size is set by --mockup-width; every other part is a share of it,
@@ -890,27 +898,27 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 
 /* ---------- trac. right panel (y = from the top of the panel) ---------- */
 .trac-panel           { --panel-height: var(--trac-panel-height); }
-.trac-logo            { --x: 495; --width: 419.093; --height: 144.694; }
+.trac-logo            { --x: 566.09; --width: 276.907; --height: 95.604; }
 
-.trac-app-screens     { --x: 0;   --y: 0;    --width: 1080; --height: 892; }
+.trac-app-screens     { --x: 0;   --y: 0;    --width: 1080; --height: 966; }
 
-.trac-notes-green     { --x: 0;   --y: 892;  --width: 720; --height: 561; }
-.trac-notes-blue      { --x: 720; --y: 892;  --width: 360; --height: 561; }
-.trac-notes           { --x: 170; --y: 944;  --width: 720; --height: 457; }
+.trac-notes-green     { --x: 0;   --y: 966;  --width: 720; --height: 561; }
+.trac-notes-blue      { --x: 720; --y: 966;  --width: 360; --height: 561; }
+.trac-notes           { --x: 170; --y: 1018; --width: 720; --height: 457; }
 
-.trac-write-box       { --x: 0;   --y: 1453; --width: 360; --height: 406; }
-.trac-record-box      { --x: 360; --y: 1453; --width: 360; --height: 406; }
-.trac-refine-box      { --x: 720; --y: 1453; --width: 360; --height: 406; }
-.trac-word-write      { --x: 111.358; --y: 1637.44; --width: 112; --height: 37; }
-.trac-word-record     { --x: 479; --y: 1631; --width: 154; --height: 48; }
-.trac-word-refine     { --x: 832; --y: 1631; --width: 134; --height: 48; }
+.trac-write-box       { --x: 0;   --y: 1527; --width: 360; --height: 406; }
+.trac-record-box      { --x: 360; --y: 1527; --width: 360; --height: 406; }
+.trac-refine-box      { --x: 720; --y: 1527; --width: 360; --height: 406; }
+.trac-word-write      { --x: 111.358; --y: 1711.44; --width: 112; --height: 37; }
+.trac-word-record     { --x: 479; --y: 1705; --width: 154; --height: 48; }
+.trac-word-refine     { --x: 832; --y: 1705; --width: 134; --height: 48; }
 
-.trac-icon-logo       { --x: 73;  --y: 1982;    --width: 89;  --height: 31; }
-.trac-icon-mic        { --x: 302; --y: 1928.48; --width: 92;  --height: 138; }
-.trac-icon-drum       { --x: 534; --y: 1941.06; --width: 149; --height: 111; }
-.trac-icon-headphones { --x: 823; --y: 1950.49; --width: 153; --height: 102; }
+.trac-icon-logo       { --x: 73;  --y: 2056;    --width: 89;  --height: 31; }
+.trac-icon-mic        { --x: 302; --y: 2002.48; --width: 92;  --height: 138; }
+.trac-icon-drum       { --x: 534; --y: 2015.06; --width: 149; --height: 111; }
+.trac-icon-headphones { --x: 823; --y: 2024.49; --width: 153; --height: 102; }
 
-.trac-banner-black    { --x: 0;   --y: 2124; --width: 1080; --height: 676; }
+.trac-banner-black    { --x: 0;   --y: 2198; --width: 1080; --height: 676; }
 
 /* =========================================================
    Phone (screen held upright), for pages with a phone design in Figma.
@@ -967,37 +975,6 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   .project-cursor,
   .project-cursor.is-visible { display: none; }
 }
-
-/* ---------- Hamotzi right half (y = from the top of the column) ---------- */
-.hamotzi-story      { --story-height: var(--hamotzi-column-height); }
-.hamotzi-opening    { --x: 0;   --y: 0;    --width: 720; --height: 257; }
-.hamotzi-plate      { --x: 0;   --y: 257;  --width: 720; --height: 236; }
-.hamotzi-hot        { --x: 0;   --y: 493;  --width: 720; --height: 404; }
-
-/* TRADITION / CRIME / SIN: three boxes, each word centered in its box */
-.hamotzi-word {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.hamotzi-tradition  { --x: 0;   --y: 897;  --width: 240; --height: 178; }
-.hamotzi-crime      { --x: 240; --y: 897;  --width: 240; --height: 178; }
-.hamotzi-sin        { --x: 480; --y: 897;  --width: 240; --height: 178; }
-
-.block-hamotzi-charcoal { background-color: var(--color-hamotzi-charcoal); color: var(--color-hamotzi-off-white); }
-.block-hamotzi-cream    { background-color: var(--color-project-cream);    color: var(--color-hamotzi-graphite); }
-
-/* Two stills, each on a colored box, next to the text about the idea */
-.block-hamotzi-beige { background-color: var(--color-hamotzi-beige-grey); }
-.block-hamotzi-dark  { background-color: var(--color-hamotzi-dark-grey); }
-.hamotzi-idea       { --x: 46;  --y: 1247; --width: 263; }
-.hamotzi-chip-box   { --x: 360; --y: 1075; --width: 360; --height: 256; }
-.hamotzi-chip       { --x: 390; --y: 1120; --width: 302; --height: 170; }
-.hamotzi-challah-box { --x: 360; --y: 1331; --width: 360; --height: 256; }
-.hamotzi-challah    { --x: 390; --y: 1374; --width: 302; --height: 170; }
-
-.hamotzi-street     { --x: 0;   --y: 1587; --width: 720; --height: 405; }
 
 /* =========================================================
    About page (about.html): one screen, drawn 1440 wide.

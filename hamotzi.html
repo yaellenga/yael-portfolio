@@ -12,70 +12,50 @@
 
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="project-page hamotzi-page">
 
-  <!-- LEFT HALF: stays in place while the page scrolls (same layout as every project page) -->
-  <header class="project-info">
-    <p class="placed project-handwriting info-more-stuff">
-      <a class="handwriting-link" href="index.html">More stuff by</a>
+  <!-- TOP AREA: the same as on every project page in the new layout -->
+  <header class="project-top">
+    <p class="placed project-handwriting top-more-stuff">
+      <a class="handwriting-link" href="index.html">More stuff</a>
     </p>
-    <p class="placed project-handwriting info-my-name">
+    <p class="placed project-handwriting top-my-name">
       <a class="handwriting-link" href="about.html">Yael Lenga</a>
     </p>
 
-    <h1 class="placed project-name info-name">Hamotzi</h1>
-    <p class="placed project-bold-text info-type">Video Art<br>Art Direction &amp; Filming<br>2024</p>
+    <!-- Contact, LinkedIn, Cv: their destinations will be added later -->
+    <p class="placed top-link top-contact">Contact</p>
+    <p class="placed top-link top-linkedin">LinkedIn</p>
+    <p class="placed top-link top-cv">Cv</p>
 
-    <h2 class="placed project-header info-header">tv title sequence -<br>ultra religious mob</h2>
-    <p class="placed project-text info-intro">A title sequence for a fictional TV series. Drawing the viewer into an ultra religious world of crime showcasing complexity of a layered world.</p>
-    <p class="placed project-bold-text info-credits">Student Project With Yuval Israel</p>
+    <!-- The title "המוציא" (Hamotzi) from the title sequence -->
+    <h1 class="placed box top-logo hamotzi-logo">
+      <img class="whole-image" src="images/hamotzi-logo.png" alt="המוציא — Hamotzi" lang="he">
+    </h1>
 
-    <!-- Bottom links: their destinations will be added later -->
-    <p class="placed pin-bottom project-footer-item info-contact">Contact</p>
-    <p class="placed pin-bottom project-footer-item info-linkedin">LinkedIn</p>
-    <p class="placed pin-bottom project-footer-item info-cv">Cv</p>
-    <p class="placed pin-bottom project-footer-item info-next">Next</p>
+    <p class="placed top-label top-type">Title Sequence</p>
+    <p class="placed top-label top-credits hamotzi-credits">Student Project With Yuval Israel</p>
+    <p class="placed top-label top-type-second">Video Art<br>Direction &amp; Filming</p>
+    <p class="placed top-label top-year">2024</p>
   </header>
 
-  <!-- RIGHT HALF: stills from the title sequence, scrolls normally -->
-  <main class="project-story hamotzi-story">
-
-    <!-- Opening: rolling up the sleeve over the snake tattoo, and the title -->
-    <div class="placed box hamotzi-opening">
-      <img class="project-image" src="images/hamotzi-opening.jpg" alt="A hand rolling up a white sleeve over a snake tattoo, next to the title המוציא on black">
+  <!-- LEFT COLUMN: one text, at the bottom -->
+  <div class="project-texts">
+    <div class="stack-box stack-first">
+      <h2 class="stack-title">tv title sequence - ultra religious mob</h2>
+      <p class="stack-text stack-after-title">A title sequence for a fictional TV series. Drawing the viewer into an ultra religious world of crime showcasing complexity of a layered world.<br>The titles explore where faith and crime meet, comparing the two worlds through shared gestures, objects, and rituals until the line between them blurs.</p>
     </div>
+  </div>
 
-    <!-- A plate with white powder -->
-    <div class="placed box hamotzi-plate">
-      <img class="project-image" src="images/hamotzi-plate.jpg" alt="Lines of white powder on a dark plate, next to a gray textured square">
-    </div>
+  <!-- Two stills from the title sequence, on the left above the text -->
+  <img class="placed box hamotzi-side-still-top" src="images/hamotzi-side-still-top.jpg" alt="A challah and a coin on a lace tablecloth, with an actor's name in Hebrew">
+  <img class="placed box hamotzi-side-still-bottom" src="images/hamotzi-side-still-bottom.jpg" alt="A poker chip on a lace tablecloth, with an actor's name in Hebrew">
 
-    <!-- The HOT channel logo — a placeholder: a video will go here later -->
-    <div class="placed box hamotzi-hot">
-      <img class="project-image" src="images/hamotzi-hot.jpg" alt="The HOT logo with a red and pink stripe on black">
-    </div>
-
-    <!-- Three words, each in a box -->
-    <p class="placed box project-title hamotzi-word block-hamotzi-charcoal hamotzi-tradition">tradition</p>
-    <p class="placed box project-title hamotzi-word block-hamotzi-cream hamotzi-crime">crime</p>
-    <p class="placed box project-title hamotzi-word block-hamotzi-charcoal hamotzi-sin">sin</p>
-
-    <!-- The idea, next to two stills on colored boxes -->
-    <p class="placed project-text hamotzi-idea">The titles explore where faith and crime meet, comparing the two worlds through shared gestures, objects, and rituals until the line between them blurs.</p>
-    <div class="placed box block-hamotzi-beige hamotzi-chip-box"></div>
-    <div class="placed box hamotzi-chip">
-      <img class="project-image" src="images/hamotzi-still-chip.jpg" alt="A poker chip rolling on a lace tablecloth, with an actor's name in Hebrew">
-    </div>
-    <div class="placed box block-hamotzi-dark hamotzi-challah-box"></div>
-    <div class="placed box hamotzi-challah">
-      <img class="project-image" src="images/hamotzi-still-challah.jpg" alt="A challah and coins on a lace tablecloth, with an actor's name in Hebrew">
-    </div>
-
-    <!-- The street at night -->
-    <div class="placed box hamotzi-street">
-      <img class="project-image" src="images/hamotzi-street.jpg" alt="Ultra-Orthodox men walking down a stone street at night, with the producers' names in Hebrew">
-    </div>
+  <!-- RIGHT: the title sequence. For now a still from it (the HOT logo); the video will go here. -->
+  <main class="placed box hamotzi-video">
+    <img class="project-image" src="images/hamotzi-video-frame.jpg" alt="The HOT logo with a red and pink stripe on black, from the start of the title sequence">
   </main>
 
+  <script src="nav-slide.js"></script>
 </body>
 </html>
