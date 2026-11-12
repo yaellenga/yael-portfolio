@@ -1,37 +1,35 @@
-// Desktop mockup: a computer screen that shows a real website, live.
-// The website is drawn as if on a 1440-wide screen, then shrunk to fit the computer,
-// so it shows its real desktop layout instead of a squeezed one.
+// Desktop mockup: a computer screen with a browser bar, showing a video of a website.
+// The screen is drawn as if it were 1440 wide, then shrunk to fit the computer,
+// so the browser bar keeps the size it has on a real computer screen.
 // The website's address is written on the computer: data-site="…" in the HTML.
+// It shows in the address bar, and the "open in a new tab" button opens the real website.
 
-const virtualWidth = 1440; // the "screen resolution" the website is drawn at
+const virtualWidth = 1440; // the "screen resolution" the screen is drawn at
 
 for (const computer of document.querySelectorAll('.mockup-computer')) {
   const address = computer.dataset.site;
   const screen = computer.querySelector('.mockup-screen');
   const viewport = computer.querySelector('.mockup-viewport');
-  const frame = computer.querySelector('.mockup-frame');
-  const loader = computer.querySelector('.mockup-loader');
+  const video = computer.querySelector('.mockup-video');
 
-  // Load the website, and fill in the address bar and the "open in a new tab" button
-  frame.src = address;
+  // Fill in the address bar and the "open in a new tab" button
   computer.querySelector('.mockup-new-tab').href = address;
   computer.querySelector('.mockup-address-text').textContent =
     address.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
-  // Hide the spinner once the website has loaded
-  frame.addEventListener('load', () => loader.classList.add('is-hidden'));
-
-  // The reload button loads the website again
+  // The reload button plays the video from the start
   computer.querySelector('.mockup-reload').addEventListener('click', () => {
-    loader.classList.remove('is-hidden');
-    frame.src = address;
+    video.currentTime = 0;
+    video.play();
   });
 
   // Draw at 1440 wide and shrink it to the size of the screen
+  // (the exact size, with fractions, so no sliver of the screen is left uncovered)
   function fitToScreen() {
-    const scale = screen.clientWidth / virtualWidth;
+    const size = screen.getBoundingClientRect();
+    const scale = size.width / virtualWidth;
     viewport.style.width = `${virtualWidth}px`;
-    viewport.style.height = `${screen.clientHeight / scale}px`;
+    viewport.style.height = `${size.height / scale}px`;
     viewport.style.transform = `scale(${scale})`;
   }
   new ResizeObserver(fitToScreen).observe(screen);

@@ -45,7 +45,6 @@
   --color-mockup-button-hover: #dcdce0;
   --color-mockup-address: #3a3a3f;      /* the address text */
   --color-mockup-lock: #8a8a90;         /* the lock icon in the address */
-  --color-mockup-spinner: #e6e6e9;      /* the spinner's track, while the site loads */
   --color-mockup-dot-red: #ff5f57;
   --color-mockup-dot-yellow: #febc2e;
   --color-mockup-dot-green: #28c840;
@@ -793,7 +792,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   aspect-ratio: 16 / 10;
   overflow: hidden;
   border-radius: calc(var(--mockup-width) * 0.0036);
-  background-color: var(--color-white);
+  background-color: var(--color-mockup-bezel); /* same as the frame, so no light line can show at the edges */
 }
 
 /* Inside the screen everything is drawn 1440 wide and then shrunk (desktop-mockup.js),
@@ -805,17 +804,16 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   display: flex;
   flex-direction: column;
   transform-origin: top left;
-  background-color: var(--color-white);
 }
 
 .mockup-browser-bar {
-  flex: 0 0 52px;
+  flex: 1 0 52px; /* at least 52 high; it grows to fill the space above the video,
+                     and its buttons and address stay in its middle */
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 0 18px;
   background-color: var(--color-mockup-bar);
-  border-bottom: 1px solid var(--color-mockup-bar-line);
 }
 
 .mockup-dots { display: flex; gap: 8px; }
@@ -857,39 +855,18 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 }
 .mockup-address svg { flex: none; width: 12px; height: 12px; color: var(--color-mockup-lock); }
 
-/* The website itself fills the rest of the screen */
-.mockup-site { position: relative; flex: 1; }
+/* Under the bar: the video, whole and as wide as the screen.
+   The video is a little wider than the screen, so the bar above it grows taller. */
+.mockup-site {
+  flex: none;
+}
 
-.mockup-frame {
-  position: absolute;
-  inset: 0;
+.mockup-video {
   display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  background-color: var(--color-white);
+  width: 100%;   /* as wide as the screen, so the whole video shows */
+  height: auto;
+  border-top: 1px solid var(--color-mockup-bar-line); /* the line under the browser bar */
 }
-
-/* A spinner on white until the website has loaded */
-.mockup-loader {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background-color: var(--color-white);
-  transition: opacity 0.3s;
-}
-.mockup-loader.is-hidden { opacity: 0; pointer-events: none; }
-
-.mockup-spinner {
-  width: 38px;
-  height: 38px;
-  border: 4px solid var(--color-mockup-spinner);
-  border-top-color: var(--color-home-green);
-  border-radius: 50%;
-  animation: mockup-spin 0.8s linear infinite;
-}
-@keyframes mockup-spin { to { transform: rotate(360deg); } }
 
 /* The chin under the screen, the neck and the foot of the stand */
 .mockup-chin {

@@ -47,8 +47,8 @@
     </div>
   </div>
 
-  <!-- MIDDLE: a computer showing the real podcast website, live.
-       You can scroll and click inside its screen (desktop-mockup.js fits the site into it). -->
+  <!-- MIDDLE: a computer showing a video of the podcast website, playing on a loop
+       (desktop-mockup.js fits the screen to the computer). -->
   <main class="placed box lets-talk-mockup">
     <div class="mockup-computer" data-site="https://boi-nidber-al-zeh.vercel.app/">
       <div class="mockup-monitor">
@@ -59,7 +59,7 @@
             <!-- A browser bar: three dots, reload, the address, open in a new tab -->
             <div class="mockup-browser-bar">
               <div class="mockup-dots"><span></span><span></span><span></span></div>
-              <button class="mockup-button mockup-reload" type="button" title="Reload">
+              <button class="mockup-button mockup-reload" type="button" title="Play from the start">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
               </button>
               <div class="mockup-address">
@@ -71,11 +71,11 @@
               </a>
             </div>
 
-            <!-- The website itself, with a spinner until it has loaded -->
+            <!-- A screen recording of the website, playing on a loop with no sound -->
             <div class="mockup-site">
-              <iframe class="mockup-frame" title="The Lets Talk About It podcast website, live" loading="lazy"
-                      allow="clipboard-write; fullscreen; autoplay"></iframe>
-              <div class="mockup-loader"><div class="mockup-spinner"></div></div>
+              <video class="mockup-video" src="images/lets-talk-site.mp4" poster="images/lets-talk-site-poster.jpg"
+                     autoplay muted loop playsinline
+                     aria-label="A screen recording of the Lets Talk About It podcast website"></video>
             </div>
           </div>
         </div>
