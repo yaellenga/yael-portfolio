@@ -32,6 +32,7 @@
   --color-hamotzi-charcoal: #313131;    /* boxes behind TRADITION and SIN */
   --color-hamotzi-off-white: #fdfdfd;   /* text on the charcoal boxes */
   --color-hamotzi-graphite: #353535;    /* text on the cream box (CRIME) */
+  --color-hamotzi-nav-grey: #575455;    /* "More stuff", "Yael Lenga" and the top links */
 
   /* Lets Talk About It colors */
   --color-lets-talk-blue: #27aae2;      /* "More stuff", "Yael Lenga" and the top links */
@@ -769,8 +770,9 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   --project-nav-color: var(--color-lets-talk-blue);
   --side-column-end-space: 24;        /* space left under the last phone of the left column at the end */
   --lets-talk-mockup-top: 208;        /* the computer's area and the side columns start here */
-  --lets-talk-text-from-bottom: 160;  /* the text under the computer: its top, from the bottom of the window */
-  --lets-talk-text-gap: 14;           /* the least space between the computer and the text */
+  --lets-talk-text-bottom: 40;        /* the text under the computer: its bottom, from the bottom of the window */
+  --lets-talk-text-gap: 14;           /* between the computer and the text */
+  --lets-talk-middle-width: 880;      /* the widest the computer can get: up to the phones on each side */
 }
 .lets-talk-logo    { --x: 431.63; --y: 21; --width: 558.74; --height: 153; }
 .lets-talk-kind    { --width: 161; } /* "Web&App Design / Illustration" */
@@ -782,24 +784,38 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   inset: 0;
 }
 
-/* The area in the middle, from under the top area down to the text:
-   the computer is as big as fits in it (never wider than the area), in its center */
+/* The middle, between the two phone columns: from under the top area down to the bottom of the window.
+   The text sits at the bottom; the computer fills all the space above it. */
+.lets-talk-middle {
+  position: absolute;
+  top: calc(var(--lets-talk-mockup-top) * var(--u));
+  bottom: calc(var(--lets-talk-text-bottom) * var(--u));
+  left: calc((720 - var(--lets-talk-middle-width) / 2) * var(--u));
+  width: calc(var(--lets-talk-middle-width) * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--lets-talk-text-gap) * var(--u));
+}
+
+/* The computer's area: takes all the height the text leaves.
+   The computer is as big as fits in it, sitting on its bottom, centered. */
 .lets-talk-mockup {
-  --x: 362; --y: 208; --width: 716;
-  height: calc(100% - (var(--lets-talk-mockup-top) + var(--lets-talk-text-from-bottom) + var(--lets-talk-text-gap)) * var(--u));
+  flex: 1;
+  min-height: 0;
+  container-type: size; /* lets the computer measure this area (cqw, cqh) */
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 .lets-talk-mockup .mockup-computer {
   /* the computer is 0.7806 times as high as it is wide */
-  --mockup-width: min(calc(716 * var(--u)), calc((100vh - (var(--lets-talk-mockup-top) + var(--lets-talk-text-from-bottom) + var(--lets-talk-text-gap)) * var(--u)) / 0.7806));
+  --mockup-width: min(100cqw, 100cqh / 0.7806);
 }
 
-/* The text under the computer: always at the bottom of the window */
+/* The text under the computer: at the bottom of the window, at its Figma spot from the left (386) */
 .lets-talk-about {
-  --x: 386; --width: 692;
-  top: calc(100% - var(--lets-talk-text-from-bottom) * var(--u));
+  margin-left: calc((386 - (720 - var(--lets-talk-middle-width) / 2)) * var(--u));
+  width: calc(692 * var(--u));
   text-transform: uppercase;
 }
 
@@ -850,11 +866,16 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 
 /* ---------- Hamotzi page (hamotzi.html): the new layout, one screen, no panel ---------- */
 .hamotzi-page {
+  --project-top-height: 206;          /* the top area */
+  --project-top-labels-top: 151;      /* type, credits and year from the top */
+  --project-nav-color: var(--color-hamotzi-nav-grey);
   --project-texts-first-bottom: 180;  /* the text: its top, from the bottom of the window */
-  --hamotzi-stills-top: 242;          /* the stills strip: from the top */
-  --hamotzi-stills-gap: 12;           /* between the stills, and between the strip and the text */
+  --hamotzi-stills-top: 208;          /* the stills strip: from the top */
+  --hamotzi-stills-gap: 19;           /* between the stills, and between the strip and the text */
+  --hamotzi-video-top: 208;           /* the video: from the top */
+  --project-video-bottom: 73;         /* space under the video, so it always fits on the screen */
 }
-.hamotzi-logo               { --x: 499; --y: 36.86; --width: 424; --height: 121.27; }
+.hamotzi-logo               { --x: 531; --y: 46.02; --width: 360; --height: 102.97; }
 .hamotzi-credits            { --width: 146; }
 
 /* The stills on the left: a strip from under the top area down to just above the text.
@@ -884,9 +905,9 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 /* The video: at its Figma spot, but it shrinks (keeping its shape) when the window is short,
    so it always fits on the screen, with --project-video-bottom of space under it */
 .hamotzi-video {
-  --x: 360; --y: 240;
+  --x: 360; --y: var(--hamotzi-video-top);
   width: min(calc(1080 * var(--u)),
-             (var(--screen-height) - (240 + var(--project-video-bottom)) * var(--u)) * 1080 / 607);
+             (var(--screen-height) - (var(--hamotzi-video-top) + var(--project-video-bottom)) * var(--u)) * 1080 / 607);
   aspect-ratio: 1080 / 607;
 }
 
