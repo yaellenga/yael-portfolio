@@ -1,6 +1,7 @@
 // Project page, top area: when "More stuff" or "Yael Lenga" is clicked,
-// the two of them first slide to the spots where "Cool stuff by" and "Yael Lenga"
-// sit on the about page, and only then the browser goes to the page that was clicked.
+// the two of them first slide sideways (keeping their height on the screen) until they reach
+// the left-right spots of "Cool stuff by" and "Yael Lenga" on the about page,
+// and only then the browser goes to the page that was clicked.
 // (How long the slide takes is --nav-slide-time in styles.css.)
 
 const moreStuff = document.querySelector('.top-more-stuff');
@@ -18,11 +19,11 @@ function aboutSpot(className) {
   return spot;
 }
 
-// Slide an item so that its top-left corner reaches that spot
+// Slide an item sideways only, so that its left edge reaches that spot (its height stays the same)
 function slideTo(item, spot) {
   const unit = window.innerWidth / 1440; // 1 Figma pixel, same as --u in styles.css
   const box = item.getBoundingClientRect();
-  item.style.transform = `translate(${spot.x * unit - box.left}px, ${spot.y * unit - box.top}px)`;
+  item.style.transform = `translateX(${spot.x * unit - box.left}px)`;
 }
 
 function slideToAboutSpots(event) {
