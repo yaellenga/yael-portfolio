@@ -7,6 +7,7 @@ const colorGroups = {
   'project': 'Shared by every project',
   'trac': 'trac.',
   'hamotzi': 'Hamotzi',
+  'lets': 'Lets Talk About It',
   'focus': 'Keyboard focus',
   'mockup': 'Desktop mockup',
   'dim': 'Video player',

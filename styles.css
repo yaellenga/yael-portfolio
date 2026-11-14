@@ -33,6 +33,9 @@
   --color-hamotzi-off-white: #fdfdfd;   /* text on the charcoal boxes */
   --color-hamotzi-graphite: #353535;    /* text on the cream box (CRIME) */
 
+  /* Lets Talk About It colors */
+  --color-lets-talk-blue: #27aae2;      /* "More stuff", "Yael Lenga" and the top links */
+
   /* Desktop mockup: the computer that shows a live website (lets-talk.html) */
   --color-mockup-bezel: #1b1b1d;        /* the black frame around the screen */
   --color-mockup-body: #d9d9dc;         /* the chin and the stand */
@@ -133,6 +136,7 @@
   --project-top-cv: 1379;              /* Cv from the left */
   --project-top-logo-top: 53.49;       /* the project logo from the top */
   --project-top-labels-top: 171;       /* type, credits and year from the top */
+  --project-nav-color: var(--color-black); /* "More stuff", "Yael Lenga", Contact, LinkedIn, Cv: each project sets its own color */
   --project-top-type: 36;              /* type ("App Design") from the left */
   --project-top-credits: 482;          /* credits from the left */
   --project-top-type-second: 964;      /* second type ("Ux\Ui") from the left */
@@ -145,6 +149,8 @@
   --video-enlarge-size: 44;            /* the enlarge button (a square) */
   --project-video-bottom: 41;          /* space under the video, so it always fits on the screen */
   --nav-slide-time: 0.6s;             /* "More stuff" and "Yael Lenga" slide to their about-page spots before leaving the page */
+  --project-texts-top-space: 20;       /* in short windows: the least free space kept above the top text */
+  --project-texts-min-gap: 0;          /* in short windows: the gaps between the texts shrink, down to this (0 = the texts can touch) */
   --project-texts-wait: 200;           /* how far to scroll after a panel part comes in, before its text starts coming down */
 
   /* Spacing scale: distances that repeat in the Figma design (Figma pixels × --u) */
@@ -651,6 +657,13 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .top-type-second  { --x: var(--project-top-type-second); --y: var(--project-top-labels-top); }
 .top-year         { --x: var(--project-top-year);        --y: var(--project-top-labels-top); }
 
+/* "More stuff", "Yael Lenga", Contact, LinkedIn and Cv take the project's own color */
+.top-more-stuff,
+.top-my-name,
+.top-link {
+  color: var(--project-nav-color);
+}
+
 /* Contact, LinkedIn, Cv: small handwriting under "Yael Lenga" */
 .top-link {
   font-family: var(--font-handwriting);
@@ -739,20 +752,97 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   background-color: var(--color-project-cream);
 }
 
-/* ---------- Lets Talk About It page (lets-talk.html): the new layout, one screen, no panel ---------- */
-.lets-talk-page {
-  --project-top-height: 285;          /* the top area ends where the computer starts */
-  --project-texts-first-bottom: 180;  /* the text: its top, from the bottom of the window */
+/* ---------- trac. page (trac.html): a shorter top area and its own link color ---------- */
+.trac-page {
+  --project-top-height: 206;          /* the top area; the right panel starts under it */
+  --project-top-labels-top: 151;      /* type, credits and year from the top */
+  --project-nav-color: var(--color-trac-green);
 }
-.lets-talk-logo    { --x: 378; --y: 6.34; --width: 666; --height: 182; }
+
+/* ---------- Lets Talk About It page (lets-talk.html) ----------
+   The computer and the text stay in the middle. On each side a column of phones:
+   while the page scrolls, the left one goes up and the right one goes down,
+   at the same speed (side-scroll.js moves them). */
+.lets-talk-page {
+  --project-top-height: 206;          /* the top area; the side columns start under it */
+  --project-top-labels-top: 151;      /* type, credits and year from the top */
+  --project-nav-color: var(--color-lets-talk-blue);
+  --side-column-end-space: 24;        /* space left under the last phone of the left column at the end */
+  --lets-talk-mockup-top: 208;        /* the computer's area starts here */
+  --lets-talk-text-from-bottom: 180;  /* the text under the computer: its top, from the bottom of the window */
+  --lets-talk-text-gap: 32;           /* the least space between the computer and the text */
+}
+.lets-talk-logo    { --x: 431.63; --y: 21; --width: 558.74; --height: 153; }
 .lets-talk-credits { --width: 161; }
 
-/* The square in the middle; the computer sits in its center */
+/* Everything below the top area that doesn't scroll away: fixed to the window */
+.lets-talk-stage {
+  position: fixed;
+  inset: 0;
+}
+
+/* The area in the middle, from under the top area down to the text:
+   the computer is as big as fits in it (never wider than the area), in its center */
 .lets-talk-mockup {
-  --x: 172; --y: 285; --width: 1097; --height: 552;
+  --x: 362; --y: 208; --width: 716;
+  height: calc(100% - (var(--lets-talk-mockup-top) + var(--lets-talk-text-from-bottom) + var(--lets-talk-text-gap)) * var(--u));
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.lets-talk-mockup .mockup-computer {
+  /* the computer is 0.7806 times as high as it is wide */
+  --mockup-width: min(calc(716 * var(--u)), calc((100vh - (var(--lets-talk-mockup-top) + var(--lets-talk-text-from-bottom) + var(--lets-talk-text-gap)) * var(--u)) / 0.7806));
+}
+
+/* The text under the computer: always at the bottom of the window */
+.lets-talk-about {
+  --x: 386; --width: 334;
+  top: calc(100% - var(--lets-talk-text-from-bottom) * var(--u));
+  text-transform: uppercase;
+}
+
+/* The two side columns: from under the top area to the bottom of the window */
+.side-column {
+  position: absolute;
+  top: calc(var(--project-top-height) * var(--u));
+  bottom: 0;
+  overflow: hidden;
+}
+.side-column-left  { left: 0;                            width: calc(360 * var(--u)); }
+.side-column-right { left: calc(1078 * var(--u)); width: calc(362 * var(--u)); }
+
+/* What moves inside a column (side-scroll.js) */
+.side-column-track {
+  position: relative;
+  height: 100%;
+}
+
+/* The phones: their Figma spots, measured from the top of their column */
+.phone-left-1  { --x: 84;    --y: 2;      --width: 192.743; }
+.phone-left-2  { --x: 84;    --y: 436;    --width: 192.743; }
+.phone-left-3  { --x: 83.25; --y: 869;    --width: 192.589; }
+.phone-right-3 { --x: 88;    --y: -424.3; --width: 192.589; } /* above the first one: it comes down into view */
+.phone-right-1 { --x: 78;    --y: 2;      --width: 203.256; }
+.phone-right-2 { --x: 79;    --y: 430;    --width: 202.088; }
+
+.side-phone img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The moving white line on the play button of the last phone (an animated gif) */
+.side-phone .phone-play-line {
+  position: absolute;
+  left: 42.11%;
+  top: 88.07%;
+  width: 14.54%;
+}
+
+/* Gives the page its scroll length (side-scroll.js sets its height) */
+.side-scroll-space {
+  height: 100vh;
 }
 
 /* ---------- Hamotzi page (hamotzi.html): the new layout, one screen, no panel ---------- */
@@ -1011,7 +1101,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 
 /* ---------- trac. right panel (y = from the top of the panel) ---------- */
 .trac-panel           { --panel-height: var(--trac-panel-height); }
-.trac-logo            { --x: 566.09; --width: 276.907; --height: 95.604; }
+.trac-logo            { --x: 594.09; --y: 63.16; --width: 220.907; --height: 76.27; }
 
 .trac-app-screens     { --x: 0;   --y: 0;    --width: 1080; --height: 966; }
 

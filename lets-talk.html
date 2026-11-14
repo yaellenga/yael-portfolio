@@ -39,13 +39,8 @@
     <p class="placed top-label top-year">2026</p>
   </header>
 
-  <!-- LEFT COLUMN: one text, at the bottom -->
-  <div class="project-texts">
-    <div class="stack-box stack-first">
-      <h2 class="stack-title">A songwriting app for independent musicians</h2>
-      <p class="stack-text stack-after-title">A title sequence for a fictional TV series. Drawing the viewer into an ultra religious world of crime showcasing complexity of a layered world.<br>The titles explore where faith and crime meet, comparing the two worlds through shared gestures, objects, and rituals until the line between them blurs.</p>
-    </div>
-  </div>
+  <!-- EVERYTHING UNDER THE TOP AREA: stays in the window while the page scrolls -->
+  <div class="lets-talk-stage">
 
   <!-- MIDDLE: a computer showing a video of the podcast website, playing on a loop
        (desktop-mockup.js fits the screen to the computer). -->
@@ -86,7 +81,40 @@
     </div>
   </main>
 
+  <!-- MIDDLE, under the computer: about the project -->
+  <div class="placed lets-talk-about">
+    <h2 class="stack-title">A songwriting app for independent musicians</h2>
+    <p class="stack-text stack-after-title">A title sequence for a fictional TV series. Drawing the viewer into an ultra religious world of crime showcasing complexity of a layered world.<br>The titles explore where faith and crime meet, comparing the two worlds through shared gestures, objects, and rituals until the line between them blurs.</p>
+  </div>
+
+  <!-- LEFT: phones with screens of the podcast site, going UP while the page scrolls -->
+  <div class="side-column side-column-left">
+    <div class="side-column-track">
+      <div class="placed side-phone phone-left-1"><img src="images/lets-talk-phone-left-1.png" alt="An episode page: an illustration of a father and son on a green background, with the episode player"></div>
+      <div class="placed side-phone phone-left-2"><img src="images/lets-talk-phone-left-2.png" alt="The list of upcoming events, in Hebrew"></div>
+      <div class="placed side-phone phone-left-3"><img src="images/lets-talk-phone-left-3.png" alt="The about page: the hosts, in Hebrew"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: phones going DOWN while the page scrolls (the third one comes down from above) -->
+  <div class="side-column side-column-right">
+    <div class="side-column-track">
+      <div class="placed side-phone phone-right-3">
+        <img src="images/lets-talk-phone-right-3.png" alt="An episode page: an illustration of a girl on a dolphin in the sea, with the episode player">
+        <img class="phone-play-line" src="images/lets-talk-play-line.gif" alt="">
+      </div>
+      <div class="placed side-phone phone-right-1"><img src="images/lets-talk-phone-right-1.png" alt="The episode list of season 1, in Hebrew"></div>
+      <div class="placed side-phone phone-right-2"><img src="images/lets-talk-phone-right-2.png" alt="The episode list with one episode opened, in Hebrew"></div>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Gives the page its scroll length -->
+  <div class="side-scroll-space"></div>
+
   <script src="desktop-mockup.js"></script>
+  <script src="side-scroll.js"></script>
   <script src="nav-slide.js"></script>
 </body>
 </html>
