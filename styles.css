@@ -100,6 +100,7 @@
   --project-header-size: calc(30 * var(--u));
   --project-title-size: calc(30 * var(--u));
   --project-text-size: calc(20 * var(--u));
+  --project-label-size: calc(15 * var(--u)); /* project pages: type, credits, second type and year under the logo */
   --project-text-spacing: calc(0.6 * var(--u));
   --project-small-text-size: calc(12 * var(--u)); /* the texts in the left column */
   --trac-panel-height: calc(2874 * var(--u)); /* height of the trac. right panel */
@@ -678,11 +679,10 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .top-label {
   font-family: var(--font-label);
   font-weight: 700;
-  font-size: var(--project-text-size);
+  font-size: var(--project-label-size);
   line-height: 1;
   white-space: nowrap;
 }
-.top-credits { white-space: normal; }
 
 /* The logo is the page's main title, so the heading itself has no extra spacing */
 .top-logo { margin: 0; }
@@ -776,7 +776,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 }
 .lets-talk-logo    { --x: 431.63; --y: 21; --width: 558.74; --height: 153; }
 .lets-talk-kind    { --width: 161; } /* "Web&App Design / Illustration" */
-.lets-talk-credits { --width: 154; white-space: normal; } /* "Student Project With Hillel Buchris", in two lines */
+.lets-talk-credits { --width: 154; }
 
 /* Everything below the top area that doesn't scroll away: fixed to the window */
 .lets-talk-stage {
