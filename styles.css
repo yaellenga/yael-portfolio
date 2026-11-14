@@ -103,7 +103,7 @@
   --project-label-size: calc(15 * var(--u)); /* project pages: type, credits, second type and year under the logo */
   --project-text-spacing: calc(0.6 * var(--u));
   --project-small-text-size: calc(12 * var(--u)); /* the texts in the left column */
-  --trac-panel-height: calc(2874 * var(--u)); /* height of the trac. right panel */
+  --trac-panel-height: calc(3423 * var(--u)); /* height of the trac. right panel */
 
   /* Phone: running text never gets smaller than this (real pixels on the screen) */
   --text-min-size: 12px;
@@ -644,9 +644,11 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 
 .top-more-stuff   { --x: var(--project-top-nav-left);  --y: var(--project-top-nav-top); }
 
-/* "More stuff" and "Yael Lenga" slide to their spots on the about page when clicked (nav-slide.js) */
+/* "More stuff" and "Yael Lenga" slide toward each other when clicked (nav-slide.js).
+   They sit above the logo, so it never covers them while they pass over it. */
 .top-more-stuff,
 .top-my-name {
+  z-index: 1;
   transition: transform var(--nav-slide-time) ease-in-out;
 }
 .top-my-name      { --x: var(--project-top-my-name);   --y: var(--project-top-nav-top); }
@@ -1127,25 +1129,37 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .trac-panel           { --panel-height: var(--trac-panel-height); }
 .trac-logo            { --x: 594.09; --y: 63.16; --width: 220.907; --height: 76.27; }
 
-.trac-app-screens     { --x: 0;   --y: 0;    --width: 1080; --height: 966; }
+.trac-yellow          { --x: 0;     --y: 0;     --width: 1080;    --height: 813; }
+.trac-phone-video     { --x: 421;   --y: 19;    --width: 241.703; --height: 500;
+                        border-radius: calc(37.879 * var(--u)); overflow: hidden; }
+.trac-small-screens   { --x: 177.5; --y: 529.5; --width: 730;     --height: 260; }
 
-.trac-notes-green     { --x: 0;   --y: 966;  --width: 720; --height: 561; }
-.trac-notes-blue      { --x: 720; --y: 966;  --width: 360; --height: 561; }
-.trac-notes           { --x: 170; --y: 1018; --width: 720; --height: 457; }
+.trac-notes-green     { --x: 0;   --y: 813;  --width: 720; --height: 561; }
+.trac-notes-blue      { --x: 720; --y: 813;  --width: 360; --height: 561; }
+.trac-notes           { --x: 170; --y: 865;  --width: 720; --height: 457; }
 
-.trac-write-box       { --x: 0;   --y: 1527; --width: 360; --height: 406; }
-.trac-record-box      { --x: 360; --y: 1527; --width: 360; --height: 406; }
-.trac-refine-box      { --x: 720; --y: 1527; --width: 360; --height: 406; }
-.trac-word-write      { --x: 111.358; --y: 1711.44; --width: 112; --height: 37; }
-.trac-word-record     { --x: 479; --y: 1705; --width: 154; --height: 48; }
-.trac-word-refine     { --x: 832; --y: 1705; --width: 134; --height: 48; }
+.trac-write-box       { --x: 0;   --y: 1374; --width: 360; --height: 406; }
+.trac-record-box      { --x: 360; --y: 1374; --width: 360; --height: 406; }
+.trac-refine-box      { --x: 720; --y: 1374; --width: 360; --height: 406; }
+.trac-word-write      { --x: 111.358; --y: 1558.44; --width: 112; --height: 37; }
+.trac-word-record     { --x: 479; --y: 1552; --width: 154; --height: 48; }
+.trac-word-refine     { --x: 832; --y: 1552; --width: 134; --height: 48; }
 
-.trac-icon-logo       { --x: 73;  --y: 2056;    --width: 89;  --height: 31; }
-.trac-icon-mic        { --x: 302; --y: 2002.48; --width: 92;  --height: 138; }
-.trac-icon-drum       { --x: 534; --y: 2015.06; --width: 149; --height: 111; }
-.trac-icon-headphones { --x: 823; --y: 2024.49; --width: 153; --height: 102; }
+.trac-icon-logo       { --x: 73;  --y: 1903;    --width: 89;  --height: 31; }
+.trac-icon-mic        { --x: 302; --y: 1849.48; --width: 92;  --height: 138; }
+.trac-icon-drum       { --x: 534; --y: 1862.06; --width: 149; --height: 111; }
+.trac-icon-headphones { --x: 823; --y: 1871.49; --width: 153; --height: 102; }
 
-.trac-banner-black    { --x: 0;   --y: 2198; --width: 1080; --height: 676; }
+.trac-site-video      { --x: 0;   --y: 2045; --width: 1080; --height: 702; background-color: var(--color-black); }
+.trac-banner          { --x: 0;   --y: 2747; --width: 1080; --height: 676; }
+
+/* A video that fills its box (the box sets the size and the rounded corners) */
+.project-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /* =========================================================
    Phone (screen held upright), for pages with a phone design in Figma.

@@ -67,10 +67,14 @@
   <!-- RIGHT PANEL: images from the project, scrolls up like a normal page -->
   <main class="project-panel trac-panel">
 
-    <!-- The app home screen, big, with five more screens below it, on yellow -->
-    <div class="placed box trac-app-screens">
-      <img class="project-image" src="images/trac-app-screens.jpg" alt="The trac. app home screen on a big phone, with five more app screens below it, on yellow">
+    <!-- On yellow: a video of the app on a phone (plays on a loop from the start),
+         with five more app screens below it -->
+    <div class="placed box block-yellow trac-yellow"></div>
+    <div class="placed box trac-phone-video">
+      <video class="project-video" src="images/trac-phone-video.mp4" autoplay muted loop playsinline
+             aria-label="A screen recording of the trac. app on a phone"></video>
     </div>
+    <img class="placed box trac-small-screens" src="images/trac-small-screens.jpg" alt="Five screens of the trac. app: home, new project, a song, its versions, and all projects">
 
     <!-- Crumpled notes on green and blue -->
     <div class="placed box block-green trac-notes-green"></div>
@@ -91,13 +95,19 @@
     <img class="placed box trac-icon-drum" src="images/trac-icon-drum.svg" alt="">
     <img class="placed box trac-icon-headphones" src="images/trac-icon-headphones.svg" alt="">
 
-    <!-- The black banner -->
-    <div class="placed box trac-banner-black">
-      <img class="project-image" src="images/trac-banner-black.jpg" alt="A musician on a crowded train looking at a phone, next to: Songwriting, but simpler. Never lose a beat again.">
+    <!-- A screen recording of the trac. landing page: starts playing when it comes into the window
+         (play-when-seen.js) -->
+    <div class="placed box trac-site-video">
+      <video class="project-video" src="images/trac-site-video.mp4" muted loop playsinline preload="metadata"
+             data-play-when-seen aria-label="A screen recording of the trac. landing page"></video>
     </div>
+
+    <!-- The closing banner, on the page's cream -->
+    <img class="placed box trac-banner" src="images/trac-banner-cream.png" alt="Songwriting, but simpler. Never lose a beat again.">
   </main>
 
   <script src="stack-scroll.js"></script>
+  <script src="play-when-seen.js"></script>
   <script src="nav-slide.js"></script>
 </body>
 </html>
