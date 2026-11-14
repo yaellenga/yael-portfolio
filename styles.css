@@ -768,12 +768,13 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   --project-top-labels-top: 151;      /* type, credits and year from the top */
   --project-nav-color: var(--color-lets-talk-blue);
   --side-column-end-space: 24;        /* space left under the last phone of the left column at the end */
-  --lets-talk-mockup-top: 208;        /* the computer's area starts here */
-  --lets-talk-text-from-bottom: 180;  /* the text under the computer: its top, from the bottom of the window */
-  --lets-talk-text-gap: 32;           /* the least space between the computer and the text */
+  --lets-talk-mockup-top: 208;        /* the computer's area and the side columns start here */
+  --lets-talk-text-from-bottom: 160;  /* the text under the computer: its top, from the bottom of the window */
+  --lets-talk-text-gap: 14;           /* the least space between the computer and the text */
 }
 .lets-talk-logo    { --x: 431.63; --y: 21; --width: 558.74; --height: 153; }
-.lets-talk-credits { --width: 161; }
+.lets-talk-kind    { --width: 161; } /* "Web&App Design / Illustration" */
+.lets-talk-credits { --width: 154; white-space: normal; } /* "Student Project With Hillel Buchris", in two lines */
 
 /* Everything below the top area that doesn't scroll away: fixed to the window */
 .lets-talk-stage {
@@ -797,19 +798,19 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 
 /* The text under the computer: always at the bottom of the window */
 .lets-talk-about {
-  --x: 386; --width: 334;
+  --x: 386; --width: 692;
   top: calc(100% - var(--lets-talk-text-from-bottom) * var(--u));
   text-transform: uppercase;
 }
 
-/* The two side columns: from under the top area to the bottom of the window */
+/* The two side columns: from where the computer starts to the bottom of the window */
 .side-column {
   position: absolute;
-  top: calc(var(--project-top-height) * var(--u));
+  top: calc(var(--lets-talk-mockup-top) * var(--u));
   bottom: 0;
   overflow: hidden;
 }
-.side-column-left  { left: 0;                            width: calc(360 * var(--u)); }
+.side-column-left  { left: 0;                     width: calc(360 * var(--u)); }
 .side-column-right { left: calc(1078 * var(--u)); width: calc(362 * var(--u)); }
 
 /* What moves inside a column (side-scroll.js) */
@@ -818,13 +819,15 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   height: 100%;
 }
 
-/* The phones: their Figma spots, measured from the top of their column */
-.phone-left-1  { --x: 84;    --y: 2;      --width: 192.743; }
-.phone-left-2  { --x: 84;    --y: 436;    --width: 192.743; }
-.phone-left-3  { --x: 83.25; --y: 869;    --width: 192.589; }
-.phone-right-3 { --x: 88;    --y: -424.3; --width: 192.589; } /* above the first one: it comes down into view */
-.phone-right-1 { --x: 78;    --y: 2;      --width: 203.256; }
-.phone-right-2 { --x: 79;    --y: 430;    --width: 202.088; }
+/* The phones: their Figma spots, measured from the top of their column (Frame 167 and Frame 168) */
+.phone-left-1  { --x: 97;  --y: 0;       --width: 164.739; }
+.phone-left-2  { --x: 97;  --y: 361.87;  --width: 164.739; }
+.phone-left-3  { --x: 97;  --y: 723.73;  --width: 165.164; }
+.phone-left-4  { --x: 97;  --y: 1087.53; --width: 164.871; }
+.phone-right-4 { --x: 110; --y: -843;    --width: 164.871; } /* the ones above the column come down into view */
+.phone-right-3 { --x: 110; --y: -478.77; --width: 164.739; }
+.phone-right-2 { --x: 102; --y: -116.9;  --width: 172.789; }
+.phone-right-1 { --x: 102; --y: 250.1;   --width: 173.464; }
 
 .side-phone img {
   display: block;

@@ -1,32 +1,26 @@
 // Project page, top area: when "More stuff" or "Yael Lenga" is clicked,
-// the two of them first slide sideways (keeping their height on the screen) until they reach
-// the left-right spots of "Cool stuff by" and "Yael Lenga" on the about page,
-// and only then the browser goes to the page that was clicked.
+// the two of them first slide sideways (keeping their height on the screen) toward the middle
+// of the window until their texts touch, and only then the browser goes to the page that was clicked.
 // (How long the slide takes is --nav-slide-time in styles.css.)
 
 const moreStuff = document.querySelector('.top-more-stuff');
 const myName = document.querySelector('.top-my-name');
 
-// The spot (--x, --y in Figma pixels) of an item on the about page, read from its class in styles.css,
-// so it always matches the about page
-function aboutSpot(className) {
-  const probe = document.createElement('p');
-  probe.className = className;
-  document.body.appendChild(probe);
-  const style = getComputedStyle(probe);
-  const spot = { x: Number(style.getPropertyValue('--x')), y: Number(style.getPropertyValue('--y')) };
-  probe.remove();
-  return spot;
+// Slide the two sideways so that they meet in the middle of the window, touching
+function slideTogether() {
+  // The texts themselves (the links), not their boxes, so that the letters touch
+  const leftText = moreStuff.querySelector('a').getBoundingClientRect();
+  const rightText = myName.querySelector('a').getBoundingClientRect();
+
+  // Side by side, both together centered in the window
+  const leftSpot = (window.innerWidth - (leftText.width + rightText.width)) / 2;
+  const rightSpot = leftSpot + leftText.width;
+
+  moreStuff.style.transform = `translateX(${leftSpot - leftText.left}px)`;
+  myName.style.transform = `translateX(${rightSpot - rightText.left}px)`;
 }
 
-// Slide an item sideways only, so that its left edge reaches that spot (its height stays the same)
-function slideTo(item, spot) {
-  const unit = window.innerWidth / 1440; // 1 Figma pixel, same as --u in styles.css
-  const box = item.getBoundingClientRect();
-  item.style.transform = `translateX(${spot.x * unit - box.left}px)`;
-}
-
-function slideToAboutSpots(event) {
+function slideTogetherAndGo(event) {
   // Let the browser handle it as usual for "open in a new tab" clicks
   if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
@@ -36,9 +30,8 @@ function slideToAboutSpots(event) {
   event.preventDefault();
   const address = event.currentTarget.href;
 
-  // Each one moves from where it is now to its spot on the about page
-  slideTo(moreStuff, aboutSpot('about-cool-stuff'));
-  slideTo(myName, aboutSpot('about-my-name'));
+  // They slide toward each other until they touch
+  slideTogether();
 
   // When they get there, go to the page
   const goToPage = () => { window.location.href = address; };
@@ -49,7 +42,7 @@ function slideToAboutSpots(event) {
 }
 
 for (const link of document.querySelectorAll('.top-more-stuff a, .top-my-name a')) {
-  link.addEventListener('click', slideToAboutSpots);
+  link.addEventListener('click', slideTogetherAndGo);
 }
 
 // Coming back with the browser's Back button: put them back in their places at once (no slide)
