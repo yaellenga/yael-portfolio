@@ -95,7 +95,7 @@
   --about-big-size: calc(55 * var(--u));
 
   /* Project pages (like "project page- trac"), also in Figma pixels × --u */
-  --project-handwriting-size: calc(45 * var(--u));
+  --project-handwriting-size: calc(42.75 * var(--u)); /* "More stuff" and "Yael Lenga": 5% smaller than in Figma (45) */
   --project-name-size: calc(40 * var(--u));
   --project-header-size: calc(30 * var(--u));
   --project-title-size: calc(30 * var(--u));
@@ -131,7 +131,7 @@
   --project-top-nav-top: 21;           /* "More stuff" and "Yael Lenga" from the top */
   --project-top-nav-left: 35;          /* "More stuff" from the left */
   --project-top-my-name: 1193;         /* "Yael Lenga" from the left */
-  --project-top-links-top: 76;         /* Contact, LinkedIn, Cv from the top */
+  --project-top-links-top: 73;         /* Contact, LinkedIn, Cv from the top (3 higher than in Figma) */
   --project-top-contact: 1176;         /* Contact from the left */
   --project-top-linkedin: 1271;        /* LinkedIn from the left */
   --project-top-cv: 1379;              /* Cv from the left */
