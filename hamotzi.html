@@ -39,7 +39,7 @@
     <p class="placed top-label top-year">2024</p>
   </header>
 
-  <!-- LEFT COLUMN: one text, at the bottom -->
+  <!-- LEFT COLUMN: one text; its bottom lines up with the bottom of the video. It stays in place. -->
   <div class="project-texts">
     <div class="stack-box stack-first">
       <h2 class="stack-title">tv title sequence - ultra religious mob</h2>
@@ -47,30 +47,34 @@
     </div>
   </div>
 
-  <!-- Stills from the title sequence, on the left above the text.
-       Only this strip scrolls (when there are more stills than fit); the rest of the page stays still. -->
-  <div class="hamotzi-stills">
-    <img class="hamotzi-still" src="images/hamotzi-side-still-top.jpg" alt="A challah and a coin on a lace tablecloth, with an actor's name in Hebrew">
-    <img class="hamotzi-still" src="images/hamotzi-side-still-bottom.jpg" alt="A poker chip on a lace tablecloth, with an actor's name in Hebrew">
-  </div>
+  <!-- RIGHT: the video and two stills from the title sequence, all the same size, one under the other.
+       This column scrolls with the page; the text on the left stays in place. -->
+  <main class="hamotzi-media">
 
-  <!-- RIGHT: the title sequence video, with a play button and an enlarge button (video-player.js).
-       Until it plays, it shows a still from its start (the HOT logo).
-       The video file goes in images/hamotzi-video.mp4 -->
-  <main class="placed hamotzi-video video-player">
-    <video class="video-player-video" src="images/hamotzi-video.mp4" poster="images/hamotzi-video-frame.jpg"
-           preload="none" playsinline aria-label="The Hamotzi title sequence"></video>
+    <!-- The title sequence video, with a play button and an enlarge button (video-player.js).
+         Until it plays, it shows a still from its start (the HOT logo).
+         The video file goes in images/hamotzi-video.mp4.
+         The outer box keeps the video's place in the column while the video is enlarged. -->
+    <div class="hamotzi-media-item">
+      <div class="hamotzi-video video-player">
+        <video class="video-player-video" src="images/hamotzi-video.mp4" poster="images/hamotzi-video-frame.jpg"
+               preload="none" playsinline aria-label="The Hamotzi title sequence"></video>
 
-    <button class="video-button video-play" type="button" aria-label="Play the video">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-    </button>
+        <button class="video-button video-play" type="button" aria-label="Play the video">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        </button>
 
-    <button class="video-button video-enlarge" type="button" aria-label="Enlarge the video">
-      <!-- Enlarge: four corners pointing out -->
-      <svg class="video-icon-enlarge" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
-      <!-- Make small again: four corners pointing in -->
-      <svg class="video-icon-shrink" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5"/></svg>
-    </button>
+        <button class="video-button video-enlarge" type="button" aria-label="Enlarge the video">
+          <!-- Enlarge: four corners pointing out -->
+          <svg class="video-icon-enlarge" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
+          <!-- Make small again: four corners pointing in -->
+          <svg class="video-icon-shrink" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <img class="hamotzi-media-item hamotzi-still" src="images/hamotzi-still-1.jpg" alt="A challah and a coin on a lace tablecloth, with an actor's name in Hebrew">
+    <img class="hamotzi-media-item hamotzi-still" src="images/hamotzi-still-2.jpg" alt="A poker chip on a lace tablecloth, with an actor's name in Hebrew">
   </main>
 
   <!-- Dims the rest of the screen while the video is enlarged; clicking it makes the video small again -->

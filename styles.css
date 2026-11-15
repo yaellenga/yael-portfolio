@@ -909,49 +909,53 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   height: 100vh;
 }
 
-/* ---------- Hamotzi page (hamotzi.html): the new layout, one screen, no panel ---------- */
+/* ---------- Hamotzi page (hamotzi.html) ----------
+   On the right, the video and two stills, all the same size, one under the other: they scroll with the page.
+   On the left, the text stays in place; its bottom lines up with the bottom of the video. */
 .hamotzi-page {
   --project-top-height: 206;          /* the top area */
   --project-nav-color: var(--color-hamotzi-nav-grey);
-  --project-texts-first-bottom: 180;  /* the text: its top, from the bottom of the window */
-  --hamotzi-stills-top: 208;          /* the stills strip: from the top */
-  --hamotzi-stills-gap: 19;           /* between the stills, and between the strip and the text */
-  --hamotzi-video-top: 208;           /* the video: from the top */
-  --project-video-bottom: 73;         /* space under the video, so it always fits on the screen */
+  --hamotzi-media-top: 208;           /* the video (the first in the column): from the top */
+  --hamotzi-media-gap: 19;            /* between the video and the stills */
+  --project-video-bottom: 73;         /* space under the video when the page opens, so it always fits on the screen;
+                                         also the space under the last still at the end of the scroll */
+  /* The width of the video and the stills: 1080 as in Figma, but smaller (keeping the shape)
+     when the window is short, so the whole video fits on the screen */
+  --hamotzi-media-width: min(calc(1080 * var(--u)),
+             (var(--screen-height) - (var(--hamotzi-media-top) + var(--project-video-bottom)) * var(--u)) * 1080 / 607);
+  --hamotzi-media-height: calc(var(--hamotzi-media-width) * 607 / 1080);
 }
 .hamotzi-logo               { --x: 531; --y: 46.02; --width: 360; --height: 102.97; }
 .hamotzi-credits            { --width: 146; }
 
-/* The stills on the left: a strip from under the top area down to just above the text.
-   Only this strip scrolls; the video and everything else stay in place.
-   (No scroll bar is shown; the mouse wheel or a swipe scrolls it.) */
-.hamotzi-stills {
-  position: fixed;
-  top: calc(var(--hamotzi-stills-top) * var(--u));
-  bottom: calc((var(--project-texts-first-bottom) + var(--hamotzi-stills-gap)) * var(--u));
-  left: calc(var(--project-texts-left) * var(--u));
-  width: calc(306 * var(--u));
+/* The text: its bottom at the bottom of the video (measured from the bottom of the text column) */
+.hamotzi-page .stack-first {
+  top: auto;
+  bottom: calc(var(--screen-height) - var(--hamotzi-media-top) * var(--u) - var(--hamotzi-media-height));
+}
+
+/* The column on the right: starts at the video's spot and scrolls under the top area */
+.hamotzi-media {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--hamotzi-stills-gap) * var(--u));
-  overflow-y: auto;
-  scrollbar-width: none; /* hide the scroll bar (Firefox, Chrome) */
+  gap: calc(var(--hamotzi-media-gap) * var(--u));
+  margin-top: calc(var(--hamotzi-media-top) * var(--u));
+  margin-left: calc(var(--project-texts-width) * var(--u));
+  padding-bottom: calc(var(--project-video-bottom) * var(--u));
 }
-.hamotzi-stills::-webkit-scrollbar { display: none; } /* hide the scroll bar (Safari) */
 
-.hamotzi-still {
+/* Each item (the video and the stills): the same size */
+.hamotzi-media-item {
   display: block;
-  flex: none;
-  width: 100%;
-  aspect-ratio: 306 / 172;
-  object-fit: cover;
+  width: var(--hamotzi-media-width);
+  aspect-ratio: 1080 / 607;
 }
-/* The video: at its Figma spot, but it shrinks (keeping its shape) when the window is short,
-   so it always fits on the screen, with --project-video-bottom of space under it */
+.hamotzi-still { object-fit: cover; }
+
+/* The video fills its spot (when enlarged it moves out of it, see below) */
 .hamotzi-video {
-  --x: 360; --y: var(--hamotzi-video-top);
-  width: min(calc(1080 * var(--u)),
-             (var(--screen-height) - (var(--hamotzi-video-top) + var(--project-video-bottom)) * var(--u)) * 1080 / 607);
+  position: relative;
+  width: 100%;
   aspect-ratio: 1080 / 607;
 }
 
