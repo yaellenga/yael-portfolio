@@ -28,3 +28,29 @@ document.addEventListener('focusin', (event) => {
   const screensDown = column === leftColumn ? number : screens.length - 1 - number;
   window.scrollTo({ top: screensDown * screenHeight });
 });
+
+// Coming back from a project page ("More stuff"): open the home page at that project's screens,
+// not at the beginning, and a bit further down, so a little of the next project already shows. The project page leaves its name behind (nav-slide.js, "home-return-to");
+// here we find the left screen that links to it and scroll that many screens down.
+(function goBackToProject() {
+  let projectPage = null;
+  try {
+    projectPage = sessionStorage.getItem('home-return-to');
+    sessionStorage.removeItem('home-return-to'); // only once: a refresh starts at the beginning
+  } catch (error) { return; } // the browser doesn't allow storage: just start at the beginning
+  if (!projectPage) return;
+
+  const screens = [...leftColumn.children];
+  const number = screens.findIndex(screen => screen.getAttribute('href') === projectPage);
+  if (number < 1) return;
+
+  // A bit further than the project, so the top of the next project already shows
+  // (--home-return-peek: a share of the window height; the last project has nothing after it)
+  const peek = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--home-return-peek'));
+  const top = (number + peek) * screens[number].offsetHeight;
+  window.scrollTo({ top, behavior: 'instant' });
+  moveColumns();
+
+  // No opening bounce (scroll-hint.js) when coming back
+  document.documentElement.dataset.hintFrom = 'none';
+})();

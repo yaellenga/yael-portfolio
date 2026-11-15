@@ -2,6 +2,7 @@
 // When the page opens at the top, it scrolls down a little by itself (the two halves start to move)
 // and comes back with a small bounce, as if someone started to scroll and changed their mind.
 // It doesn't happen if the visitor already started scrolling, or asked their computer for less motion.
+// Coming back from a project page it doesn't happen (split-scroll.js sets data-hint-from="none").
 // How far, how long and when: --scroll-hint-distance, --scroll-hint-time, --scroll-hint-delay in styles.css.
 // The underline under "Cool stuff by" shows up only once the hint is over (or if it doesn't happen at all):
 // the page gets the class "hint-done", and styles.css shows the underline.
@@ -33,15 +34,20 @@
     return 0;
   }
 
+  // Where the hint starts: the top ("none" = no hint)
+  const from = document.documentElement.dataset.hintFrom;
+  const startTop = from ? Number(from) : 0;
+
   function play() {
-    if (stopped || window.scrollY !== 0) { showUnderline(); return; } // only from the very top
+    // only from where it should start, if the visitor hasn't moved the page yet
+    if (stopped || Number.isNaN(startTop) || window.scrollY !== startTop) { showUnderline(); return; }
     const distance = window.innerHeight * distanceShare;
     const start = performance.now();
 
     function step(now) {
       if (stopped) return;
       const t = Math.min((now - start) / totalTime, 1);
-      window.scrollTo({ top: depth(t) * distance, behavior: 'instant' });
+      window.scrollTo({ top: startTop + depth(t) * distance, behavior: 'instant' });
       if (t < 1) requestAnimationFrame(step);
       else showUnderline(); // the bounce is over
     }

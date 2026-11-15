@@ -160,6 +160,7 @@
   --scroll-hint-distance: 0.08;        /* home: on opening, the page scrolls down this share of the window height... */
   --scroll-hint-time: 0.8s;            /* ...and back with a small bounce, all of it taking this long */
   --scroll-hint-delay: 0.6s;           /* ...after waiting this long once the page has loaded */
+  --home-return-peek: 0.12;            /* home, back from a project: opens this share of a screen past it, showing the next project */
   --cool-stuff-underline-time: 0.4s;   /* home: the underline under "Cool stuff by" fades in this fast after the bounce */
   --mouse-trail-size: 0.285;           /* home: the photos in the mouse's tail, this share of the old changing photos' size (30%, then 5% smaller) */
   --mouse-trail-overlap: 0.25;         /* home: each photo in the tail covers this share of the one before */

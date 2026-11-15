@@ -29,6 +29,13 @@ function slideTogether() {
 }
 
 function slideTogetherAndGo(event) {
+  // Going to the home page: remember which project this was, so the home page opens
+  // at this project's screens and not at the beginning (split-scroll.js reads it)
+  if (event.currentTarget.getAttribute('href') === 'index.html') {
+    const thisPage = window.location.pathname.split('/').pop(); // e.g. "trac.html"
+    try { sessionStorage.setItem('home-return-to', thisPage); } catch (error) { /* no storage: never mind */ }
+  }
+
   // Let the browser handle it as usual for "open in a new tab" clicks
   if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
