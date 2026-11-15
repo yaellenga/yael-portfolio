@@ -22,10 +22,22 @@
     <!-- LEFT COLUMN (starts at Screen 1, moves up) -->
     <div class="split-column split-left">
 
-      <!-- Screen 1 · Cool stuff by (table photo) -->
-      <section class="screen">
-        <img class="screen-photo" src="images/home-table-photo.jpg" alt="A festive table with flowers, candles, pumpkins and pine cones">
-        <p class="placed pin-bottom handwriting cool-stuff" aria-hidden="true">Cool stuff by</p>
+      <!-- Screen 1 · Cool stuff by (changing photos, and the big text across both halves) -->
+      <section class="screen screen-white">
+        <!-- Changing photos: every few seconds the next one comes up from below
+             and pushes the one before it up and out of the frame (home-slides.js) -->
+        <div class="placed pin-bottom box home-slides">
+          <img class="home-slide slide-1 is-current" src="images/home-slide-1.png" alt="A festive table with flowers, candles, pumpkins and pine cones">
+          <img class="home-slide slide-2" src="images/home-slide-2.png" alt="A computer showing a website: Anywhere, anytime, with three photos of musicians">
+          <img class="home-slide slide-3" src="images/home-slide-3.png" alt="A dark plate with three white lines on it, from the Hamotzi title sequence">
+          <img class="home-slide slide-4" src="images/home-slide-4.png" alt="A phone showing an episode of the Lets Talk About It podcast site">
+        </div>
+        <p class="placed handwriting cool-stuff" aria-hidden="true">Cool stuff by</p>
+
+        <!-- The big text, over the photos. It runs across both halves of the screen:
+             this is its left part (orange); the right part (white, on orange) is in the right column's
+             Screen 4, at the same spot. Each screen hides what reaches past its edge. -->
+        <p class="placed center-y home-intro home-intro-left">Graphic &amp; UX/UI designer<br>loves solving creative puzzles<br>&amp;making complexity effortless</p>
       </section>
 
       <!-- Screen 2 · trac. (headline and the app on a phone) — opens the trac. page -->
@@ -80,7 +92,10 @@
 
       <!-- Screen 4 · Yael Lenga (what you see first) -->
       <section class="screen screen-orange">
-        <p class="placed pin-bottom handwriting home-name">
+        <!-- The right part of the big text (the same words; screen readers read it once, on the left) -->
+        <p class="placed center-y home-intro home-intro-right" aria-hidden="true">Graphic &amp; UX/UI designer<br>loves solving creative puzzles<br>&amp;making complexity effortless</p>
+
+        <p class="placed handwriting home-name">
           <a class="handwriting-link" href="about.html">Yael Lenga</a>
         </p>
       </section>
@@ -92,6 +107,8 @@
   <img class="project-cursor" src="images/cursor-trac.svg" alt="" aria-hidden="true">
 
   <script src="split-scroll.js"></script>
+  <script src="home-slides.js"></script>
+  <script src="scroll-hint.js"></script>
   <script src="custom-cursor.js"></script>
 </body>
 </html>
