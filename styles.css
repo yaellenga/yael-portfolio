@@ -100,7 +100,7 @@
   --project-header-size: calc(30 * var(--u));
   --project-title-size: calc(30 * var(--u));
   --project-text-size: calc(20 * var(--u));
-  --project-label-size: calc(15 * var(--u)); /* project pages: type, credits, second type and year under the logo */
+  --project-label-size: calc(16 * var(--u)); /* project pages: type, credits, second type and year under the logo */
   --project-text-spacing: calc(0.6 * var(--u));
   --project-small-text-size: calc(12 * var(--u)); /* the texts in the left column */
   --trac-panel-height: calc(3423 * var(--u)); /* height of the trac. right panel */
@@ -137,12 +137,12 @@
   --project-top-linkedin: 1271;        /* LinkedIn from the left */
   --project-top-cv: 1379;              /* Cv from the left */
   --project-top-logo-top: 53.49;       /* the project logo from the top */
-  --project-top-labels-top: 171;       /* type, credits and year from the top */
+  --project-top-labels-top: 161;       /* type, credits and year from the top */
   --project-nav-color: var(--color-black); /* "More stuff", "Yael Lenga", Contact, LinkedIn, Cv: each project sets its own color */
-  --project-top-type: 36;              /* type ("App Design") from the left */
-  --project-top-credits: 482;          /* credits from the left */
-  --project-top-type-second: 964;      /* second type ("Ux\Ui") from the left */
-  --project-top-year: 1365;            /* year from the left */
+  --project-top-type: 417;             /* type ("App Design") from the left */
+  --project-top-credits: 797;          /* credits ("Student Project With …") from the left */
+  --project-top-type-second: 584;      /* second type ("Ux\Ui") from the left */
+  --project-top-year: 978;             /* year from the left */
   --project-texts-width: 360;          /* the text column (the right panel starts here) */
   --project-texts-left: 35;            /* the texts from the left */
   --project-texts-text-width: 317;     /* width of the texts */
@@ -758,7 +758,6 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 /* ---------- trac. page (trac.html): a shorter top area and its own link color ---------- */
 .trac-page {
   --project-top-height: 206;          /* the top area; the right panel starts under it */
-  --project-top-labels-top: 151;      /* type, credits and year from the top */
   --project-nav-color: var(--color-trac-green);
 }
 
@@ -768,7 +767,6 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
    at the same speed (side-scroll.js moves them). */
 .lets-talk-page {
   --project-top-height: 206;          /* the top area; the side columns start under it */
-  --project-top-labels-top: 151;      /* type, credits and year from the top */
   --project-nav-color: var(--color-lets-talk-blue);
   --side-column-end-space: 24;        /* space left under the last phone of the left column at the end */
   --lets-talk-mockup-top: 208;        /* the computer's area and the side columns start here */
@@ -777,8 +775,6 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   --lets-talk-middle-width: 880;      /* the widest the computer can get: up to the phones on each side */
 }
 .lets-talk-logo    { --x: 431.63; --y: 21; --width: 558.74; --height: 153; }
-.lets-talk-kind    { --width: 161; } /* "Web&App Design / Illustration" */
-.lets-talk-credits { --width: 154; }
 
 /* Everything below the top area that doesn't scroll away: fixed to the window */
 .lets-talk-stage {
@@ -869,7 +865,6 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 /* ---------- Hamotzi page (hamotzi.html): the new layout, one screen, no panel ---------- */
 .hamotzi-page {
   --project-top-height: 206;          /* the top area */
-  --project-top-labels-top: 151;      /* type, credits and year from the top */
   --project-nav-color: var(--color-hamotzi-nav-grey);
   --project-texts-first-bottom: 180;  /* the text: its top, from the bottom of the window */
   --hamotzi-stills-top: 208;          /* the stills strip: from the top */
