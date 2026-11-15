@@ -3,9 +3,13 @@
 // and comes back with a small bounce, as if someone started to scroll and changed their mind.
 // It doesn't happen if the visitor already started scrolling, or asked their computer for less motion.
 // How far, how long and when: --scroll-hint-distance, --scroll-hint-time, --scroll-hint-delay in styles.css.
+// The underline under "Cool stuff by" shows up only once the hint is over (or if it doesn't happen at all):
+// the page gets the class "hint-done", and styles.css shows the underline.
 
 (function () {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const showUnderline = () => document.documentElement.classList.add('hint-done');
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { showUnderline(); return; }
 
   const rootStyle = getComputedStyle(document.documentElement);
   const distanceShare = parseFloat(rootStyle.getPropertyValue('--scroll-hint-distance')); // share of the window height
@@ -14,7 +18,7 @@
 
   let stopped = false;
   // If the visitor scrolls, clicks or presses a key, stop the hint and leave the page to them
-  const stop = () => { stopped = true; };
+  const stop = () => { stopped = true; showUnderline(); };
   for (const type of ['wheel', 'touchstart', 'keydown', 'mousedown']) {
     window.addEventListener(type, stop, { once: true, passive: true });
   }
@@ -30,7 +34,7 @@
   }
 
   function play() {
-    if (stopped || window.scrollY !== 0) return; // only from the very top
+    if (stopped || window.scrollY !== 0) { showUnderline(); return; } // only from the very top
     const distance = window.innerHeight * distanceShare;
     const start = performance.now();
 
@@ -39,6 +43,7 @@
       const t = Math.min((now - start) / totalTime, 1);
       window.scrollTo({ top: depth(t) * distance, behavior: 'instant' });
       if (t < 1) requestAnimationFrame(step);
+      else showUnderline(); // the bounce is over
     }
     requestAnimationFrame(step);
   }

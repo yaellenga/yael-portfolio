@@ -155,9 +155,7 @@
   --scroll-hint-distance: 0.08;        /* home: on opening, the page scrolls down this share of the window height... */
   --scroll-hint-time: 0.8s;            /* ...and back with a small bounce, all of it taking this long */
   --scroll-hint-delay: 0.6s;           /* ...after waiting this long once the page has loaded */
-  --home-slide-stay-time: 3s;          /* home: how long each changing photo stays */
-  --home-slide-move-time: 1s;          /* home: how long the change takes */
-  --home-slide-squish: 0.3;            /* home: the old photo is squished to this share of its height, then moves out */
+  --cool-stuff-underline-time: 0.4s;   /* home: the underline under "Cool stuff by" fades in this fast after the bounce */
   --project-texts-top-space: 20;       /* in short windows: the least free space kept above the top text */
   --project-texts-min-gap: 0;          /* in short windows: the gaps between the texts shrink, down to this (0 = the texts can touch) */
   --project-texts-wait: 200;           /* how far to scroll after a panel part comes in, before its text starts coming down */
@@ -405,58 +403,39 @@ body {
   line-height: 0.9;
 }
 
-/* Home, first left screen: the changing photos (home-slides.js).
-   A frame at the bottom of the screen; each photo comes up from below it,
-   squishing the one before it toward the top, and then pushing it out. */
-.home-slides {
-  --x: 49.05; --width: 621.9; --height: 717.57; /* 10% smaller than in Figma (691 × 797.3), still centered across */
-  --from-bottom: 717.57;                /* its top: its own height above the bottom, so it sits on the bottom of the screen */
-  clip-path: inset(0 -100% 0 -100%);    /* hides what goes above or below the frame (not the sides) */
-}
-.home-slide {
-  position: absolute;
-  max-width: none;
-  transform-origin: top center;         /* squished toward the top of the frame */
-  transform: translateY(100%);          /* waiting below the frame */
-}
-.home-slide.is-current { transform: none; } /* in the frame */
-
-/* Each photo's spot in the frame, from Figma (some reach past the sides of the frame) */
-.slide-1 { left: 0;       top: 0;       width: 100%; }
-.slide-2 { left: -2.894%; top: 0;       width: 105.93%; }
-.slide-3 { left: -5.746%; top: 0;       width: 111.5%; }
-.slide-4 { left: 0;       top: -0.286%; width: 100%; }
-
 .cool-stuff {
   --x: 398; --y: 25; --width: 391;
-  color: var(--color-black);
+  color: var(--color-white);
   text-decoration: underline;
   text-decoration-thickness: from-font; /* underline as in Figma */
   text-underline-position: from-font;
+  /* The underline is hidden until the scroll hint's bounce is over (scroll-hint.js adds "hint-done") */
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--cool-stuff-underline-time) ease;
 }
+.hint-done .cool-stuff { text-decoration-color: currentColor; }
 
 .home-name {
   --x: 20; --y: 25; --width: 265;
   color: var(--color-white);
 }
 
-/* Home, first view: the big text across both halves, over the changing photos.
-   The same text sits in both screens at the same spot (1136 wide, from 152 on the whole page);
+/* Home, first view: the big white text across both halves, at the bottom of the screen.
+   The same text sits in both screens at the same spot (from 58 on the whole page);
    each screen shows only its own half. */
 .home-intro {
-  --width: 1136; --from-center: -135;   /* its top: 347 from the top of a 964 screen */
-  z-index: 1;                           /* over the photos */
+  --width: 1300; --from-bottom: 263.24; /* its top: 700.76 from the top of a 964 screen (the capitals start at 717.5) */
   font-family: var(--font-label);
   font-weight: 700;
   font-size: var(--home-intro-size);
   line-height: 1.11;
   letter-spacing: 0.04em;               /* 2.68 at 67 */
   text-transform: uppercase;
-  text-align: center;
   white-space: nowrap;
+  color: var(--color-white);
 }
-.home-intro-left  { --x: 152;  color: var(--color-home-orange); }
-.home-intro-right { --x: -568; color: var(--color-white); }   /* 152 - 720: starts in the left half */
+.home-intro-left  { --x: 58; }
+.home-intro-right { --x: -662; }        /* 58 - 720: starts in the left half */
 
 /* Project labels on the right column: name, type, year (pinned to the bottom) */
 .project-label,
@@ -1539,13 +1518,6 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 }
 .guide-video-button { position: static; }
 
-/* Style guide: the home page's changing photos, small, side by side */
-.guide-slides {
-  display: flex;
-  align-items: flex-end;
-  gap: var(--space-small);
-}
-.guide-slides img { width: calc(140 * var(--u)); height: auto; }
 .guide-video-play {
   width: calc(var(--video-play-size) * var(--u));
   height: calc(var(--video-play-size) * var(--u));
