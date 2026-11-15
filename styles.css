@@ -152,6 +152,11 @@
   --video-enlarge-size: 44;            /* the enlarge button (a square) */
   --project-video-bottom: 41;          /* space under the video, so it always fits on the screen */
   --nav-slide-time: 0.6s;             /* "More stuff" and "Yael Lenga" slide toward each other before leaving the page */
+  --nav-meet-left-end: 690.94;         /* ...and stop: "More stuff" ends where "Cool stuff by" ends on the home page */
+  --nav-meet-right-start: 740;         /* ...and "Yael Lenga" starts where it starts on the home page */
+  --loader-wait-time: 0.3s;            /* loader: the number shows only if the page isn't ready after this long */
+  --loader-picture-time: 0.5s;         /* loader: at 100%, the about page's mouse picture shows this long before the page opens */
+  --loader-fade-time: 0.3s;            /* loader: how fast it fades away to show the page */
   --scroll-hint-distance: 0.08;        /* home: on opening, the page scrolls down this share of the window height... */
   --scroll-hint-time: 0.8s;            /* ...and back with a small bounce, all of it taking this long */
   --scroll-hint-delay: 0.6s;           /* ...after waiting this long once the page has loaded */
@@ -1616,4 +1621,55 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   display: flex;
   flex-direction: column;
   gap: var(--space-small);
+}
+
+
+/* ---------- Loader (page-loader.js): covers the page while it loads ----------
+   A cream screen; after a short wait the share loaded shows in handwriting.
+   At 100% the about page's mouse picture shows instead, and then the whole loader fades away. */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;                         /* above everything, also the special mouse */
+  display: grid;
+  place-items: center;
+  background-color: var(--color-project-cream);
+  transition: opacity var(--loader-fade-time) ease;
+}
+.page-loader.is-gone {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The number and the picture sit in the same spot, in the middle */
+.page-loader-number,
+.page-loader-picture { grid-area: 1 / 1; }
+
+.page-loader-number {
+  font-family: var(--font-handwriting);
+  font-size: var(--handwriting-size);
+  color: var(--color-black);
+  visibility: hidden;                   /* until the short wait is over */
+}
+.page-loader.is-visible .page-loader-number { visibility: visible; }
+
+.page-loader-picture {
+  width: calc(65 * 2 * var(--u));      /* the mouse picture, twice its size on the about page */
+  height: auto;
+  visibility: hidden;                   /* until 100% */
+}
+.page-loader.is-at-picture .page-loader-number  { visibility: hidden; }
+.page-loader.is-at-picture .page-loader-picture { visibility: visible; }
+
+/* Style guide: the loader's two moments, small boxes side by side (not covering the page) */
+.guide-loaders {
+  display: flex;
+  gap: var(--space-small);
+}
+.page-loader.guide-loader {
+  position: relative;
+  z-index: auto;
+  width: calc(300 * var(--u));
+  height: calc(200 * var(--u));
+  border: 1px solid var(--color-black);
 }

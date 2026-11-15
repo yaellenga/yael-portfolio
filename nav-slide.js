@@ -1,20 +1,28 @@
 // Project page, top area: when "More stuff" or "Yael Lenga" is clicked,
 // the two of them first slide sideways (keeping their height on the screen) toward the middle
-// of the window until their texts touch, and only then the browser goes to the page that was clicked.
+// of the window, and only then the browser goes to the page that was clicked.
+// They stop where "Cool stuff by" and "Yael Lenga" are on the home page: "More stuff" ends where
+// "Cool stuff by" ends, and "Yael Lenga" starts where the home page's "Yael Lenga" starts
+// (--nav-meet-left-end and --nav-meet-right-start in styles.css, in Figma pixels).
 // (How long the slide takes is --nav-slide-time in styles.css.)
 
 const moreStuff = document.querySelector('.top-more-stuff');
 const myName = document.querySelector('.top-my-name');
 
-// Slide the two sideways so that they meet in the middle of the window, touching
+// Slide the two sideways to the spots of "Cool stuff by" and "Yael Lenga" on the home page
 function slideTogether() {
-  // The texts themselves (the links), not their boxes, so that the letters touch
+  // The texts themselves (the links), not their boxes
   const leftText = moreStuff.querySelector('a').getBoundingClientRect();
   const rightText = myName.querySelector('a').getBoundingClientRect();
 
-  // Side by side, both together centered in the window
-  const leftSpot = (window.innerWidth - (leftText.width + rightText.width)) / 2;
-  const rightSpot = leftSpot + leftText.width;
+  // The home page spots, from Figma pixels (a 1440-wide screen) to this window
+  const unit = window.innerWidth / 1440;
+  const rootStyle = getComputedStyle(document.documentElement);
+  const leftEnd = parseFloat(rootStyle.getPropertyValue('--nav-meet-left-end')) * unit;
+  const rightStart = parseFloat(rootStyle.getPropertyValue('--nav-meet-right-start')) * unit;
+
+  const leftSpot = leftEnd - leftText.width; // where the left of "More stuff" goes
+  const rightSpot = rightStart;              // where the left of "Yael Lenga" goes
 
   moreStuff.style.transform = `translateX(${leftSpot - leftText.left}px)`;
   myName.style.transform = `translateX(${rightSpot - rightText.left}px)`;
