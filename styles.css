@@ -133,10 +133,14 @@
   --project-top-nav-top: 21;           /* "More stuff" and "Yael Lenga" from the top */
   --project-top-nav-left: 35;          /* "More stuff" from the left */
   --project-top-my-name: 1193;         /* "Yael Lenga" from the left */
-  --project-top-links-top: 73;         /* Contact, LinkedIn, Cv from the top (3 higher than in Figma) */
-  --project-top-contact: 1176;         /* Contact from the left */
-  --project-top-linkedin: 1271;        /* LinkedIn from the left */
-  --project-top-cv: 1379;              /* Cv from the left */
+  --project-top-links-top: 71;         /* phone, email, LinkedIn, Cv from the top */
+  --project-top-links-left: 895;       /* ...the row's box from the left (it ends where Cv ends, at 1397: 10 left of Figma) */
+  --project-top-links-width: 502;
+  --top-link-gap-email: 24;            /* the space before email, before LinkedIn and before Cv */
+  --top-link-gap-linkedin: 18;
+  --top-link-gap-cv: 19;               /* (LinkedIn moved 8 to the left of Figma: more space before Cv, less before LinkedIn) */
+  --top-link-open-time: 0.3s;          /* how fast a link opens up on hover (and Cv grows on click) */
+  --email-copied-time: 2s;             /* after clicking the number or the email: "number copied" / "email copied" shows this long */
   --project-top-logo-top: 53.49;       /* the project logo from the top */
   --project-top-labels-top: 161;       /* type, credits and year from the top */
   --project-nav-color: var(--color-black); /* "More stuff", "Yael Lenga", Contact, LinkedIn, Cv: each project sets its own color */
@@ -704,9 +708,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   transition: transform var(--nav-slide-time) ease-in-out;
 }
 .top-my-name      { --x: var(--project-top-my-name);   --y: var(--project-top-nav-top); }
-.top-contact      { --x: var(--project-top-contact);   --y: var(--project-top-links-top); }
-.top-linkedin     { --x: var(--project-top-linkedin);  --y: var(--project-top-links-top); }
-.top-cv           { --x: var(--project-top-cv);        --y: var(--project-top-links-top); }
+.top-links        { --x: var(--project-top-links-left); --y: var(--project-top-links-top); --width: var(--project-top-links-width); }
 .top-logo         { --y: var(--project-top-logo-top); } /* each project sets --x and the size of its logo */
 .top-type         { --x: var(--project-top-type);        --y: var(--project-top-labels-top); }
 .top-credits      { --x: var(--project-top-credits);     --y: var(--project-top-labels-top); --width: 130; }
@@ -720,14 +722,63 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   color: var(--project-nav-color);
 }
 
-/* Contact, LinkedIn, Cv: small handwriting under "Yael Lenga" */
+/* phone, email, LinkedIn, Cv: small handwriting under "Yael Lenga" */
 .top-link {
   font-family: var(--font-handwriting);
   font-weight: 400;
   font-size: var(--project-text-size);
   line-height: 1.49;
   white-space: nowrap;
+  text-decoration: none;
 }
+
+/* The row: lined up on the right, so when a link opens up it grows to the left
+   and pushes the links before it to the left */
+.top-links {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.top-link-email    { margin-left: calc(var(--top-link-gap-email) * var(--u)); }
+.top-link-linkedin { margin-left: calc(var(--top-link-gap-linkedin) * var(--u)); }
+.top-link-cv       { margin-left: calc(var(--top-link-gap-cv) * var(--u)); }
+
+/* A link that opens up: its word and what it stands for sit in the same spot, lined up on the right.
+   Its width is the word's box in Figma (--closed), and on hover the long text's box (--open),
+   so the width grows smoothly while the word fades into the long text. */
+.top-link-swap {
+  display: inline-grid;
+  grid-template-columns: minmax(0, 1fr); /* one column, exactly as wide as the link */
+  justify-items: unsafe end;            /* the texts end at its right edge (the long one sticks out to the left, hidden) */
+  overflow: hidden;
+  width: calc(var(--closed) * var(--u));
+  transition: width var(--top-link-open-time) ease-out;
+}
+.top-link-phone    { --closed: 48; --open: 141; } /* "phone" → the phone number */
+.top-link-email    { --closed: 47; --open: 186; } /* "email" → the address */
+.top-link-linkedin { --closed: 78; --open: 88; }  /* "LinkedIn" → "Yael lenga" (just as wide as the name, so phone and email move only a little) */
+.top-link-cv       { width: calc(28 * var(--u)); }
+.top-link-label,
+.top-link-reveal {
+  grid-area: 1 / 1;
+  transition: opacity var(--top-link-open-time) ease-out;
+}
+.top-link-reveal { opacity: 0; }
+
+.top-link-swap:hover,
+.top-link-swap:focus-visible { width: calc(var(--open) * var(--u)); }
+.top-link-swap:hover .top-link-label,
+.top-link-swap:focus-visible .top-link-label { opacity: 0; }
+.top-link-swap:hover .top-link-reveal,
+.top-link-swap:focus-visible .top-link-reveal { opacity: 1; }
+
+/* Cv: grows 10% on hover; a click opens the CV (a PDF, in a new tab) */
+.top-link-cv {
+  transform-origin: left bottom;
+  transition: transform var(--top-link-open-time) ease-out;
+}
+.top-link-cv:hover,
+.top-link-cv:focus-visible { transform: scale(1.1); }
 
 /* Type, credits and year: bold labels under the logo */
 .top-label {

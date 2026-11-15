@@ -29,10 +29,25 @@
       <a class="handwriting-link" href="about.html">Yael Lenga</a>
     </p>
 
-    <!-- Contact, LinkedIn, Cv: their destinations will be added later -->
-    <p class="placed top-link top-contact">Contact</p>
-    <p class="placed top-link top-linkedin">LinkedIn</p>
-    <p class="placed top-link top-cv">Cv</p>
+    <!-- phone, email, LinkedIn, Cv: on hover each one opens up to show what it stands for
+         (styles.css, .top-link-swap), and the ones to its left move over to make room.
+         Cv grows a little on hover and opens the CV; LinkedIn opens the LinkedIn page (both in a new tab);
+         clicking the phone number or the email address copies it (copy-on-click.js). -->
+    <nav class="placed top-links" aria-label="Contact">
+      <a class="top-link top-link-swap top-link-phone" href="tel:+972546138340" data-copied-text="number copied">
+        <span class="top-link-label">phone</span>
+        <span class="top-link-reveal" aria-live="polite">+972546138340</span>
+      </a>
+      <a class="top-link top-link-swap top-link-email" href="mailto:yael.lenga@gmail.com" data-copied-text="email copied">
+        <span class="top-link-label">email</span>
+        <span class="top-link-reveal" aria-live="polite">yael.lenga@gmail.com</span>
+      </a>
+      <a class="top-link top-link-swap top-link-linkedin" href="https://www.linkedin.com/in/yael-lenga-37ba863b9/" target="_blank" rel="noopener">
+        <span class="top-link-label">LinkedIn</span>
+        <span class="top-link-reveal">Yael lenga</span>
+      </a>
+      <a class="top-link top-link-cv" href="CV%20Yael%20Lenga-%20portfolio.pdf" target="_blank" rel="noopener">Cv</a>
+    </nav>
 
     <h1 class="placed box top-logo trac-logo">
       <img class="whole-image" src="images/trac-logo.svg" alt="trac.">
@@ -115,5 +130,6 @@
   <script src="stack-scroll.js"></script>
   <script src="play-when-seen.js"></script>
   <script src="nav-slide.js"></script>
+  <script src="copy-on-click.js"></script>
 </body>
 </html>

@@ -79,8 +79,13 @@
 
       <div class="guide-group">
         <p class="project-bold-text">Project page — new layout (trac.)</p>
-        <p class="project-text">.top-link</p>
-        <p class="top-link">Contact</p>
+        <p class="project-text">.top-links (hover each one)</p>
+        <nav class="top-links guide-top-links" aria-label="Contact (example)">
+          <a class="top-link top-link-swap top-link-phone" href="tel:+972546138340" data-copied-text="number copied"><span class="top-link-label">phone</span><span class="top-link-reveal" aria-live="polite">+972546138340</span></a>
+          <a class="top-link top-link-swap top-link-email" href="mailto:yael.lenga@gmail.com" data-copied-text="email copied"><span class="top-link-label">email</span><span class="top-link-reveal" aria-live="polite">yael.lenga@gmail.com</span></a>
+          <a class="top-link top-link-swap top-link-linkedin" href="https://www.linkedin.com/in/yael-lenga-37ba863b9/" target="_blank" rel="noopener"><span class="top-link-label">LinkedIn</span><span class="top-link-reveal">Yael lenga</span></a>
+          <a class="top-link top-link-cv" href="CV%20Yael%20Lenga-%20portfolio.pdf" target="_blank" rel="noopener">Cv</a>
+        </nav>
         <p class="project-text">.top-label</p>
         <p class="top-label">Student Project<br>With Mia Gaon</p>
         <p class="project-text">.stack-title</p>
@@ -340,6 +345,7 @@
   <img class="project-cursor" src="images/cursor-trac.svg" alt="" aria-hidden="true">
 
   <script src="guide.js"></script>
+  <script src="copy-on-click.js"></script>
   <script src="custom-cursor.js"></script>
   <script src="about-stamps.js"></script>
 </body>
