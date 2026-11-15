@@ -28,8 +28,11 @@
     <!-- LEFT COLUMN (starts at Screen 1, moves up) -->
     <div class="split-column split-left">
 
-      <!-- Screen 1 · Cool stuff by (orange, with the big text across both halves at the bottom) -->
-      <section class="screen screen-orange">
+      <!-- Screen 1 · Cool stuff by (orange, with the big text across both halves at the bottom).
+           Over it (and over the right half next to it), a tail of photos follows the mouse (mouse-trail.js). -->
+      <section class="screen screen-orange mouse-trail-area">
+        <!-- The tail of photos behind the mouse (mouse-trail.js puts the photos in it): first, so it is under the text -->
+        <div class="mouse-trail" aria-hidden="true"></div>
         <p class="placed handwriting cool-stuff" aria-hidden="true">Cool stuff by</p>
 
         <!-- The big text. It runs across both halves of the screen:
@@ -89,7 +92,10 @@
       </a>
 
       <!-- Screen 4 · Yael Lenga (what you see first) -->
-      <section class="screen screen-orange">
+      <section class="screen screen-orange mouse-trail-area">
+        <!-- The tail of photos behind the mouse: its right half (under the text and the button) -->
+        <div class="mouse-trail" aria-hidden="true"></div>
+
         <!-- The right part of the big text (the same words; screen readers read it once, on the left) -->
         <p class="placed pin-bottom home-intro home-intro-right" aria-hidden="true">A graphic &amp; UX/UI designer,<br>who loves solving creative puzzles &amp;<br>making complexity effortless</p>
 
@@ -107,5 +113,6 @@
   <script src="split-scroll.js"></script>
   <script src="scroll-hint.js"></script>
   <script src="custom-cursor.js"></script>
+  <script src="mouse-trail.js"></script>
 </body>
 </html>

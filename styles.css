@@ -161,6 +161,10 @@
   --scroll-hint-time: 0.8s;            /* ...and back with a small bounce, all of it taking this long */
   --scroll-hint-delay: 0.6s;           /* ...after waiting this long once the page has loaded */
   --cool-stuff-underline-time: 0.4s;   /* home: the underline under "Cool stuff by" fades in this fast after the bounce */
+  --mouse-trail-size: 0.285;           /* home: the photos in the mouse's tail, this share of the old changing photos' size (30%, then 5% smaller) */
+  --mouse-trail-overlap: 0.25;         /* home: each photo in the tail covers this share of the one before */
+  --mouse-trail-stay-time: 1.7s;        /* home: each photo stays this long... */
+  --mouse-trail-fade-time: 0.4s;       /* ...and then fades away this fast */
   --project-texts-top-space: 20;       /* in short windows: the least free space kept above the top text */
   --project-texts-min-gap: 0;          /* in short windows: the gaps between the texts shrink, down to this (0 = the texts can touch) */
   --project-texts-wait: 200;           /* how far to scroll after a panel part comes in, before its text starts coming down */
@@ -424,6 +428,22 @@ body {
   --x: 20; --y: 25; --width: 265;
   color: var(--color-white);
 }
+
+/* Home, first screen: the tail of photos behind the mouse (mouse-trail.js).
+   One layer in each half of the first screen, under the text and the buttons (it comes first in the screen).
+   A photo that crosses the middle is put in both layers, and each half shows only its own part. */
+.mouse-trail {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;                 /* clicks pass through it */
+}
+.mouse-trail-photo {
+  position: absolute;
+  height: auto;
+  max-width: none;
+  transition: opacity var(--mouse-trail-fade-time) ease;
+}
+.mouse-trail-photo.is-fading { opacity: 0; }
 
 /* Home, first view: the big white text across both halves, at the bottom of the screen.
    The same text sits in both screens at the same spot (from 58 on the whole page);
@@ -1673,3 +1693,11 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   height: calc(200 * var(--u));
   border: 1px solid var(--color-black);
 }
+
+/* Style guide: the photos of the mouse's tail, small, side by side */
+.guide-trail {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-small);
+}
+.guide-trail img { height: calc(120 * var(--u)); width: auto; }
