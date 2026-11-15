@@ -54,10 +54,15 @@
       <img class="whole-image" src="images/hamotzi-logo.png" alt="המוציא — Hamotzi" lang="he">
     </h1>
 
-    <p class="placed top-label top-type">Title Sequence</p>
-    <p class="placed top-label top-credits hamotzi-credits">Student Project<br>With Yuval Israel</p>
-    <p class="placed top-label top-type-second">Video Art<br>Direction &amp; Filming</p>
-    <p class="placed top-label top-year">2024</p>
+    <!-- Type, second type, credits and year: spread out in one row, from the left edge of the
+         picture area to the right edge of "Yael Lenga", with equal space between them
+         (styles.css, .top-labels-spread) -->
+    <div class="placed top-labels-spread">
+      <p class="top-label top-type">Title Sequence</p>
+      <p class="top-label top-type-second">Video Art<br>Direction &amp; Filming</p>
+      <p class="top-label top-credits">Student Project<br>With Yuval Israel</p>
+      <p class="top-label top-year">2024</p>
+    </div>
   </header>
 
   <!-- LEFT COLUMN: one text; its bottom lines up with the bottom of the video. It stays in place. -->

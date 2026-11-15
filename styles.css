@@ -149,6 +149,7 @@
   --project-top-credits: 797;          /* credits ("Student Project With …") from the left */
   --project-top-type-second: 584;      /* second type ("Ux\Ui") from the left */
   --project-top-year: 978;             /* year from the left */
+  --project-top-my-name-right: 1393;   /* the right edge of the words "Yael Lenga" */
   --project-texts-width: 360;          /* the text column (the right panel starts here) */
   --project-texts-left: 35;            /* the texts from the left */
   --project-texts-text-width: 317;     /* width of the texts */
@@ -718,6 +719,17 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .top-type-second  { --x: var(--project-top-type-second); --y: var(--project-top-labels-top); }
 .top-year         { --x: var(--project-top-year);        --y: var(--project-top-labels-top); }
 
+/* trac. and Hamotzi: type, second type, credits and year in one row instead, spread out
+   from the left edge of the picture area (the video, the yellow rectangle) to the right edge
+   of "Yael Lenga", with equal space between them */
+.top-labels-spread {
+  --x: var(--project-texts-width);
+  --y: var(--project-top-labels-top);
+  --width: calc(var(--project-top-my-name-right) - var(--project-texts-width));
+  display: flex;
+  justify-content: space-between;
+}
+
 /* "More stuff", "Yael Lenga", Contact, LinkedIn and Cv take the project's own color */
 .top-more-stuff,
 .top-my-name,
@@ -985,6 +997,9 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   --hamotzi-media-height: calc(var(--hamotzi-media-width) * 607 / 1080);
 }
 .hamotzi-logo               { --x: 531; --y: 46.02; --width: 360; --height: 102.97; }
+/* The descriptions under the logo: as wide as the video, so the year ends at its right edge
+   (the video gets narrower on short windows, and so does the row) */
+.hamotzi-page .top-labels-spread { width: var(--hamotzi-media-width); }
 .hamotzi-credits            { --width: 146; }
 
 /* The text: its bottom at the bottom of the video (measured from the bottom of the text column) */
