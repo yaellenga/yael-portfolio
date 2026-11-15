@@ -73,17 +73,24 @@
   <main class="hamotzi-media">
 
     <!-- The title sequence video, with a play button and an enlarge button (video-player.js).
-         Until it plays, it shows a still from its start (the HOT logo).
+         Until it plays, it shows a still from its start (the HOT logo). Only its length is loaded at first.
          The video file goes in images/hamotzi-video.mp4.
          The outer box keeps the video's place in the column while the video is enlarged. -->
     <div class="hamotzi-media-item">
       <div class="hamotzi-video video-player">
         <video class="video-player-video" src="images/hamotzi-video.mp4" poster="images/hamotzi-video-frame.jpg"
-               preload="none" playsinline aria-label="The Hamotzi title sequence"></video>
+               preload="metadata" playsinline aria-label="The Hamotzi title sequence"></video>
 
         <button class="video-button video-play" type="button" aria-label="Play the video">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
         </button>
+
+        <!-- The time bar: shows how far the video has played; drag it (or click it) to move forward or back -->
+        <div class="video-time-bar" role="slider" tabindex="0" aria-label="Video time"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="video-time-track"><div class="video-time-played"></div></div>
+          <div class="video-time-handle"></div>
+        </div>
 
         <button class="video-button video-enlarge" type="button" aria-label="Enlarge the video">
           <!-- Enlarge: four corners pointing out -->
