@@ -106,9 +106,9 @@
 
   /* About page sizes (in Figma pixels × --u) */
   --about-text-size: calc(20 * var(--u));  /* the text about me */
-  --about-fact-size: calc(25 * var(--u));  /* "A random fact about me:" and the facts */
-  --about-fact-step: 72;                   /* from one fact to the next in the list (a line and an empty line) */
-  --about-fact-scroll: 40vh;               /* how much scrolling moves to the next fact */
+  --about-photo-time: 3s;                  /* each photo of me stays this long... */
+  --about-photo-switch-time: 0.55s;        /* ...and then the next one pushes it out this fast */
+  --about-trail-fade-time: 0.2s;           /* the tail disappears (over the links and "Cool stuff by") this fast */
 
   /* Project pages (like "project page- trac"), also in Figma pixels × --u */
   --scroll-down-size: calc(20 * var(--u)); /* home: "scroll down" at the bottom of the first screen */
@@ -830,6 +830,8 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   transition: opacity var(--top-link-open-time) ease-out;
 }
 .top-link-reveal { opacity: 0; }
+/* "number copied" / "email copied" (copy-on-click.js): in the middle of the space of the number or address */
+.top-link-swap.is-copied .top-link-reveal { justify-self: center; }
 
 .top-link-swap:hover,
 .top-link-swap:focus-visible { width: calc(var(--open) * var(--t)); }
@@ -1426,18 +1428,17 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 }
 
 /* =========================================================
-   About page (about.html): one screen, drawn 1440 × 785.
-   The screen stays in place (fixed); scrolling only changes the random fact (about-facts.js).
+   About page (about.html): one screen, drawn 1440 × 785, that stays in place.
    ========================================================= */
 
-/* The blue page: fills the window and stays in place */
+/* The page: cream, with orange texts, fills the window and stays in place */
 .about-page {
+  --project-nav-color: var(--color-home-orange); /* phone, email, LinkedIn, Cv */
   position: fixed;
   inset: 0;
-  z-index: 1; /* above the scroll space under it (.about-scroll-space), so clicks reach the links */
   height: var(--screen-height);
-  background-color: var(--color-about-blue);
-  color: var(--color-black);
+  background-color: var(--color-project-cream);
+  color: var(--color-home-orange);
 }
 
 /* "Cool stuff by" and "Yael Lenga" at the top */
@@ -1456,57 +1457,52 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   text-underline-position: from-font;
 }
 
-/* The text about me: Title Case, an empty line between the paragraphs */
+/* The text about me: capitals, an empty line between the paragraphs */
 .about-info {
   font-family: var(--font-label);
   font-weight: 400;
   font-size: var(--about-text-size);
-  line-height: 1.2;                  /* 24 at 20, as Figma rounds it */
-  text-transform: capitalize;
-}
-.about-info p + p { margin-top: 1.2em; }  /* one empty line */
-
-/* "A random fact about me:" and the facts: capitals */
-.about-fact {
-  font-family: var(--font-label);
-  font-weight: 400;
-  font-size: var(--about-fact-size);
-  line-height: 1.44;
+  line-height: 1.18;
   text-transform: uppercase;
-  white-space: nowrap;
-  list-style: none;
 }
+.about-info p + p { margin-top: 1.18em; }  /* one empty line */
 
-/* The window the facts show through: one fact (and the empty line under it) at a time.
-   A fact that slides up out of it disappears under the headline. */
-.about-facts {
-  height: calc(var(--about-fact-step) * var(--u));
+/* The photos' rectangle, with rough edges: the photos show through a mask of its shape
+   (the rectangle from Figma, with its rough edge around it: 3 more on each side) */
+.about-photos {
   overflow: hidden;
+  -webkit-mask: url("images/about-photo-mask.png") center / 100% 100% no-repeat;
+          mask: url("images/about-photo-mask.png") center / 100% 100% no-repeat;
 }
 
-/* The list of facts, one under the other. --progress (about-facts.js) moves it up:
-   0 shows the first fact, 1 the second, and in between both are partly showing. */
-.about-facts-list {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: calc((var(--about-fact-step) * var(--u)) - 1.44 * var(--about-fact-size)); /* the empty line */
-  transform: translateY(calc(var(--progress, 0) * var(--about-fact-step) * -1 * var(--u)));
+/* The photos, one under the other, each as big as the rectangle.
+   about-photos.js moves them up one photo at a time; the move goes just a little past
+   and comes back: a small bounce (like the text on the trac. page). */
+.about-photos-track {
+  height: 100%;
+  transition: transform var(--about-photo-switch-time) cubic-bezier(0.3, 1.15, 0.6, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-photos-track { transition: none; } /* for people who asked for less motion: switch at once */
+}
+.about-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* The scroll length under the fixed page: one stop for each fact (about-facts.js adds them).
-   The page snaps to the stops, so it always rests on a whole fact. */
-html:has(.about-scroll-space) { scroll-snap-type: y mandatory; }
-.about-scroll-space {
-  position: relative;
-  height: calc(var(--screen-height) + (var(--fact-count, 1) - 1) * var(--about-fact-scroll));
-}
-.about-scroll-stop {
-  position: absolute;
-  top: calc(var(--index) * var(--about-fact-scroll));
-  height: 1px;
-  width: 1px;
-  scroll-snap-align: start;
+/* The mouse's tail on this page (mouse-trail.js): it disappears while the mouse is over
+   the contact links or "Cool stuff by" */
+.about-page .mouse-trail { transition: opacity var(--about-trail-fade-time) ease; }
+.about-page:has(.about-links a:hover) .mouse-trail,
+.about-page:has(.about-cool-stuff a:hover) .mouse-trail { opacity: 0; }
+
+/* Only the part of the tail that is behind the text shows at half strength, so the text can be read:
+   the text's box has a half see-through cream background, laid over the tail (the tail is under the text).
+   Where there is no tail it can't be seen (cream on cream); the rest of the tail stays at full strength. */
+.about-page .about-info {
+  background-color: color-mix(in srgb, var(--color-project-cream) 50%, transparent);
 }
 
 /* A stamp left by a click: a copy of the mouse photo, centered on the click
@@ -1526,10 +1522,17 @@ html:has(.about-scroll-space) { scroll-snap-type: y mandatory; }
 
 .about-cool-stuff { --x: 398;  --y: 25; }
 .about-my-name    { --x: 740;  --y: 25; }
-.about-top-links  { --y: 48; }                          /* a bit higher than on the project pages */
-.about-info       { --x: 54;   --y: 322; --width: 667; }
-.about-fact-title { --x: 1080; --from-bottom: 164; }    /* its top: 621 of 785 */
-.about-facts      { --x: 1080; --from-bottom: 111; --width: 360; } /* its top: 674 of 785 */
+.about-info       { --x: 745;  --y: 178; --width: 453; }
+.about-reach-out  { --y: 533; }                         /* "don't hesitate to reach out:" */
+.about-photos     { --x: 328;  --y: 175; --width: 362; --height: 417; } /* the rectangle: 331, 178, 356 × 411 */
+
+/* phone, email, LinkedIn, Cv under "don't hesitate to reach out:": phone at the text's left edge,
+   Cv ending at 1208, with equal space between them */
+.about-links {
+  --x: 745; --y: 566; --width: 463;
+  justify-content: space-between;
+}
+.about-links .top-link { margin-left: 0; }
 
 /* =========================================================
    Process page
@@ -1735,6 +1738,12 @@ html:has(.about-scroll-space) { scroll-snap-type: y mandatory; }
 .guide-video-enlarge {
   width: calc(var(--video-enlarge-size) * var(--u));
   height: calc(var(--video-enlarge-size) * var(--u));
+}
+
+/* The about page's photos rectangle, at its size on the page */
+.guide-about-photos {
+  width: calc(362 * var(--u));
+  height: calc(417 * var(--u));
 }
 
 /* Samples of the left-column texts: uppercase, as inside the column */

@@ -1,6 +1,7 @@
 // Project pages, top right: clicking the phone number or the email address copies it
 // instead of calling or opening an email. The text changes for a moment ("number copied",
-// "email copied", from data-copied-text in the HTML, in the same font), then goes back.
+// "email copied", from data-copied-text in the HTML, in the same font, in the middle of the
+// space the address or number took), then goes back.
 // (How long it stays: --email-copied-time in styles.css.)
 
 const copiedTime = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--email-copied-time')) * 1000;
@@ -28,8 +29,13 @@ for (const link of document.querySelectorAll('[data-copied-text]')) {
       box.remove();
     }
 
+    // The message sits in the middle of the space of the address (or number): .is-copied in styles.css
     text.textContent = link.dataset.copiedText;
+    link.classList.add('is-copied');
     clearTimeout(timer);
-    timer = setTimeout(() => { text.textContent = original; }, copiedTime);
+    timer = setTimeout(() => {
+      text.textContent = original;
+      link.classList.remove('is-copied');
+    }, copiedTime);
   });
 }
