@@ -110,7 +110,7 @@
 
   /* Project pages (like "project page- trac"), also in Figma pixels × --u */
   --scroll-down-size: calc(20 * var(--u)); /* home: "scroll down" at the bottom of the first screen */
-  --trac-headline-gap: 4px;                 /* home, trac.: the space between the headline and the phone under it */
+  --trac-group-gap: 45.73;                  /* home, trac.: the space between the headline, the tag and the phone (Figma pixels; the headline-to-tag space in Figma) */
   --trac-screen-padding: 8px;               /* home, trac.: the least space above the headline and under the phone */
   --project-handwriting-size: calc(42.75 * var(--u)); /* "More stuff" and "Yael Lenga": 5% smaller than in Figma (45) */
   --project-name-size: calc(40 * var(--u));
@@ -394,30 +394,41 @@ body {
 
 /* Screen 1: table photo behind "Cool stuff by" (uses .screen-photo) */
 
-/* Screen 2: trac. headline and phone, one above the other, as one group in the middle of the screen:
+/* Screen 2: trac. headline, tag and phone, one above the other, as one group in the middle of the screen:
    the same space above the headline and under the phone, never less than --trac-screen-padding.
-   - The headline ("Songwriting, but simpler." with the cable): 5% smaller than in Figma (591 × 299),
-     its right edge at the edge of the screen (where the cable ends).
-   - --trac-headline-gap between the headline and the phone.
+   - The headline ("Songwriting, but simpler."): 0.855 of its Figma size (5% and then 10% smaller).
+   - The tag ("never lose a beat again." with the plug and the cable): 5% smaller than in Figma,
+     its right edge at the edge of the screen (where the cable ends). The headline starts where it starts.
    - The phone: 224.629 × 486.981, centered on its Figma spot (360.31 from the left).
-   The group is 284.05 + 486.981 = 771.031 Figma pixels high (plus the gap). On a short window the whole
-   group shrinks (--trac-unit, 1 Figma pixel, smaller than --u), so it still fits with the padding. */
-.left-trac-headline,
+   - The same space (--trac-group-gap) between the headline and the tag, and between the tag and the phone.
+   All in --trac-unit (1 Figma pixel): the same as --u, but smaller on a short window, so the whole group
+   shrinks and still fits with the padding. The group is 171.684 + 38.674 + 486.981 high, plus two gaps. */
+.left-trac-title,
+.left-trac-tag,
 .left-trac-phone {
-  --trac-unit: min(var(--u), calc((var(--screen-height) - 2 * var(--trac-screen-padding) - var(--trac-headline-gap)) / 771.031));
-  --group-top: calc((var(--screen-height) - 771.031 * var(--trac-unit) - var(--trac-headline-gap)) / 2);
+  --group-height: calc(697.339 + 2 * var(--trac-group-gap));
+  --trac-unit: min(var(--u), calc((var(--screen-height) - 2 * var(--trac-screen-padding)) / var(--group-height)));
+  --group-top: calc((var(--screen-height) - var(--group-height) * var(--trac-unit)) / 2);
+  --tag-left: calc(720 * var(--u) - 558.317 * var(--trac-unit));
 }
-.left-trac-headline {
+.left-trac-title {
   position: absolute;
-  left: calc(720 * var(--u) - 561.45 * var(--trac-unit));
+  left: calc(var(--tag-left) - 0.227 * var(--trac-unit));
   top: var(--group-top);
-  width: calc(561.45 * var(--trac-unit));
-  height: calc(284.05 * var(--trac-unit));
+  width: calc(415.188 * var(--trac-unit));
+  height: calc(171.684 * var(--trac-unit));
+}
+.left-trac-tag {
+  position: absolute;
+  left: var(--tag-left);
+  top: calc(var(--group-top) + (171.684 + var(--trac-group-gap)) * var(--trac-unit));
+  width: calc(558.317 * var(--trac-unit));
+  height: calc(38.674 * var(--trac-unit));
 }
 .left-trac-phone {
   position: absolute;
   left: calc(360.31 * var(--u) - 112.31 * var(--trac-unit)); /* 360.31 = middle of the phone in Figma */
-  top: calc(var(--group-top) + 284.05 * var(--trac-unit) + var(--trac-headline-gap));
+  top: calc(var(--group-top) + (171.684 + 38.674 + 2 * var(--trac-group-gap)) * var(--trac-unit));
   width: calc(224.629 * var(--trac-unit));
   height: calc(486.981 * var(--trac-unit));
   border-radius: calc(27.436 * var(--trac-unit)); /* round phone corners, as in Figma */
