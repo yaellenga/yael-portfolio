@@ -33,6 +33,10 @@
   --color-hamotzi-off-white: #fdfdfd;   /* text on the charcoal boxes */
   --color-hamotzi-graphite: #353535;    /* text on the cream box (CRIME) */
   --color-hamotzi-nav-grey: #575455;    /* "More stuff", "Yael Lenga" and the top links */
+  --color-hamotzi-button-grey: #b2b1b1; /* the video's play and enlarge buttons */
+  /* Grain, like the photocopied paper of the Hamotzi logo: fine grey specks, partly see-through.
+     Laid over a color, it makes it look printed. */
+  --hamotzi-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.25  0 0 0 0 0.25  0 0 0 0 0.25  0 0 0 1.6 -0.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 
   /* Lets Talk About It colors */
   --color-lets-talk-blue: #27aae2;      /* "More stuff", "Yael Lenga" and the top links */
@@ -1061,6 +1065,25 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   color: var(--color-project-cream);
 }
 .video-button svg { width: 55%; height: 55%; }
+
+/* Hamotzi: the buttons in a light grey with grain, like the logo
+   (the enlarge icon in the grey of "More stuff"); on hover they turn cream */
+.hamotzi-video .video-button {
+  background: var(--hamotzi-grain), var(--color-hamotzi-button-grey);
+  color: var(--project-nav-color);
+}
+.hamotzi-video .video-button:hover {
+  background: var(--hamotzi-grain), var(--color-project-cream);
+}
+
+/* Hamotzi play button: the triangle is cut out of the square, so the video shows through it.
+   The mask is the square with a triangle-shaped hole, in the same spot as the icon
+   (the icon is 55% of the button, in the middle), so the icon itself isn't needed. */
+.hamotzi-video .video-play {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill-rule='evenodd' d='M0 0H100V100H0Z M40.83 33.96V66.04L66.04 50Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill-rule='evenodd' d='M0 0H100V100H0Z M40.83 33.96V66.04L66.04 50Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.hamotzi-video .video-play svg { visibility: hidden; }
 
 /* Play: in the middle of the video; hidden while it plays */
 .video-play {
