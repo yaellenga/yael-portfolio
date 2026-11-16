@@ -539,7 +539,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .project-cursor.is-visible { display: block; }
 
 /* Size of each project's mouse, in Figma pixels (frame 1440 wide) */
-.cursor-trac      { --width: 77.307; --height: 26.69; }
+.cursor-trac      { --width: 33.154; --height: 50.017; }
 .cursor-lets-talk { --width: 58;     --height: 58; }
 .cursor-hamotzi   { --width: 138.8;  --height: 31.2; }
 .cursor-about     { --width: 65;     --height: 101; }
