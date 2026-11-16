@@ -4,6 +4,8 @@
 // it has moved far enough that the new photo covers only --mouse-trail-overlap of the one before.
 // The photos come one after the other (1, 2, 3, 4, 1, 2…). Each stays --mouse-trail-stay-time,
 // then fades away (--mouse-trail-fade-time). Their size: --mouse-trail-size of the old changing photos.
+// On the home page, now and then a photo comes out a bit smaller, at random (10% or 15% smaller:
+// --mouse-trail-smaller, --mouse-trail-smallest), so the tail has a range of sizes.
 // Only with a real mouse (not on touch screens), and not for people who asked for less motion.
 
 (function () {
@@ -24,6 +26,7 @@
     // at their width in the old changing photos, shrunk to --mouse-trail-size
     home: {
       size: parseFloat(rootStyle.getPropertyValue('--mouse-trail-size')),
+      varySizes: true,
       photos: [
         { src: 'images/home-trail-1.png', width: 621.9,  ratio: 1382 / 1595 },
         { src: 'images/home-trail-2.png', width: 630.45, ratio: 1401 / 1118 },
@@ -45,7 +48,20 @@
   const overlap = parseFloat(rootStyle.getPropertyValue('--mouse-trail-overlap')); // share that overlaps
   const stayTime = parseFloat(rootStyle.getPropertyValue('--mouse-trail-stay-time')) * 1000;
 
+  // Now and then a smaller photo: the size of the next photo, as a share of the full size
+  const smaller = parseFloat(rootStyle.getPropertyValue('--mouse-trail-smaller'));
+  const smallest = parseFloat(rootStyle.getPropertyValue('--mouse-trail-smallest'));
+  const smallerChance = parseFloat(rootStyle.getPropertyValue('--mouse-trail-smaller-chance'));
+  function pickShare() {
+    if (!tail.varySizes) return 1;
+    const roll = Math.random();
+    if (roll < smallerChance) return smallest;          // 15% smaller
+    if (roll < smallerChance * 2) return smaller;       // 10% smaller
+    return 1;                                           // the full size
+  }
+
   let next = 0;       // which photo comes next
+  let nextShare = pickShare(); // how big the next photo is (chosen once, when the photo before it is left)
   let last = null;    // where the last photo was left: { x, y, width, height }
 
   // Load the photos ahead of time, so they show at once
@@ -54,7 +70,7 @@
   // The size of the next photo on the screen
   function nextSize() {
     const unit = window.innerWidth / 1440; // 1 Figma pixel
-    const width = photos[next].width * size * unit;
+    const width = photos[next].width * size * nextShare * unit;
     return { width, height: width / photos[next].ratio };
   }
 
@@ -84,6 +100,7 @@
 
     last = { x, y, width, height };
     next = (next + 1) % photos.length;
+    nextShare = pickShare();
   }
 
   // How long a photo is in the direction (dx, dy): its width when moving sideways,

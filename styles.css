@@ -106,7 +106,7 @@
   --about-fact-scroll: 40vh;               /* how much scrolling moves to the next fact */
 
   /* Project pages (like "project page- trac"), also in Figma pixels × --u */
-  --home-intro-size: calc(67 * var(--u)); /* home: the big text across both halves */
+  --scroll-down-size: calc(20 * var(--u)); /* home: "scroll down" at the bottom of the first screen */
   --project-handwriting-size: calc(42.75 * var(--u)); /* "More stuff" and "Yael Lenga": 5% smaller than in Figma (45) */
   --project-name-size: calc(40 * var(--u));
   --project-header-size: calc(30 * var(--u));
@@ -184,7 +184,10 @@
   --scroll-hint-delay: 0.6s;           /* ...after waiting this long once the page has loaded */
   --home-return-peek: 0.12;            /* home, back from a project: opens this share of a screen past it, showing the next project */
   --cool-stuff-underline-time: 0.4s;   /* home: the underline under "Cool stuff by" fades in this fast after the bounce */
-  --mouse-trail-size: 0.285;           /* home: the photos in the mouse's tail, this share of the old changing photos' size (30%, then 5% smaller) */
+  --mouse-trail-size: 0.27075;         /* home: the photos in the mouse's tail, this share of the old changing photos' size (30%, then 5% smaller, then 5% smaller again) */
+  --mouse-trail-smaller: 0.9;          /* home: now and then a photo is this much of that size (10% smaller)... */
+  --mouse-trail-smallest: 0.85;        /* ...and now and then this much (15% smaller), at random, for a range of sizes */
+  --mouse-trail-smaller-chance: 0.2;   /* the chance of each of the two smaller sizes (the rest are the full size) */
   --mouse-trail-overlap: 0.25;         /* home: each photo in the tail covers this share of the one before */
   --mouse-trail-stay-time: 1.7s;        /* home: each photo stays this long... */
   --mouse-trail-fade-time: 0.4s;       /* ...and then fades away this fast */
@@ -445,6 +448,17 @@ body {
 }
 .hint-done .cool-stuff { text-decoration-color: currentColor; }
 
+/* "scroll down": small handwriting at the bottom of the first screen, across the middle
+   ("scroll" ends at the left half's edge, "down" starts just after it, in the right half) */
+.scroll-down {
+  --from-bottom: 43;
+  font-size: var(--scroll-down-size);
+  color: var(--color-white);
+  white-space: nowrap;
+}
+.scroll-down-left  { --x: 672; --width: 48; }
+.scroll-down-right { --x: 5;   --width: 53; }
+
 .home-name {
   --x: 20; --y: 25; --width: 265;
   color: var(--color-white);
@@ -469,19 +483,12 @@ body {
 /* Home, first view: the big white text across both halves, at the bottom of the screen.
    The same text sits in both screens at the same spot (from 58 on the whole page);
    each screen shows only its own half. */
-.home-intro {
-  --width: 1300; --from-bottom: 263.24; /* its top: 700.76 from the top of a 964 screen (the capitals start at 717.5) */
-  font-family: var(--font-label);
-  font-weight: 700;
-  font-size: var(--home-intro-size);
-  line-height: 1.11;
-  letter-spacing: 0.04em;               /* 2.68 at 67 */
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--color-white);
-}
-.home-intro-left  { --x: 58; }
-.home-intro-right { --x: -662; }        /* 58 - 720: starts in the left half */
+/* The big all-caps text across both halves of the first screen: a shape from Figma (its letters
+   are drawn, not typed), cut in two: the left part in the left half, the right part in the right half.
+   Pinned to the bottom of the screen, like "scroll down" under it, so the space between them never changes. */
+.home-intro-left  { --x: 162.261; --from-bottom: 284;     --width: 553.557; --height: 163.731; }
+.home-intro-right { --x: -2.593;  --from-bottom: 281.488; --width: 520.593; --height: 161.561; } /* 717.407 - 720 */
+.home-intro-right-in-left { --x: 717.407; } /* in the left half: only the sliver before the middle shows */
 
 /* Project labels on the right column: name, type, year (pinned to the bottom) */
 .project-label,
@@ -1032,7 +1039,8 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 
 .lets-talk-box-yoram { --x: 0;   --y: 788.5; --width: 540; --height: 419; background-color: var(--color-lets-talk-navy); }
 .lets-talk-box-naomi { --x: 540; --y: 788.5; --width: 540; --height: 419; background-color: var(--color-lets-talk-light); }
-/* Their names, drawings and texts (one picture over both boxes: the fonts are not on the web) */
+/* Their names, drawings and texts (one picture over both boxes: the fonts are not on the web).
+   The texts in it are 16px (smaller than in Figma), in the same widths. */
 .lets-talk-hosts     { --x: 47;  --y: 792.5; --width: 996; --height: 387; }
 
 .lets-talk-phone-1   { --x: 39;  --y: 1261.5; --width: 164.871; --height: 346.228; }
