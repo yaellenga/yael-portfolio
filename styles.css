@@ -147,6 +147,9 @@
   --top-link-open-time: 0.3s;          /* how fast a link opens up on hover (and Cv grows on click) */
   --email-copied-time: 2s;             /* after clicking the number or the email: "number copied" / "email copied" shows this long */
   --project-top-logo-top: 53.49;       /* the project logo from the top */
+  --next-project-right: 20;            /* "next project": from the right edge */
+  --next-project-height: 39;           /* "next project": its box (the text sits at its top) */
+  --next-project-fade-time: 0.3s;      /* Lets Talk About It: how fast it shows up at the end of the scroll */
   --project-top-labels-top: 161;       /* type, credits and year from the top */
   --project-nav-color: var(--color-black); /* "More stuff", "Yael Lenga", Contact, LinkedIn, Cv: each project sets its own color */
   --project-top-type: 417;             /* type ("App Design") from the left */
@@ -398,7 +401,8 @@ body {
 .left-hamotzi    { --x: 319; --from-center: -405; --width: 401; --height: 540;
                    --img-left: -31.56%; --img-top: -1.34%; --img-width: 244.78%; --img-height: 101.34%; }
 
-/* Screen 4: Lets Talk About It, a pattern of the boy that fills the screen (uses .screen-photo) */
+/* Screen 4: Lets Talk About It, an illustration of a pool in a park, in the middle of the screen (Constraints: Center) */
+.left-lets-talk { --x: 212; --from-center: -148; --width: 296; --height: 296; }
 
 /* ---------- Right column ---------- */
 
@@ -808,6 +812,33 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   white-space: nowrap;
 }
 
+/* "next project": the project's color, at the bottom right of the page, to the next project in the list
+   (trac. → Hamotzi → Lets Talk About It → trac.). On trac. and Hamotzi it ends the page;
+   on Lets Talk About It it stays in the window's corner and shows up only at the end of the scroll. */
+.next-project {
+  position: absolute;
+  right: calc(var(--next-project-right) * var(--u));
+  bottom: 0;
+  height: calc(var(--next-project-height) * var(--u)); /* the text at its top, like the box in Figma */
+  z-index: 2;
+  font-family: var(--font-handwriting);
+  font-weight: 400;
+  font-size: var(--project-text-size);
+  line-height: 1.49;
+  white-space: nowrap;
+  color: var(--project-nav-color);
+}
+.next-project-at-end {
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;                /* can't be clicked while hidden */
+  transition: opacity var(--next-project-fade-time) ease;
+}
+.next-project-at-end.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 /* The logo is the page's main title, so the heading itself has no extra spacing */
 .top-logo { margin: 0; }
 
@@ -1014,6 +1045,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 
 /* The column on the right: starts at the video's spot and scrolls under the top area */
 .hamotzi-media {
+  position: relative; /* "next project" sits at its bottom right */
   display: flex;
   flex-direction: column;
   gap: calc(var(--hamotzi-media-gap) * var(--u));
