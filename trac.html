@@ -20,7 +20,7 @@
   </div>
   <script src="page-loader.js"></script>
 
-  <!-- TOP AREA: stays at the top of the window while the page scrolls -->
+  <!-- TOP AREA: stays at the top of the window while the page scrolls (the same on every project page) -->
   <header class="project-top">
     <p class="placed project-handwriting top-more-stuff">
       <a class="handwriting-link" href="index.html">More stuff</a>
@@ -48,50 +48,49 @@
       </a>
       <a class="top-link top-link-cv" href="CV%20Yael%20Lenga-%20portfolio.pdf" target="_blank" rel="noopener">Cv</a>
     </nav>
+  </header>
 
-    <h1 class="placed box top-logo trac-logo">
+  <!-- SIDE COLUMN (left): stays in place while the page scrolls.
+       At the top: the logo, the details and "next project" (to the next project in the list: Hamotzi).
+       At the bottom of the window: the title, the text and the links. -->
+  <aside class="project-side">
+    <h1 class="side-logo">
       <img class="whole-image" src="images/trac-logo.svg" alt="trac.">
     </h1>
 
-    <!-- Type, second type, credits and year: spread out in one row, from the left edge of the
-         picture area to the right edge of "Yael Lenga", with equal space between them
-         (styles.css, .top-labels-spread) -->
-    <div class="placed top-labels-spread">
-      <p class="top-label top-type">App Design</p>
-      <p class="top-label top-type-second">Ux\Ui</p>
-      <p class="top-label top-credits">Student Project<br>With Mia Gaon</p>
-      <p class="top-label top-year">2025</p>
-    </div>
-  </header>
-
-  <!-- LEFT COLUMN: the texts. The first one sits at the bottom;
-       each of the others comes down from the top when the part of the right panel
-       it belongs to (data-appears-with) comes into the window, and stops at its spot from Figma
-       (--stop-from-bottom: its top, from the bottom of the window, in Figma pixels).
-       stack-scroll.js moves them. -->
-  <div class="project-texts">
-    <div class="stack-box stack-first">
-      <h2 class="stack-title">A songwriting app for independent musicians</h2>
-      <p class="stack-text stack-after-title">trac. is an app that keeps your songwriting organized while you keep creating. Write lyrics, capture ideas, record drafts, and build your projects without the usual mess in between.</p>
+    <div class="side-details">
+      <p class="side-year">2025</p>
+      <p class="side-detail">ux\ui</p>
+      <p class="side-detail">student project with mia gaon</p>
+      <a class="side-link handwriting-link" href="hamotzi.html">next project</a>
     </div>
 
-    <div class="stack-box" data-appears-with=".trac-notes-green" style="--stop-from-bottom: 303">
-      <p class="stack-text">When creating music, short or quick materials are created along the way. Musicians often keep these materials across many platforms.<br>Inaccessible materials, lost, ruined or forgotten, make the workflow more challenging.</p>
-    </div>
+    <div class="side-about">
+      <h2 class="side-title">A songwriting app for independent musicians</h2>
 
-    <div class="stack-box" data-appears-with=".trac-write-box" style="--stop-from-bottom: 537">
-      <h2 class="stack-big-title">too many versions<br>too many places<br>&amp;&nbsp; too easy to lose</h2>
-      <p class="stack-text stack-bold stack-new-paragraph">Our Solution:<br>Write lyrics, capture ideas, record drafts and build your projects without the usual mess in between.</p>
-    </div>
+      <!-- The text is longer than its spot: it moves up inside it while the page scrolls (scroll-text.js) -->
+      <div class="side-text-window trac-text-window">
+        <div class="side-text-track">
+          <p class="side-text">trac. is an app that keeps your songwriting organized while you keep creating. Write lyrics, capture ideas, record drafts, and build your projects without the usual mess in between.
+            <span class="side-new-paragraph">When creating music, short or quick materials are created along the way. Musicians often keep these materials across many platforms. Inaccessible materials, lost, ruined or forgotten,<br>make the workflow more challenging.</span></p>
+          <p class="side-text">I designed this app end-to-end alongside a fellow designer. We shared responsibility across the process, from research and small-scale studies to ideation, prototyping, and defining the app’s visual language.
+            <span class="side-new-paragraph">I took lead on key parts of the design process, in development of the visual language, designing the landing page, and building the final full-flow prototype.</span></p>
+          <p class="side-text"><span class="trac-tight-lines">too many versions too many places &amp;&nbsp; too easy to lose</span>
+            <span class="side-new-paragraph">Our Solution:<br>Write lyrics, capture ideas, record drafts and build your projects without the usual mess in between.</span></p>
+        </div>
+      </div>
 
-    <div class="stack-box" data-appears-with=".trac-icon-mic" style="--stop-from-bottom: 720">
-      <p class="stack-text">I designed this app end-to-end alongside a fellow designer. We shared responsibility across the process, from research and small-scale studies to ideation, prototyping, and defining the app’s visual language.</p>
-      <p class="stack-text stack-new-paragraph">I took lead on key parts of the design process, in development of the visual language, designing the landing page, and building the final full-flow prototype.</p>
+      <!-- The links (their addresses aren't set yet) -->
+      <nav class="side-links" aria-label="More about trac.">
+        <a class="side-link handwriting-link">prototype</a>
+        <a class="side-link handwriting-link">landing page</a>
+        <a class="side-link handwriting-link">presentation</a>
+      </nav>
     </div>
-  </div>
+  </aside>
 
-  <!-- RIGHT PANEL: images from the project, scrolls up like a normal page -->
-  <main class="project-panel trac-panel">
+  <!-- MEDIA (right): images from the project, scrolls up like a normal page -->
+  <main class="project-media trac-media">
 
     <!-- On yellow: a video of the app on a phone (plays on a loop from the start),
          with five more app screens below it -->
@@ -131,11 +130,9 @@
     <!-- The closing banner, on the page's cream -->
     <img class="placed box trac-banner" src="images/trac-banner-cream.png" alt="Songwriting, but simpler. Never lose a beat again.">
 
-    <!-- "next project": at the bottom right of the page, to the next project in the list (Hamotzi) -->
-    <a class="next-project handwriting-link" href="hamotzi.html">next project</a>
   </main>
 
-  <script src="stack-scroll.js"></script>
+  <script src="scroll-text.js"></script>
   <script src="play-when-seen.js"></script>
   <script src="nav-slide.js"></script>
   <script src="copy-on-click.js"></script>

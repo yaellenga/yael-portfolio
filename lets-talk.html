@@ -20,7 +20,7 @@
   </div>
   <script src="page-loader.js"></script>
 
-  <!-- TOP AREA: the same as on every project page in the new layout -->
+  <!-- TOP AREA: stays at the top of the window while the page scrolls (the same on every project page) -->
   <header class="project-top">
     <p class="placed project-handwriting top-more-stuff">
       <a class="handwriting-link" href="index.html">More stuff</a>
@@ -48,107 +48,94 @@
       </a>
       <a class="top-link top-link-cv" href="CV%20Yael%20Lenga-%20portfolio.pdf" target="_blank" rel="noopener">Cv</a>
     </nav>
-
-    <!-- The project name in Hebrew: "בואי נדבר על זה" (Lets talk about it) -->
-    <h1 class="placed box top-logo lets-talk-logo">
-      <img class="whole-image" src="images/lets-talk-logo.svg" alt="בואי נדבר על זה — Lets Talk About It" lang="he">
-    </h1>
-
-    <p class="placed top-label top-type">Podcast Website</p>
-    <p class="placed top-label top-type-second">Web&amp;App Design<br>Illustration</p>
-    <p class="placed top-label top-credits">Student Project<br>With Hillel Buchris</p>
-    <p class="placed top-label top-year">2026</p>
   </header>
 
-  <!-- EVERYTHING UNDER THE TOP AREA: stays in the window while the page scrolls -->
-  <div class="lets-talk-stage">
+  <!-- SIDE COLUMN (left): stays in place while the page scrolls.
+       At the top: the logo, the details and "next project" (to the next project in the list: back to the first, trac.).
+       At the bottom of the window: the title, the text and the links. -->
+  <aside class="project-side">
+    <!-- The project name in Hebrew: "בואי נדבר על זה" (Lets talk about it) -->
+    <h1 class="side-logo">
+      <img class="whole-image" src="images/lets-talk-logo-small.svg" alt="בואי נדבר על זה — Lets Talk About It" lang="he">
+    </h1>
 
-  <!-- MIDDLE: the computer, with the text under it at the bottom of the window -->
-  <div class="lets-talk-middle">
+    <div class="side-details">
+      <p class="side-year">2026</p>
+      <p class="side-detail">podcast website</p>
+      <p class="side-detail">web&amp;app design<br>illustration</p>
+      <p class="side-detail">student project with hillel buchris</p>
+      <a class="side-link handwriting-link" href="trac.html">next project</a>
+    </div>
 
-  <!-- A computer showing a video of the podcast website, playing on a loop
-       (desktop-mockup.js fits the screen to the computer). -->
-  <main class="lets-talk-mockup">
-    <div class="mockup-computer" data-site="https://boi-nidber-al-zeh.vercel.app/">
-      <div class="mockup-monitor">
-        <div class="mockup-screen">
-          <!-- The site is drawn as on a 1440-wide screen, then shrunk to fit -->
-          <div class="mockup-viewport">
+    <div class="side-about">
+      <h2 class="side-title">a personalized podcast website and app</h2>
+      <p class="side-text">A digital experience for a podcast where a father and his 10-year-old daughter explore life’s big questions - from the seemingly naive to the deeply complex.<br>The website and app turn each season into an interactive world, allowing users to wander between playful scenarios and discover different perspectives connected to the season’s theme.</p>
 
-            <!-- A browser bar: three dots, reload, the address, open in a new tab -->
-            <div class="mockup-browser-bar">
-              <div class="mockup-dots"><span></span><span></span><span></span></div>
-              <button class="mockup-button mockup-reload" type="button" title="Play from the start">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
-              </button>
-              <div class="mockup-address">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 9V7a5 5 0 0 0-10 0v2H5v13h14V9h-2Zm-8-2a3 3 0 0 1 6 0v2H9V7Z"/></svg>
-                <span class="mockup-address-text"></span>
+      <!-- The links: the website opens in a new tab (the app prototype's address isn't set yet) -->
+      <nav class="side-links" aria-label="More about Lets Talk About It">
+        <a class="side-link handwriting-link" href="https://boi-nidber-al-zeh.vercel.app/" target="_blank" rel="noopener">website</a>
+        <a class="side-link handwriting-link">app prototype</a>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- MEDIA (right): scrolls up like a normal page -->
+  <main class="project-media">
+
+    <!-- A computer showing a video of the podcast website, playing on a loop
+         (desktop-mockup.js fits the screen to the computer) -->
+    <div class="placed box lets-talk-computer-spot">
+      <div class="mockup-computer" data-site="https://boi-nidber-al-zeh.vercel.app/">
+        <div class="mockup-monitor">
+          <div class="mockup-screen">
+            <!-- The site is drawn as on a 1440-wide screen, then shrunk to fit -->
+            <div class="mockup-viewport">
+
+              <!-- A browser bar: three dots, reload, the address, open in a new tab -->
+              <div class="mockup-browser-bar">
+                <div class="mockup-dots"><span></span><span></span><span></span></div>
+                <button class="mockup-button mockup-reload" type="button" title="Play from the start">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+                </button>
+                <div class="mockup-address">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 9V7a5 5 0 0 0-10 0v2H5v13h14V9h-2Zm-8-2a3 3 0 0 1 6 0v2H9V7Z"/></svg>
+                  <span class="mockup-address-text"></span>
+                </div>
+                <a class="mockup-button mockup-new-tab" target="_blank" rel="noopener" title="Open in a new tab">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>
+                </a>
               </div>
-              <a class="mockup-button mockup-new-tab" target="_blank" rel="noopener" title="Open in a new tab">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>
-              </a>
-            </div>
 
-            <!-- A screen recording of the website, playing on a loop with no sound -->
-            <div class="mockup-site">
-              <video class="mockup-video" src="images/lets-talk-site.mp4" poster="images/lets-talk-site-poster.jpg"
-                     autoplay muted loop playsinline
-                     aria-label="A screen recording of the Lets Talk About It podcast website"></video>
+              <!-- A screen recording of the website, playing on a loop with no sound -->
+              <div class="mockup-site">
+                <video class="mockup-video" src="images/lets-talk-site.mp4" poster="images/lets-talk-site-poster.jpg"
+                       autoplay muted loop playsinline
+                       aria-label="A screen recording of the Lets Talk About It podcast website"></video>
+              </div>
             </div>
           </div>
         </div>
+        <div class="mockup-chin"></div>
+        <div class="mockup-neck"></div>
+        <div class="mockup-foot"></div>
       </div>
-      <div class="mockup-chin"></div>
-      <div class="mockup-neck"></div>
-      <div class="mockup-foot"></div>
     </div>
+
+    <!-- The two hosts, Yoram and Naomi: each on a box, with their name, a drawing and a few words about them -->
+    <div class="placed box lets-talk-box-yoram"></div>
+    <div class="placed box lets-talk-box-naomi"></div>
+    <img class="placed box lets-talk-hosts" src="images/lets-talk-hosts.png" lang="he"
+         alt="יורם: יורם יובל הוא פסיכיאטר, פסיכואנליטיקאי וחוקר מוח, מהקולות הבולטים בישראל בתחום הנפש והרגש. הוא מרצה בפקולטה לרפואה באוניברסיטה העברית בירושלים וחוקר את הקשר בין המוח, רגשות והתנהגות אנושית - במיוחד בתחומי האהבה והקשרים בין אנשים. נעמי: נעמי בת 10, בתו של יורם יובל. ילדה סקרנית, דעתנית ומלאת דמיון, עם יכולת נדירה לשאול שאלות פשוטות שנוגעות בדיוק בדברים הכי מורכבים. מתוך התבוננות חדה בבני אדם ובעולם שסביבה, היא מעלה מחשבות מפתיעות על טוב ורע, פחד, אהבה, חברות ותקווה - ועל הפער בין מה שאנשים אומרים למה שהם באמת מרגישים.">
+
+    <!-- Four phones with screens of the podcast app -->
+    <img class="placed box lets-talk-phone-1" src="images/lets-talk-phone-1.png" alt="The episode list of season 1, in Hebrew">
+    <img class="placed box lets-talk-phone-2" src="images/lets-talk-phone-2.png" alt="An episode page: an illustration of a father and son on a green background, with the episode player">
+    <img class="placed box lets-talk-phone-3" src="images/lets-talk-phone-3.png" alt="The list of episodes, in Hebrew">
+    <img class="placed box lets-talk-phone-4" src="images/lets-talk-phone-4.png" alt="An episode page: an illustration of a boy pulling a friend on a float by the pool, with the episode player">
   </main>
 
-  <!-- MIDDLE, under the computer: about the project (always at the bottom of the window) -->
-  <div class="lets-talk-about">
-    <h2 class="stack-title">A personalized podcast website and app</h2>
-    <p class="stack-text stack-after-title">A digital experience for a podcast where a father and his 10-year-old daughter explore life’s big questions - from the seemingly naive to the deeply complex.<br>The website and app turn each season into an interactive world, allowing users to wander between playful scenarios and discover different perspectives connected to the season’s theme.</p>
-  </div>
-
-  </div>
-
-  <!-- LEFT: phones with screens of the podcast site, going UP while the page scrolls -->
-  <div class="side-column side-column-left">
-    <div class="side-column-track">
-      <div class="placed side-phone phone-left-1"><img src="images/lets-talk-phone-left-1.png" alt="An episode page: an illustration of a boy making a snow angel in the grass, with the episode player"></div>
-      <div class="placed side-phone phone-left-2"><img src="images/lets-talk-phone-left-2.png" alt="The about page: the hosts, in Hebrew"></div>
-      <div class="placed side-phone phone-left-3"><img src="images/lets-talk-phone-left-3.png" alt="An episode page: an illustration of a boy pulling a friend on a float by the pool, with the episode player"></div>
-      <div class="placed side-phone phone-left-4"><img src="images/lets-talk-phone-left-4.png" alt="The list of upcoming events, in Hebrew"></div>
-    </div>
-  </div>
-
-  <!-- RIGHT: phones going DOWN while the page scrolls (the ones above come down into view) -->
-  <div class="side-column side-column-right">
-    <div class="side-column-track">
-      <div class="placed side-phone phone-right-4"><img src="images/lets-talk-phone-right-4.png" alt="An episode page: an illustration of a father and son on a green background, with the episode player"></div>
-      <div class="placed side-phone phone-right-3">
-        <img src="images/lets-talk-phone-right-3.png" alt="An episode page: an illustration of a girl on a dolphin in the sea, with the episode player">
-        <img class="phone-play-line" src="images/lets-talk-play-line.gif" alt="">
-      </div>
-      <div class="placed side-phone phone-right-2"><img src="images/lets-talk-phone-right-2.png" alt="The episode list with one episode opened, in Hebrew"></div>
-      <div class="placed side-phone phone-right-1"><img src="images/lets-talk-phone-right-1.png" alt="The episode list of season 1, in Hebrew"></div>
-    </div>
-  </div>
-
-  </div>
-
-  <!-- Gives the page its scroll length -->
-  <div class="side-scroll-space"></div>
-
-  <!-- "next project": at the bottom right of the window, showing up only at the end of the scroll
-       (next-project.js), to the next project in the list (back to the first: trac.) -->
-  <a class="next-project next-project-at-end handwriting-link" href="trac.html">next project</a>
-
   <script src="desktop-mockup.js"></script>
-  <script src="side-scroll.js"></script>
   <script src="nav-slide.js"></script>
   <script src="copy-on-click.js"></script>
-  <script src="next-project.js"></script>
 </body>
 </html>

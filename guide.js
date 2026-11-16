@@ -101,10 +101,10 @@ for (const { name, value } of variables.filter(v => v.name.startsWith('--project
   projectLeftArea.appendChild(row);
 }
 
-// ---------- Project page, new layout: top area and text column ----------
+// ---------- Project pages: top area and side column ----------
 const projectTopArea = document.querySelector('#guide-project-top');
 
-for (const { name, value } of variables.filter(v => v.name.startsWith('--project-top-') || v.name.startsWith('--project-texts-'))) {
+for (const { name, value } of variables.filter(v => v.name.startsWith('--project-top-') || v.name.startsWith('--project-side-'))) {
   const row = document.createElement('div');
   row.className = 'guide-space';
   const bar = document.createElement('div');

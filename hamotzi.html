@@ -20,7 +20,7 @@
   </div>
   <script src="page-loader.js"></script>
 
-  <!-- TOP AREA: the same as on every project page in the new layout -->
+  <!-- TOP AREA: stays at the top of the window while the page scrolls (the same on every project page) -->
   <header class="project-top">
     <p class="placed project-handwriting top-more-stuff">
       <a class="handwriting-link" href="index.html">More stuff</a>
@@ -48,40 +48,39 @@
       </a>
       <a class="top-link top-link-cv" href="CV%20Yael%20Lenga-%20portfolio.pdf" target="_blank" rel="noopener">Cv</a>
     </nav>
-
-    <!-- The title "המוציא" (Hamotzi) from the title sequence -->
-    <h1 class="placed box top-logo hamotzi-logo">
-      <img class="whole-image" src="images/hamotzi-logo.png" alt="המוציא — Hamotzi" lang="he">
-    </h1>
-
-    <!-- Type, second type, credits and year: spread out in one row, from the left edge of the
-         picture area to the right edge of "Yael Lenga", with equal space between them
-         (styles.css, .top-labels-spread) -->
-    <div class="placed top-labels-spread">
-      <p class="top-label top-type">Title Sequence</p>
-      <p class="top-label top-type-second">Video Art<br>Direction &amp; Filming</p>
-      <p class="top-label top-credits">Student Project<br>With Yuval Israel</p>
-      <p class="top-label top-year">2024</p>
-    </div>
   </header>
 
-  <!-- LEFT COLUMN: one text; its bottom lines up with the bottom of the video. It stays in place. -->
-  <div class="project-texts">
-    <div class="stack-box stack-first">
-      <h2 class="stack-title">tv title sequence - ultra religious mob</h2>
-      <p class="stack-text stack-after-title">A title sequence for a fictional TV series. Drawing the viewer into an ultra religious world of crime showcasing complexity of a layered world.<br>The titles explore where faith and crime meet, comparing the two worlds through shared gestures, objects, and rituals until the line between them blurs.</p>
-    </div>
-  </div>
+  <!-- SIDE COLUMN (left): stays in place while the page scrolls.
+       At the top: the logo, the details and "next project" (to the next project in the list: Lets Talk About It).
+       At the bottom of the window: the title and the text. -->
+  <aside class="project-side">
+    <!-- The title "המוציא" (Hamotzi) from the title sequence -->
+    <h1 class="side-logo">
+      <img class="whole-image" src="images/hamotzi-logo-small.png" alt="המוציא — Hamotzi" lang="he">
+    </h1>
 
-  <!-- RIGHT: the video and two stills from the title sequence, all the same size, one under the other.
-       This column scrolls with the page; the text on the left stays in place. -->
-  <main class="hamotzi-media">
+    <div class="side-details">
+      <p class="side-year">2024</p>
+      <p class="side-detail">title sequence</p>
+      <p class="side-detail">Video art<br>direction &amp; filming</p>
+      <p class="side-detail">student project with yuval israel</p>
+      <a class="side-link handwriting-link" href="lets-talk.html">next project</a>
+    </div>
+
+    <div class="side-about">
+      <h2 class="side-title">tv title sequence - ultra religious mob</h2>
+      <p class="side-text">A title sequence for a fictional TV series. Drawing<br>the viewer into an ultra religious world of crime showcasing complexity of a layered world.<br>The titles explore where faith and crime meet, comparing the two worlds through shared gestures, objects, and rituals until the line between them blurs.</p>
+    </div>
+  </aside>
+
+  <!-- MEDIA (right): the video, and two stills from the title sequence side by side under it.
+       It scrolls with the page; the side column stays in place. -->
+  <main class="project-media">
 
     <!-- The title sequence video, with a play button and an enlarge button (video-player.js).
          Until it plays, it shows a still from its start (the HOT logo). Only its length is loaded at first.
-         The video file goes in images/hamotzi-video.mp4.
-         The outer box keeps the video's place in the column while the video is enlarged. -->
-    <div class="hamotzi-media-item">
+         The outer box keeps the video's place while the video is enlarged. -->
+    <div class="placed box hamotzi-video-spot">
       <div class="hamotzi-video video-player">
         <video class="video-player-video" src="images/hamotzi-video.mp4" poster="images/hamotzi-video-frame.jpg"
                preload="metadata" playsinline aria-label="The Hamotzi title sequence"></video>
@@ -106,12 +105,8 @@
       </div>
     </div>
 
-    <img class="hamotzi-media-item hamotzi-still" src="images/hamotzi-still-2.jpg" alt="A poker chip on a lace tablecloth, with an actor's name in Hebrew">
-    <img class="hamotzi-media-item hamotzi-still" src="images/hamotzi-still-1.jpg" alt="A challah and a coin on a lace tablecloth, with an actor's name in Hebrew">
-
-    <!-- "next project": at the bottom right of the page, under the last picture,
-         to the next project in the list (Lets Talk About It) -->
-    <a class="next-project handwriting-link" href="lets-talk.html">next project</a>
+    <img class="placed box hamotzi-still hamotzi-still-1" src="images/hamotzi-still-1.jpg" alt="A challah and a coin on a lace tablecloth, with an actor's name in Hebrew">
+    <img class="placed box hamotzi-still hamotzi-still-2" src="images/hamotzi-still-2.jpg" alt="A poker chip on a lace tablecloth, with an actor's name in Hebrew">
   </main>
 
   <!-- Dims the rest of the screen while the video is enlarged; clicking it makes the video small again -->

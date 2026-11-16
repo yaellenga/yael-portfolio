@@ -40,6 +40,8 @@
 
   /* Lets Talk About It colors */
   --color-lets-talk-blue: #27aae2;      /* "More stuff", "Yael Lenga" and the top links */
+  --color-lets-talk-navy: #192e5a;      /* the box behind Yoram */
+  --color-lets-talk-light: #f5f6ff;     /* the box behind Naomi */
 
   /* Desktop mockup: the computer that shows a live website (lets-talk.html) */
   --color-mockup-bezel: #1b1b1d;        /* the black frame around the screen */
@@ -84,6 +86,10 @@
      The page is drawn 1440 wide and always fills the screen width. */
   --u: calc(100vw / 1440);
 
+  /* Text unit: 1 Figma pixel for texts and their boxes. Usually the same as --u
+     (project pages change it: their texts stay at their Figma size) */
+  --t: var(--u);
+
   /* Home page: every "Screen" in the columns is as tall as the browser window */
   --screen-height: 100vh;
 
@@ -109,7 +115,11 @@
   --project-label-size: calc(16 * var(--u)); /* project pages: type, credits, second type and year under the logo */
   --project-text-spacing: calc(0.6 * var(--u));
   --project-small-text-size: calc(12 * var(--u)); /* the texts in the left column */
-  --trac-panel-height: calc(3423 * var(--u)); /* height of the trac. right panel */
+  /* The side column of the project pages: small texts, never smaller than --text-min-size (12px) */
+  --side-text-size: max(var(--text-min-size), calc(12 * var(--u)));   /* the details under the logo */
+  --side-paragraph-size: max(var(--text-min-size), calc(12 * var(--u))); /* the text about the project (project pages keep it at 12px) */
+  --side-year-size: max(var(--text-min-size), calc(16 * var(--u)));   /* the year */
+  --side-link-size: max(var(--text-min-size), calc(16 * var(--u)));   /* "next project" and the links at the bottom */
 
   /* Phone: running text never gets smaller than this (real pixels on the screen) */
   --text-min-size: 12px;
@@ -132,12 +142,14 @@
   --project-left-next: 620;            /* Next from the left */
   --project-left-next-bottom: 63;      /* Next: top, from the bottom */
 
-  /* Project pages, top area and text column (the new layout, trac.).
-     The same spots on every project page. Plain Figma pixels. */
-  --project-top-height: 240;           /* the top area; the right panel starts under it */
+  /* Project pages: the top area, the side column on the left and the media on the right.
+     The same on every project page (each project can change some of them, see its page section).
+     Plain Figma pixels (the project frames are 1440 × 888). */
+  --project-top-height: 120;           /* the top area: the media on the right scrolls under it */
   --project-top-nav-top: 21;           /* "More stuff" and "Yael Lenga" from the top */
   --project-top-nav-left: 35;          /* "More stuff" from the left */
   --project-top-my-name: 1193;         /* "Yael Lenga" from the left */
+  --project-top-my-name-right: 1393;   /* ...and the right edge of the words: on big screens (where the texts don't grow) it stays here */
   --project-top-links-top: 71;         /* phone, email, LinkedIn, Cv from the top */
   --project-top-links-left: 895;       /* ...the row's box from the left (it ends where Cv ends, at 1397: 10 left of Figma) */
   --project-top-links-width: 502;
@@ -146,26 +158,21 @@
   --top-link-gap-cv: 19;               /* (LinkedIn moved 8 to the left of Figma: more space before Cv, less before LinkedIn) */
   --top-link-open-time: 0.3s;          /* how fast a link opens up on hover (and Cv grows on click) */
   --email-copied-time: 2s;             /* after clicking the number or the email: "number copied" / "email copied" shows this long */
-  --project-top-logo-top: 53.49;       /* the project logo from the top */
-  --next-project-right: 20;            /* "next project": from the right edge */
-  --next-project-height: 39;           /* "next project": its box (the text sits at its top) */
-  --next-project-fade-time: 0.3s;      /* Lets Talk About It: how fast it shows up at the end of the scroll */
-  --project-top-labels-top: 161;       /* type, credits and year from the top */
-  --project-nav-color: var(--color-black); /* "More stuff", "Yael Lenga", Contact, LinkedIn, Cv: each project sets its own color */
-  --project-top-type: 417;             /* type ("App Design") from the left */
-  --project-top-credits: 797;          /* credits ("Student Project With …") from the left */
-  --project-top-type-second: 584;      /* second type ("Ux\Ui") from the left */
-  --project-top-year: 978;             /* year from the left */
-  --project-top-my-name-right: 1393;   /* the right edge of the words "Yael Lenga" */
-  --project-texts-width: 360;          /* the text column (the right panel starts here) */
-  --project-texts-left: 35;            /* the texts from the left */
-  --project-texts-text-width: 317;     /* width of the texts */
-  --project-texts-first-bottom: 137;   /* the first text: its top, from the bottom of the window */
+  --project-nav-color: var(--color-black); /* "More stuff", "Yael Lenga", the links and "next project": each project sets its own color */
+  --project-side-width: 360;           /* the side column on the left (the media on the right starts here) */
+  --project-side-left: 35;             /* the texts in the side column, from the left */
+  --project-side-details-top: 183;     /* the year (the first of the details under the logo) from the top */
+  --project-side-details-gap: 10;      /* between the year, the type, the credits and "next project" */
+  --project-side-bottom: 28;           /* the title, text and links at the bottom: their bottom, from the bottom of the window */
+  --project-side-min-gap: 30;          /* on short windows: the least space between the details and the title (then the column scrolls) */
+  --project-side-title-width: 228;     /* the title at the bottom (breaks into two lines, as in Figma) */
+  --project-side-text-width: 317;      /* the text at the bottom, and the row of links under it */
+  --project-side-title-gap: 15;        /* between the title and the text */
+  --project-side-links-gap: 14;        /* between the text and the links */
   --video-play-size: 90;               /* the play button (a square) */
   --video-enlarge-size: 44;            /* the enlarge button (a square) */
   --video-time-bar-height: 4;          /* the time bar under the video: its line... */
   --video-time-handle-size: 14;        /* ...and the square you drag */
-  --project-video-bottom: 41;          /* space under the video, so it always fits on the screen */
   --nav-slide-time: 0.6s;             /* "More stuff" and "Yael Lenga" slide toward each other before leaving the page */
   --nav-meet-left-end: 690.94;         /* ...and stop: "More stuff" ends where "Cool stuff by" ends on the home page */
   --nav-meet-right-start: 740;         /* ...and "Yael Lenga" starts where it starts on the home page */
@@ -181,9 +188,6 @@
   --mouse-trail-overlap: 0.25;         /* home: each photo in the tail covers this share of the one before */
   --mouse-trail-stay-time: 1.7s;        /* home: each photo stays this long... */
   --mouse-trail-fade-time: 0.4s;       /* ...and then fades away this fast */
-  --project-texts-top-space: 20;       /* in short windows: the least free space kept above the top text */
-  --project-texts-min-gap: 0;          /* in short windows: the gaps between the texts shrink, down to this (0 = the texts can touch) */
-  --project-texts-wait: 200;           /* how far to scroll after a panel part comes in, before its text starts coming down */
 
   /* Spacing scale: distances that repeat in the Figma design (Figma pixels × --u) */
   --space-small: calc(20 * var(--u));
@@ -688,57 +692,73 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .info-next        { --x: var(--project-left-next);     --from-bottom: var(--project-left-next-bottom); }
 
 /* =========================================================
-   Project page, new layout (trac.html):
-   a top area that stays still, a text column on the left
-   whose texts move down and stack (stack-scroll.js),
-   and a wide right panel that scrolls up like a normal page.
+   Project pages (trac.html, hamotzi.html, lets-talk.html).
+   The same on every project:
+   - the top area: "More stuff", "Yael Lenga" and the contact links, fixed to the top of the window;
+   - the side column on the left: fixed, does not scroll. At its top the logo, the year, the type,
+     the credits and "next project"; at the bottom of the window the title, the text and the links;
+   - the media on the right: the project's own pictures and videos, scrolling like a normal page.
+   Everything is in Figma pixels × --u, so the whole page grows and shrinks with the window's width.
    ========================================================= */
 
 .project-page {
   background-color: var(--color-project-cream);
   color: var(--color-black);
+
+  /* Texts: at their size from Figma (in real pixels), and not bigger on big screens.
+     On a screen narrower than 1440 they shrink with it, but never below 12px. */
+  --t: min(1px, var(--u));
+  --project-handwriting-size: max(var(--text-min-size), calc(42.75 * var(--t))); /* "More stuff" and "Yael Lenga": 5% smaller than in Figma (45) */
+  --project-text-size: max(var(--text-min-size), calc(20 * var(--t)));   /* the title, and the contact links */
+  --side-text-size: max(var(--text-min-size), calc(12 * var(--t)));      /* the details under the logo */
+  --side-paragraph-size: max(var(--text-min-size), calc(12 * var(--t))); /* the text about the project */
+  --side-year-size: max(var(--text-min-size), calc(16 * var(--t)));      /* the year */
+  --side-link-size: max(var(--text-min-size), calc(16 * var(--t)));      /* "next project" and the links */
 }
 
-/* Top area: fixed to the top of the window, over everything */
+/* ---------- Top area ----------
+   Fixed to the top of the window, above everything. It is see-through, except over the media:
+   there it is cream, so the media disappears under it while it scrolls up.
+   (Over the side column it stays see-through: the logo sits a little inside it.) */
 .project-top {
   position: fixed;
-  z-index: 2;
+  z-index: 3;
   top: 0;
   left: 0;
   width: 100%;
   height: calc(var(--project-top-height) * var(--u));
+  pointer-events: none; /* clicks go through its empty parts… */
+}
+.project-top a { pointer-events: auto; } /* …but not through its links */
+
+.project-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--project-side-width) * var(--u));
+  right: 0;
   background-color: var(--color-project-cream);
 }
 
 .top-more-stuff   { --x: var(--project-top-nav-left);  --y: var(--project-top-nav-top); }
 
-/* "More stuff" and "Yael Lenga" slide toward each other when clicked (nav-slide.js).
-   They sit above the logo, so it never covers them while they pass over it. */
+/* "More stuff" and "Yael Lenga" slide toward each other when clicked (nav-slide.js) */
 .top-more-stuff,
 .top-my-name {
   z-index: 1;
   transition: transform var(--nav-slide-time) ease-in-out;
 }
 .top-my-name      { --x: var(--project-top-my-name);   --y: var(--project-top-nav-top); }
-.top-links        { --x: var(--project-top-links-left); --y: var(--project-top-links-top); --width: var(--project-top-links-width); }
-.top-logo         { --y: var(--project-top-logo-top); } /* each project sets --x and the size of its logo */
-.top-type         { --x: var(--project-top-type);        --y: var(--project-top-labels-top); }
-.top-credits      { --x: var(--project-top-credits);     --y: var(--project-top-labels-top); --width: 130; }
-.top-type-second  { --x: var(--project-top-type-second); --y: var(--project-top-labels-top); }
-.top-year         { --x: var(--project-top-year);        --y: var(--project-top-labels-top); }
-
-/* trac. and Hamotzi: type, second type, credits and year in one row instead, spread out
-   from the left edge of the picture area (the video, the yellow rectangle) to the right edge
-   of "Yael Lenga", with equal space between them */
-.top-labels-spread {
-  --x: var(--project-texts-width);
-  --y: var(--project-top-labels-top);
-  --width: calc(var(--project-top-my-name-right) - var(--project-texts-width));
-  display: flex;
-  justify-content: space-between;
+/* On project pages "Yael Lenga" is lined up by its right edge, above the end of the contact links */
+.project-page .top-my-name {
+  left: auto;
+  right: calc((1440 - var(--project-top-my-name-right)) * var(--u));
+  width: auto;
 }
+.top-links        { --x: var(--project-top-links-left); --y: var(--project-top-links-top); --width: var(--project-top-links-width); }
 
-/* "More stuff", "Yael Lenga", Contact, LinkedIn and Cv take the project's own color */
+/* "More stuff", "Yael Lenga" and the contact links take the project's own color */
 .top-more-stuff,
 .top-my-name,
 .top-link {
@@ -762,9 +782,9 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   justify-content: flex-end;
   align-items: flex-start;
 }
-.top-link-email    { margin-left: calc(var(--top-link-gap-email) * var(--u)); }
-.top-link-linkedin { margin-left: calc(var(--top-link-gap-linkedin) * var(--u)); }
-.top-link-cv       { margin-left: calc(var(--top-link-gap-cv) * var(--u)); }
+.top-link-email    { margin-left: calc(var(--top-link-gap-email) * var(--t)); }
+.top-link-linkedin { margin-left: calc(var(--top-link-gap-linkedin) * var(--t)); }
+.top-link-cv       { margin-left: calc(var(--top-link-gap-cv) * var(--t)); }
 
 /* A link that opens up: its word and what it stands for sit in the same spot, lined up on the right.
    Its width is the word's box in Figma (--closed), and on hover the long text's box (--open),
@@ -774,13 +794,13 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   grid-template-columns: minmax(0, 1fr); /* one column, exactly as wide as the link */
   justify-items: unsafe end;            /* the texts end at its right edge (the long one sticks out to the left, hidden) */
   overflow: hidden;
-  width: calc(var(--closed) * var(--u));
+  width: calc(var(--closed) * var(--t));
   transition: width var(--top-link-open-time) ease-out;
 }
 .top-link-phone    { --closed: 48; --open: 141; } /* "phone" → the phone number */
 .top-link-email    { --closed: 47; --open: 186; } /* "email" → the address */
 .top-link-linkedin { --closed: 78; --open: 88; }  /* "LinkedIn" → "Yael lenga" (just as wide as the name, so phone and email move only a little) */
-.top-link-cv       { width: calc(28 * var(--u)); }
+.top-link-cv       { width: calc(28 * var(--t)); }
 .top-link-label,
 .top-link-reveal {
   grid-area: 1 / 1;
@@ -789,7 +809,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .top-link-reveal { opacity: 0; }
 
 .top-link-swap:hover,
-.top-link-swap:focus-visible { width: calc(var(--open) * var(--u)); }
+.top-link-swap:focus-visible { width: calc(var(--open) * var(--t)); }
 .top-link-swap:hover .top-link-label,
 .top-link-swap:focus-visible .top-link-label { opacity: 0; }
 .top-link-swap:hover .top-link-reveal,
@@ -803,264 +823,162 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .top-link-cv:hover,
 .top-link-cv:focus-visible { transform: scale(1.1); }
 
-/* Type, credits and year: bold labels under the logo */
-.top-label {
-  font-family: var(--font-label);
-  font-weight: 700;
-  font-size: var(--project-label-size);
-  line-height: 1;
-  white-space: nowrap;
+/* ---------- Side column (left) ----------
+   Fixed to the window, as tall as it. Its top part stays at the top and its bottom part
+   at the bottom of the window. On a short window, where they would meet, they keep
+   --project-side-min-gap between them and the column scrolls by itself instead. */
+.project-side {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(var(--project-side-width) * var(--u));
+  overflow-y: auto;
+  scrollbar-width: none;     /* it scrolls only on short windows, without a scroll bar */
+  display: flex;
+  flex-direction: column;
+  padding-left: calc(var(--project-side-left) * var(--u));
+  padding-bottom: calc(var(--project-side-bottom) * var(--u));
+  background-color: var(--color-project-cream);
+}
+.project-side::-webkit-scrollbar { display: none; }
+
+/* The logo: each project sets its spot and size (--logo-x and --logo-y from the window's
+   top-left corner, --logo-width and --logo-height), all in Figma pixels */
+.side-logo {
+  flex: none;
+  margin: calc(var(--logo-y) * var(--u)) 0 0 calc((var(--logo-x) - var(--project-side-left)) * var(--u));
+  width: calc(var(--logo-width) * var(--u));
+  height: calc(var(--logo-height) * var(--u));
 }
 
-/* "next project": the project's color, at the bottom right of the page, to the next project in the list
-   (trac. → Hamotzi → Lets Talk About It → trac.). On trac. and Hamotzi it ends the page;
-   on Lets Talk About It it stays in the window's corner and shows up only at the end of the scroll. */
-.next-project {
-  position: absolute;
-  right: calc(var(--next-project-right) * var(--u));
-  bottom: 0;
-  height: calc(var(--next-project-height) * var(--u)); /* the text at its top, like the box in Figma */
-  z-index: 2;
+/* The details under the logo: the year, the type, the credits and "next project",
+   one under the other. The year sits at --project-side-details-top from the top of the window. */
+.side-details {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(var(--project-side-details-gap) * var(--u));
+  margin-top: calc((var(--project-side-details-top) - var(--logo-y) - var(--logo-height)) * var(--u));
+}
+
+/* The year: bold, a little bigger */
+.side-year {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--side-year-size);
+  line-height: 0.94;  /* its box is 15 high in Figma */
+}
+
+/* The type and the credits: small, bold, all caps */
+.side-detail {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--side-text-size);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* "next project" and the links at the bottom: small handwriting, in the project's color */
+.side-link {
   font-family: var(--font-handwriting);
   font-weight: 400;
-  font-size: var(--project-text-size);
+  font-size: var(--side-link-size);
   line-height: 1.49;
   white-space: nowrap;
   color: var(--project-nav-color);
 }
-.next-project-at-end {
-  position: fixed;
-  opacity: 0;
-  pointer-events: none;                /* can't be clicked while hidden */
-  transition: opacity var(--next-project-fade-time) ease;
-}
-.next-project-at-end.is-visible {
-  opacity: 1;
-  pointer-events: auto;
-}
 
-/* The logo is the page's main title, so the heading itself has no extra spacing */
-.top-logo { margin: 0; }
-
-/* Text column: fixed under the top area, on the left. Texts outside it are hidden. */
-.project-texts {
-  position: fixed;
-  top: calc(var(--project-top-height) * var(--u));
-  bottom: 0;
-  left: 0;
-  width: calc(var(--project-texts-width) * var(--u));
-  overflow: hidden;
-  background-color: var(--color-project-cream);
-}
-
-/* One text in the column. The script moves all of them except the first. */
-.stack-box {
-  position: absolute;
-  top: 0;
-  left: calc(var(--project-texts-left) * var(--u));
-  width: calc(var(--project-texts-text-width) * var(--u));
+/* The bottom part: the title, the text and the links, pushed to the bottom of the window */
+.side-about {
+  flex: none;
+  margin-top: auto;
+  padding-top: calc(var(--project-side-min-gap) * var(--u));
+  /* As wide as in Figma, in text pixels like its text, so the lines break as in Figma */
+  width: calc(var(--project-side-text-width) * var(--t));
   text-transform: uppercase;
 }
 
-/* The first text sits at the bottom of the column and never moves */
-.stack-first {
-  top: calc(100% - var(--project-texts-first-bottom) * var(--u));
-}
-
-/* Bold title of the first text */
-.stack-title {
-  width: calc(228 * var(--u)); /* breaks into two lines, as in Figma */
+/* The title: bold, breaks into two lines */
+.side-title {
+  width: calc(var(--project-side-title-width) * var(--t));
   font-family: var(--font-label);
   font-weight: 700;
   font-size: var(--project-text-size);
-  line-height: 0.9;
+  line-height: 1;
 }
 
-/* Big bold title ("too many versions…") */
-.stack-big-title {
-  font-family: var(--font-label);
-  font-weight: 700;
-  font-size: var(--project-title-size);
-  line-height: 1.24;
-}
-
-/* The small running text */
-.stack-text {
+/* The running text */
+.side-text {
+  margin-top: calc(var(--project-side-title-gap) * var(--u));
   font-family: var(--font-label);
   font-weight: 400;
-  font-size: var(--project-small-text-size);
+  font-size: var(--side-paragraph-size);
   line-height: 1.24;
 }
 
-.stack-bold { font-weight: 700; }
-
-/* Space between a title and its text, and an empty line before a new paragraph */
-.stack-after-title   { margin-top: calc(10 * var(--u)); }
-.stack-new-paragraph { margin-top: 1.24em; }
-
-/* Right panel: starts under the top area, next to the text column, scrolls up */
-.project-panel {
-  position: relative;
-  margin-top: calc(var(--project-top-height) * var(--u));
-  margin-left: calc(var(--project-texts-width) * var(--u));
-  width: calc(100% - var(--project-texts-width) * var(--u));
-  height: var(--panel-height); /* each project sets its own (see below) */
-  background-color: var(--color-project-cream);
-}
-
-/* ---------- trac. page (trac.html): a shorter top area and its own link color ---------- */
-.trac-page {
-  --project-top-height: 206;          /* the top area; the right panel starts under it */
-  --project-nav-color: var(--color-trac-green);
-}
-
-/* ---------- Lets Talk About It page (lets-talk.html) ----------
-   The computer and the text stay in the middle. On each side a column of phones:
-   while the page scrolls, the left one goes up and the right one goes down,
-   at the same speed (side-scroll.js moves them). */
-.lets-talk-page {
-  --project-top-height: 206;          /* the top area; the side columns start under it */
-  --project-nav-color: var(--color-lets-talk-blue);
-  --side-column-end-space: 24;        /* space left under the last phone of the left column at the end */
-  --lets-talk-mockup-top: 208;        /* the computer's area and the side columns start here */
-  --lets-talk-text-bottom: 40;        /* the text under the computer: its bottom, from the bottom of the window */
-  --lets-talk-text-gap: 14;           /* between the computer and the text */
-  --lets-talk-middle-width: 880;      /* the widest the computer can get: up to the phones on each side */
-}
-.lets-talk-logo    { --x: 431.63; --y: 21; --width: 558.74; --height: 153; }
-
-/* Everything below the top area that doesn't scroll away: fixed to the window */
-.lets-talk-stage {
-  position: fixed;
-  inset: 0;
-}
-
-/* The middle, between the two phone columns: from under the top area down to the bottom of the window.
-   The text sits at the bottom; the computer fills all the space above it. */
-.lets-talk-middle {
-  position: absolute;
-  top: calc(var(--lets-talk-mockup-top) * var(--u));
-  bottom: calc(var(--lets-talk-text-bottom) * var(--u));
-  left: calc((720 - var(--lets-talk-middle-width) / 2) * var(--u));
-  width: calc(var(--lets-talk-middle-width) * var(--u));
+/* The links under the text, spread across its width (the first at its left edge, the last at its right) */
+.side-links {
   display: flex;
-  flex-direction: column;
-  gap: calc(var(--lets-talk-text-gap) * var(--u));
+  justify-content: space-between;
+  margin-top: calc(var(--project-side-links-gap) * var(--u));
+  text-transform: none;
 }
 
-/* The computer's area: takes all the height the text leaves.
-   The computer is as big as fits in it, sitting on its bottom, centered. */
-.lets-talk-mockup {
-  flex: 1;
-  min-height: 0;
-  container-type: size; /* lets the computer measure this area (cqw, cqh) */
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-.lets-talk-mockup .mockup-computer {
-  /* the computer is 0.7806 times as high as it is wide */
-  --mockup-width: min(100cqw, 100cqh / 0.7806);
-}
-
-/* The text under the computer: at the bottom of the window, at its Figma spot from the left (386) */
-.lets-talk-about {
-  margin-left: calc((386 - (720 - var(--lets-talk-middle-width) / 2)) * var(--u));
-  width: calc(692 * var(--u));
-  text-transform: uppercase;
-}
-
-/* The two side columns: from where the computer starts to the bottom of the window */
-.side-column {
-  position: absolute;
-  top: calc(var(--lets-talk-mockup-top) * var(--u));
-  bottom: 0;
+/* A text longer than its spot (trac.): a window onto it, --window-height high.
+   While the page scrolls, the text moves up inside the window, like a normal scroll:
+   new lines come in at the bottom and push the old ones out at the top.
+   When the page reaches its end, so does the text (scroll-text.js moves it). */
+.side-text-window {
+  height: calc(var(--window-height) * var(--u));
+  margin-top: calc(var(--project-side-title-gap) * var(--u));
   overflow: hidden;
 }
-.side-column-left  { left: 0;                     width: calc(360 * var(--u)); }
-.side-column-right { left: calc(1078 * var(--u)); width: calc(362 * var(--u)); }
+.side-text-window .side-text { margin-top: 0; }
+.side-text-window .side-text + .side-text { margin-top: calc(var(--paragraph-gap) * var(--u)); }
 
-/* What moves inside a column (side-scroll.js) */
-.side-column-track {
+/* trac.: the first lines of its last text sit closer together, as in Figma */
+.trac-tight-lines { display: block; line-height: 0.94; }
+
+/* An empty line inside a text, between two paragraphs */
+.side-new-paragraph { display: block; margin-top: 1.24em; }
+
+/* ---------- Media (right) ----------
+   The project's own pictures and videos. They start under the top area, next to the side column,
+   and scroll up with the page. Each project sets the height (--media-height) and the spots of its pieces
+   (with .placed: --x and --y from the top-left corner of the media, as in Figma minus 360 and 120). */
+.project-media {
   position: relative;
-  height: 100%;
+  margin-top: calc(var(--project-top-height) * var(--u));
+  margin-left: calc(var(--project-side-width) * var(--u));
+  height: calc(var(--media-height) * var(--u));
 }
 
-/* The phones: their Figma spots, measured from the top of their column (Frame 167 and Frame 168) */
-.phone-left-1  { --x: 97;  --y: 0;       --width: 164.739; }
-.phone-left-2  { --x: 97;  --y: 361.87;  --width: 164.739; }
-.phone-left-3  { --x: 97;  --y: 723.73;  --width: 165.164; }
-.phone-left-4  { --x: 97;  --y: 1087.53; --width: 164.871; }
-.phone-right-4 { --x: 110; --y: -843;    --width: 164.871; } /* the ones above the column come down into view */
-.phone-right-3 { --x: 110; --y: -478.77; --width: 164.739; }
-.phone-right-2 { --x: 102; --y: -116.9;  --width: 172.789; }
-.phone-right-1 { --x: 102; --y: 250.1;   --width: 173.464; }
-
-.side-phone img {
-  display: block;
-  width: 100%;
-  height: auto;
+/* ---------- trac. (trac.html) ---------- */
+.trac-page {
+  --project-nav-color: var(--color-trac-green);
+  --project-side-details-top: 177;
+  --project-side-text-width: 310;
+  --project-side-links-gap: 0;
+  --logo-x: 35; --logo-y: 108; --logo-width: 152.907; --logo-height: 52.793;
 }
+/* The text window: 166 high; between its texts, the space they have in Figma */
+.trac-text-window { --window-height: 166; --paragraph-gap: 52; }
 
-/* The moving white line on the play button of the last phone (an animated gif) */
-.side-phone .phone-play-line {
-  position: absolute;
-  left: 42.11%;
-  top: 88.07%;
-  width: 14.54%;
-}
-
-/* Gives the page its scroll length (side-scroll.js sets its height) */
-.side-scroll-space {
-  height: 100vh;
-}
-
-/* ---------- Hamotzi page (hamotzi.html) ----------
-   On the right, the video and two stills, all the same size, one under the other: they scroll with the page.
-   On the left, the text stays in place; its bottom lines up with the bottom of the video. */
+/* ---------- Hamotzi (hamotzi.html) ----------
+   The video, and two stills side by side under it */
 .hamotzi-page {
-  --project-top-height: 206;          /* the top area */
   --project-nav-color: var(--color-hamotzi-nav-grey);
-  --hamotzi-media-top: 208;           /* the video (the first in the column): from the top */
-  --hamotzi-media-gap: 19;            /* between the video and the stills */
-  --project-video-bottom: 73;         /* space under the video when the page opens, so it always fits on the screen;
-                                         also the space under the last still at the end of the scroll */
-  /* The width of the video and the stills: 1080 as in Figma, but smaller (keeping the shape)
-     when the window is short, so the whole video fits on the screen */
-  --hamotzi-media-width: min(calc(1080 * var(--u)),
-             (var(--screen-height) - (var(--hamotzi-media-top) + var(--project-video-bottom)) * var(--u)) * 1080 / 607);
-  --hamotzi-media-height: calc(var(--hamotzi-media-width) * 607 / 1080);
+  --project-side-bottom: 33;          /* no links under the text: it ends a little higher, as in Figma */
+  --media-height: 924;
+  --logo-x: 20; --logo-y: 117; --logo-width: 230; --logo-height: 49.194;
 }
-.hamotzi-logo               { --x: 531; --y: 46.02; --width: 360; --height: 102.97; }
-/* The descriptions under the logo: as wide as the video, so the year ends at its right edge
-   (the video gets narrower on short windows, and so does the row) */
-.hamotzi-page .top-labels-spread { width: var(--hamotzi-media-width); }
-.hamotzi-credits            { --width: 146; }
-
-/* The text: its bottom at the bottom of the video (measured from the bottom of the text column) */
-.hamotzi-page .stack-first {
-  top: auto;
-  bottom: calc(var(--screen-height) - var(--hamotzi-media-top) * var(--u) - var(--hamotzi-media-height));
-}
-
-/* The column on the right: starts at the video's spot and scrolls under the top area */
-.hamotzi-media {
-  position: relative; /* "next project" sits at its bottom right */
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--hamotzi-media-gap) * var(--u));
-  margin-top: calc(var(--hamotzi-media-top) * var(--u));
-  margin-left: calc(var(--project-texts-width) * var(--u));
-  padding-bottom: calc(var(--project-video-bottom) * var(--u));
-}
-
-/* Each item (the video and the stills): the same size */
-.hamotzi-media-item {
-  display: block;
-  width: var(--hamotzi-media-width);
-  aspect-ratio: 1080 / 607;
-}
-.hamotzi-still { object-fit: cover; }
+.hamotzi-video-spot { --x: 0;   --y: 0;   --width: 1080; --height: 607; }
+.hamotzi-still-1    { --x: 0;   --y: 614; --width: 539;  --height: 303; }
+.hamotzi-still-2    { --x: 542; --y: 614; --width: 538;  --height: 303; }
+.hamotzi-still { display: block; object-fit: cover; }
 
 /* The video fills its spot (when enlarged it moves out of it, see below) */
 .hamotzi-video {
@@ -1068,6 +986,38 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   width: 100%;
   aspect-ratio: 1080 / 607;
 }
+
+/* ---------- Lets Talk About It (lets-talk.html) ----------
+   The computer; Yoram and Naomi, each on a box in the podcast's colors; and four phones */
+.lets-talk-page {
+  --project-nav-color: var(--color-lets-talk-blue);
+  --project-side-text-width: 307;
+  --media-height: 1485;
+  --logo-x: 30; --logo-y: 78.293; --logo-width: 288; --logo-height: 86.419;
+}
+
+/* The computer's spot: the computer is as big as fits in it, in its middle */
+.lets-talk-computer-spot {
+  --x: 0; --y: 0; --width: 982; --height: 532;
+  container-type: size; /* lets the computer measure this spot (cqw, cqh) */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lets-talk-computer-spot .mockup-computer {
+  /* the computer is 0.7806 times as high as it is wide */
+  --mockup-width: min(100cqw, 100cqh / 0.7806);
+}
+
+.lets-talk-box-yoram { --x: 0;   --y: 554; --width: 484; --height: 419; background-color: var(--color-lets-talk-navy); }
+.lets-talk-box-naomi { --x: 498; --y: 554; --width: 484; --height: 419; background-color: var(--color-lets-talk-light); }
+/* Their names, drawings and texts (one picture over both boxes: the fonts are not on the web) */
+.lets-talk-hosts     { --x: 19;  --y: 558; --width: 942; --height: 387; }
+
+.lets-talk-phone-1   { --x: 39;  --y: 1027; --width: 164.871; --height: 346.228; }
+.lets-talk-phone-2   { --x: 285; --y: 1027; --width: 164.871; --height: 346.228; }
+.lets-talk-phone-3   { --x: 532; --y: 1027; --width: 172.789; --height: 349; }
+.lets-talk-phone-4   { --x: 786; --y: 1027; --width: 165.164; --height: 345.797; }
 
 /* ---------- Video player: play and enlarge buttons (video-player.js) ---------- */
 .video-player { background-color: var(--color-black); }
@@ -1350,8 +1300,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 }
 
 /* ---------- trac. right panel (y = from the top of the panel) ---------- */
-.trac-panel           { --panel-height: var(--trac-panel-height); }
-.trac-logo            { --x: 594.09; --y: 63.16; --width: 220.907; --height: 76.27; }
+.trac-media           { --media-height: 3423; }
 
 .trac-yellow          { --x: 0;     --y: 0;     --width: 1080;    --height: 813; }
 .trac-phone-video     { --x: 421;   --y: 19;    --width: 241.703; --height: 500;
@@ -1756,15 +1705,18 @@ html:has(.about-scroll-space) { scroll-snap-type: y mandatory; }
 /* Samples of the left-column texts: uppercase, as inside the column */
 .guide-uppercase { text-transform: uppercase; }
 
-/* The stacking texts as they look at the end of the scroll: one under the other.
-   (On a project page each text's spot comes from Figma: --stop-from-bottom.) */
-.guide-text-stack {
+/* A side column sample: its top part and its bottom part, with a gap between them
+   (on a project page the bottom part sits at the bottom of the window) */
+.guide-side-column {
   display: flex;
   flex-direction: column;
-  gap: var(--space-small);
-  width: calc(var(--project-texts-text-width) * var(--u));
-  text-transform: uppercase;
+  gap: var(--space-extra-large);
+  width: calc(var(--project-side-width) * var(--u));
+  padding-left: calc(var(--project-side-left) * var(--u));
+  background-color: var(--color-project-cream);
 }
+.guide-side-column .side-details { margin-top: 0; }
+.guide-side-column .side-about   { margin-top: 0; padding-top: 0; }
 
 /* In the guide's lists, a name and its sample sit close together
    (the empty line between paragraphs is only for real text blocks) */

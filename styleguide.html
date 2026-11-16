@@ -38,10 +38,10 @@
       <div id="guide-project-left" class="guide-group"></div>
     </section>
 
-    <!-- PROJECT PAGE NEW LAYOUT: guide.js fills this from the --project-top- and --project-texts- variables -->
+    <!-- PROJECT PAGES: guide.js fills this from the --project-top- and --project-side- variables -->
     <section class="guide-section">
-      <h2 class="project-title">Project page — top area and text column</h2>
-      <p class="project-text">The new layout (trac.): the same spots on every project page, in Figma pixels.</p>
+      <h2 class="project-title">Project pages — top area and side column</h2>
+      <p class="project-text">The same on every project page (trac., Hamotzi, Lets Talk About It), in Figma pixels. A project can change some of them on its own page.</p>
       <div id="guide-project-top" class="guide-group"></div>
     </section>
 
@@ -78,7 +78,7 @@
       </div>
 
       <div class="guide-group">
-        <p class="project-bold-text">Project page — new layout (trac.)</p>
+        <p class="project-bold-text">Project pages</p>
         <p class="project-text">.top-links (hover each one)</p>
         <nav class="top-links guide-top-links" aria-label="Contact (example)">
           <a class="top-link top-link-swap top-link-phone" href="tel:+972546138340" data-copied-text="number copied"><span class="top-link-label">phone</span><span class="top-link-reveal" aria-live="polite">+972546138340</span></a>
@@ -86,16 +86,16 @@
           <a class="top-link top-link-swap top-link-linkedin" href="https://www.linkedin.com/in/yael-lenga-37ba863b9/" target="_blank" rel="noopener"><span class="top-link-label">LinkedIn</span><span class="top-link-reveal">Yael lenga</span></a>
           <a class="top-link top-link-cv" href="CV%20Yael%20Lenga-%20portfolio.pdf" target="_blank" rel="noopener">Cv</a>
         </nav>
-        <p class="project-text">.next-project — bottom right of each project page, to the next project (trac. → Hamotzi → Lets Talk About It → trac.)</p>
-        <p><a class="next-project handwriting-link" href="hamotzi.html" style="position: static;">next project</a></p>
-        <p class="project-text">.top-label</p>
-        <p class="top-label">Student Project<br>With Mia Gaon</p>
-        <p class="project-text">.stack-title</p>
-        <p class="stack-title guide-uppercase">A songwriting app for independent musicians</p>
-        <p class="project-text">.stack-big-title</p>
-        <p class="stack-big-title guide-uppercase">too many versions</p>
-        <p class="project-text">.stack-text</p>
-        <p class="stack-text guide-uppercase">trac. is an app that keeps your songwriting organized while you keep creating.</p>
+        <p class="project-text">.side-year — side column: the year</p>
+        <p class="side-year">2025</p>
+        <p class="project-text">.side-detail — side column: the type and the credits</p>
+        <p class="side-detail">Student Project with Mia Gaon</p>
+        <p class="project-text">.side-link — side column: "next project" (to the next project: trac. → Hamotzi → Lets Talk About It → trac.) and the links at the bottom</p>
+        <p><a class="side-link handwriting-link" href="hamotzi.html">next project</a></p>
+        <p class="project-text">.side-title — side column: the title at the bottom</p>
+        <p class="side-title guide-uppercase">A songwriting app for independent musicians</p>
+        <p class="project-text">.side-text — side column: the text at the bottom</p>
+        <p class="side-text guide-uppercase">trac. is an app that keeps your songwriting organized while you keep creating.</p>
       </div>
 
       <div class="guide-group">
@@ -229,34 +229,48 @@
         </div>
       </div>
 
-      <!-- Stacking texts (project page, new layout): how the left column looks at the end of the scroll.
-           On the page they come down one by one while you scroll (stack-scroll.js). -->
+      <!-- Side column (project pages): the details at the top, the title, text and links at the bottom.
+           A text longer than its spot (.side-text-window) moves up inside it while the page scrolls (scroll-text.js). -->
       <div class="guide-group">
-        <p class="project-bold-text">Stacking texts (end of the scroll)</p>
+        <p class="project-bold-text">Side column</p>
         <div class="guide-pair">
           <div class="guide-stack">
             <p class="project-text">Short</p>
-            <div class="guide-text-stack">
-              <p class="stack-text">I designed this app.</p>
-              <h3 class="stack-big-title">too easy to lose</h3>
-              <div>
-                <p class="stack-title">A songwriting app</p>
-                <p class="stack-text stack-after-title">An app for writing songs.</p>
+            <div class="guide-side-column">
+              <div class="side-details">
+                <p class="side-year">2024</p>
+                <p class="side-detail">title sequence</p>
+                <a class="side-link handwriting-link" href="lets-talk.html">next project</a>
+              </div>
+              <div class="side-about">
+                <h3 class="side-title">A songwriting app</h3>
+                <p class="side-text">An app for writing songs.</p>
               </div>
             </div>
           </div>
           <div class="guide-stack">
-            <p class="project-text">Long</p>
-            <div class="guide-text-stack">
-              <p class="stack-text">I designed this app end-to-end alongside a fellow designer. We shared responsibility across the process, from research and small-scale studies to ideation, prototyping, and defining the app’s visual language.</p>
-              <div>
-                <h3 class="stack-big-title">too many versions<br>too many places<br>&amp;&nbsp; too easy to lose</h3>
-                <p class="stack-text stack-bold stack-new-paragraph">Our Solution:<br>Write lyrics, capture ideas, record drafts and build your projects without the usual mess in between.</p>
+            <p class="project-text">Long, with a text window and links</p>
+            <div class="guide-side-column">
+              <div class="side-details">
+                <p class="side-year">2026</p>
+                <p class="side-detail">web&amp;app design<br>illustration</p>
+                <p class="side-detail">student project with hillel buchris</p>
+                <a class="side-link handwriting-link" href="trac.html">next project</a>
               </div>
-              <p class="stack-text">When creating music, short or quick materials are created along the way. Musicians often keep these materials across many platforms.</p>
-              <div>
-                <p class="stack-title">A songwriting app for independent musicians</p>
-                <p class="stack-text stack-after-title">trac. is an app that keeps your songwriting organized while you keep creating.</p>
+              <div class="side-about">
+                <h3 class="side-title">A songwriting app for independent musicians</h3>
+                <div class="side-text-window trac-text-window">
+                  <div class="side-text-track">
+                    <p class="side-text">trac. is an app that keeps your songwriting organized while you keep creating. Write lyrics, capture ideas, record drafts, and build your projects without the usual mess in between.
+                      <span class="side-new-paragraph">When creating music, short or quick materials are created along the way. Musicians often keep these materials across many platforms.</span></p>
+                    <p class="side-text">I designed this app end-to-end alongside a fellow designer.</p>
+                  </div>
+                </div>
+                <nav class="side-links" aria-label="Links (example)">
+                  <a class="side-link handwriting-link">prototype</a>
+                  <a class="side-link handwriting-link">landing page</a>
+                  <a class="side-link handwriting-link">presentation</a>
+                </nav>
               </div>
             </div>
           </div>
