@@ -18,6 +18,11 @@
   /* Project pages: the background every project shares */
   --color-project-cream: #fdfaf2;
 
+  /* Home page, the first screen (the opening): its background and its texts.
+     (Before: an orange background with white texts.) */
+  --color-hero-background: var(--color-project-cream);
+  --color-hero-text: var(--color-home-orange);
+
   /* trac. colors (each project has its own colors) */
   --color-trac-orange: #fe5808;
   --color-trac-blue: #acd0ef;
@@ -320,6 +325,7 @@ body {
 
 /* Screen backgrounds */
 .screen-orange { background-color: var(--color-home-orange); }
+.screen-hero   { background-color: var(--color-hero-background); } /* the first screen */
 .screen-blue   { background-color: var(--color-home-blue); }
 .screen-green  { background-color: var(--color-home-green); }
 .screen-white  { background-color: var(--color-white); }
@@ -438,7 +444,7 @@ body {
 
 .cool-stuff {
   --x: 398; --y: 25; --width: 391;
-  color: var(--color-white);
+  color: var(--color-hero-text);
   text-decoration: underline;
   text-decoration-thickness: from-font; /* underline as in Figma */
   text-underline-position: from-font;
@@ -453,7 +459,7 @@ body {
 .scroll-down {
   --from-bottom: 43;
   font-size: var(--scroll-down-size);
-  color: var(--color-white);
+  color: var(--color-hero-text);
   white-space: nowrap;
 }
 .scroll-down-left  { --x: 672; --width: 48; }
@@ -461,7 +467,7 @@ body {
 
 .home-name {
   --x: 20; --y: 25; --width: 265;
-  color: var(--color-white);
+  color: var(--color-hero-text);
 }
 
 /* Home, first screen: the tail of photos behind the mouse (mouse-trail.js).

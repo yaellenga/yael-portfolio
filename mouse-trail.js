@@ -1,4 +1,4 @@
-// Home page, first screen: a tail of black-and-white photos that follows the mouse.
+// Home page, first screen: a tail of photos (in color) that follows the mouse.
 // The about page has a tail too, made of its mouse picture (data-trail="about" on the area).
 // While the mouse moves over the first screen (both halves), a photo is left behind it every time
 // it has moved far enough that the new photo covers only --mouse-trail-overlap of the one before.
@@ -22,16 +22,16 @@
   // The tails: the photos of each one, how wide each photo is (in Figma pixels),
   // its width ÷ height, and how much to shrink them all (size)
   const tails = {
-    // Home: the black-and-white photos (cut to what can be seen, without see-through margins),
+    // Home: the photos, in color (cut to what can be seen, without see-through margins),
     // at their width in the old changing photos, shrunk to --mouse-trail-size
     home: {
       size: parseFloat(rootStyle.getPropertyValue('--mouse-trail-size')),
       varySizes: true,
       photos: [
-        { src: 'images/home-trail-1.png', width: 621.9,  ratio: 1382 / 1595 },
-        { src: 'images/home-trail-2.png', width: 630.45, ratio: 1401 / 1118 },
-        { src: 'images/home-trail-3.png', width: 693.45, ratio: 1541 / 1258 },
-        { src: 'images/home-trail-4.png', width: 344.7,  ratio: 766 / 1604 },
+        { src: 'images/home-trail-color-1.png', width: 621.9,  ratio: 700 / 808 },
+        { src: 'images/home-trail-color-2.png', width: 630.45, ratio: 700 / 559 },
+        { src: 'images/home-trail-color-3.png', width: 693.45, ratio: 760 / 620 },
+        { src: 'images/home-trail-color-4.png', width: 344.7,  ratio: 400 / 837 },
       ],
     },
     // About: the page's mouse picture, as big as the mouse (.cursor-about in styles.css)
