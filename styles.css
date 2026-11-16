@@ -1085,6 +1085,16 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 }
 .hamotzi-video .video-play svg { visibility: hidden; }
 
+/* Hamotzi: the square you drag on the time bar, in the same grey with grain as the buttons
+   (lighter, cream, while the mouse is over the bar or it is being dragged) */
+.hamotzi-video .video-time-handle {
+  background: var(--hamotzi-grain), var(--color-hamotzi-button-grey);
+}
+.hamotzi-video .video-time-bar:hover .video-time-handle,
+.hamotzi-video .video-time-bar.is-dragging .video-time-handle {
+  background: var(--hamotzi-grain), var(--color-project-cream);
+}
+
 /* Play: in the middle of the video; hidden while it plays */
 .video-play {
   left: 50%;
