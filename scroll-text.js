@@ -1,25 +1,33 @@
-// Project page, side column: a text that is longer than its spot (.side-text-window).
-// The spot is a window onto the text. While the page scrolls, the text moves up inside it,
-// like a normal scroll: new lines come in at the bottom and push the old ones out at the top.
-// At the top of the page the text shows from its start; at the end of the page, its end.
+// Project page, side column: a text in parts, longer than its spot (.side-text-window).
+// Each part fits in the spot, and the spot shows one part at a time.
+// Each part after the first belongs to a picture on the right (data-appears-with="…").
+// When the top of that picture reaches the middle of the window, the text moves up to that part
+// by itself, with a small bounce, however the page goes on scrolling (the movement and the bounce
+// are the transition in styles.css, .side-text-track). Scrolling back up brings the earlier part back.
 
 const textWindows = [...document.querySelectorAll('.side-text-window')];
 
-function scrollTexts() {
-  // How far down the page is: 0 = at the top, 1 = at the end
-  const pageScroll = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = pageScroll > 0 ? Math.min(Math.max(window.scrollY / pageScroll, 0), 1) : 0;
+function showParts() {
+  const middle = window.innerHeight / 2;
 
   for (const textWindow of textWindows) {
     const track = textWindow.querySelector('.side-text-track');
-    // How much of the text doesn't fit in the window: that is how far it moves
-    const hidden = Math.max(track.offsetHeight - textWindow.clientHeight, 0);
-    track.style.transform = `translateY(${-progress * hidden}px)`;
+    const parts = [...track.children];
+
+    // The last part whose picture has reached the middle of the window (the first part if none)
+    let current = parts[0];
+    for (const part of parts) {
+      const picture = part.dataset.appearsWith && document.querySelector(part.dataset.appearsWith);
+      if (picture && picture.getBoundingClientRect().top <= middle) current = part;
+    }
+
+    // Move the text up so that this part starts at the top of the spot
+    // (measured from the first part, which sits at the top when the text hasn't moved)
+    track.style.transform = `translateY(${parts[0].offsetTop - current.offsetTop}px)`;
   }
 }
 
-window.addEventListener('scroll', scrollTexts, { passive: true });
-window.addEventListener('resize', scrollTexts);
-window.addEventListener('load', scrollTexts); // once the pictures have their sizes (the page's length)
-document.fonts.ready.then(scrollTexts);       // the text's height changes once the font has loaded
-scrollTexts();
+window.addEventListener('scroll', showParts, { passive: true });
+window.addEventListener('resize', showParts);
+document.fonts.ready.then(showParts); // the parts' spots change once the font has loaded
+showParts();

@@ -705,15 +705,25 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   background-color: var(--color-project-cream);
   color: var(--color-black);
 
-  /* Texts: at their size from Figma (in real pixels), and not bigger on big screens.
-     On a screen narrower than 1440 they shrink with it, but never below 12px. */
-  --t: min(1px, var(--u));
-  --project-handwriting-size: max(var(--text-min-size), calc(42.75 * var(--t))); /* "More stuff" and "Yael Lenga": 5% smaller than in Figma (45) */
-  --project-text-size: max(var(--text-min-size), calc(20 * var(--t)));   /* the title, and the contact links */
-  --side-text-size: max(var(--text-min-size), calc(12 * var(--t)));      /* the details under the logo */
-  --side-paragraph-size: max(var(--text-min-size), calc(12 * var(--t))); /* the text about the project */
-  --side-year-size: max(var(--text-min-size), calc(16 * var(--t)));      /* the year */
-  --side-link-size: max(var(--text-min-size), calc(16 * var(--t)));      /* "next project" and the links */
+  /* Three units (1 Figma pixel each), for three kinds of things:
+     --t  texts (and their boxes): their Figma size, not bigger on big screens. On a screen narrower
+          than 1440 they shrink with it, until the small texts (12 in Figma) reach 10px: then they stop.
+     --s  the side column: grows and shrinks with the screen like the rest of the page,
+          but stops shrinking together with the texts (when 1 Figma pixel = 10/12 px, a screen 1200 wide).
+     --u  inside the media on the right: always fills what is left of the window next to the side column
+          (1080 Figma pixels wide), so on narrow screens only the media keeps shrinking. */
+  --text-smallest-unit: calc(10px / 12);  /* 1 Figma pixel when the 12px texts are 10px */
+  --t: clamp(var(--text-smallest-unit), var(--u), 1px);
+  --s: max(var(--text-smallest-unit), var(--u));
+  --side-width: calc(var(--project-side-width) * var(--s)); /* the side column's width, in real pixels */
+  --top-height: calc(var(--project-top-height) * var(--s)); /* the top area's height, in real pixels: with the side
+                                                               column's unit, so the logo stays lined up with the top of the media */
+  --project-handwriting-size: calc(42.75 * var(--t)); /* "More stuff" and "Yael Lenga": 5% smaller than in Figma (45) */
+  --project-text-size: calc(20 * var(--t));   /* the title, and the contact links */
+  --side-text-size: calc(12 * var(--t));      /* the details under the logo */
+  --side-paragraph-size: calc(12 * var(--t)); /* the text about the project */
+  --side-year-size: calc(16 * var(--t));      /* the year */
+  --side-link-size: calc(16 * var(--t));      /* "next project" and the links */
 }
 
 /* ---------- Top area ----------
@@ -726,7 +736,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   top: 0;
   left: 0;
   width: 100%;
-  height: calc(var(--project-top-height) * var(--u));
+  height: var(--top-height);
   pointer-events: none; /* clicks go through its empty parts… */
 }
 .project-top a { pointer-events: auto; } /* …but not through its links */
@@ -736,7 +746,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(var(--project-side-width) * var(--u));
+  left: var(--side-width);
   right: 0;
   background-color: var(--color-project-cream);
 }
@@ -833,13 +843,13 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   top: 0;
   bottom: 0;
   left: 0;
-  width: calc(var(--project-side-width) * var(--u));
+  width: var(--side-width);
   overflow-y: auto;
   scrollbar-width: none;     /* it scrolls only on short windows, without a scroll bar */
   display: flex;
   flex-direction: column;
-  padding-left: calc(var(--project-side-left) * var(--u));
-  padding-bottom: calc(var(--project-side-bottom) * var(--u));
+  padding-left: calc(var(--project-side-left) * var(--s));
+  padding-bottom: calc(var(--project-side-bottom) * var(--s));
   background-color: var(--color-project-cream);
 }
 .project-side::-webkit-scrollbar { display: none; }
@@ -848,9 +858,9 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
    top-left corner, --logo-width and --logo-height), all in Figma pixels */
 .side-logo {
   flex: none;
-  margin: calc(var(--logo-y) * var(--u)) 0 0 calc((var(--logo-x) - var(--project-side-left)) * var(--u));
-  width: calc(var(--logo-width) * var(--u));
-  height: calc(var(--logo-height) * var(--u));
+  margin: calc(var(--logo-y) * var(--s)) 0 0 calc((var(--logo-x) - var(--project-side-left)) * var(--s));
+  width: calc(var(--logo-width) * var(--s));
+  height: calc(var(--logo-height) * var(--s));
 }
 
 /* The details under the logo: the year, the type, the credits and "next project",
@@ -860,8 +870,8 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: calc(var(--project-side-details-gap) * var(--u));
-  margin-top: calc((var(--project-side-details-top) - var(--logo-y) - var(--logo-height)) * var(--u));
+  gap: calc(var(--project-side-details-gap) * var(--s));
+  margin-top: calc((var(--project-side-details-top) - var(--logo-y) - var(--logo-height)) * var(--s));
 }
 
 /* The year: bold, a little bigger */
@@ -895,7 +905,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .side-about {
   flex: none;
   margin-top: auto;
-  padding-top: calc(var(--project-side-min-gap) * var(--u));
+  padding-top: calc(var(--project-side-min-gap) * var(--s));
   /* As wide as in Figma, in text pixels like its text, so the lines break as in Figma */
   width: calc(var(--project-side-text-width) * var(--t));
   text-transform: uppercase;
@@ -912,7 +922,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 
 /* The running text */
 .side-text {
-  margin-top: calc(var(--project-side-title-gap) * var(--u));
+  margin-top: calc(var(--project-side-title-gap) * var(--s));
   font-family: var(--font-label);
   font-weight: 400;
   font-size: var(--side-paragraph-size);
@@ -923,21 +933,30 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .side-links {
   display: flex;
   justify-content: space-between;
-  margin-top: calc(var(--project-side-links-gap) * var(--u));
+  margin-top: calc(var(--project-side-links-gap) * var(--s));
   text-transform: none;
 }
 
-/* A text longer than its spot (trac.): a window onto it, --window-height high.
-   While the page scrolls, the text moves up inside the window, like a normal scroll:
-   new lines come in at the bottom and push the old ones out at the top.
-   When the page reaches its end, so does the text (scroll-text.js moves it). */
+/* A text in parts, longer than its spot (trac.): a window onto it, --window-height high, as in Figma.
+   Each part fits in the window, and the window shows one part at a time. When the page reaches the
+   picture a part belongs to (data-appears-with), the text moves up to that part by itself, with a small
+   bounce, however fast or slow the page is scrolled; and back when scrolling back up (scroll-text.js).
+   Its height and gaps are in text pixels, like the text, so the parts always fit. */
 .side-text-window {
-  height: calc(var(--window-height) * var(--u));
-  margin-top: calc(var(--project-side-title-gap) * var(--u));
+  --text-switch-time: 0.55s;  /* how long the move to the next part takes */
+  height: calc(var(--window-height) * var(--t));
+  margin-top: calc(var(--project-side-title-gap) * var(--s));
   overflow: hidden;
 }
+.side-text-track {
+  /* goes just a little past the new part and comes back: a small bounce */
+  transition: transform var(--text-switch-time) cubic-bezier(0.3, 1.15, 0.6, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .side-text-track { transition: none; } /* for people who asked for less motion: switch at once */
+}
 .side-text-window .side-text { margin-top: 0; }
-.side-text-window .side-text + .side-text { margin-top: calc(var(--paragraph-gap) * var(--u)); }
+.side-text-window .side-text + .side-text { margin-top: calc(var(--paragraph-gap) * var(--t)); }
 
 /* trac.: the first lines of its last text sit closer together, as in Figma */
 .trac-tight-lines { display: block; line-height: 0.94; }
@@ -950,9 +969,10 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
    and scroll up with the page. Each project sets the height (--media-height) and the spots of its pieces
    (with .placed: --x and --y from the top-left corner of the media, as in Figma minus 360 and 120). */
 .project-media {
+  --u: calc((100vw - var(--side-width)) / 1080); /* 1 Figma pixel inside the media (see .project-page) */
   position: relative;
-  margin-top: calc(var(--project-top-height) * var(--u));
-  margin-left: calc(var(--project-side-width) * var(--u));
+  margin-top: var(--top-height);
+  margin-left: var(--side-width);
   height: calc(var(--media-height) * var(--u));
 }
 
@@ -964,7 +984,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   --project-side-links-gap: 0;
   --logo-x: 35; --logo-y: 108; --logo-width: 152.907; --logo-height: 52.793;
 }
-/* The text window: 166 high; between its texts, the space they have in Figma */
+/* The text window: 166 high; between its parts, the space they have in Figma */
 .trac-text-window { --window-height: 166; --paragraph-gap: 52; }
 
 /* ---------- Hamotzi (hamotzi.html) ----------
