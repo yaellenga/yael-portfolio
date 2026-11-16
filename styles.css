@@ -90,10 +90,10 @@
   --year-size: calc(15 * var(--u));
 
   /* About page sizes (in Figma pixels × --u) */
-  --about-height: calc(982 * var(--u));
-  --about-text-size: calc(24 * var(--u));
-  --about-links-size: calc(41 * var(--u));
-  --about-big-size: calc(55 * var(--u));
+  --about-text-size: calc(20 * var(--u));  /* the text about me */
+  --about-fact-size: calc(25 * var(--u));  /* "A random fact about me:" and the facts */
+  --about-fact-step: 72;                   /* from one fact to the next in the list (a line and an empty line) */
+  --about-fact-scroll: 40vh;               /* how much scrolling moves to the next fact */
 
   /* Project pages (like "project page- trac"), also in Figma pixels × --u */
   --home-intro-size: calc(67 * var(--u)); /* home: the big text across both halves */
@@ -1377,14 +1377,16 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 }
 
 /* =========================================================
-   About page (about.html): one screen, drawn 1440 wide.
-   Still a draft in Figma, so the text is placeholder text.
+   About page (about.html): one screen, drawn 1440 × 785.
+   The screen stays in place (fixed); scrolling only changes the random fact (about-facts.js).
    ========================================================= */
 
-/* The blue page; fills the window if the window is taller */
+/* The blue page: fills the window and stays in place */
 .about-page {
-  position: relative;
-  min-height: max(var(--about-height), var(--screen-height));
+  position: fixed;
+  inset: 0;
+  z-index: 1; /* above the scroll space under it (.about-scroll-space), so clicks reach the links */
+  height: var(--screen-height);
   background-color: var(--color-about-blue);
   color: var(--color-black);
 }
@@ -1405,31 +1407,57 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   text-underline-position: from-font;
 }
 
-/* Regular text: "info about me", "fun facts" */
-.about-text {
+/* The text about me: Title Case, an empty line between the paragraphs */
+.about-info {
   font-family: var(--font-label);
   font-weight: 400;
   font-size: var(--about-text-size);
-  line-height: 1.2;
+  line-height: 1.2;                  /* 24 at 20, as Figma rounds it */
   text-transform: capitalize;
 }
+.about-info p + p { margin-top: 1.2em; }  /* one empty line */
 
-/* Email, LinkedIn, CV at the top right */
-.about-links {
+/* "A random fact about me:" and the facts: capitals */
+.about-fact {
   font-family: var(--font-label);
   font-weight: 400;
-  font-size: var(--about-links-size);
-  line-height: 1.86;
-  text-transform: capitalize;
+  font-size: var(--about-fact-size);
+  line-height: 1.44;
+  text-transform: uppercase;
+  white-space: nowrap;
+  list-style: none;
 }
 
-/* Big text: "scroll of things i like to do", "short paragraph about me" */
-.about-big {
-  font-family: var(--font-label);
-  font-weight: 400;
-  font-size: var(--about-big-size);
-  line-height: 1;
-  text-transform: capitalize;
+/* The window the facts show through: one fact (and the empty line under it) at a time.
+   A fact that slides up out of it disappears under the headline. */
+.about-facts {
+  height: calc(var(--about-fact-step) * var(--u));
+  overflow: hidden;
+}
+
+/* The list of facts, one under the other. --progress (about-facts.js) moves it up:
+   0 shows the first fact, 1 the second, and in between both are partly showing. */
+.about-facts-list {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc((var(--about-fact-step) * var(--u)) - 1.44 * var(--about-fact-size)); /* the empty line */
+  transform: translateY(calc(var(--progress, 0) * var(--about-fact-step) * -1 * var(--u)));
+}
+
+/* The scroll length under the fixed page: one stop for each fact (about-facts.js adds them).
+   The page snaps to the stops, so it always rests on a whole fact. */
+html:has(.about-scroll-space) { scroll-snap-type: y mandatory; }
+.about-scroll-space {
+  position: relative;
+  height: calc(var(--screen-height) + (var(--fact-count, 1) - 1) * var(--about-fact-scroll));
+}
+.about-scroll-stop {
+  position: absolute;
+  top: calc(var(--index) * var(--about-fact-scroll));
+  height: 1px;
+  width: 1px;
+  scroll-snap-align: start;
 }
 
 /* A stamp left by a click: a copy of the mouse photo, centered on the click
@@ -1447,13 +1475,12 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   to { opacity: 0; }
 }
 
-.about-cool-stuff { --x: 434;  --y: 40; }
-.about-my-name    { --x: 760;  --y: 43; }
-.about-contact    { --x: 1144; --y: 67;  --width: 265; }
-.about-info       { --x: 63;   --y: 246; --width: 626; }
-.about-fun-facts  { --x: 730;  --y: 252; --width: 297; text-align: center; }
-.about-things     { --x: 210;  --y: 684; --width: 265; }
-.about-paragraph  { --x: 772;  --y: 682; --width: 265; }
+.about-cool-stuff { --x: 398;  --y: 25; }
+.about-my-name    { --x: 740;  --y: 25; }
+.about-top-links  { --y: 48; }                          /* a bit higher than on the project pages */
+.about-info       { --x: 54;   --y: 322; --width: 667; }
+.about-fact-title { --x: 1080; --from-bottom: 164; }    /* its top: 621 of 785 */
+.about-facts      { --x: 1080; --from-bottom: 111; --width: 360; } /* its top: 674 of 785 */
 
 /* =========================================================
    Process page

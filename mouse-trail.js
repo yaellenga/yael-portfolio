@@ -1,4 +1,5 @@
 // Home page, first screen: a tail of black-and-white photos that follows the mouse.
+// The about page has a tail too, made of its mouse picture (data-trail="about" on the area).
 // While the mouse moves over the first screen (both halves), a photo is left behind it every time
 // it has moved far enough that the new photo covers only --mouse-trail-overlap of the one before.
 // The photos come one after the other (1, 2, 3, 4, 1, 2…). Each stays --mouse-trail-stay-time,
@@ -13,17 +14,34 @@
   const trails = [...document.querySelectorAll('.mouse-trail')]; // one layer in each half, under the text
   const areas = [...document.querySelectorAll('.mouse-trail-area')]; // the two halves of the first screen
 
-  // The photos (cut to what can be seen, without see-through margins),
-  // how wide each one was in the old changing photos (in Figma pixels), and its width ÷ height
-  const photos = [
-    { src: 'images/home-trail-1.png', width: 621.9,  ratio: 1382 / 1595 },
-    { src: 'images/home-trail-2.png', width: 630.45, ratio: 1401 / 1118 },
-    { src: 'images/home-trail-3.png', width: 693.45, ratio: 1541 / 1258 },
-    { src: 'images/home-trail-4.png', width: 344.7,  ratio: 766 / 1604 },
-  ];
-
+  if (areas.length === 0) return;
   const rootStyle = getComputedStyle(document.documentElement);
-  const size = parseFloat(rootStyle.getPropertyValue('--mouse-trail-size'));       // share of the old size
+
+  // The tails: the photos of each one, how wide each photo is (in Figma pixels),
+  // its width ÷ height, and how much to shrink them all (size)
+  const tails = {
+    // Home: the black-and-white photos (cut to what can be seen, without see-through margins),
+    // at their width in the old changing photos, shrunk to --mouse-trail-size
+    home: {
+      size: parseFloat(rootStyle.getPropertyValue('--mouse-trail-size')),
+      photos: [
+        { src: 'images/home-trail-1.png', width: 621.9,  ratio: 1382 / 1595 },
+        { src: 'images/home-trail-2.png', width: 630.45, ratio: 1401 / 1118 },
+        { src: 'images/home-trail-3.png', width: 693.45, ratio: 1541 / 1258 },
+        { src: 'images/home-trail-4.png', width: 344.7,  ratio: 766 / 1604 },
+      ],
+    },
+    // About: the page's mouse picture, as big as the mouse (.cursor-about in styles.css)
+    about: {
+      size: 1,
+      photos: [
+        { src: 'images/cursor-about.png', width: 65, ratio: 195 / 303 },
+      ],
+    },
+  };
+  const tail = tails[areas[0].dataset.trail || 'home'];
+  const photos = tail.photos;
+  const size = tail.size;
   const overlap = parseFloat(rootStyle.getPropertyValue('--mouse-trail-overlap')); // share that overlaps
   const stayTime = parseFloat(rootStyle.getPropertyValue('--mouse-trail-stay-time')) * 1000;
 

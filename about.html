@@ -20,35 +20,68 @@
   </div>
   <script src="page-loader.js"></script>
 
-  <!-- About page: still a draft in Figma, so most of the text is placeholder text -->
-  <main class="about-page stamp-area has-project-cursor" data-cursor="about">
+  <!-- About page: one screen that stays in place. Scrolling only changes the random fact
+       at the bottom right (about-facts.js); everything else stays still. -->
+  <main class="about-page stamp-area has-project-cursor mouse-trail-area" data-cursor="about" data-trail="about">
 
-    <!-- "Cool stuff by Yael Lenga" at the top -->
+    <!-- A tail of the mouse picture behind the mouse (mouse-trail.js, data-trail="about"):
+         first, so it is under the text; the stamps from clicks show above it -->
+    <div class="mouse-trail" aria-hidden="true"></div>
+
+    <!-- "Cool stuff by Yael Lenga" at the top: "Cool stuff by" goes back to the home page -->
     <p class="placed about-handwriting about-cool-stuff">
       <a class="handwriting-link" href="index.html">Cool stuff by</a>
     </p>
     <h1 class="placed about-handwriting about-name about-my-name">Yael Lenga</h1>
 
-    <!-- Contact links: their destinations will be added later -->
-    <p class="placed about-links about-contact">Email<br>LinkedIn<br>CV</p>
+    <!-- phone, email, LinkedIn, Cv: the same as on the project pages (styles.css, .top-link-swap;
+         clicking the phone number or the email address copies it: copy-on-click.js) -->
+    <nav class="placed top-links about-top-links" aria-label="Contact">
+      <a class="top-link top-link-swap top-link-phone" href="tel:+972546138340" data-copied-text="number copied">
+        <span class="top-link-label">phone</span>
+        <span class="top-link-reveal" aria-live="polite">+972546138340</span>
+      </a>
+      <a class="top-link top-link-swap top-link-email" href="mailto:yael.lenga@gmail.com" data-copied-text="email copied">
+        <span class="top-link-label">email</span>
+        <span class="top-link-reveal" aria-live="polite">yael.lenga@gmail.com</span>
+      </a>
+      <a class="top-link top-link-swap top-link-linkedin" href="https://www.linkedin.com/in/yael-lenga-37ba863b9/" target="_blank" rel="noopener">
+        <span class="top-link-label">LinkedIn</span>
+        <span class="top-link-reveal">Yael lenga</span>
+      </a>
+      <a class="top-link top-link-cv" href="CV%20Yael%20Lenga-%20portfolio.pdf" target="_blank" rel="noopener">Cv</a>
+    </nav>
 
-    <!-- Info about me -->
-    <div class="placed about-text about-info">
-      <p>info about me</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <!-- About me -->
+    <div class="placed about-info">
+      <p>I’m a UX/UI designer based in Tel Aviv.<br>I graduated the Visual Communication program at Bezalel Academy of arts.</p>
+      <p>I like creating designes that solve problems, like a puzzle waiting to be cracked, figuring out how all the pieces fit together and making the final result feel simple and effortless.<br>I like jumping between ideas, visuals, and interactions to find the right solution.</p>
+      <p>When I’m not designing, you’ll probably find me baking, traveling, reading or designing tables.</p>
+      <p>and definitely holding a coffee...</p>
     </div>
 
-    <p class="placed about-text about-fun-facts">Fun Facts</p>
-
-    <!-- Places for things that will be designed later -->
-    <p class="placed about-big about-things">Scroll Of Things I Like To Do</p>
-    <p class="placed about-big about-paragraph">Short Paragraph About Me</p>
+    <!-- A random fact: the headline stays, the facts slide up under it while the page scrolls -->
+    <p class="placed pin-bottom about-fact about-fact-title">A random fact about me:</p>
+    <div class="placed pin-bottom about-facts">
+      <ul class="about-facts-list">
+        <li class="about-fact">i always have a Kleenex</li>
+        <li class="about-fact">i’m a pretty bad swimmer</li>
+        <li class="about-fact">i’m a great clothes folder</li>
+        <li class="about-fact">i loooove coffee</li>
+      </ul>
+    </div>
   </main>
+
+  <!-- Gives the page its scroll length: one stop for each fact (about-facts.js) -->
+  <div class="about-scroll-space" aria-hidden="true"></div>
 
   <!-- The special mouse on this page (see custom-cursor.js) -->
   <img class="project-cursor" src="images/cursor-about.png" alt="" aria-hidden="true">
 
   <script src="custom-cursor.js"></script>
   <script src="about-stamps.js"></script>
+  <script src="mouse-trail.js"></script>
+  <script src="about-facts.js"></script>
+  <script src="copy-on-click.js"></script>
 </body>
 </html>
