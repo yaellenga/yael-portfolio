@@ -82,7 +82,8 @@
 
   /* Fonts */
   --font-text: "Advent Pro", sans-serif;
-  --font-handwriting: "Mynerve", cursive;
+  --font-handwriting: "DM Serif Display", serif; /* "Cool stuff by", "Yael Lenga", the links and "scroll down" (was Mynerve, then Alice, Bigshot One, Croissant One) */
+  --font-handwriting-style: italic;      /* ...in italics */
   --font-label: "Carlito", sans-serif;
 
   /* Home page scale unit: 1 Figma pixel.
@@ -112,7 +113,6 @@
   --scroll-down-size: calc(20 * var(--u)); /* home: "scroll down" at the bottom of the first screen */
   --trac-group-gap: 45.73;                  /* home, trac.: the space between the headline, the tag and the phone (Figma pixels; the headline-to-tag space in Figma) */
   --trac-screen-padding: 8px;               /* home, trac.: the least space above the headline and under the phone */
-  --project-handwriting-size: calc(42.75 * var(--u)); /* "More stuff" and "Yael Lenga": 5% smaller than in Figma (45) */
   --project-name-size: calc(40 * var(--u));
   --project-header-size: calc(30 * var(--u));
   --project-title-size: calc(30 * var(--u));
@@ -179,7 +179,7 @@
   --video-time-bar-height: 4;          /* the time bar under the video: its line... */
   --video-time-handle-size: 14;        /* ...and the square you drag */
   --nav-slide-time: 0.6s;             /* "More stuff" and "Yael Lenga" slide toward each other before leaving the page */
-  --nav-meet-left-end: 690.94;         /* ...and stop: "More stuff" ends where "Cool stuff by" ends on the home page */
+  --nav-meet-left-end: 689.4;          /* ...and stop: "More stuff" ends where "Cool stuff by" ends on the home page (398 + its width) */
   --nav-meet-right-start: 740;         /* ...and "Yael Lenga" starts where it starts on the home page */
   --loader-wait-time: 0.3s;            /* loader: the number shows only if the page isn't ready after this long */
   --loader-picture-time: 0.5s;         /* loader: at 100%, the about page's mouse picture shows this long before the page opens */
@@ -462,13 +462,15 @@ body {
 /* "Cool stuff by" and "Yael Lenga" in handwriting, pinned to the bottom */
 .handwriting {
   font-family: var(--font-handwriting);
+  font-style: var(--font-handwriting-style);
   font-weight: 400;
   font-size: var(--handwriting-size);
   line-height: 0.9;
+  white-space: nowrap; /* "Yael Lenga" and "Cool stuff by" stay on one line, whatever the font */
 }
 
 .cool-stuff {
-  --x: 398; --y: 25; --width: 391;
+  --x: 398; --y: 25; --width: 392;   /* as in Figma */
   color: var(--color-hero-text);
   text-decoration: underline;
   text-decoration-thickness: from-font; /* underline as in Figma */
@@ -487,11 +489,11 @@ body {
   color: var(--color-hero-text);
   white-space: nowrap;
 }
-.scroll-down-left  { --x: 672; --width: 48; }
-.scroll-down-right { --x: 5;   --width: 53; }
+.scroll-down-left  { --x: 673.8; --width: 46.2; } /* ends at the middle (its width in DM Serif Display italic: 46.2) */
+.scroll-down-right { --x: 5;   --width: 48; }
 
 .home-name {
-  --x: 20; --y: 25; --width: 265;
+  --x: 20; --y: 25; --width: 315;
   color: var(--color-hero-text);
 }
 
@@ -616,6 +618,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 /* "More stuff by Yael Lenga" at the top of the left half */
 .project-handwriting {
   font-family: var(--font-handwriting);
+  font-style: var(--font-handwriting-style);
   font-weight: 400;
   font-size: var(--project-handwriting-size);
   line-height: 0.9;
@@ -756,7 +759,8 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   --side-width: calc(var(--project-side-width) * var(--s)); /* the side column's width, in real pixels */
   --top-height: calc(var(--project-top-height) * var(--s)); /* the top area's height, in real pixels: with the side
                                                                column's unit, so the logo stays lined up with the top of the media */
-  --project-handwriting-size: calc(42.75 * var(--t)); /* "More stuff" and "Yael Lenga": 5% smaller than in Figma (45) */
+  --project-handwriting-size: calc(40.6125 * var(--t)); /* "More stuff" and "Yael Lenga": 45 in Figma, 5% smaller, and 5% smaller again */
+  --top-link-scale: 0.95;                      /* phone, email, LinkedIn, Cv: 5% smaller than in Figma (and the spaces between them) */
   --project-text-size: calc(20 * var(--t));   /* the title, and the contact links */
   --side-text-size: calc(12 * var(--t));      /* the details under the logo */
   --side-paragraph-size: calc(12 * var(--t)); /* the text about the project */
@@ -816,8 +820,9 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 /* phone, email, LinkedIn, Cv: small handwriting under "Yael Lenga" */
 .top-link {
   font-family: var(--font-handwriting);
+  font-style: var(--font-handwriting-style);
   font-weight: 400;
-  font-size: var(--project-text-size);
+  font-size: calc(var(--project-text-size) * var(--top-link-scale, 1));
   line-height: 1.49;
   white-space: nowrap;
   text-decoration: none;
@@ -830,9 +835,9 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   justify-content: flex-end;
   align-items: flex-start;
 }
-.top-link-email    { margin-left: calc(var(--top-link-gap-email) * var(--t)); }
-.top-link-linkedin { margin-left: calc(var(--top-link-gap-linkedin) * var(--t)); }
-.top-link-cv       { margin-left: calc(var(--top-link-gap-cv) * var(--t)); }
+.top-link-email    { margin-left: calc(var(--top-link-gap-email) * var(--top-link-scale, 1) * var(--t)); }
+.top-link-linkedin { margin-left: calc(var(--top-link-gap-linkedin) * var(--top-link-scale, 1) * var(--t)); }
+.top-link-cv       { margin-left: calc(var(--top-link-gap-cv) * var(--top-link-scale, 1) * var(--t)); }
 
 /* A link that opens up: its word and what it stands for sit in the same spot, lined up on the right.
    Its width is the word's box in Figma (--closed), and on hover the long text's box (--open),
@@ -842,13 +847,13 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   grid-template-columns: minmax(0, 1fr); /* one column, exactly as wide as the link */
   justify-items: unsafe end;            /* the texts end at its right edge (the long one sticks out to the left, hidden) */
   overflow: hidden;
-  width: calc(var(--closed) * var(--t));
+  width: calc(var(--closed) * var(--top-link-scale, 1) * var(--t));
   transition: width var(--top-link-open-time) ease-out;
 }
-.top-link-phone    { --closed: 48; --open: 141; } /* "phone" → the phone number */
-.top-link-email    { --closed: 47; --open: 186; } /* "email" → the address */
-.top-link-linkedin { --closed: 78; --open: 88; }  /* "LinkedIn" → "Yael lenga" (just as wide as the name, so phone and email move only a little) */
-.top-link-cv       { width: calc(28 * var(--t)); }
+.top-link-phone    { --closed: 52; --open: 132; } /* "phone" → the phone number (wide enough for "number copied" too); widths of the words in DM Serif Display italic */
+.top-link-email    { --closed: 48; --open: 196; } /* "email" → the address */
+.top-link-linkedin { --closed: 75; --open: 87; }  /* "LinkedIn" → "Yael lenga" (just as wide as the name, so phone and email move only a little) */
+.top-link-cv       { width: calc(28 * var(--top-link-scale, 1) * var(--t)); }
 .top-link-label,
 .top-link-reveal {
   grid-area: 1 / 1;
@@ -859,7 +864,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .top-link-swap.is-copied .top-link-reveal { justify-self: center; }
 
 .top-link-swap:hover,
-.top-link-swap:focus-visible { width: calc(var(--open) * var(--t)); }
+.top-link-swap:focus-visible { width: calc(var(--open) * var(--top-link-scale, 1) * var(--t)); }
 .top-link-swap:hover .top-link-label,
 .top-link-swap:focus-visible .top-link-label { opacity: 0; }
 .top-link-swap:hover .top-link-reveal,
@@ -934,6 +939,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 /* "next project" and the links at the bottom: small handwriting, in the project's color */
 .side-link {
   font-family: var(--font-handwriting);
+  font-style: var(--font-handwriting-style);
   font-weight: 400;
   font-size: var(--side-link-size);
   line-height: 1.49;
@@ -972,7 +978,9 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 /* The links under the text, spread across its width (the first at its left edge, the last at its right) */
 .side-links {
   display: flex;
+  flex-wrap: wrap;            /* if the links don't fit in one row, the last ones go to a second row */
   justify-content: space-between;
+  column-gap: 0.75em;         /* and they never touch each other */
   margin-top: calc(var(--project-side-links-gap) * var(--s));
   text-transform: none;
 }
@@ -1469,6 +1477,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 /* "Cool stuff by" and "Yael Lenga" at the top */
 .about-handwriting {
   font-family: var(--font-handwriting);
+  font-style: var(--font-handwriting-style);
   font-weight: 400;
   font-size: var(--handwriting-size);
   line-height: 0.9;
@@ -1492,12 +1501,9 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 }
 .about-info p + p { margin-top: 1.18em; }  /* one empty line */
 
-/* The photos' rectangle, with rough edges: the photos show through a mask of its shape
-   (the rectangle from Figma, with its rough edge around it: 3 more on each side) */
+/* The photos' rectangle: straight edges; the photos show only inside it */
 .about-photos {
   overflow: hidden;
-  -webkit-mask: url("images/about-photo-mask.png") center / 100% 100% no-repeat;
-          mask: url("images/about-photo-mask.png") center / 100% 100% no-repeat;
 }
 
 /* The photos, one under the other, each as big as the rectangle.
@@ -1549,7 +1555,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .about-my-name    { --x: 740;  --y: 25; }
 .about-info       { --x: 745;  --y: 178; --width: 453; }
 .about-reach-out  { --y: 533; }                         /* "don't hesitate to reach out:" */
-.about-photos     { --x: 328;  --y: 175; --width: 362; --height: 417; } /* the rectangle: 331, 178, 356 × 411 */
+.about-photos     { --x: 331;  --y: 178; --width: 356; --height: 411; } /* the rectangle in Figma */
 
 /* phone, email, LinkedIn, Cv under "don't hesitate to reach out:": phone at the text's left edge,
    Cv ending at 1208, with equal space between them */
@@ -1767,8 +1773,8 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 
 /* The about page's photos rectangle, at its size on the page */
 .guide-about-photos {
-  width: calc(362 * var(--u));
-  height: calc(417 * var(--u));
+  width: calc(356 * var(--u));
+  height: calc(411 * var(--u));
 }
 
 /* Samples of the left-column texts: uppercase, as inside the column */
@@ -1890,6 +1896,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 
 .page-loader-number {
   font-family: var(--font-handwriting);
+  font-style: var(--font-handwriting-style);
   font-size: var(--handwriting-size);
   color: var(--color-black);
   visibility: hidden;                   /* until the short wait is over */

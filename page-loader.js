@@ -1,5 +1,5 @@
 // Loader: covers the page while its pictures, videos and fonts load, and counts up to 100%
-// in handwriting (Mynerve). At 100% the about page's mouse picture shows for a moment
+// in the handwriting-style font (DM Serif Display italic). At 100% the about page's mouse picture shows for a moment
 // (--loader-picture-time in styles.css), and then the loader goes away and the page shows.
 //
 // The loader covers the page from the start (a plain cream screen), but the number only shows up
