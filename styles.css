@@ -158,10 +158,13 @@
   --project-top-links-top: 71;         /* phone, email, LinkedIn, Cv from the top */
   --project-top-links-left: 895;       /* ...the row's box from the left (it ends where Cv ends, at 1397: 10 left of Figma) */
   --project-top-links-width: 502;
-  --top-link-gap-email: 24;            /* the space before email, before LinkedIn and before Cv */
-  --top-link-gap-linkedin: 18;
-  --top-link-gap-cv: 19;               /* (LinkedIn moved 8 to the left of Figma: more space before Cv, less before LinkedIn) */
-  --top-link-open-time: 0.3s;          /* how fast a link opens up on hover (and Cv grows on click) */
+  --top-link-gap: 14;                  /* the space between phone, email, LinkedIn and Cv (the same between all of them;
+                                          each also has 0.3em of room on its left, so the words are about 20 apart) */
+  --top-link-open-time: 0.3s;          /* how fast phone, email and LinkedIn open up on hover */
+  --roll-time: 0.45s;                  /* the wave on hover: how long each letter takes to go up... */
+  --roll-stagger: 0.012s;              /* ...how long after the letter before it it starts... */
+  --roll-distance: calc(100% + 0.6em); /* ...and how far it goes: its own line, and a bit more (out of sight) */
+  --roll-ease: cubic-bezier(0.65, 0, 0.25, 1);
   --email-copied-time: 2s;             /* after clicking the number or the email: "number copied" / "email copied" shows this long */
   --project-nav-color: var(--color-black); /* "More stuff", "Yael Lenga", the links and "next project": each project sets its own color */
   --project-side-width: 360;           /* the side column on the left (the media on the right starts here) */
@@ -179,8 +182,9 @@
   --video-time-bar-height: 4;          /* the time bar under the video: its line... */
   --video-time-handle-size: 14;        /* ...and the square you drag */
   --nav-slide-time: 0.6s;             /* "More stuff" and "Yael Lenga" slide toward each other before leaving the page */
-  --nav-meet-left-end: 689.4;          /* ...and stop: "More stuff" ends where "Cool stuff by" ends on the home page (398 + its width) */
-  --nav-meet-right-start: 740;         /* ...and "Yael Lenga" starts where it starts on the home page */
+  --nav-meet-left-end: 708;            /* ...and stop: "More stuff" ends where "Cool stuff by" ends on the home page */
+  --nav-meet-right-start: 732;         /* ...and "Yael Lenga" starts where it starts on the home page */
+  --name-gap-half: 12;                 /* home and about: "Cool stuff by" ends this far before the middle (720), "Yael Lenga" starts this far after it */
   --loader-wait-time: 0.3s;            /* loader: the number shows only if the page isn't ready after this long */
   --loader-picture-time: 0.5s;         /* loader: at 100%, the about page's mouse picture shows this long before the page opens */
   --loader-fade-time: 0.3s;            /* loader: how fast it fades away to show the page */
@@ -470,7 +474,8 @@ body {
 }
 
 .cool-stuff {
-  --x: 398; --y: 25; --width: 392;   /* as in Figma */
+  --width: 292; --y: 25;
+  --x: calc(720 - var(--name-gap-half) - 291.4); /* ends just before the middle (291.4 = its width) */
   color: var(--color-hero-text);
   text-decoration: underline;
   text-decoration-thickness: from-font; /* underline as in Figma */
@@ -493,7 +498,7 @@ body {
 .scroll-down-right { --x: 5;   --width: 48; }
 
 .home-name {
-  --x: 20; --y: 25; --width: 315;
+  --x: var(--name-gap-half); --y: 25; --width: 315; /* starts just after the middle (this is the right half) */
   color: var(--color-hero-text);
 }
 
@@ -632,10 +637,59 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   text-decoration: none;
 }
 
-.handwriting-link:hover {
-  text-decoration: underline;
-  text-decoration-thickness: from-font; /* same underline as "Cool stuff by" */
-  text-underline-position: from-font;
+/* =========================================================
+   The wave on hover (letter-roll.js): every button and link in the handwriting-style font.
+   Each letter is a <span> (.roll-letter) with its place in the word (--i). On hover the letters go up
+   out of sight, one after another (--roll-stagger apart), and the same text comes up from below.
+   The text shows only inside its own line (clip-path), with a little room around it for the
+   letters' tails (g, y, p) and the slant of the italics.
+   ========================================================= */
+/* The button itself is what the mouse is over (its own box), not the moving letters:
+   so letters passing by on their way up or down never catch the mouse (no flicker between buttons) */
+a.handwriting-link,
+a.top-link:not(.top-link-swap) { display: inline-block; } /* (phone, email and LinkedIn are already a box: .top-link-swap) */
+.roll,
+.top-link-label,
+.top-link-reveal { pointer-events: none; }
+
+.roll {
+  display: inline-grid;
+  vertical-align: top;
+  clip-path: inset(-0.2em -0.3em -0.35em -0.3em);
+  text-decoration: inherit;            /* an underlined button ("Cool stuff by", "Yael Lenga" on the about page) stays underlined */
+}
+.roll-line {
+  grid-area: 1 / 1;                    /* the text and its copy in the same spot */
+  text-decoration: inherit;
+}
+.roll-letter {
+  display: inline-block;
+  white-space: pre;                    /* a space is a letter too */
+  text-decoration: inherit;
+  transition: transform var(--roll-time) var(--roll-ease) calc(var(--i) * var(--roll-stagger));
+}
+
+/* The underlined buttons: the link passes the underline on to its letters */
+.cool-stuff .handwriting-link,
+.about-name .handwriting-link { text-decoration: inherit; }
+
+/* Before hover: the copy (and what phone, email and LinkedIn stand for) waits below, out of sight */
+.roll-in .roll-letter,
+.top-link-reveal .roll-letter { transform: translateY(var(--roll-distance)); }
+
+/* On hover (or keyboard focus): the text goes up and out, the copy comes up into its place */
+a:hover .roll-out .roll-letter,
+a:focus-visible .roll-out .roll-letter,
+.top-link-swap:hover .top-link-label .roll-letter,
+.top-link-swap:focus-visible .top-link-label .roll-letter { transform: translateY(calc(-1 * var(--roll-distance))); }
+a:hover .roll-in .roll-letter,
+a:focus-visible .roll-in .roll-letter,
+.top-link-swap:hover .top-link-reveal .roll-letter,
+.top-link-swap:focus-visible .top-link-reveal .roll-letter { transform: none; }
+
+/* People who asked their computer for less motion: the text changes at once, without moving */
+@media (prefers-reduced-motion: reduce) {
+  .roll-letter { transition: none; }
 }
 
 /* Project name, type and year */
@@ -835,48 +889,45 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   justify-content: flex-end;
   align-items: flex-start;
 }
-.top-link-email    { margin-left: calc(var(--top-link-gap-email) * var(--top-link-scale, 1) * var(--t)); }
-.top-link-linkedin { margin-left: calc(var(--top-link-gap-linkedin) * var(--top-link-scale, 1) * var(--t)); }
-.top-link-cv       { margin-left: calc(var(--top-link-gap-cv) * var(--top-link-scale, 1) * var(--t)); }
+.top-link-email,
+.top-link-linkedin,
+.top-link-cv       { margin-left: calc(var(--top-link-gap) * var(--top-link-scale, 1) * var(--t)); }
 
 /* A link that opens up: its word and what it stands for sit in the same spot, lined up on the right.
    Its width is the word's box in Figma (--closed), and on hover the long text's box (--open),
-   so the width grows smoothly while the word fades into the long text. */
+   so the width grows smoothly while the word goes up in a wave and the long text comes up
+   from below (the wave: .roll-letter, above). Only what is inside the link's box shows. */
 .top-link-swap {
-  display: inline-grid;
-  grid-template-columns: minmax(0, 1fr); /* one column, exactly as wide as the link */
-  justify-items: unsafe end;            /* the texts end at its right edge (the long one sticks out to the left, hidden) */
-  overflow: hidden;
-  width: calc(var(--closed) * var(--top-link-scale, 1) * var(--t));
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  height: 1.49em;                       /* one line */
+  clip-path: inset(-0.2em -0.15em -0.35em 0);  /* hides what sticks out to the left; above, below and on the right, room for the letters' tails and slant */
+  /* the width from Figma, or the measured width of the word if that is wider (letter-roll.js) */
+  width: max(calc(var(--closed) * var(--top-link-scale, 1) * var(--t)), var(--closed-px, 0px));
   transition: width var(--top-link-open-time) ease-out;
 }
-.top-link-phone    { --closed: 52; --open: 132; } /* "phone" → the phone number (wide enough for "number copied" too); widths of the words in DM Serif Display italic */
-.top-link-email    { --closed: 48; --open: 196; } /* "email" → the address */
-.top-link-linkedin { --closed: 75; --open: 87; }  /* "LinkedIn" → "Yael lenga" (just as wide as the name, so phone and email move only a little) */
-.top-link-cv       { width: calc(28 * var(--top-link-scale, 1) * var(--t)); }
+.top-link { flex-shrink: 0; }           /* the links never get squeezed: the ones before them move over instead */
+.top-link-phone    { --closed: 52; --open: 140; } /* "phone" → the phone number (wide enough for "number copied" too); widths of the words in DM Serif Display italic */
+.top-link-email    { --closed: 48; --open: 206; } /* "email" → the address (with a little room, so the whole address shows) */
+.top-link-linkedin { --closed: 75; --open: 95; }  /* "LinkedIn" → "Yael lenga" (just as wide as the name, so phone and email move only a little) */
+.top-link-cv       { padding-left: 0.3em; } /* the same room on its left as the other three have (letter-roll.js), so the spaces match */
+/* The word and what it stands for: both end at the link's right edge (the long one sticks out to the left, hidden) */
 .top-link-label,
 .top-link-reveal {
-  grid-area: 1 / 1;
-  transition: opacity var(--top-link-open-time) ease-out;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
-.top-link-reveal { opacity: 0; }
 /* "number copied" / "email copied" (copy-on-click.js): in the middle of the space of the number or address */
-.top-link-swap.is-copied .top-link-reveal { justify-self: center; }
+.top-link-swap.is-copied .top-link-reveal { right: auto; left: 50%; transform: translateX(-50%); }
 
 .top-link-swap:hover,
-.top-link-swap:focus-visible { width: calc(var(--open) * var(--top-link-scale, 1) * var(--t)); }
-.top-link-swap:hover .top-link-label,
-.top-link-swap:focus-visible .top-link-label { opacity: 0; }
-.top-link-swap:hover .top-link-reveal,
-.top-link-swap:focus-visible .top-link-reveal { opacity: 1; }
-
-/* Cv: grows 10% on hover; a click opens the CV (a PDF, in a new tab) */
-.top-link-cv {
-  transform-origin: left bottom;
-  transition: transform var(--top-link-open-time) ease-out;
+.top-link-swap:focus-visible {
+  /* the width from Figma, or the measured width of what it stands for if that is wider (letter-roll.js) */
+  width: max(calc(var(--open) * var(--top-link-scale, 1) * var(--t)), var(--open-px, 0px));
 }
-.top-link-cv:hover,
-.top-link-cv:focus-visible { transform: scale(1.1); }
+/* Cv: a click opens the CV (a PDF, in a new tab) */
 
 /* ---------- Side column (left) ----------
    Fixed to the window, as tall as it. Its top part stays at the top and its bottom part
@@ -1524,10 +1575,11 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 }
 
 /* The mouse's tail on this page (mouse-trail.js): it disappears while the mouse is over
-   the contact links or "Cool stuff by" */
+   the contact links, "Cool stuff by" or "Yael Lenga" */
 .about-page .mouse-trail { transition: opacity var(--about-trail-fade-time) ease; }
 .about-page:has(.about-links a:hover) .mouse-trail,
-.about-page:has(.about-cool-stuff a:hover) .mouse-trail { opacity: 0; }
+.about-page:has(.about-cool-stuff a:hover) .mouse-trail,
+.about-page:has(.about-my-name a:hover) .mouse-trail { opacity: 0; }
 
 /* Only the part of the tail that is behind the text shows at half strength, so the text can be read:
    the text's box has a half see-through cream background, laid over the tail (the tail is under the text).
@@ -1551,8 +1603,8 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
   to { opacity: 0; }
 }
 
-.about-cool-stuff { --x: 398;  --y: 25; }
-.about-my-name    { --x: 740;  --y: 25; }
+.about-cool-stuff { --x: calc(720 - var(--name-gap-half) - 291.4); --y: 25; } /* as on the home page */
+.about-my-name    { --x: calc(720 + var(--name-gap-half)); --y: 25; }
 .about-info       { --x: 745;  --y: 178; --width: 453; }
 .about-reach-out  { --y: 533; }                         /* "don't hesitate to reach out:" */
 .about-photos     { --x: 331;  --y: 178; --width: 356; --height: 411; } /* the rectangle in Figma */

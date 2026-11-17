@@ -9,7 +9,7 @@ const copiedTime = parseFloat(getComputedStyle(document.documentElement).getProp
 for (const link of document.querySelectorAll('[data-copied-text]')) {
   const text = link.querySelector('.top-link-reveal');
   const value = link.getAttribute('href').replace(/^(mailto|tel):/, ''); // the address or the number
-  const original = text.textContent;
+  const original = text.textContent; // (letter-roll.js cut it into letters; textContent joins them back)
   let timer = null;
 
   link.addEventListener('click', async (event) => {
@@ -30,11 +30,11 @@ for (const link of document.querySelectorAll('[data-copied-text]')) {
     }
 
     // The message sits in the middle of the space of the address (or number): .is-copied in styles.css
-    text.textContent = link.dataset.copiedText;
+    splitIntoLetters(text, link.dataset.copiedText); // in letters, like the rest (letter-roll.js)
     link.classList.add('is-copied');
     clearTimeout(timer);
     timer = setTimeout(() => {
-      text.textContent = original;
+      splitIntoLetters(text, original);
       link.classList.remove('is-copied');
     }, copiedTime);
   });

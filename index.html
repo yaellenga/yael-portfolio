@@ -33,7 +33,9 @@
       <section class="screen screen-hero mouse-trail-area">
         <!-- The tail of photos behind the mouse (mouse-trail.js puts the photos in it): first, so it is under the text -->
         <div class="mouse-trail" aria-hidden="true"></div>
-        <p class="placed handwriting cool-stuff" aria-hidden="true">Cool stuff by</p>
+        <p class="placed handwriting cool-stuff">
+          <a class="handwriting-link" href="index.html">Cool stuff by</a>
+        </p>
 
         <!-- The big text (a shape from Figma). It runs across both halves of the screen:
              this is its left part; the right part is in the right column's Screen 4. -->
@@ -119,6 +121,7 @@
   <!-- The special mouse shown over a project screen (see custom-cursor.js) -->
   <img class="project-cursor" src="images/cursor-trac.svg" alt="" aria-hidden="true">
 
+  <script src="letter-roll.js"></script>
   <script src="split-scroll.js"></script>
   <script src="scroll-hint.js"></script>
   <script src="custom-cursor.js"></script>
