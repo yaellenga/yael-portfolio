@@ -110,6 +110,7 @@
   --about-trail-fade-time: 0.2s;           /* the tail disappears (over the links and "Cool stuff by") this fast */
 
   /* Project pages (like "project page- trac"), also in Figma pixels × --u */
+  --home-intro-size: calc(56.12 * var(--u)); /* home: the big text across both halves */
   --scroll-down-size: calc(20 * var(--u)); /* home: "scroll down" at the bottom of the first screen */
   --trac-group-gap: 45.73;                  /* home, trac.: the space between the headline, the tag and the phone (Figma pixels; the headline-to-tag space in Figma) */
   --trac-screen-padding: 8px;               /* home, trac.: the least space above the headline and under the phone */
@@ -521,12 +522,23 @@ body {
 /* Home, first view: the big white text across both halves, at the bottom of the screen.
    The same text sits in both screens at the same spot (from 58 on the whole page);
    each screen shows only its own half. */
-/* The big all-caps text across both halves of the first screen: a shape from Figma (its letters
-   are drawn, not typed), cut in two: the left part in the left half, the right part in the right half.
+/* The big all-caps text across both halves of the first screen: the same text in both halves,
+   each half shows its own part (the left part in the left half, the right part in the right half).
+   Its size, spacing and spot are those of the text in Figma (there it is a shape: Carlito Bold, 56.12).
    Pinned to the bottom of the screen, like "scroll down" under it, so the space between them never changes. */
-.home-intro-left  { --x: 162.261; --from-bottom: 284;     --width: 553.557; --height: 163.731; }
-.home-intro-right { --x: -2.593;  --from-bottom: 281.488; --width: 520.593; --height: 161.561; } /* 717.407 - 720 */
-.home-intro-right-in-left { --x: 717.407; } /* in the left half: only the sliver before the middle shows */
+.home-intro {
+  --width: 1100; --from-bottom: 294.7;   /* the top of its capitals: 682.9 of 964, as in Figma */
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--home-intro-size);
+  line-height: 1.1053;                  /* 62.03 between the lines */
+  letter-spacing: 0.0406em;             /* 2.28 at 56.12 */
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-hero-text);
+}
+.home-intro-left  { --x: 162.26; }
+.home-intro-right { --x: -557.74; }     /* 162.26 - 720: starts in the left half */
 
 /* Project labels on the right column: name, type, year (pinned to the bottom) */
 .project-label,

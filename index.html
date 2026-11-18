@@ -37,12 +37,10 @@
           <a class="handwriting-link" href="index.html">Cool stuff by</a>
         </p>
 
-        <!-- The big text (a shape from Figma). It runs across both halves of the screen:
-             this is its left part; the right part is in the right column's Screen 4. -->
-        <img class="placed box pin-bottom home-intro-left" src="images/home-intro-left.svg" alt="A graphic &amp; UX/UI designer, who loves solving creative puzzles &amp; making complexity feel effortless">
-        <!-- The right part too, starting just before the middle: the C of "creative" begins 2.6 pixels
-             left of the middle, so that sliver of it shows here (the rest is hidden past the edge) -->
-        <img class="placed box pin-bottom home-intro-right home-intro-right-in-left" src="images/home-intro-right.svg" alt="">
+        <!-- The big text. It runs across both halves of the screen:
+             this is its left part; the right part is in the right column's Screen 4, at the same spot.
+             Each screen hides what reaches past its edge. -->
+        <p class="placed pin-bottom home-intro home-intro-left">A graphic and digital designer<br>who loves solving creative puzzles &amp;<br>making complexity feel effortless</p>
 
         <!-- "scroll down" at the bottom, across the middle: "scroll" here, "down" in the right half.
              It and the big text are both pinned to the bottom, so the space between them stays the same. -->
@@ -105,8 +103,8 @@
         <!-- The tail of photos behind the mouse: its right half (under the text and the button) -->
         <div class="mouse-trail" aria-hidden="true"></div>
 
-        <!-- The right part of the big text (screen readers read it once, on the left) -->
-        <img class="placed box pin-bottom home-intro-right" src="images/home-intro-right.svg" alt="">
+        <!-- The right part of the big text (the same words; screen readers read it once, on the left) -->
+        <p class="placed pin-bottom home-intro home-intro-right" aria-hidden="true">A graphic and digital designer<br>who loves solving creative puzzles &amp;<br>making complexity feel effortless</p>
 
         <p class="placed pin-bottom handwriting scroll-down scroll-down-right" aria-hidden="true">down</p>
 
