@@ -7,6 +7,7 @@ const cursorPictures = {
   'lets-talk': 'images/cursor-lets-talk.svg',
   'hamotzi': 'images/cursor-hamotzi.png',
   'about': 'images/cursor-about.png',
+  'davar': 'images/cursor-davar.svg',
 };
 
 const projectCursor = document.querySelector('.project-cursor');

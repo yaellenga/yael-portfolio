@@ -43,6 +43,9 @@
      Laid over a color, it makes it look printed. */
   --hamotzi-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.25  0 0 0 0 0.25  0 0 0 0 0.25  0 0 0 1.6 -0.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 
+  /* Davar Echad colors */
+  --color-davar-pink: #fab8f9;          /* "More stuff", "Yael Lenga", the links and "next project" */
+
   /* Lets Talk About It colors */
   --color-lets-talk-blue: #27aae2;      /* "More stuff", "Yael Lenga" and the top links */
   --color-lets-talk-navy: #192e5a;      /* the box behind Yoram */
@@ -279,7 +282,7 @@ body {
 
 /* Gives the page its scroll length: as tall as a column */
 .split {
-  height: calc(4 * var(--screen-height));
+  height: calc(5 * var(--screen-height)); /* 5 screens: the opening and one for each project */
 }
 
 /* Both columns stay fixed on screen; the script slides them */
@@ -571,6 +574,12 @@ body {
 .label-hamotzi,
 .year-hamotzi    { color: var(--color-black); }
 
+/* Davar Echad: two lines (name, type), the year under them like trac.'s; black, over the speech bubbles */
+.label-davar     { --x: 498; --from-bottom: 100; --width: 182; }
+.year-davar      { --x: 498; --from-bottom: 57;  --width: 67; }
+.label-davar,
+.year-davar      { color: var(--color-black); }
+
 /* ---------- Special mouse over the project screens ---------- */
 
 /* Hide the regular mouse over a screen that has its own mouse */
@@ -604,6 +613,7 @@ body:has(.has-project-cursor a:hover) .project-cursor { display: none; }
 .cursor-lets-talk { --width: 58;     --height: 58; }
 .cursor-hamotzi   { --width: 138.8;  --height: 31.2; }
 .cursor-about     { --width: 65;     --height: 101; }
+.cursor-davar     { --width: 46.454; --height: 45.84; }  /* half of Figma's */
 
 /* =========================================================
    Project page (trac.html): the left half stays still,
@@ -1116,6 +1126,15 @@ a:focus-visible .roll-in .roll-letter,
   position: relative;
   width: 100%;
   aspect-ratio: 1080 / 607;
+}
+
+/* ---------- Davar Echad (davar-echad.html) ----------
+   The right side is blank for now (its layout is still to come) */
+.davar-page {
+  --project-nav-color: var(--color-davar-pink);
+  --project-side-title-width: 305;      /* a wider title box (two lines), so "'Davar'" fits on the line before it */
+  --media-height: 844;                  /* one window of blank space (964 − 120) */
+  --logo-x: 35; --logo-y: 78.293; --logo-width: 125.19; --logo-height: 86.419; /* as high as the Lets Talk About It logo */
 }
 
 /* ---------- Lets Talk About It (lets-talk.html) ----------

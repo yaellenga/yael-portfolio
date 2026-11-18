@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Davar Echad — Yael Lenga</title>
+
+  <!-- Fonts from Google Fonts: DM Serif Display italic (the handwriting-style texts) and Carlito (text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="project-page davar-page">
+  <!-- Loader: covers the page while it loads (page-loader.js) -->
+  <div class="page-loader" aria-hidden="true">
+    <span class="page-loader-number">0%</span>
+    <img class="page-loader-picture" src="images/cursor-about.png" alt="">
+  </div>
+  <script src="page-loader.js"></script>
+
+  <!-- TOP AREA: stays at the top of the window while the page scrolls (the same on every project page) -->
+  <header class="project-top">
+    <p class="placed project-handwriting top-more-stuff">
+      <a class="handwriting-link" href="index.html">More stuff</a>
+    </p>
+    <p class="placed project-handwriting top-my-name">
+      <a class="handwriting-link" href="about.html">Yael Lenga</a>
+    </p>
+
+    <!-- phone, email, LinkedIn, Cv: on hover each one opens up to show what it stands for
+         (styles.css, .top-link-swap), and the ones to its left move over to make room.
+         Cv grows a little on hover and opens the CV; LinkedIn opens the LinkedIn page (both in a new tab);
+         clicking the phone number or the email address copies it (copy-on-click.js). -->
+    <nav class="placed top-links" aria-label="Contact">
+      <a class="top-link top-link-swap top-link-phone" href="tel:+972546138340" data-copied-text="number copied">
+        <span class="top-link-label">phone</span>
+        <span class="top-link-reveal" aria-live="polite">+972546138340</span>
+      </a>
+      <a class="top-link top-link-swap top-link-email" href="mailto:yael.lenga@gmail.com" data-copied-text="email copied">
+        <span class="top-link-label">email</span>
+        <span class="top-link-reveal" aria-live="polite">yael.lenga@gmail.com</span>
+      </a>
+      <a class="top-link top-link-swap top-link-linkedin" href="https://www.linkedin.com/in/yael-lenga-37ba863b9/" target="_blank" rel="noopener">
+        <span class="top-link-label">LinkedIn</span>
+        <span class="top-link-reveal">Yael lenga</span>
+      </a>
+      <a class="top-link top-link-cv" href="CV%20Yael%20Lenga-%20portfolio.pdf" target="_blank" rel="noopener">Cv</a>
+    </nav>
+  </header>
+
+  <!-- SIDE COLUMN (left): stays in place while the page scrolls.
+       At the top: the logo, the details and "next project" (to the next project in the list: back to the first, trac.).
+       At the bottom of the window: the title and the text. -->
+  <aside class="project-side">
+    <!-- The logo: "דבר אחד" (Davar Echad) -->
+    <h1 class="side-logo">
+      <img class="whole-image" src="images/davar-logo.png" alt="דבר אחד — Davar Echad" lang="he">
+    </h1>
+
+    <div class="side-details">
+      <p class="side-year">2026</p>
+      <p class="side-detail">branding</p>
+      <p class="side-detail">student project with Yael Gosling</p>
+      <a class="side-link handwriting-link" href="trac.html">next project</a>
+    </div>
+
+    <div class="side-about">
+      <h2 class="side-title">Rebranding the historic Israeli workers’ newspaper ‘Davar’</h2>
+      <p class="side-text">Davar Echad is a contemporary news rebrand designed to make current events more accessible and less overwhelming. By curating one key headline from each major news category, the brand delivers quick, digestible updates that help people stay informed, feel connected, and confidently join everyday conversations.</p>
+    </div>
+  </aside>
+
+  <!-- MEDIA (right): blank for now — the layout is still to come -->
+  <main class="project-media"></main>
+
+  <script src="letter-roll.js"></script>
+  <script src="nav-slide.js"></script>
+  <script src="copy-on-click.js"></script>
+</body>
+</html>
