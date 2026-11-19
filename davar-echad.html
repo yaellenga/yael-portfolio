@@ -72,10 +72,40 @@
     </div>
   </aside>
 
-  <!-- MEDIA (right): blank for now — the layout is still to come -->
-  <main class="project-media"></main>
+  <!-- MEDIA (right): the brand video (plays on a loop when it comes into view), and under it the brand book -->
+  <main class="project-media">
+    <div class="placed box davar-video-spot">
+      <video class="project-video" src="images/davar-brand-video.mp4" poster="images/davar-brand-video-poster.jpg"
+             muted loop playsinline preload="metadata" data-play-when-seen
+             aria-label="The Davar Echad brand video"></video>
+    </div>
+
+    <!-- The brand book, as a long picture in six parts (its fonts are not on the web) -->
+    <div class="placed davar-book">
+      <img src="images/davar-book-1.jpg" alt="Brand book: the idea — one news item from each subject, quick and accessible; the values (quick, accessible, social) and the color palette">
+      <img src="images/davar-book-2.jpg" alt="Brand book: the shape language of speech bubbles and arrows, and posters made of them" loading="lazy">
+      <img src="images/davar-book-3.jpg" alt="Brand book: the typography, and posters with the brand's slogans in Hebrew" loading="lazy">
+      <img src="images/davar-book-4.jpg" alt="Brand book: the newspaper, a newspaper stand, a laptop and a phone with the brand" loading="lazy">
+      <img src="images/davar-book-5.jpg" alt="Brand book: a billboard in the subway, printed tape with the brand's pattern, and a truck with the brand" loading="lazy">
+      <img src="images/davar-book-6.jpg" alt="Brand book: the truck, and the logo at the end" loading="lazy">
+
+      <!-- The brand book's animations, over the picture (styles.css: .davar-anim) -->
+      <div class="davar-anim davar-words davar-typo-anim" aria-hidden="true">
+        <img src="images/davar-anim-typo-black.svg" alt="">
+        <div class="davar-red-band"><img src="images/davar-anim-typo-red.svg" alt=""></div>
+      </div>
+      <div class="davar-anim davar-heart-anim davar-heart-1" aria-hidden="true"><img src="images/davar-anim-heart.svg" alt=""></div>
+      <div class="davar-anim davar-words davar-haim-anim" aria-hidden="true">
+        <img src="images/davar-anim-haim-black.svg" alt="">
+        <div class="davar-red-band"><img src="images/davar-anim-haim-red.svg" alt=""></div>
+      </div>
+      <div class="davar-anim davar-heart-anim davar-heart-2" aria-hidden="true"><img src="images/davar-anim-heart.svg" alt=""></div>
+      <div class="davar-anim davar-ticker-anim" aria-hidden="true"><img src="images/davar-anim-ticker.svg" alt=""></div>
+    </div>
+  </main>
 
   <script src="letter-roll.js"></script>
+  <script src="play-when-seen.js"></script>
   <script src="nav-slide.js"></script>
   <script src="copy-on-click.js"></script>
 </body>
