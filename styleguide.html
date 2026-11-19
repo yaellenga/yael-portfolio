@@ -317,6 +317,55 @@
         </div>
       </div>
 
+      <!-- Home page on the phone: the texts, the project squares and the about strip (same classes as index.html) -->
+      <div class="guide-group">
+        <p class="project-bold-text">Home page on the phone</p>
+        <p class="project-text">.phone-tile and .phone-about — tapping a square brings in the project's two halves from the computer version; they sweep the page into the middle and meet there, then the project opens. The yellow strip grows to fill the screen, then the about page opens (phone-home.js).</p>
+        <div class="phone-home guide-phone-home">
+          <p class="placed phone-handwriting phone-cool-stuff"><a href="index.html">Cool stuff by</a></p>
+          <p class="placed phone-handwriting phone-my-name"><a href="about.html">Yael Lenga</a></p>
+          <p class="placed phone-intro">hey i’m yael, a graphic &amp; digital designer, who loves solving creative puzzles and making complexity feel effortless</p>
+          <div class="placed box phone-tile phone-tile-lets-talk"><img class="phone-tile-picture phone-picture-lets-talk" src="images/phone-tile-lets-talk.svg" alt=""><span class="phone-tile-label">lets talk about it</span></div>
+          <div class="placed box phone-tile phone-tile-hamotzi"><img class="phone-tile-picture phone-picture-hamotzi" src="images/phone-tile-hamotzi.png" alt=""><span class="phone-tile-label">hamotzi</span></div>
+          <div class="placed box phone-tile phone-tile-davar"><img class="phone-tile-picture phone-picture-davar" src="images/phone-tile-davar.svg" alt=""><span class="phone-tile-label">davar echad</span></div>
+          <div class="placed box phone-tile phone-tile-trac"><img class="phone-tile-picture phone-picture-trac" src="images/phone-tile-trac.svg" alt=""><span class="phone-tile-label">trac</span></div>
+          <div class="placed box phone-about"><img class="phone-about-photo" src="images/phone-tile-about.png" alt=""><span class="phone-tile-label">more about me</span></div>
+        </div>
+      </div>
+
+      <!-- Project pages on the phone: the links, the running text and a colored folder with its tab -->
+      <div class="guide-group">
+        <p class="project-bold-text">Project page on the phone</p>
+        <p class="project-text">.phone-nav-link (the links at the top and bottom, in the project's color; the top ones sit on .phone-nav-background, a cream rectangle across the top of the screen), .phone-details, .phone-text, and .phone-folder with .phone-folder-tab (a cream cut-out over its top-left corner). The small app screens (.phone-screen-thumb) swap what is in the big phone (.phone-screen-big): a copy of the tapped one grows into the big phone, over the old one; the first one brings back the video (phone-screens.js).</p>
+        <div class="guide-phone-project trac-phone">
+          <a class="phone-nav-link" href="index.html">More Cool Stuff</a>
+          <p class="phone-details">ux\ui<br>student project<br>2025</p>
+          <p class="phone-text">trac. is an app that keeps your songwriting organized while you keep creating.</p>
+          <div class="guide-phone-folder">
+            <div class="placed box phone-folder block-orange" style="--x: 0; --y: 14; --width: 131; --height: 113"></div>
+            <img class="placed box phone-folder-tab" style="--x: -9; --y: 0" src="images/trac-phone-tab-notch.svg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <!-- Words that change by themselves (trac. phone page, "never lose a ___ again.") -->
+      <div class="guide-group">
+        <p class="project-bold-text">Changing word</p>
+        <p class="project-text">.word-swap — the words show one after the other, each for --word-swap-time (0.45s): beat, sound, track, song, verse, thing, demo, note.</p>
+        <div class="guide-word-swap">
+          <div class="word-swap" aria-hidden="true">
+            <img class="word-swap-word" style="--i: 0; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-beat.svg" alt="">
+            <img class="word-swap-word" style="--i: 1; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-sound.svg" alt="">
+            <img class="word-swap-word" style="--i: 2; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-track.svg" alt="">
+            <img class="word-swap-word" style="--i: 3; --svg-width: 109; --svg-height: 47" src="images/trac-word-swap-song.svg" alt="">
+            <img class="word-swap-word" style="--i: 4; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-verse.svg" alt="">
+            <img class="word-swap-word" style="--i: 5; --svg-width: 110; --svg-height: 47" src="images/trac-word-swap-thing.svg" alt="">
+            <img class="word-swap-word" style="--i: 6; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-demo.svg" alt="">
+            <img class="word-swap-word" style="--i: 7; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-note.svg" alt="">
+          </div>
+        </div>
+      </div>
+
       <!-- Loader (page-loader.js): what shows while a page loads, if it takes a while -->
       <div class="guide-group">
         <p class="project-bold-text">Loader</p>

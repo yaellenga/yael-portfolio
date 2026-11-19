@@ -12,6 +12,8 @@ const colorGroups = {
   'mockup': 'Desktop mockup',
   'dim': 'Video player',
   'home': 'Home page',
+  'phone': 'Home page on the phone',
+  'davar': 'Davar Echad',
   'about': 'About page',
   'entry': 'Process page',
 };

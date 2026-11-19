@@ -11,6 +11,7 @@
   const showUnderline = () => document.documentElement.classList.add('hint-done');
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { showUnderline(); return; }
+  if (window.matchMedia('(orientation: portrait)').matches) { showUnderline(); return; } // the phone version has no hint
 
   const rootStyle = getComputedStyle(document.documentElement);
   const distanceShare = parseFloat(rootStyle.getPropertyValue('--scroll-hint-distance')); // share of the window height

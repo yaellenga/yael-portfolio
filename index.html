@@ -8,7 +8,7 @@
   <!-- Fonts from Google Fonts: DM Serif Display italic (the handwriting-style texts) and Carlito (project labels) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@700&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -128,6 +128,41 @@
 
   </main>
 
+  <!-- PHONE (screen held upright): one page instead of the two columns (Figma: "iPhone 16 - 5").
+       The texts at the top, then a square for each project, two by two, and a yellow strip for the about page.
+       Tapping a project: its two halves from the computer version come in, from above and from below,
+       sweep the page in front of them into the middle and meet there; then its page opens (phone-home.js). -->
+  <main class="phone-home">
+    <p class="placed phone-handwriting phone-cool-stuff"><a href="index.html">Cool stuff by</a></p>
+    <p class="placed phone-handwriting phone-my-name"><a href="about.html">Yael Lenga</a></p>
+
+    <p class="placed phone-intro">hey i’m yael, a graphic &amp; digital designer, who loves solving creative puzzles and making complexity feel effortless</p>
+
+    <!-- The projects: each square opens its page -->
+    <a class="placed box phone-tile phone-tile-lets-talk" href="lets-talk.html">
+      <img class="phone-tile-picture phone-picture-lets-talk" src="images/phone-tile-lets-talk.svg" alt="">
+      <span class="phone-tile-label">lets talk about it</span>
+    </a>
+    <a class="placed box phone-tile phone-tile-hamotzi" href="hamotzi.html">
+      <img class="phone-tile-picture phone-picture-hamotzi" src="images/phone-tile-hamotzi.png" alt="">
+      <span class="phone-tile-label">hamotzi</span>
+    </a>
+    <a class="placed box phone-tile phone-tile-davar" href="davar-echad.html">
+      <img class="phone-tile-picture phone-picture-davar" src="images/phone-tile-davar.svg" alt="">
+      <span class="phone-tile-label">davar echad</span>
+    </a>
+    <a class="placed box phone-tile phone-tile-trac" href="trac.html">
+      <img class="phone-tile-picture phone-picture-trac" src="images/phone-tile-trac.svg" alt="">
+      <span class="phone-tile-label">trac</span>
+    </a>
+
+    <!-- The about page: a yellow strip with a photo of me -->
+    <a class="placed box phone-about" href="about.html">
+      <img class="phone-about-photo" src="images/phone-tile-about.png" alt="">
+      <span class="phone-tile-label">more about me</span>
+    </a>
+  </main>
+
   <!-- The special mouse shown over a project screen (see custom-cursor.js) -->
   <img class="project-cursor" src="images/cursor-trac.svg" alt="" aria-hidden="true">
 
@@ -136,5 +171,6 @@
   <script src="scroll-hint.js"></script>
   <script src="custom-cursor.js"></script>
   <script src="mouse-trail.js"></script>
+  <script src="phone-home.js"></script>
 </body>
 </html>

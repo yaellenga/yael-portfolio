@@ -133,10 +133,114 @@
 
   </main>
 
+  <!-- PHONE (screen held upright): one column, from the Figma frame "trac phone" (393 wide).
+       The computer version above is hidden on the phone, and this is hidden on the computer. -->
+  <div class="phone-project trac-phone">
+
+    <!-- At the top of the screen all the time, with no background -->
+    <nav class="phone-project-nav" aria-label="Pages">
+      <div class="phone-nav-background"></div> <!-- cream, behind the links, so the page scrolls under it -->
+      <a class="placed phone-nav-link trac-phone-more" href="index.html">More Cool<br>Stuff</a>
+      <a class="placed phone-nav-link trac-phone-next" href="hamotzi.html">Next Project</a>
+      <a class="placed phone-nav-link trac-phone-about" href="about.html">About&amp;<br>Contact</a>
+    </nav>
+
+    <!-- The logo and the details; next to them, the app on a phone (a video) -->
+    <h1 class="placed box trac-phone-logo"><img class="whole-image" src="images/trac-phone-logo.svg" alt="trac."></h1>
+    <p class="placed phone-details trac-phone-details">ux\ui<br>student project<br>2025</p>
+    <div class="placed box trac-phone-big-phone phone-screen-big">
+      <video class="project-video" src="images/trac-phone-video.mp4" autoplay muted loop playsinline
+             aria-label="A screen recording of the trac. app on a phone"></video>
+    </div>
+
+    <!-- Five screens of the app, in a row (each one cut from a picture of several screens, as in Figma).
+         Tapping one: a copy of it grows into the big phone's spot, over what is there now.
+         The first one (home) brings back the video (phone-screens.js). -->
+    <button type="button" class="placed box crop trac-phone-screen trac-phone-screen-1 phone-screen-thumb" data-video aria-label="Show the video of the app in the big phone"><img src="images/trac-phone-app-screens.png" alt=""></button>
+    <button type="button" class="placed box crop trac-phone-screen trac-phone-screen-2 phone-screen-thumb" aria-label="Show the new project screen in the big phone"><img src="images/trac-phone-app-screens.png" alt=""></button>
+    <button type="button" class="placed box trac-phone-screen trac-phone-screen-3 phone-screen-thumb" aria-label="Show the song screen in the big phone"><img class="whole-image trac-phone-cover" src="images/trac-phone-screen-projects.png" alt=""></button>
+    <button type="button" class="placed box crop trac-phone-screen trac-phone-screen-4 phone-screen-thumb" aria-label="Show the versions screen in the big phone"><img src="images/trac-phone-app-screens.png" alt=""></button>
+    <button type="button" class="placed box crop trac-phone-screen trac-phone-screen-5 phone-screen-thumb" aria-label="Show the projects screen in the big phone"><img src="images/trac-phone-app-screens.png" alt=""></button>
+
+    <p class="placed phone-text trac-phone-intro">trac. is an app that keeps your songwriting organized while you keep creating. Write lyrics, capture ideas, record drafts, and build your projects without the usual mess in between.</p>
+
+    <!-- Write / Record / Refine: three colored folders (the tab at the top of each is a cream cut-out) -->
+    <!-- In the order of the Figma layers: each folder covers the part of the tab before it that reaches over it -->
+    <div class="placed box phone-folder block-pink trac-phone-refine-box"></div>
+    <img class="placed box phone-folder-tab" style="--x: 253; --y: 754.84" src="images/trac-phone-tab-notch.svg" alt="">
+    <div class="placed box phone-folder block-blue trac-phone-record-box"></div>
+    <img class="placed box phone-folder-tab" style="--x: 122; --y: 754.84" src="images/trac-phone-tab-notch.svg" alt="">
+    <div class="placed box phone-folder block-orange trac-phone-write-box"></div>
+    <img class="placed box phone-folder-tab" style="--x: -9; --y: 754.84" src="images/trac-phone-tab-notch.svg" alt="">
+    <img class="placed box trac-phone-word-write" src="images/trac-word-write.svg" alt="Write">
+    <img class="placed box trac-phone-word-record" src="images/trac-word-record.svg" alt="Record">
+    <img class="placed box trac-phone-word-refine" src="images/trac-word-refine.svg" alt="Refine">
+
+    <!-- The problem and the solution, with the crumpled notes -->
+    <img class="placed box trac-phone-notes" src="images/trac-phone-notes.png" alt="Crumpled paper notes with handwritten lyrics">
+    <div class="placed phone-text trac-phone-problem">
+      <p class="trac-tight-lines">too many versions<br>too many places<br>&amp;&nbsp; too easy to lose</p>
+      <p class="phone-new-paragraph">Our Solution:<br>Write lyrics, capture ideas, record drafts and build your projects without the usual mess in between.</p>
+    </div>
+
+    <!-- The small logo and three icons from the app, on four colored folders
+         (in the order of the Figma layers, so each folder covers the part of the tab before it that reaches over it) -->
+    <div class="placed box phone-folder block-orange trac-phone-headphones-box"></div>
+    <img class="placed box phone-folder-tab" style="--x: 188; --y: 1208.84" src="images/trac-phone-tab-notch.svg" alt="">
+    <div class="placed box phone-folder block-yellow trac-phone-drum-box"></div>
+    <img class="placed box phone-folder-tab" style="--x: -9; --y: 1208.84" src="images/trac-phone-tab-notch.svg" alt="">
+    <div class="placed box phone-folder block-green trac-phone-mic-box"></div>
+    <img class="placed box phone-folder-tab" style="--x: 188; --y: 1078.84" src="images/trac-phone-tab-notch.svg" alt="">
+    <div class="placed box phone-folder block-blue trac-phone-logo-box"></div>
+    <img class="placed box phone-folder-tab" style="--x: -10; --y: 1078.84" src="images/trac-phone-tab-notch.svg" alt="">
+    <img class="placed box trac-phone-icon-logo" src="images/trac-icon-logo.svg" alt="">
+    <img class="placed box trac-phone-icon-mic" src="images/trac-icon-mic.svg" alt="">
+    <img class="placed box trac-phone-icon-drum" src="images/trac-icon-drum.svg" alt="">
+    <img class="placed box trac-phone-icon-headphones" src="images/trac-icon-headphones.svg" alt="">
+
+    <!-- The landing page on a computer (before the text above it, so its picture's top edge doesn't cover the text) -->
+    <img class="placed box trac-phone-computer" src="images/trac-phone-computer.png" alt="The trac. landing page on a computer: anywhere, anytime">
+
+    <div class="placed phone-text trac-phone-credits">
+      <p>I designed this app end-to-end alongside mia gaon. We shared responsibility across the process, from research and small-scale studies to ideation, prototyping, and defining the app’s visual language.</p>
+      <p class="phone-new-paragraph">I took lead on key parts of the design process, in development of the visual language, designing the landing page, and building the final full-flow prototype.</p>
+    </div>
+
+    <!-- The closing banner: "Songwriting, but simpler." and the tag with the plug and the cable -->
+    <img class="placed box trac-phone-banner-title" src="images/trac-phone-banner-title.svg" alt="Songwriting, but simpler.">
+    <div class="placed box trac-phone-tag-pill"></div>
+    <!-- "never lose a" and "again." are one drawing, shown twice: each copy shows only its own part,
+         so "again." can sit a little further from the changing word -->
+    <img class="placed box trac-phone-tag-text" src="images/trac-phone-tag-text.svg" alt="Never lose a beat again.">
+    <img class="placed box trac-phone-tag-again" src="images/trac-phone-tag-text.svg" alt="">
+    <!-- The bold word in "never lose a ___ again." changes by itself every 0.45 seconds, as in Figma
+         (the component "trac song verse etc"): beat, sound, track, song, verse, thing, demo, note, and again -->
+    <div class="placed trac-phone-tag-word word-swap" aria-hidden="true">
+      <img class="word-swap-word" style="--i: 0; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-beat.svg" alt="">
+      <img class="word-swap-word" style="--i: 1; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-sound.svg" alt="">
+      <img class="word-swap-word" style="--i: 2; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-track.svg" alt="">
+      <img class="word-swap-word" style="--i: 3; --svg-width: 109; --svg-height: 47" src="images/trac-word-swap-song.svg" alt="">
+      <img class="word-swap-word" style="--i: 4; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-verse.svg" alt="">
+      <img class="word-swap-word" style="--i: 5; --svg-width: 110; --svg-height: 47" src="images/trac-word-swap-thing.svg" alt="">
+      <img class="word-swap-word" style="--i: 6; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-demo.svg" alt="">
+      <img class="word-swap-word" style="--i: 7; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-note.svg" alt="">
+    </div>
+    <img class="placed box trac-phone-tag-plug" src="images/trac-phone-tag-plug.svg" alt="">
+    <img class="placed box trac-phone-tag-cable" src="images/trac-phone-tag-cable.svg" alt="">
+
+    <!-- The links at the bottom (they scroll with the page), each in a new tab -->
+    <nav class="trac-phone-links" aria-label="More about trac.">
+      <a class="placed phone-nav-link trac-phone-prototype" href="https://www.figma.com/proto/IFVMtpxbmqqcvzFbHvP6Hs/trac-wireframe?node-id=873-21469&amp;p=f&amp;viewport=267%2C907%2C0.13&amp;t=jePuDxMn9vEd59ZS-1&amp;scaling=scale-down&amp;content-scaling=fixed&amp;starting-point-node-id=873%3A21469&amp;page-id=873%3A21465" target="_blank" rel="noopener">App Prototype</a>
+      <a class="placed phone-nav-link trac-phone-landing" href="https://www.figma.com/proto/aza1cLUyk3sLCfMGBNpVzj/trac-desktop?node-id=4526-1656&amp;viewport=-708%2C567%2C0.08&amp;t=rcFrFrIKmO6L2Pcv-1&amp;scaling=scale-down&amp;content-scaling=fixed&amp;starting-point-node-id=4526%3A1633&amp;page-id=4526%3A1516" target="_blank" rel="noopener">Landing Page</a>
+      <a class="placed phone-nav-link trac-phone-presentation" href="trac-presentation.pdf" target="_blank" rel="noopener">Research<br>Presentation</a>
+    </nav>
+  </div>
+
   <script src="letter-roll.js"></script>
   <script src="scroll-text.js"></script>
   <script src="play-when-seen.js"></script>
   <script src="nav-slide.js"></script>
   <script src="copy-on-click.js"></script>
+  <script src="phone-screens.js"></script>
 </body>
 </html>
