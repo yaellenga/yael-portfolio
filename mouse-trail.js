@@ -1,4 +1,9 @@
 // Home page, first screen: a tail of photos (in color) that follows the mouse.
+// The photos are the files in the folder images/tail/, named by number: 1.png, 2.png, 3.jpg…
+// (PNG or JPG). To add a photo, put it in the folder with the next number; nothing else to change.
+// The script looks for 1, 2, 3… and stops at the first number that isn't there.
+// Each photo is sized to fit in the same box (--mouse-trail-box-width × --mouse-trail-box-height, in styles.css),
+// keeping its own shape, like the photos in the bank frame in Figma ("Frame 169").
 // The about page has a tail too, made of its mouse picture (data-trail="about" on the area).
 // While the mouse moves over the first screen (both halves), a photo is left behind it every time
 // it has moved far enough that the new photo covers only --mouse-trail-overlap of the one before.
@@ -22,17 +27,12 @@
   // The tails: the photos of each one, how wide each photo is (in Figma pixels),
   // its width ÷ height, and how much to shrink them all (size)
   const tails = {
-    // Home: the photos, in color (cut to what can be seen, without see-through margins),
-    // at their width in the old changing photos, shrunk to --mouse-trail-size
+    // Home: the photos from images/tail/ (found below, as they load), shrunk to --mouse-trail-size
     home: {
       size: parseFloat(rootStyle.getPropertyValue('--mouse-trail-size')),
       varySizes: true,
-      photos: [
-        { src: 'images/home-trail-color-1.png', width: 621.9,  ratio: 700 / 808 },
-        { src: 'images/home-trail-color-2.png', width: 630.45, ratio: 700 / 559 },
-        { src: 'images/home-trail-color-3.png', width: 693.45, ratio: 760 / 620 },
-        { src: 'images/home-trail-color-4.png', width: 344.7,  ratio: 400 / 837 },
-      ],
+      folder: 'images/tail/',
+      photos: [],
     },
     // About: the page's mouse picture, as big as the mouse (.cursor-about in styles.css)
     about: {
@@ -66,6 +66,35 @@
 
   // Load the photos ahead of time, so they show at once
   for (const photo of photos) new Image().src = photo.src;
+
+  // Home: find the photos in the folder, 1, 2, 3… (each as PNG, JPG or JPEG), until a number is missing.
+  // Each one is sized to fit in the box, keeping its shape.
+  if (tail.folder) {
+    const boxWidth = parseFloat(rootStyle.getPropertyValue('--mouse-trail-box-width'));
+    const boxHeight = parseFloat(rootStyle.getPropertyValue('--mouse-trail-box-height'));
+    const load = (src) => new Promise((resolve) => {
+      const image = new Image();
+      image.onload = () => resolve(image);
+      image.onerror = () => resolve(null);
+      image.src = src;
+    });
+    (async () => {
+      for (let number = 1; ; number++) {
+        let image = null;
+        for (const type of ['png', 'jpg', 'jpeg']) {
+          image = await load(`${tail.folder}${number}.${type}`);
+          if (image) break;
+        }
+        if (!image) break; // no photo with this number: that was the last one
+        const fit = Math.min(boxWidth / image.naturalWidth, boxHeight / image.naturalHeight);
+        photos.push({
+          src: image.src,
+          width: image.naturalWidth * fit,
+          ratio: image.naturalWidth / image.naturalHeight,
+        });
+      }
+    })();
+  }
 
   // The size of the next photo on the screen
   function nextSize() {
@@ -113,6 +142,7 @@
   }
 
   window.addEventListener('mousemove', (event) => {
+    if (photos.length === 0) return; // the photos haven't loaded yet
     const isOverFirstScreen = areas.some(area => area.contains(event.target));
     if (!isOverFirstScreen) { last = null; return; } // left the first screen: the tail starts again next time
 

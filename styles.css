@@ -198,6 +198,8 @@
   --home-return-peek: 0.12;            /* home, back from a project: opens this share of a screen past it, showing the next project */
   --cool-stuff-underline-time: 0.4s;   /* home: the underline under "Cool stuff by" fades in this fast after the bounce */
   --mouse-trail-size: 0.27075;         /* home: the photos in the mouse's tail, this share of the old changing photos' size (30%, then 5% smaller, then 5% smaller again) */
+  --mouse-trail-box-width: 621.9;      /* home: each photo in the tail fits in this box (Figma pixels: 691 × 797, the photos' frames */
+  --mouse-trail-box-height: 717.3;     /*   in the bank frame "Frame 169", × 0.9), keeping its own shape, before --mouse-trail-size */
   --mouse-trail-smaller: 0.9;          /* home: now and then a photo is this much of that size (10% smaller)... */
   --mouse-trail-smallest: 0.85;        /* ...and now and then this much (15% smaller), at random, for a range of sizes */
   --mouse-trail-smaller-chance: 0.2;   /* the chance of each of the two smaller sizes (the rest are the full size) */
