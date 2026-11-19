@@ -45,6 +45,54 @@
       <div id="guide-project-top" class="guide-group"></div>
     </section>
 
+    <!-- PHONE RULES: what every phone page follows (written out by hand: update when a rule changes) -->
+    <section class="guide-section">
+      <h2 class="project-title">Phone rules</h2>
+
+      <div class="guide-group">
+        <p class="project-bold-text">When and how big</p>
+        <ul class="project-text guide-rules">
+          <li>A screen held upright gets the phone version; a screen held sideways gets the computer version.</li>
+          <li>The phone frames in Figma are 393 wide. On the phone, 1 Figma pixel (--u) = the screen width ÷ 393, so everything grows and shrinks with the phone.</li>
+          <li>Each page keeps its phone layout in its own part (.phone-home, .phone-project, .phone-about-page); it only shows on the phone, and the computer version is hidden there.</li>
+          <li>The content and the order follow the phone frame, even when they are different from the computer version.</li>
+        </ul>
+      </div>
+
+      <div class="guide-group">
+        <p class="project-bold-text">Texts</p>
+        <ul class="project-text guide-rules">
+          <li>Running text (.phone-text): Carlito 16, capitals, line height 1.24. Never smaller than 12px on the screen.</li>
+          <li>An empty line (1.24em) between paragraphs (.phone-new-paragraph).</li>
+          <li>After a text, before the picture or box under it: an empty line more than in Figma (19.84), so the text doesn't touch what comes next.</li>
+          <li>The details at the top (.phone-details): Carlito Bold 16, capitals, line height 0.98.</li>
+          <li>Links (.phone-nav-link): DM Serif Display italic 16, in orange.</li>
+        </ul>
+      </div>
+
+      <div class="guide-group">
+        <p class="project-bold-text">Project pages</p>
+        <ul class="project-text guide-rules">
+          <li>At the top: "More Cool Stuff", "Next Project" (to the next project in the list) and "About&amp; Contact". They stay at the top of the screen, on a cream bar (.phone-nav-background, 95 tall), so the page scrolls under it.</li>
+          <li>"More Cool Stuff" and "About&amp; Contact" are two lines at most.</li>
+          <li>The links at the bottom (prototype, website, presentation…) scroll with the page and open in a new tab.</li>
+          <li>Colored folders (.phone-folder): corners rounded 4, with a cream tab cut-out over the top-left corner, stacked in the order of the Figma layers.</li>
+          <li>Pictures exported from Figma have no background (transparent), so they sit on the boxes under them.</li>
+          <li>Videos of screens play by themselves, with no sound. A video with sound (Hamotzi) has the play button and time bar; its enlarge button opens it full screen.</li>
+          <li>Small screens under a big phone (trac.): tapping one grows a copy of it into the big phone, over the old one; the first one brings back the video.</li>
+        </ul>
+      </div>
+
+      <div class="guide-group">
+        <p class="project-bold-text">Home and about</p>
+        <ul class="project-text guide-rules">
+          <li>Home: a square for each project, two by two, and a yellow strip for the about page. Tapping a project brings in its two halves from the computer version; they sweep the page into the middle, meet, and the project opens. The strip grows to fill the screen, then the about page opens.</li>
+          <li>About: the photos move slowly to the right, without end. Tapping leaves a stamp.</li>
+          <li>No special mice and no hover effects on the phone.</li>
+        </ul>
+      </div>
+    </section>
+
     <!-- TEXT STYLES: each class from styles.css, with its name -->
     <section class="guide-section">
       <h2 class="project-title">Text styles</h2>
@@ -329,7 +377,7 @@
           <div class="placed box phone-tile phone-tile-hamotzi"><img class="phone-tile-picture phone-picture-hamotzi" src="images/phone-tile-hamotzi.png" alt=""><span class="phone-tile-label">hamotzi</span></div>
           <div class="placed box phone-tile phone-tile-davar"><img class="phone-tile-picture phone-picture-davar" src="images/phone-tile-davar.svg" alt=""><span class="phone-tile-label">davar echad</span></div>
           <div class="placed box phone-tile phone-tile-trac"><img class="phone-tile-picture phone-picture-trac" src="images/phone-tile-trac.svg" alt=""><span class="phone-tile-label">trac</span></div>
-          <div class="placed box phone-about"><img class="phone-about-photo" src="images/phone-tile-about.png" alt=""><span class="phone-tile-label">more about me</span></div>
+          <div class="placed box phone-about"><img class="phone-about-icon" src="images/phone-tile-about-coffee.svg" alt=""><span class="phone-tile-label">more about me</span></div>
         </div>
       </div>
 
@@ -362,6 +410,36 @@
             <img class="word-swap-word" style="--i: 5; --svg-width: 110; --svg-height: 47" src="images/trac-word-swap-thing.svg" alt="">
             <img class="word-swap-word" style="--i: 6; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-demo.svg" alt="">
             <img class="word-swap-word" style="--i: 7; --svg-width: 109; --svg-height: 43" src="images/trac-word-swap-note.svg" alt="">
+          </div>
+        </div>
+      </div>
+
+      <!-- About page on the phone: the photos moving slowly to the right, without end -->
+      <div class="guide-group">
+        <p class="project-bold-text">Photo carousel (about, phone)</p>
+        <p class="project-text">.phone-about-carousel — the six photos three times over; the row moves right by one set in --about-carousel-time (40s) and starts again.</p>
+        <div class="guide-about-carousel">
+          <div class="phone-about-carousel" aria-hidden="true">
+            <div class="phone-about-carousel-track">
+            <img class="phone-about-carousel-photo" src="images/about-photo-1.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-2.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-3.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-4.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-5.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-6.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-1.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-2.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-3.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-4.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-5.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-6.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-1.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-2.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-3.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-4.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-5.jpg" alt="">
+            <img class="phone-about-carousel-photo" src="images/about-photo-6.jpg" alt="">
+            </div>
           </div>
         </div>
       </div>

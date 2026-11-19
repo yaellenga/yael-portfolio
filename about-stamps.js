@@ -7,7 +7,9 @@ for (const area of document.querySelectorAll('.stamp-area')) {
     // No stamp when clicking a link (there the regular mouse is showing)
     if (event.target.closest('a')) return;
 
-    const unit = window.innerWidth / 1440; // 1 Figma pixel, same as --u in styles.css
+    // 1 Figma pixel, same as --u in styles.css: the computer frame is 1440 wide, the phone frame 393
+    // (an area can say how wide its Figma frame is with data-figma-width)
+    const unit = window.innerWidth / Number(area.dataset.figmaWidth || 1440);
     const areaBox = area.getBoundingClientRect();
 
     // Make a copy of the photo and place its center where the mouse was clicked.

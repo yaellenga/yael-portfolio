@@ -8,7 +8,7 @@
   <!-- Fonts from Google Fonts: DM Serif Display italic (the handwriting-style texts) and Carlito (text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -77,6 +77,57 @@
       </a>
       <a class="top-link top-link-cv" href="CV%20Yael%20Lenga-%20portfolio.pdf" target="_blank" rel="noopener">Cv</a>
     </nav>
+  </main>
+
+  <!-- PHONE (screen held upright): from the Figma frame "about" (393 wide). The computer version above is
+       hidden on the phone, and this is hidden on the computer. Tapping anywhere leaves a stamp (about-stamps.js). -->
+  <main class="phone-about-page stamp-area" data-figma-width="393">
+    <p class="placed phone-about-handwriting phone-about-back"><a href="index.html">Back to the<br>cool stuff</a></p>
+    <h1 class="placed phone-about-handwriting phone-about-name"><a href="about.html" aria-current="page">Yael Lenga</a></h1>
+
+    <div class="placed phone-about-text">
+      <p>I’m a graphic &amp; digital designer based in Tel Aviv.<br>I’m graduating the Visual Communication program at Bezalel Academy of arts.</p>
+      <p>When I’m not designing, you’ll probably find me baking, traveling, reading or designing tables.</p>
+      <p>and definitely holding a coffee...</p>
+    </div>
+
+    <!-- Photos of me in a row that slowly moves to the right, without end:
+         the six photos three times over, and when the row has moved by one set of six, it starts again
+         from where it began, which looks the same (styles.css, .phone-about-carousel) -->
+    <div class="phone-about-carousel" role="img" aria-label="Photos of Yael Lenga">
+      <div class="phone-about-carousel-track">
+        <img class="phone-about-carousel-photo" src="images/about-photo-1.jpg" alt="" aria-hidden="true">
+        <img class="phone-about-carousel-photo" src="images/about-photo-2.jpg" alt="" aria-hidden="true">
+        <img class="phone-about-carousel-photo" src="images/about-photo-3.jpg" alt="" aria-hidden="true">
+        <img class="phone-about-carousel-photo" src="images/about-photo-4.jpg" alt="" aria-hidden="true">
+        <img class="phone-about-carousel-photo" src="images/about-photo-5.jpg" alt="" aria-hidden="true">
+        <img class="phone-about-carousel-photo" src="images/about-photo-6.jpg" alt="" aria-hidden="true">
+        <img class="phone-about-carousel-photo" src="images/about-photo-1.jpg" alt="">
+        <img class="phone-about-carousel-photo" src="images/about-photo-2.jpg" alt="">
+        <img class="phone-about-carousel-photo" src="images/about-photo-3.jpg" alt="">
+        <img class="phone-about-carousel-photo" src="images/about-photo-4.jpg" alt="">
+        <img class="phone-about-carousel-photo" src="images/about-photo-5.jpg" alt="">
+        <img class="phone-about-carousel-photo" src="images/about-photo-6.jpg" alt="">
+        <img class="phone-about-carousel-photo" src="images/about-photo-1.jpg" alt="" aria-hidden="true">
+        <img class="phone-about-carousel-photo" src="images/about-photo-2.jpg" alt="" aria-hidden="true">
+        <img class="phone-about-carousel-photo" src="images/about-photo-3.jpg" alt="" aria-hidden="true">
+        <img class="phone-about-carousel-photo" src="images/about-photo-4.jpg" alt="" aria-hidden="true">
+        <img class="phone-about-carousel-photo" src="images/about-photo-5.jpg" alt="" aria-hidden="true">
+        <img class="phone-about-carousel-photo" src="images/about-photo-6.jpg" alt="" aria-hidden="true">
+      </div>
+    </div>
+
+    <!-- How to reach me: the word on the left, and what it stands for on the right (each one a link).
+         Like everything under the two links at the top, 5 lower than in Figma -->
+    <p class="placed phone-about-reach-out">reach out:</p>
+    <p class="placed phone-about-label" style="--y: 604">phone</p>
+    <p class="placed phone-about-label" style="--y: 650">email</p>
+    <p class="placed phone-about-label" style="--y: 696">LinkedIn</p>
+    <p class="placed phone-about-label" style="--y: 742">Cv</p>
+    <a class="placed phone-about-contact" style="--y: 599" href="tel:+972546138340">+972546138340</a>
+    <a class="placed phone-about-contact" style="--y: 643" href="mailto:yael.lenga@gmail.com">yael.lenga@gmail.com</a>
+    <a class="placed phone-about-contact" style="--y: 689" href="https://www.linkedin.com/in/yael-lenga-37ba863b9/" target="_blank" rel="noopener">Yael Lenga</a>
+    <a class="placed phone-about-contact" style="--y: 735" href="CV%20Yael%20Lenga-%20portfolio.pdf" target="_blank" rel="noopener">See Here</a>
   </main>
 
   <!-- The special mouse on this page (see custom-cursor.js) -->

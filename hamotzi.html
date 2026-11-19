@@ -109,6 +109,52 @@
     <img class="placed box hamotzi-still hamotzi-still-2" src="images/hamotzi-still-2.jpg" alt="A poker chip on a lace tablecloth, with an actor's name in Hebrew">
   </main>
 
+  <!-- PHONE (screen held upright): one column, from the Figma frame "hamotzi phone" (393 wide).
+       The computer version above is hidden on the phone, and this is hidden on the computer. -->
+  <div class="phone-project hamotzi-phone">
+
+    <!-- At the top of the screen all the time, on a cream bar -->
+    <nav class="phone-project-nav" aria-label="Pages">
+      <div class="phone-nav-background"></div> <!-- cream, behind the links, so the page scrolls under it -->
+      <a class="placed phone-nav-link hamotzi-phone-more" href="index.html">More Cool<br>Stuff</a>
+      <a class="placed phone-nav-link hamotzi-phone-next" href="lets-talk.html">Next Project</a>
+      <a class="placed phone-nav-link hamotzi-phone-about" href="about.html">About&amp;<br>Contact</a>
+    </nav>
+
+    <!-- The details, and the logo next to them -->
+    <p class="placed phone-details hamotzi-phone-details">hamotzi<br>Video art<br>direction &amp; filming<br>student project<br>2024</p>
+    <h1 class="placed box hamotzi-phone-logo"><img class="whole-image" src="images/hamotzi-phone-logo.png" alt="Hamotzi — המוציא"></h1>
+
+    <!-- The title sequence video, as wide as the screen, with the same play button and time bar as on the computer
+         (video-player.js). On the phone, the enlarge button opens the video full screen. -->
+    <div class="placed box hamotzi-phone-video-spot">
+      <div class="hamotzi-video video-player">
+        <video class="video-player-video" src="images/hamotzi-video.mp4" poster="images/hamotzi-video-frame.jpg"
+               preload="metadata" playsinline aria-label="The Hamotzi title sequence"></video>
+
+        <button class="video-button video-play" type="button" aria-label="Play the video">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        </button>
+
+        <div class="video-time-bar" role="slider" tabindex="0" aria-label="Video time"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="video-time-track"><div class="video-time-played"></div></div>
+          <div class="video-time-handle"></div>
+        </div>
+
+        <button class="video-button video-enlarge" type="button" aria-label="Show the video full screen">
+          <svg class="video-icon-enlarge" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="placed phone-text hamotzi-phone-text">
+      <p>A title sequence for a fictional TV series. Drawing the viewer into an ultra religious world of crime showcasing complexity of a layered world.</p>
+      <p>The titles explore where faith and crime meet, comparing the two worlds through shared gestures, objects, and rituals until the line between them blurs.</p>
+      <p class="phone-new-paragraph">student project with yuval israel</p>
+    </div>
+  </div>
+
   <!-- Dims the rest of the screen while the video is enlarged; clicking it makes the video small again -->
   <div class="video-backdrop"></div>
 

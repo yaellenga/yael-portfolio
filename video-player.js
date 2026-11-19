@@ -28,7 +28,17 @@ for (const player of document.querySelectorAll('.video-player')) {
     enlargeButton.setAttribute('aria-label', enlarged ? 'Make the video small again' : 'Enlarge the video');
   }
 
-  enlargeButton.addEventListener('click', () => setEnlarged(!player.classList.contains('is-enlarged')));
+  // On the phone version of the page the video already fills the screen's width,
+  // so the enlarge button shows it full screen instead (there the phone can be turned sideways)
+  function showFullScreen() {
+    if (video.requestFullscreen) video.requestFullscreen();
+    else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen(); // iPhone
+  }
+
+  enlargeButton.addEventListener('click', () => {
+    if (player.closest('.phone-project')) showFullScreen();
+    else setEnlarged(!player.classList.contains('is-enlarged'));
+  });
   backdrop.addEventListener('click', () => setEnlarged(false));
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') setEnlarged(false);
