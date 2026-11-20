@@ -1693,13 +1693,13 @@ a:focus-visible .roll-in .roll-letter,
   color: var(--color-hero-text);
 }
 .phone-handwriting a { color: inherit; text-decoration: none; }
-.phone-cool-stuff { --x: 85; --y: 16; }
+.phone-cool-stuff { --x: 85; --y: 40; } /* the bottom of its letters on the same line as "More Cool Stuff" on the project pages (16 in Figma) */
 .phone-cool-stuff a {
   text-decoration: underline;
   text-decoration-thickness: from-font;
   text-underline-position: from-font;
 }
-.phone-my-name { --x: 173; --y: 18; --width: 143; }
+.phone-my-name { --x: 173; --y: 40; --width: 143; } /* on the same line too (18 in Figma) */
 
 /* The text about me under them: orange capitals */
 .phone-intro {
@@ -1731,8 +1731,7 @@ a:focus-visible .roll-in .roll-letter,
   max-width: none;
 }
 .phone-picture-lets-talk { --x: 52;    --y: 74; --width: 94;  --height: 94; }
-.phone-picture-hamotzi   { --x: 20;    --y: 98; --width: 157; --height: 45;
-                           filter: invert(1) contrast(1.1); } /* the logo's photo, light on dark, as in Figma */
+.phone-picture-hamotzi   { --x: 20;    --y: 98; --width: 157; --height: 45; }
 .phone-picture-davar     { --x: 58.63; --y: 58; --width: 139; --height: 137; }
 .phone-picture-trac      { --x: 65;    --y: 76; --width: 67;  --height: 100; }
 
@@ -1809,6 +1808,9 @@ a:focus-visible .roll-in .roll-letter,
   width: calc(720 * var(--u));
 }
 .phone-sweep-left  { left: 0; }
+/* On the phone, the halves come without the project's name, type and year (the small text at the bottom right) */
+.phone-sweep-half .project-label,
+.phone-sweep-half .project-year { display: none; }
 .phone-sweep-right {                     /* half a pixel wider, over the left half, so no thin line shows where they meet */
   right: 0;
   width: calc(720 * var(--u) + 0.5px);
@@ -1902,7 +1904,7 @@ a:focus-visible .roll-in .roll-letter,
   --phone-project-color: var(--color-trac-orange);
 }
 .trac-phone-more  { --x: 25;  --y: 42; --width: 90; } /* wider than in Figma (70), so it is never more than two lines */
-.trac-phone-next  { --x: 150; --y: 59; --width: 94; }
+.trac-phone-next  { --x: 150; --y: 42; --width: 94; } /* on every project page the three links are on one line, at 42 */
 .trac-phone-about { --x: 311; --y: 42; --width: 57; }
 .trac-phone        { --phone-nav-height: 95; }
 
@@ -2016,7 +2018,7 @@ a:focus-visible .roll-in .roll-letter,
   --phone-project-color: var(--color-home-orange);
 }
 .lets-talk-phone-more  { --x: 25;  --y: 42; --width: 90; } /* wider than in Figma (70), so it is never more than two lines */
-.lets-talk-phone-next  { --x: 150; --y: 56; --width: 94; }
+.lets-talk-phone-next  { --x: 150; --y: 42; --width: 94; } /* the three links on one line, at 42 */
 .lets-talk-phone-about { --x: 311; --y: 42; --width: 57; }
 
 .lets-talk-phone-details { --x: 25;  --y: 112; --width: 160; }
@@ -2055,9 +2057,9 @@ a:focus-visible .roll-in .roll-letter,
   --phone-nav-height: 95;
   --phone-project-color: var(--color-home-orange);
 }
-.hamotzi-phone-more  { --x: 25;  --y: 19; --width: 90; } /* wider than in Figma (70), so it is never more than two lines */
-.hamotzi-phone-next  { --x: 150; --y: 19; --width: 94; }
-.hamotzi-phone-about { --x: 311; --y: 19; --width: 57; }
+.hamotzi-phone-more  { --x: 25;  --y: 42; --width: 90; } /* wider than in Figma (70), so it is never more than two lines */
+.hamotzi-phone-next  { --x: 150; --y: 42; --width: 94; } /* the three links on one line, at 42 (19 in Figma) */
+.hamotzi-phone-about { --x: 311; --y: 42; --width: 57; }
 
 .hamotzi-phone-details { --x: 25;  --y: 112; --width: 170; }
 .hamotzi-phone-logo    { --x: 209; --y: 110; --width: 169; --height: 36.147; }
@@ -2075,6 +2077,52 @@ a:focus-visible .roll-in .roll-letter,
 .hamotzi-phone-video-spot .hamotzi-video { height: 100%; aspect-ratio: auto; }
 
 .hamotzi-phone-text { --x: 25; --y: 468; --width: 339; } /* 460 in Figma, 8 lower */
+
+/* ---------- Davar Echad on the phone (Figma: "davar phone") ---------- */
+.davar-phone {
+  --phone-page-height: 2124;
+  --phone-nav-height: 95;
+  --phone-project-color: var(--color-home-orange);
+}
+.davar-phone-more  { --x: 25;  --y: 42; --width: 90; } /* wider than in Figma (70), so it is never more than two lines */
+.davar-phone-next  { --x: 150; --y: 42; --width: 94; }
+.davar-phone-about { --x: 311; --y: 42; --width: 57; }
+
+.davar-phone-details { --x: 25;  --y: 112; --width: 170; }
+.davar-phone-logo    { --x: 275; --y: 112; --width: 93; --height: 64.2; }
+.davar-phone-video   { --x: 0;   --y: 201; --width: 393; --height: 221; }
+.davar-phone-video .project-video { object-fit: cover; }
+
+.davar-phone-intro        { --x: 25;  --y: 460; --width: 339; }
+.davar-phone-values-title { --x: 25;  --y: 718; --width: 150; }
+.davar-phone-values       { --x: 150; --y: 676; --width: 230; --height: 244; }
+
+.davar-phone-comp         { --x: 0; --y: 906;  --width: 393; --height: 221; object-fit: cover; }
+.davar-phone-posters      { --x: 0; --y: 1166; --width: 393; --height: 181; }
+.davar-phone-grid         { --x: 0; --y: 1340; --width: 393; --height: 625; }
+.davar-phone-footer-logo  { --x: 164; --y: 2014; --width: 65; --height: 47; }
+
+/* The news subjects strip: the component is 3621 wide and shown at 623.47 here (×0.17218);
+   like on the computer it moves left by 1203 of its units in 9 seconds, and starts again */
+.davar-phone-ticker {
+  position: absolute;
+  left: calc(-2.396 * var(--u));
+  top: calc(1356.44 * var(--u));
+  width: calc(623.47 * var(--u));
+  height: calc(6.371 * var(--u));
+}
+.davar-phone-ticker img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: davar-phone-ticker 9s linear infinite;
+}
+@keyframes davar-phone-ticker {
+  to { transform: translateX(calc(-207.13 * var(--u))); } /* 1203 × 0.17218 */
+}
+@media (prefers-reduced-motion: reduce) {
+  .davar-phone-ticker img { animation: none; }
+}
 
 /* =========================================================
    About page (about.html): one screen, drawn 1440 × 785, that stays in place.

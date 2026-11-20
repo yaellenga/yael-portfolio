@@ -104,6 +104,55 @@
     </div>
   </main>
 
+  <!-- PHONE (screen held upright): one column, from the Figma frame "davar phone" (393 wide).
+       The computer version above is hidden on the phone, and this is hidden on the computer. -->
+  <div class="phone-project davar-phone">
+
+    <!-- At the top of the screen all the time, on a cream bar -->
+    <nav class="phone-project-nav" aria-label="Pages">
+      <div class="phone-nav-background"></div> <!-- cream, behind the links, so the page scrolls under it -->
+      <a class="placed phone-nav-link davar-phone-more" href="index.html">More Cool<br>Stuff</a>
+      <a class="placed phone-nav-link davar-phone-next" href="trac.html">Next Project</a>
+      <a class="placed phone-nav-link davar-phone-about" href="about.html">About&amp;<br>Contact</a>
+    </nav>
+
+    <!-- The details, and the logo next to them -->
+    <p class="placed phone-details davar-phone-details">davar echad<br>branding<br>student project<br>2026</p>
+    <h1 class="placed box davar-phone-logo"><img class="whole-image" src="images/davar-logo.png" alt="Davar Echad — דבר אחד"></h1>
+
+    <!-- The brand video, as wide as the screen; it starts playing when it comes into the window (play-when-seen.js) -->
+    <div class="placed box davar-phone-video">
+      <video class="project-video" src="images/davar-brand-video.mp4" poster="images/davar-brand-video-poster.jpg"
+             muted loop playsinline preload="metadata" data-play-when-seen
+             aria-label="The Davar Echad brand video"></video>
+    </div>
+
+    <div class="placed phone-text davar-phone-intro">
+      <p>Rebranding the historic Israeli workers’ newspaper ‘Davar’.</p>
+      <p>Davar Echad is a contemporary news rebrand designed to make current events more accessible and less overwhelming. By curating one key headline from each major news category, the brand delivers quick, digestible updates that help people stay informed, feel connected, and confidently join everyday conversations.</p>
+    </div>
+
+    <!-- The brand's values, in the brand's font (a drawing, as the font isn't on the web) -->
+    <p class="placed phone-text davar-phone-values-title">brand values:</p>
+    <img class="placed box davar-phone-values" src="images/davar-phone-values.svg" lang="he" alt="מהיר, נגיש, חברתי — quick, accessible, social">
+
+    <!-- The arrows animation from the brand (in Figma a video, "Comp 1_2"; for now a still from it) -->
+    <img class="placed box davar-phone-comp" src="images/davar-phone-comp-poster.jpg" alt="The brand's arrows in its colors, with the news subjects">
+
+    <!-- Three posters on black -->
+    <img class="placed box davar-phone-posters" src="images/davar-phone-posters.jpg" alt="Three posters of the brand: speech bubbles and arrows in the brand's colors">
+
+    <!-- The brand in use: newspapers, a stand, a laptop, a phone, a billboard in the subway, tape and a truck,
+         in a grid of thin lines -->
+    <img class="placed box davar-phone-grid" src="images/davar-phone-grid.jpg" alt="The brand in use: a stack of newspapers, the newspaper, a laptop and a phone with the brand, a billboard in the subway, printed tape and a truck">
+
+    <!-- The news subjects running along, over the grid's top lines (the same strip and speed as on the computer) -->
+    <div class="davar-phone-ticker" aria-hidden="true"><img src="images/davar-anim-ticker.svg" alt=""></div>
+
+    <!-- The logo at the end -->
+    <img class="placed box davar-phone-footer-logo" src="images/davar-phone-footer-logo.svg" alt="">
+  </div>
+
   <script src="letter-roll.js"></script>
   <script src="play-when-seen.js"></script>
   <script src="nav-slide.js"></script>
