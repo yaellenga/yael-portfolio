@@ -25,6 +25,15 @@
     return copy;
   }
 
+  // Only the part of the copy that was on the screen (a slice as tall as half the screen), so that
+  // what is above or below the screen doesn't come into view while the slice is pushed away
+  function onScreenOnly(copy) {
+    const slice = document.createElement('div');
+    slice.className = 'phone-sweep-slice';
+    slice.appendChild(copy);
+    return slice;
+  }
+
   // The cream layer over everything
   function makeLayer() {
     const layer = document.createElement('div');
@@ -42,12 +51,12 @@
     // The page, cut in two at the middle of the screen
     const top = document.createElement('div');
     top.className = 'phone-sweep-part phone-sweep-top';
-    const topPage = copyOfPage(0);
+    const topPage = onScreenOnly(copyOfPage(0));
     top.appendChild(topPage);
 
     const bottom = document.createElement('div');
     bottom.className = 'phone-sweep-part phone-sweep-bottom';
-    const bottomPage = copyOfPage(screenHeight / 2);
+    const bottomPage = onScreenOnly(copyOfPage(screenHeight / 2));
     bottom.appendChild(bottomPage);
 
     // The project's two halves, copied from the computer version

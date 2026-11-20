@@ -1789,9 +1789,16 @@ a:focus-visible .roll-in .roll-letter,
   height: 50%;
   overflow: hidden;
 }
+/* Inside each part, the slice of the page that was on the screen; it is what moves */
+.phone-sweep-slice {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
 .phone-sweep-top    { top: 0; }
 .phone-sweep-bottom { top: 50%; }
-.phone-sweep .phone-home {               /* the copies of the page */
+.phone-sweep .phone-home,
+.phone-sweep .phone-project {            /* the copies of the page */
   position: absolute;
   left: 0;
   width: 100%;
@@ -1815,6 +1822,16 @@ a:focus-visible .roll-in .roll-letter,
   right: 0;
   width: calc(720 * var(--u) + 0.5px);
 }
+
+/* Going back home from a project page (phone-back-home.js): the home page's squares in two columns,
+   two squares each (242 high): Lets Talk About It and Davar Echad on the left, Hamotzi and trac. on the right */
+.phone-sweep-column {
+  position: absolute;
+  top: 0;
+  height: calc(484 * var(--u));
+}
+.phone-sweep-column-left  { left: 0;  width: calc(197 * var(--u)); }
+.phone-sweep-column-right { right: 0; width: calc(196 * var(--u)); }
 
 /* The about strip: a copy of it grows up to fill the screen */
 .phone-sweep-about {
