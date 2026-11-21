@@ -1,5 +1,6 @@
 // Every button and link in the handwriting-style font (DM Serif Display italic): on hover, its letters
-// go up one after another, like a wave, and the same text comes up from below in their place.
+// go up one after another, like a wave, and the same text comes up from below in their place
+// (or another text, written in the link's data-hover-text).
 // phone, email and LinkedIn bring up what they stand for instead (the number, the address, the name).
 // How it moves is in styles.css (.roll, .roll-letter: --roll-time, --roll-stagger, --roll-distance).
 //
@@ -60,9 +61,11 @@ function splitIntoLetters(element, text) {
     leaving.className = 'roll-line roll-out';
     splitIntoLetters(leaving, text);
 
-    const coming = document.createElement('span');   // its copy, hidden below; it comes up on hover
+    // The text hidden below, which comes up on hover: a copy of the text, or another text
+    // when the link has one in data-hover-text (home page: "selected work", "more about me")
+    const coming = document.createElement('span');
     coming.className = 'roll-line roll-in';
-    splitIntoLetters(coming, text);
+    splitIntoLetters(coming, link.dataset.hoverText || text);
 
     roll.append(leaving, coming);
     link.textContent = '';

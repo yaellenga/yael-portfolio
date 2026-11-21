@@ -54,3 +54,19 @@ document.addEventListener('focusin', (event) => {
   // No opening bounce (scroll-hint.js) when coming back
   document.documentElement.dataset.hintFrom = 'none';
 })();
+
+// "Cool stuff by" (on hover: "Selected work"): instead of opening the home page again,
+// the page scrolls down smoothly to the first project, trac. (the left screen that links to trac.html)
+(function scrollToSelectedWork() {
+  const link = document.querySelector('.cool-stuff a');
+  const screens = [...leftColumn.children];
+  const number = screens.findIndex(screen => screen.getAttribute('href') === 'trac.html');
+  if (!link || number < 1) return;
+
+  link.addEventListener('click', (event) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; // "open in a new tab": as usual
+    event.preventDefault();
+    const lessMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: number * screens[number].offsetHeight, behavior: lessMotion ? 'instant' : 'smooth' });
+  });
+})();

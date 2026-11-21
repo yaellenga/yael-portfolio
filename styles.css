@@ -706,6 +706,14 @@ a.top-link:not(.top-link-swap) { display: inline-block; } /* (phone, email and L
   transition: transform var(--roll-time) var(--roll-ease) calc(var(--i) * var(--roll-stagger));
 }
 
+/* Home and about pages, "Cool stuff by": on hover "Selected work" comes up. It is wider, and "Cool stuff by" ends
+   just before the middle of the screen, so "Selected work" ends where it ends and grows to the left
+   (outside the grid, so the link keeps its size), and the clip lets it show to the left */
+.cool-stuff .roll,
+.about-cool-stuff .roll { position: relative; clip-path: inset(-0.2em -0.3em -0.35em -2em); }
+.cool-stuff .roll-in,
+.about-cool-stuff .roll-in { position: absolute; top: 0; right: 0; }
+
 /* The underlined buttons: the link passes the underline on to its letters */
 .cool-stuff .handwriting-link,
 .about-name .handwriting-link { text-decoration: inherit; }
