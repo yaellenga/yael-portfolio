@@ -69,7 +69,14 @@
 
     <div class="side-about">
       <h2 class="side-title">a personalized podcast website and app</h2>
-      <p class="side-text">A digital experience for a podcast where a father and his 10-year-old daughter explore life’s big questions - from the seemingly naive to the deeply complex.<br>The website and app turn each season into an interactive world, allowing users to wander between playful scenarios and discover different perspectives connected to the season’s theme.</p>
+      <!-- The text is longer than its spot: two parts, each one fits in it. At the hosts (Yoram and Naomi),
+           the second part moves in by itself with a small bounce (scroll-text.js), as on the trac. page -->
+      <div class="side-text-window lets-talk-text-window">
+        <div class="side-text-track">
+          <p class="side-text">A digital experience for a podcast where a father and his 10-year-old daughter explore life’s big questions - from the seemingly naive to the deeply complex.<br>The website and app turn each season into an interactive world, allowing users to wander between playful scenarios and discover different perspectives connected to the season’s theme.</p>
+          <p class="side-text" data-appears-with=".lets-talk-box-yoram">I designed this website and app end-to-end alongside hillel buchris. I took lead on the development of the visual language, building the final app prototype, assisted with the illustration and vibe coding.</p>
+        </div>
+      </div>
 
       <!-- The links, each in a new tab: the website, and the app prototype in Figma -->
       <nav class="side-links" aria-label="More about Lets Talk About It">
@@ -186,6 +193,7 @@
 
   <script src="letter-roll.js"></script>
   <script src="desktop-mockup.js"></script>
+  <script src="scroll-text.js"></script>
   <script src="nav-slide.js"></script>
   <script src="copy-on-click.js"></script>
   <script src="phone-back-home.js"></script>

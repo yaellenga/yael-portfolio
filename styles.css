@@ -1084,7 +1084,7 @@ a:focus-visible .roll-in .roll-letter,
   text-transform: none;
 }
 
-/* A text in parts, longer than its spot (trac.): a window onto it, --window-height high, as in Figma.
+/* A text in parts, longer than its spot (trac., Lets Talk About It): a window onto it, --window-height high, as in Figma.
    Each part fits in the window, and the window shows one part at a time. When the page reaches the
    picture a part belongs to (data-appears-with), the text moves up to that part by itself, with a small
    bounce, however fast or slow the page is scrolled; and back when scrolling back up (scroll-text.js).
@@ -1275,6 +1275,9 @@ a:focus-visible .roll-in .roll-letter,
 
 /* The computer's spot: as wide as the rectangle in Figma (982), and as tall as the computer
    is at that width (982 × 0.7806). Everything under it moves down by the difference (234.5). */
+/* The side text in two parts (scroll-text.js, as on trac.): the window is as high as the first part */
+.lets-talk-text-window { --window-height: 104; --paragraph-gap: 52; }
+
 .lets-talk-computer-spot {
   --x: 0; --y: 0; --width: 982; --height: 766.5;
   container-type: size; /* lets the computer measure this spot (cqw, cqh) */
