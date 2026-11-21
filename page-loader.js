@@ -71,9 +71,10 @@
   document.addEventListener('DOMContentLoaded', () => {
     const waits = [];
 
-    // Pictures
+    // Pictures (only the ones the browser loads right away: pictures with loading="lazy",
+    // lower down the page, load while scrolling, so the loader doesn't wait for them)
     for (const image of document.images) {
-      if (image.complete) continue;
+      if (image.complete || image.loading === 'lazy') continue;
       waits.push(new Promise(done => {
         image.addEventListener('load', done, { once: true });
         image.addEventListener('error', done, { once: true });

@@ -1,6 +1,6 @@
 // Home page, first screen: a tail of photos (in color) that follows the mouse.
-// The photos are the files in the folder images/tail/, named by number: 1.png, 2.png, 3.jpg…
-// (PNG or JPG). To add a photo, put it in the folder with the next number; nothing else to change.
+// The photos are the files in the folder images/tail/, named by number: 1.webp, 2.webp, 3.png…
+// (WebP, PNG or JPG). To add a photo, put it in the folder with the next number; nothing else to change.
 // The script looks for 1, 2, 3… and stops at the first number that isn't there.
 // Each photo is sized to fit in the same box (--mouse-trail-box-width × --mouse-trail-box-height, in styles.css),
 // keeping its own shape, like the photos in the bank frame in Figma ("Frame 169").
@@ -38,7 +38,7 @@
     about: {
       size: 1,
       photos: [
-        { src: 'images/cursor-about.png', width: 65, ratio: 195 / 303 },
+        { src: 'images/cursor-about.webp', width: 65, ratio: 195 / 303 },
       ],
     },
   };
@@ -81,7 +81,7 @@
     (async () => {
       for (let number = 1; ; number++) {
         let image = null;
-        for (const type of ['png', 'jpg', 'jpeg']) {
+        for (const type of ['webp', 'png', 'jpg', 'jpeg']) {
           image = await load(`${tail.folder}${number}.${type}`);
           if (image) break;
         }

@@ -1,2 +1,5 @@
 # Mac system files
 .DS_Store
+
+# The full-size originals of the pictures (optimize-images.py moves them here; the site uses the WebP files)
+originals/

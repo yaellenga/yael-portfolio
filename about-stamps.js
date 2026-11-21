@@ -15,7 +15,7 @@ for (const area of document.querySelectorAll('.stamp-area')) {
     // Make a copy of the photo and place its center where the mouse was clicked.
     // The spot is saved in Figma pixels, so it stays in place if the window is resized.
     const stamp = document.createElement('img');
-    stamp.src = 'images/cursor-about.png';
+    stamp.src = 'images/cursor-about.webp';
     stamp.alt = '';
     stamp.className = 'placed box about-stamp';
     stamp.style.setProperty('--x', (event.clientX - areaBox.left) / unit);

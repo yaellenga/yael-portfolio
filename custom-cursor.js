@@ -5,8 +5,8 @@
 const cursorPictures = {
   'trac': 'images/cursor-trac.svg',
   'lets-talk': 'images/cursor-lets-talk.svg',
-  'hamotzi': 'images/cursor-hamotzi.png',
-  'about': 'images/cursor-about.png',
+  'hamotzi': 'images/cursor-hamotzi.webp',
+  'about': 'images/cursor-about.webp',
   'davar': 'images/cursor-davar.svg',
 };
 

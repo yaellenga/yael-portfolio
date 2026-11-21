@@ -25,7 +25,7 @@
       ['davar', 'images/phone-tile-davar.svg', 'davar echad'],
     ],
     right: [
-      ['hamotzi', 'images/phone-tile-hamotzi.png', 'hamotzi'],
+      ['hamotzi', 'images/phone-tile-hamotzi.webp', 'hamotzi'],
       ['trac', 'images/phone-tile-trac.svg', 'trac'],
     ],
   };
