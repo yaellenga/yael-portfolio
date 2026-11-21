@@ -124,7 +124,7 @@
   --home-intro-size: calc(56.12 * var(--u)); /* home: the big text across both halves */
   --scroll-down-size: calc(20 * var(--u)); /* home: "scroll down" at the bottom of the first screen */
   --trac-group-gap: 45.73;                  /* home, trac.: the space between the headline, the tag and the phone (Figma pixels; the headline-to-tag space in Figma) */
-  --trac-screen-padding: 8px;               /* home, trac.: the least space above the headline and under the phone */
+  --trac-screen-padding: 1cm;               /* home, trac.: the least space above the headline and under the phone (1 cm, about 38 pixels) */
   --project-name-size: calc(40 * var(--u));
   --project-header-size: calc(30 * var(--u));
   --project-title-size: calc(30 * var(--u));

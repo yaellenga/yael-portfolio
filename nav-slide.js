@@ -48,9 +48,24 @@ function slideTogetherAndGo(event) {
   // They slide toward each other until they touch
   slideTogether();
 
-  // When they get there, go to the page
-  const goToPage = () => { window.location.href = address; };
-  moreStuff.addEventListener('transitionend', goToPage, { once: true });
+  // When both of them get there, go to the page.
+  // Only the end of their own slide counts: the letters inside them have small animations of their own
+  // (when the mouse is over them), and the end of those must not send the page away in the middle of the slide.
+  let isGone = false;
+  const goToPage = () => {
+    if (isGone) return;
+    isGone = true;
+    window.location.href = address;
+  };
+  const arrived = new Set();
+  for (const item of [moreStuff, myName]) {
+    item.addEventListener('transitionend', function onEnd(endEvent) {
+      if (endEvent.target !== item || endEvent.propertyName !== 'transform') return;
+      item.removeEventListener('transitionend', onEnd);
+      arrived.add(item);
+      if (arrived.size === 2) goToPage();
+    });
+  }
   // Just in case the browser doesn't report the end of the slide: go anyway, a moment after it should end
   const slideTime = parseFloat(getComputedStyle(moreStuff).transitionDuration) * 1000;
   setTimeout(goToPage, slideTime + 200);
