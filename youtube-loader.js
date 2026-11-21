@@ -1,5 +1,5 @@
 // Loader for the YouTube videos (Hamotzi, Lets Talk About It): while a YouTube video loads,
-// its frame shows the same loader as the whole page (page-loader.js): cream, counting up to 100%
+// its frame shows the same loader as the whole page (page-loader.js): cream, "video is loading" and a count up to 100%
 // in the handwriting-style font, at 100% the mouse picture for a moment, and then it fades away.
 //
 // YouTube doesn't say how much of a video has loaded, so the number counts up slowly by itself
@@ -20,9 +20,13 @@
 
     // The loader, on top of the video, in the same frame
     const loader = document.createElement('div');
+    // (data-loader-frame on the video: the loader also draws a frame around it, so the video's edges show while it loads)
     loader.className = 'page-loader video-loader is-visible';
+    if (video.hasAttribute('data-loader-frame')) loader.classList.add('has-frame');
     loader.setAttribute('aria-hidden', 'true');
-    loader.innerHTML = '<span class="page-loader-number">0%</span>' +
+    // "video is loading" above the number (only here, not in the whole page's loader)
+    loader.innerHTML = '<span class="video-loader-words"><span class="video-loader-text">video is loading</span>' +
+      '<span class="page-loader-number">0%</span></span>' +
       '<img class="page-loader-picture" src="images/cursor-about.webp" width="195" height="303" alt="">';
     video.after(loader);
     const number = loader.querySelector('.page-loader-number');

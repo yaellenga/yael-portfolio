@@ -2771,6 +2771,22 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
   width: auto;
   height: 60%;
 }
+/* "video is loading" above the number, in the same font and size; both in the middle, where the picture shows at 100% */
+.video-loader-words {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.video-loader-text {
+  font-family: var(--font-handwriting);
+  font-style: var(--font-handwriting-style);
+  font-size: var(--handwriting-size);
+  color: var(--color-black);
+}
+.video-loader.is-at-picture .video-loader-text { visibility: hidden; }
+/* A frame around the video's edges while it loads (Hamotzi); it goes away with the loader */
+.video-loader.has-frame { box-shadow: inset 0 0 0 1px var(--color-black); }
 /* The frame the computer's video sits in, so the loader covers just the video */
 .mockup-site { position: relative; }
 
