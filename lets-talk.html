@@ -106,11 +106,11 @@
                 </a>
               </div>
 
-              <!-- A screen recording of the website, playing on a loop with no sound -->
+              <!-- A screen recording of the website, from YouTube, playing on a loop with no sound -->
               <div class="mockup-site">
-                <video class="mockup-video" src="images/lets-talk-site.mp4" poster="images/lets-talk-site-poster.webp"
-                       autoplay muted loop playsinline
-                       aria-label="A screen recording of the Lets Talk About It podcast website"></video>
+                <iframe class="mockup-video youtube-video" src="https://www.youtube-nocookie.com/embed/RC-TkwStg00?enablejsapi=1&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=RC-TkwStg00&amp;controls=0&amp;rel=0&amp;playsinline=1"
+                        title="A screen recording of the Lets Talk About It podcast website"
+                        allow="autoplay; encrypted-media"></iframe>
               </div>
             </div>
           </div>
@@ -153,9 +153,9 @@
     <!-- A computer, with a screen recording of the podcast website playing on its screen (under the browser bar) -->
     <img class="placed box lets-talk-phone-computer" src="images/lets-talk-phone-computer.webp" width="1188" height="958" alt="">
     <div class="placed box lets-talk-phone-site">
-      <video class="project-video" src="images/lets-talk-site.mp4" poster="images/lets-talk-site-poster.webp"
-             autoplay muted loop playsinline
-             aria-label="A screen recording of the Lets Talk About It podcast website"></video>
+      <iframe class="youtube-video youtube-cover" src="https://www.youtube-nocookie.com/embed/RC-TkwStg00?enablejsapi=1&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=RC-TkwStg00&amp;controls=0&amp;rel=0&amp;playsinline=1"
+              title="A screen recording of the Lets Talk About It podcast website"
+              allow="autoplay; encrypted-media" loading="lazy"></iframe>
     </div>
 
     <div class="placed phone-text lets-talk-phone-intro">
@@ -189,5 +189,6 @@
   <script src="nav-slide.js"></script>
   <script src="copy-on-click.js"></script>
   <script src="phone-back-home.js"></script>
+  <script src="youtube-loader.js"></script>
 </body>
 </html>

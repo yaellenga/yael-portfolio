@@ -18,9 +18,14 @@ for (const computer of document.querySelectorAll('.mockup-computer')) {
     address.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
   // The reload button plays the video from the start
+  // (a YouTube video, in an iframe, starts again when its address is set again)
   computer.querySelector('.mockup-reload').addEventListener('click', () => {
-    video.currentTime = 0;
-    video.play();
+    if (video.tagName === 'IFRAME') {
+      video.src = video.src;
+    } else {
+      video.currentTime = 0;
+      video.play();
+    }
   });
 
   // Draw at 1440 wide and shrink it to the size of the screen

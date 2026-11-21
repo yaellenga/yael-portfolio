@@ -1549,6 +1549,9 @@ a:focus-visible .roll-in .roll-letter,
   height: auto;
   border-top: 1px solid var(--color-mockup-bar-line); /* the line under the browser bar */
 }
+/* The website video comes from YouTube (lets-talk.html): a YouTube player has no size of its own,
+   so it gets the video's proportions (1920 × 1046) */
+iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0; border-bottom: 0; }
 
 /* The chin under the screen, the neck and the foot of the stand */
 .mockup-chin {
@@ -1598,6 +1601,14 @@ a:focus-visible .roll-in .roll-letter,
 .trac-banner          { --x: 0;   --y: 2747; --width: 1080; --height: 676; }
 
 /* A video that fills its box (the box sets the size and the rounded corners) */
+/* A video from YouTube (an iframe): no frame around it, and it fills its box */
+.youtube-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 .project-video {
   display: block;
   width: 100%;
@@ -2047,7 +2058,18 @@ a:focus-visible .roll-in .roll-letter,
 .lets-talk-phone-site     { --x: 30.30; --y: 236.79; --width: 332;     --height: 195;
                             overflow: hidden;
                             border-radius: 0 0 calc(1.8 * var(--u)) calc(1.8 * var(--u)); }
-.lets-talk-phone-site .project-video { object-fit: cover; }
+/* The video (from YouTube) fills the screen and its edges are cut, like a picture with object-fit: cover.
+   The box is measured (container-type), and the player gets the video's proportions (1920 × 1046),
+   as big as needed to cover the box, in its middle. */
+.lets-talk-phone-site { container-type: size; }
+.lets-talk-phone-site .youtube-cover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100cqw, 100cqh * 1920 / 1046);
+  height: max(100cqh, 100cqw * 1046 / 1920);
+  transform: translate(-50%, -50%);
+}
 
 .lets-talk-phone-intro { --x: 25; --y: 523; --width: 339; }
 
@@ -2738,6 +2760,19 @@ a:focus-visible .roll-in .roll-letter,
 }
 .page-loader.is-at-picture .page-loader-number  { visibility: hidden; }
 .page-loader.is-at-picture .page-loader-picture { visibility: visible; }
+
+/* The same loader inside a YouTube video's frame, while the video loads (youtube-loader.js):
+   it covers only the video, and the mouse picture fits the frame's height */
+.page-loader.video-loader {
+  position: absolute;
+  z-index: 1;
+}
+.video-loader .page-loader-picture {
+  width: auto;
+  height: 60%;
+}
+/* The frame the computer's video sits in, so the loader covers just the video */
+.mockup-site { position: relative; }
 
 /* Style guide: the loader's two moments, small boxes side by side (not covering the page) */
 .guide-loaders {
