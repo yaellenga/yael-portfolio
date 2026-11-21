@@ -2347,10 +2347,10 @@ a:focus-visible .roll-in .roll-letter,
 .about-cool-stuff { --x: calc(720 - var(--name-gap-half) - 291.4); --y: 25; } /* as on the home page */
 .about-my-name    { --x: calc(720 + var(--name-gap-half)); --y: 25; }
 .about-info       { --x: 745;  --y: 178; --width: 453; }
-.about-reach-out  { --y: 533; }                         /* "don't hesitate to reach out:" */
+.about-reach-out  { --y: 533; }                         /* "reach out:" */
 .about-photos     { --x: 331;  --y: 178; --width: 356; --height: 411; } /* the rectangle in Figma */
 
-/* phone, email, LinkedIn, Cv under "don't hesitate to reach out:": phone at the text's left edge,
+/* phone, email, LinkedIn, Cv under "reach out:": phone at the text's left edge,
    Cv ending at 1208, with equal space between them */
 .about-links {
   --x: 745; --y: 566; --width: 463;
