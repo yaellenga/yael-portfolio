@@ -1592,6 +1592,16 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
                         border-radius: calc(37.879 * var(--u)); overflow: hidden; }
 .trac-small-screens   { --x: 177.5; --y: 529.5; --width: 730;     --height: 260; }
 
+/* The five small screens are buttons (phone-screens.js, as on the phone): each one shows its part of the picture
+   of the five screens (cut from it in %), right over it. Clicking one: a copy grows into the big phone's spot.
+   The first one (home) brings back the video. Their spots: where each screen is in the picture (730 × 260). */
+.trac-small-screen { --img-width: calc(730 / var(--width) * 100%); --img-height: calc(260 / var(--height) * 100%); }
+.trac-small-screen-1 { --x: 182; --y: 534; --width: 120; --height: 249.5; --img-left: -3.750%; --img-top: -1.804%; }
+.trac-small-screen-2 { --x: 332; --y: 533.5; --width: 120.5; --height: 248; --img-left: -128.216%; --img-top: -1.613%; }
+.trac-small-screen-3 { --x: 482; --y: 534; --width: 120; --height: 248; --img-left: -253.750%; --img-top: -1.815%; }
+.trac-small-screen-4 { --x: 632; --y: 534; --width: 120; --height: 248; --img-left: -378.750%; --img-top: -1.815%; }
+.trac-small-screen-5 { --x: 782; --y: 533; --width: 120; --height: 248; --img-left: -503.750%; --img-top: -1.411%; }
+
 .trac-notes-green     { --x: 0;   --y: 813;  --width: 720; --height: 561; }
 .trac-notes-blue      { --x: 720; --y: 813;  --width: 360; --height: 561; }
 .trac-notes           { --x: 170; --y: 865;  --width: 720; --height: 457; }
@@ -2773,14 +2783,14 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
 .page-loader.is-at-picture .page-loader-picture { visibility: visible; }
 
 /* The same loader inside a YouTube video's frame, while the video loads (youtube-loader.js):
-   it covers only the video, and the mouse picture fits the frame's height */
+   it covers only the video, and the mouse picture is 30% of the frame's height */
 .page-loader.video-loader {
   position: absolute;
   z-index: 1;
 }
 .video-loader .page-loader-picture {
   width: auto;
-  height: 60%;
+  height: 30%; /* half of what it was (60%) */
 }
 /* "video is loading" above the number, in the same font and size; both in the middle, where the picture shows at 100% */
 .video-loader-words {

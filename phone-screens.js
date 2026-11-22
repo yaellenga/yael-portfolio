@@ -1,16 +1,16 @@
-// Project page on the phone: the small app screens under the big phone.
+// trac. project page (on the computer and on the phone): the small app screens under the big phone.
 // Tapping a small screen: a copy of it is sent out and grows into the big phone's spot (with a small bounce),
 // on top of what is there now. Once it has arrived, the old one underneath is taken away (it doesn't move).
 // The small screen stays where it is.
 // The small screen marked data-video is the video's own: tapping it brings the video back into the big phone
 // the same way (it grows out of that small screen).
-// The big phone: .phone-screen-big. The small screens: .phone-screen-thumb.
+// The big phone: .phone-screen-big. The small screens: .phone-screen-thumb, in the same box as their big phone
+// (the computer version and the phone version each have their own big phone and small screens).
 // How fast: --phone-screen-send-time in styles.css.
 
-(function () {
-  const big = document.querySelector('.phone-screen-big');
-  const thumbs = [...document.querySelectorAll('.phone-screen-thumb')];
-  if (!big || thumbs.length === 0) return;
+for (const big of document.querySelectorAll('.phone-screen-big')) {
+  const thumbs = [...big.parentElement.querySelectorAll('.phone-screen-thumb')];
+  if (thumbs.length === 0) continue;
 
   const video = big.querySelector('video');
   const videoThumb = thumbs.find(thumb => thumb.hasAttribute('data-video'));
@@ -104,4 +104,4 @@
   window.addEventListener('resize', () => {
     if (bigCopy && !busy) Object.assign(bigCopy.style, asFrame(fitInto(placeOf(big), placeOf(showing))));
   });
-})();
+}

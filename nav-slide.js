@@ -1,7 +1,7 @@
-// Project page, top area: when "More stuff" or "Yael Lenga" is clicked,
+// Project page, top area: when "More Cool Stuff" or "Yael Lenga" is clicked,
 // the two of them first slide sideways (keeping their height on the screen) toward the middle
 // of the window, and only then the browser goes to the page that was clicked.
-// They stop where "Cool stuff by" and "Yael Lenga" are on the home page: "More stuff" ends where
+// They stop where "Cool stuff by" and "Yael Lenga" are on the home page: "More Cool Stuff" ends where
 // "Cool stuff by" ends, and "Yael Lenga" starts where the home page's "Yael Lenga" starts
 // (--nav-meet-left-end and --nav-meet-right-start in styles.css, in Figma pixels).
 // (How long the slide takes is --nav-slide-time in styles.css.)
@@ -21,7 +21,7 @@ function slideTogether() {
   const leftEnd = parseFloat(rootStyle.getPropertyValue('--nav-meet-left-end')) * unit;
   const rightStart = parseFloat(rootStyle.getPropertyValue('--nav-meet-right-start')) * unit;
 
-  const leftSpot = leftEnd - leftText.width; // where the left of "More stuff" goes
+  const leftSpot = leftEnd - leftText.width; // where the left of "More Cool Stuff" goes
   const rightSpot = rightStart;              // where the left of "Yael Lenga" goes
 
   moreStuff.style.transform = `translateX(${leftSpot - leftText.left}px)`;
