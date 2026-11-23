@@ -121,7 +121,7 @@
   --about-carousel-time: 40s;             /* phone: the row of photos moves right by one set of six in this long */
 
   /* Project pages (like "project page- trac"), also in Figma pixels × --u */
-  --home-intro-size: calc(56.12 * var(--u)); /* home: the big text across both halves */
+  --home-intro-size: calc(52.12 * var(--u)); /* home: the big text across both halves (Figma: 56.12, made 4 smaller) */
   --scroll-down-size: calc(20 * var(--u)); /* home: "scroll down" at the bottom of the first screen */
   --trac-group-gap: 45.73;                  /* home, trac.: the space between the headline, the tag and the phone (Figma pixels; the headline-to-tag space in Figma) */
   --trac-screen-padding: 1cm;               /* home, trac.: the least space above the headline and under the phone (1 cm, about 38 pixels) */
@@ -550,7 +550,7 @@ body {
   font-weight: 700;
   font-size: var(--home-intro-size);
   line-height: 1.1053;                  /* 62.03 between the lines */
-  letter-spacing: 0.0406em;             /* 2.28 at 56.12 */
+  letter-spacing: 0.0406em;             /* 2.28 at 56.12 (grows and shrinks with the size) */
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--color-hero-text);
