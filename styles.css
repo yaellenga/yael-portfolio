@@ -1855,7 +1855,7 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
   width: calc(720 * var(--u) + 0.5px);
 }
 
-/* Going back home from a project page (phone-back-home.js): the home page's squares in two columns,
+/* Going back home, if the home page can't be read (phone-back-home.js): the home page's squares in two columns,
    two squares each (242 high): Lets Talk About It and Davar Echad on the left, Hamotzi and trac. on the right */
 .phone-sweep-column {
   position: absolute;
@@ -1864,6 +1864,25 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
 }
 .phone-sweep-column-left  { left: 0;  width: calc(197 * var(--u)); }
 .phone-sweep-column-right { right: 0; width: calc(196 * var(--u)); }
+
+/* Going back home (phone-back-home.js): the two halves of the home page itself, each as tall as the screen.
+   Each half is a window onto a whole copy of the home page: the left one shows its left 197,
+   the right one its right 196 (the copy is moved left by 197, so its right part shows). */
+.phone-sweep-home-half {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.phone-sweep-home-left  { left: 0;  width: calc(197 * var(--u)); }
+.phone-sweep-home-right { right: 0; width: calc(196 * var(--u) + 0.5px); } /* half a pixel wider, so no thin line shows where they meet */
+.phone-sweep .phone-sweep-home-half .phone-home {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(393 * var(--u));
+}
+.phone-sweep .phone-sweep-home-right .phone-home { left: auto; right: 0; }
 
 /* The about strip: a copy of it grows up to fill the screen */
 .phone-sweep-about {

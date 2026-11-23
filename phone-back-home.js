@@ -1,13 +1,14 @@
 // Project page on the phone: going back to the home page ("More Cool Stuff").
-// The opposite of opening a project from the home page (phone-home.js): the home page's squares come in,
-// as two columns, before the home page opens.
-//   - The right column (Hamotzi above trac., stuck together) comes down from the top, on the right half.
-//   - The left column (Lets Talk About It above Davar Echad) comes up from the bottom, on the left half.
-// Each column pushes the page in front of it toward the middle of the screen, where it disappears
-// (like a broom sweeping). They meet in the middle on cream, stay together for a moment,
-// and then the home page opens.
+// The opposite of opening a project from the home page (phone-home.js): the home page itself comes in,
+// cut in two halves (each as tall as the screen), before the home page opens.
+//   - The right half of the home page (Yael Lenga, Hamotzi, trac., ...) comes down from the top.
+//   - The left half (Cool stuff by, Lets Talk About It, Davar Echad, ...) comes up from the bottom.
+// Each half pushes the page in front of it toward the middle of the screen, where it disappears
+// (like a broom sweeping). When they arrive they make up the whole home screen; a moment later
+// the home page opens.
+// The home page's look is taken from index.html itself (read once, when this page loads), so it is
+// always the same as the real home page. If it can't be read, just the four squares come in, in two columns.
 // How fast: --phone-sweep-time and --phone-sweep-hold in styles.css (the same as from the home page).
-// The squares look the same as on the home page (styles.css, .phone-tile).
 
 (function () {
   const page = document.querySelector('.phone-project');
@@ -18,7 +19,28 @@
   const seconds = name => parseFloat(rootStyle.getPropertyValue(name)) * 1000; // "1.1s" → 1100
   const smooth = 'cubic-bezier(0.65, 0, 0.35, 1)'; // starts slowly, speeds up, slows down at the end
 
-  // The home page's squares, column by column, top to bottom: [name, picture, label]
+  // The phone part of the home page (.phone-home in index.html), read in the background when this page loads
+  let homeCopy = null;
+  fetch('index.html')
+    .then(answer => answer.text())
+    .then(html => {
+      const homePage = new DOMParser().parseFromString(html, 'text/html');
+      homeCopy = homePage.querySelector('.phone-home');
+    })
+    .catch(() => { /* can't read it: the squares come in instead (makeColumn) */ });
+
+  // One half of the home page, as tall as the screen: a window as wide as the home page's column
+  // of squares on that side (197 on the left, 196 on the right, in Figma pixels), showing that part of the home page
+  function makeHomeHalf(side) {
+    const half = document.createElement('div');
+    half.className = `phone-sweep-home-half phone-sweep-home-${side}`;
+    const home = document.importNode(homeCopy, true);
+    home.setAttribute('aria-hidden', 'true');
+    half.appendChild(home);
+    return half;
+  }
+
+  // If the home page couldn't be read: the home page's squares, column by column, top to bottom: [name, picture, label]
   const columns = {
     left: [
       ['lets-talk', 'images/phone-tile-lets-talk.svg', 'lets talk about it'],
@@ -92,14 +114,16 @@
     const bottomPage = onScreenOnly(copyOfPage(screenHeight / 2));
     bottom.appendChild(bottomPage);
 
-    const leftColumn = makeColumn('left');
-    const rightColumn = makeColumn('right');
+    // The two halves of the home page (or, if it couldn't be read, two columns of squares)
+    const leftColumn = homeCopy ? makeHomeHalf('left') : makeColumn('left');
+    const rightColumn = homeCopy ? makeHomeHalf('right') : makeColumn('right');
     layer.append(top, bottom, leftColumn, rightColumn);
 
-    // Where the columns meet: their middle at the middle of the screen
+    // Where they stop: the halves of the home page fill the screen (top at 0);
+    // the columns of squares meet with their middle at the middle of the screen
     const columnHeight = rightColumn.offsetHeight;
-    const meetTop = (screenHeight - columnHeight) / 2;
-    const distance = meetTop + columnHeight; // how far each column travels (and pushes the page)
+    const meetTop = homeCopy ? 0 : (screenHeight - columnHeight) / 2;
+    const distance = meetTop + columnHeight; // how far each one travels (and pushes the page)
 
     const timing = { duration: seconds('--phone-sweep-time'), easing: smooth, fill: 'forwards' };
     // The right column: from just above the screen down to the middle; the top of the page goes down with it
