@@ -26,9 +26,11 @@
   --color-project-cream: #fdfaf2;
 
   /* Home page, the first screen (the opening): its background and its texts.
-     (Before: an orange background with white texts.) */
+     The right half: cream with orange texts. The left half: the other way around, orange with cream texts. */
   --color-hero-background: var(--color-project-cream);
   --color-hero-text: var(--color-home-orange);
+  --color-hero-left-background: var(--color-home-orange);
+  --color-hero-left-text: var(--color-project-cream);
 
   /* trac. colors (each project has its own colors) */
   --color-trac-orange: #fe5808;
@@ -51,10 +53,10 @@
   --hamotzi-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.25  0 0 0 0 0.25  0 0 0 0 0.25  0 0 0 1.6 -0.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 
   /* Davar Echad colors */
-  --color-davar-pink: #fab8f9;          /* "More stuff", "Yael Lenga", the links and "next project" */
+  --color-davar-pink: #fab8f9;          /* the Davar Echad label on the phone home page (the links on its page are orange now) */
 
   /* Lets Talk About It colors */
-  --color-lets-talk-blue: #27aae2;      /* "More stuff", "Yael Lenga" and the top links */
+  --color-lets-talk-blue: #27aae2;      /* not in use now (it was the links on the Lets Talk page; they are orange now) */
   --color-lets-talk-navy: #192e5a;      /* the box behind Yoram */
   --color-lets-talk-light: #f5f6ff;     /* the box behind Naomi */
 
@@ -95,6 +97,7 @@
   --font-handwriting: "DM Serif Display", serif; /* "Cool stuff by", "Yael Lenga", the links and "scroll down" (was Mynerve, then Alice, Bigshot One, Croissant One) */
   --font-handwriting-style: italic;      /* ...in italics */
   --font-label: "Carlito", sans-serif;
+  --font-condensed: "Fira Sans Condensed", sans-serif; /* the big text on the home page; the running text on the Davar Echad and Lets Talk pages */
 
   /* Home page scale unit: 1 Figma pixel.
      The page is drawn 1440 wide and always fills the screen width. */
@@ -121,7 +124,7 @@
   --about-carousel-time: 40s;             /* phone: the row of photos moves right by one set of six in this long */
 
   /* Project pages (like "project page- trac"), also in Figma pixels × --u */
-  --home-intro-size: calc(52.12 * var(--u)); /* home: the big text across both halves (Figma: 56.12, made 4 smaller) */
+  --home-intro-size: calc(80 * var(--u)); /* home: the big text across both halves */
   --scroll-down-size: calc(20 * var(--u)); /* home: "scroll down" at the bottom of the first screen */
   --trac-group-gap: 45.73;                  /* home, trac.: the space between the headline, the tag and the phone (Figma pixels; the headline-to-tag space in Figma) */
   --trac-screen-padding: 1cm;               /* home, trac.: the least space above the headline and under the phone (1 cm, about 38 pixels) */
@@ -349,6 +352,7 @@ body {
 /* Screen backgrounds */
 .screen-orange { background-color: var(--color-home-orange); }
 .screen-hero   { background-color: var(--color-hero-background); } /* the first screen */
+.split-left .screen-hero { background-color: var(--color-hero-left-background); } /* its left half: orange */
 .screen-blue   { background-color: var(--color-home-blue); }
 .screen-green  { background-color: var(--color-home-green); }
 .screen-white  { background-color: var(--color-white); }
@@ -542,21 +546,26 @@ body {
    each screen shows only its own half. */
 /* The big all-caps text across both halves of the first screen: the same text in both halves,
    each half shows its own part (the left part in the left half, the right part in the right half).
-   Its size, spacing and spot are those of the text in Figma (there it is a shape: Carlito Bold, 56.12).
+   Its size, spacing and spot are those of the text in Figma (Fira Sans Condensed Bold, 80).
    Pinned to the bottom of the screen, like "scroll down" under it, so the space between them never changes. */
 .home-intro {
-  --width: 1100; --from-bottom: 294.7;   /* the top of its capitals: 682.9 of 964, as in Figma */
-  font-family: var(--font-label);
+  --width: 1411; --from-bottom: 371;     /* the top of its box: 593 of 964, as in Figma */
+  font-family: var(--font-condensed);
   font-weight: 700;
   font-size: var(--home-intro-size);
-  line-height: 1.1053;                  /* 62.03 between the lines */
-  letter-spacing: 0.0406em;             /* 2.28 at 56.12 (grows and shrinks with the size) */
+  line-height: 1.125;                   /* 90 between the lines */
+  letter-spacing: 0.0265em;             /* 2.12 at 80 (grows and shrinks with the size) */
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--color-hero-text);
 }
-.home-intro-left  { --x: 162.26; }
-.home-intro-right { --x: -557.74; }     /* 162.26 - 720: starts in the left half */
+.home-intro-left  { --x: 61; }
+.home-intro-right { --x: -659; }        /* 61 - 720: starts in the left half */
+
+/* The left half of the first screen is orange, so its texts there are cream */
+.split-left .screen-hero .cool-stuff,
+.split-left .screen-hero .scroll-down,
+.split-left .screen-hero .home-intro { color: var(--color-hero-left-text); }
 
 /* Project labels on the right column: name, type, year (pinned to the bottom) */
 .project-label,
@@ -994,6 +1003,14 @@ a:focus-visible .roll-in .roll-letter,
   background-color: var(--color-project-cream);
 }
 .project-side::-webkit-scrollbar { display: none; }
+/* The hidden copy of each link's letters waits just under the link (for the wave on hover).
+   Under the links at the bottom, it reached a little past the bottom of the window, so the column
+   thought it had more to show and scrolled by itself. Cut at the link's edge (with room for the letters' tails),
+   the copy no longer counts, and the column stays still: only the text inside it moves. */
+.project-side .roll {
+  overflow: clip;
+  overflow-clip-margin: 0.35em;
+}
 
 /* The logo: each project sets its spot and size (--logo-x and --logo-y from the window's
    top-left corner, --logo-width and --logo-height), all in Figma pixels.
@@ -1089,6 +1106,14 @@ a:focus-visible .roll-in .roll-letter,
    picture a part belongs to (data-appears-with), the text moves up to that part by itself, with a small
    bounce, however fast or slow the page is scrolled; and back when scrolling back up (scroll-text.js).
    Its height and gaps are in text pixels, like the text, so the parts always fit. */
+/* Davar Echad and Lets Talk About It: the running text in Fira Sans Condensed Light, in regular letters (not capitals) */
+.davar-page .side-text,
+.lets-talk-page .side-text {
+  font-family: var(--font-condensed);
+  font-weight: 300;
+  text-transform: none;
+}
+
 .side-text-window {
   --text-switch-time: 0.55s;  /* how long the move to the next part takes */
   height: calc(var(--window-height) * var(--t));
@@ -1158,7 +1183,7 @@ a:focus-visible .roll-in .roll-letter,
    On the right: the brand video, and under it the brand book (a long picture in six parts, from the
    brand book file in Figma, from its first white part, "מצגת מותג", to the truck and the logo at the end) */
 .davar-page {
-  --project-nav-color: var(--color-davar-pink);
+  --project-nav-color: var(--color-home-orange); /* the links in orange (was the project's pink) */
   --project-side-title-width: 305;      /* a wider title box (two lines), so "'Davar'" fits on the line before it */
   --project-side-details-top: 224.71;   /* the year, under the logo */
   --media-height: 5449.56;              /* the brand book ends at 639.96 + 4809.6 */
@@ -1267,7 +1292,7 @@ a:focus-visible .roll-in .roll-letter,
 /* ---------- Lets Talk About It (lets-talk.html) ----------
    The computer; Yoram and Naomi, each on a box in the podcast's colors; and four phones */
 .lets-talk-page {
-  --project-nav-color: var(--color-lets-talk-blue);
+  --project-nav-color: var(--color-home-orange); /* the links in orange (was the project's blue) */
   --project-side-text-width: 307;
   --media-height: 1719.5;
   --logo-x: 30; --logo-y: 78.293; --logo-width: 288; --logo-height: 86.419;
