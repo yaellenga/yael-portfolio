@@ -102,7 +102,7 @@
         <p class="project-bold-text">Home page</p>
         <p class="project-text">.handwriting</p>
         <p class="handwriting">Cool stuff by</p>
-        <p class="project-text">.scroll-down — "scroll" and "down" at the bottom of the first screen, across the middle</p>
+        <p class="project-text">.scroll-down — "scroll" and "down" at the bottom of the first screen, across the middle; the wave on hover over either one plays on both (letter-roll.js), and so does a click on the floating picture</p>
         <div class="guide-dark"><p class="handwriting scroll-down">scroll down</p></div>
         <p class="project-text">.home-intro — the big text on the first screen (Fira Sans Condensed Bold 80): cream on the orange left half, orange on the cream right half</p>
         <p class="home-intro">A graphic &amp; digital designer</p>
@@ -358,15 +358,17 @@
         </div>
       </div>
 
-      <!-- Mouse tail (home page, first screen): the four photos, in the order they come -->
+      <!-- Floating picture (home page, first screen, computer): the five pictures in the order they come,
+           each on its screen's two colors (left half / right half) -->
       <div class="guide-group">
-        <p class="project-bold-text">Mouse tail (home)</p>
-        <p class="project-text">Behind the mouse on the first screen; each photo covers a quarter of the one before, stays 1.7 seconds and fades (mouse-trail.js).</p>
-        <div class="guide-trail">
-          <img src="images/home-trail-1.webp" width="1382" height="1595" loading="lazy" alt="Photo 1">
-          <img src="images/home-trail-2.webp" width="1401" height="1118" loading="lazy" alt="Photo 2">
-          <img src="images/home-trail-3.webp" width="1541" height="1258" loading="lazy" alt="Photo 3">
-          <img src="images/home-trail-4.webp" width="766" height="1604" loading="lazy" alt="Photo 4">
+        <p class="project-bold-text">Floating picture (home)</p>
+        <p class="project-text">Floats around the first screen like the old DVD screen saver; at each edge it bounces back, changes to the next picture, and the screen changes to that picture's two colors. With the mouse over it, it freezes; clicking it plays the wave on "scroll down" (bouncing-picture.js).</p>
+        <div class="guide-bounce">
+          <div class="guide-bounce-item" style="--hero-left: var(--color-hero-1-left); --hero-right: var(--color-hero-1-right)"><img src="images/tail/1.webp" loading="lazy" alt="Picture 1"></div>
+          <div class="guide-bounce-item" style="--hero-left: var(--color-hero-2-left); --hero-right: var(--color-hero-2-right)"><img src="images/tail/2.webp" loading="lazy" alt="Picture 2"></div>
+          <div class="guide-bounce-item" style="--hero-left: var(--color-hero-3-left); --hero-right: var(--color-hero-3-right)"><img src="images/tail/3.webp" loading="lazy" alt="Picture 3"></div>
+          <div class="guide-bounce-item" style="--hero-left: var(--color-hero-4-left); --hero-right: var(--color-hero-4-right)"><img src="images/tail/4.webp" loading="lazy" alt="Picture 4"></div>
+          <div class="guide-bounce-item" style="--hero-left: var(--color-hero-5-left); --hero-right: var(--color-hero-5-right)"><img src="images/tail/5.webp" loading="lazy" alt="Picture 5"></div>
         </div>
       </div>
 

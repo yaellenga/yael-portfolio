@@ -26,11 +26,20 @@
   --color-project-cream: #fdfaf2;
 
   /* Home page, the first screen (the opening): its background and its texts.
-     The right half: cream with orange texts. The left half: the other way around, orange with cream texts. */
+     The right half: cream with orange texts. The left half: the other way around, orange with cream texts.
+     (On the computer these change with the floating picture: the colors below. The phone keeps these.) */
   --color-hero-background: var(--color-project-cream);
   --color-hero-text: var(--color-home-orange);
   --color-hero-left-background: var(--color-home-orange);
   --color-hero-left-text: var(--color-project-cream);
+
+  /* Home page, the first screen on the computer: the two colors of each floating picture's screen
+     (left half / right half; the texts on each half are in the other half's color) */
+  --color-hero-1-left: #812e3c;  --color-hero-1-right: #c4967d;  /* 1 · Hamotzi, the holiday table: wine and tan */
+  --color-hero-2-left: #5e9aff;  --color-hero-2-right: #fab8f9;  /* 2 · trac., the landing page: blue and pink */
+  --color-hero-3-left: #aea1b0;  --color-hero-3-right: #2c322e;  /* 3 · Hamotzi, the knife: lilac grey and near black */
+  --color-hero-4-left: #31643a;  --color-hero-4-right: #bcff40;  /* 4 · Lets Talk About It, the app: dark green and lime */
+  --color-hero-5-left: #5ef9e4;  --color-hero-5-right: #fb1a1a;  /* 5 · Davar Echad, the newspaper: aqua and red */
 
   /* trac. colors (each project has its own colors) */
   --color-trac-orange: #fe5808;
@@ -208,14 +217,10 @@
   --scroll-hint-delay: 0.6s;           /* ...after waiting this long once the page has loaded */
   --home-return-peek: 0.12;            /* home, back from a project: opens this share of a screen past it, showing the next project */
   --cool-stuff-underline-time: 0.4s;   /* home: the underline under "Cool stuff by" fades in this fast after the bounce */
-  --mouse-trail-size: 0.27075;         /* home: the photos in the mouse's tail, this share of the old changing photos' size (30%, then 5% smaller, then 5% smaller again) */
-  --mouse-trail-box-width: 621.9;      /* home: each photo in the tail fits in this box (Figma pixels: 691 × 797, the photos' frames */
-  --mouse-trail-box-height: 717.3;     /*   in the bank frame "Frame 169", × 0.9), keeping its own shape, before --mouse-trail-size */
-  --mouse-trail-smaller: 0.9;          /* home: now and then a photo is this much of that size (10% smaller)... */
-  --mouse-trail-smallest: 0.85;        /* ...and now and then this much (15% smaller), at random, for a range of sizes */
-  --mouse-trail-smaller-chance: 0.2;   /* the chance of each of the two smaller sizes (the rest are the full size) */
-  --mouse-trail-overlap: 0.25;         /* home: each photo in the tail covers this share of the one before */
-  --mouse-trail-stay-time: 1.7s;        /* home: each photo stays this long... */
+  --scroll-down-wave-hold: 0.6s;       /* home: after a click on the floating picture, the wave on "scroll down" stays up this long before going back */
+  --bouncing-picture-speed: 180;       /* home: the floating picture on the first screen moves this fast (Figma pixels a second) */
+  --mouse-trail-overlap: 0.25;         /* about: each picture in the mouse's tail covers this share of the one before */
+  --mouse-trail-stay-time: 1.7s;        /* about: each picture stays this long... */
   --mouse-trail-fade-time: 0.4s;       /* ...and then fades away this fast */
   --phone-sweep-time: 1.1s;            /* home, phone: the two halves of a project come in and meet in the middle this fast... */
   --phone-sweep-hold: 0.3s;            /* ...stay together this long, and then the project page opens */
@@ -352,7 +357,7 @@ body {
 /* Screen backgrounds */
 .screen-orange { background-color: var(--color-home-orange); }
 .screen-hero   { background-color: var(--color-hero-background); } /* the first screen */
-.split-left .screen-hero { background-color: var(--color-hero-left-background); } /* its left half: orange */
+.split-left .screen-hero { background-color: var(--color-hero-left-background); } /* its left half */
 .screen-blue   { background-color: var(--color-home-blue); }
 .screen-green  { background-color: var(--color-home-green); }
 .screen-white  { background-color: var(--color-white); }
@@ -517,7 +522,10 @@ body {
   color: var(--color-hero-text);
   white-space: nowrap;
 }
-.scroll-down-left  { --x: 673.8; --width: 46.2; } /* ends at the middle (its width in DM Serif Display italic: 46.2) */
+.scroll-down-left  { --x: 667.8; --width: 46.2; } /* ends 6 before the middle (its width in DM Serif Display italic: 46.2) */
+/* The wave (letter-roll.js): the mouse over "scroll" or "down", or a click on the floating picture, adds "is-rolling" to both */
+.scroll-down.is-rolling .roll-out .roll-letter { transform: translateY(calc(-1 * var(--roll-distance))); }
+.scroll-down.is-rolling .roll-in .roll-letter { transform: none; }
 .scroll-down-right { --x: 5;   --width: 48; }
 
 .home-name {
@@ -525,9 +533,40 @@ body {
   color: var(--color-hero-text);
 }
 
-/* Home, first screen: the tail of photos behind the mouse (mouse-trail.js).
+/* Home, first screen: the floating picture that bounces off the edges (bouncing-picture.js).
    One layer in each half of the first screen, under the text and the buttons (it comes first in the screen).
-   A photo that crosses the middle is put in both layers, and each half shows only its own part. */
+   The picture is in both layers, and each half shows only its own part (the screen hides what reaches past it). */
+.bouncing-picture-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;                 /* clicks pass through it */
+}
+.bouncing-picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  object-fit: cover;                    /* fills its Figma size; a picture of another shape is cropped a little */
+  will-change: transform;               /* it moves all the time: let the browser move it smoothly */
+  pointer-events: auto;                 /* the picture itself does catch the mouse: it freezes while the mouse is over it */
+  cursor: pointer;                      /* and it can be clicked (it plays the wave on "scroll down") */
+}
+
+/* Each picture's screen has its own two colors: the left half in one, the right half in the other,
+   and the texts on each half in the other half's color (bouncing-picture.js sets data-hero-picture) */
+.split[data-hero-picture="1"] { --hero-left: var(--color-hero-1-left); --hero-right: var(--color-hero-1-right); }
+.split[data-hero-picture="2"] { --hero-left: var(--color-hero-2-left); --hero-right: var(--color-hero-2-right); }
+.split[data-hero-picture="3"] { --hero-left: var(--color-hero-3-left); --hero-right: var(--color-hero-3-right); }
+.split[data-hero-picture="4"] { --hero-left: var(--color-hero-4-left); --hero-right: var(--color-hero-4-right); }
+.split[data-hero-picture="5"] { --hero-left: var(--color-hero-5-left); --hero-right: var(--color-hero-5-right); }
+.split[data-hero-picture] {
+  --color-hero-left-background: var(--hero-left);
+  --color-hero-left-text: var(--hero-right);
+  --color-hero-background: var(--hero-right);
+  --color-hero-text: var(--hero-left);
+}
+
+/* About page: the tail of pictures behind the mouse (mouse-trail.js) */
 .mouse-trail {
   position: absolute;
   inset: 0;
@@ -558,11 +597,12 @@ body {
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--color-hero-text);
+  pointer-events: none;                 /* the mouse passes through it to the floating picture under it (to freeze or click it) */
 }
 .home-intro-left  { --x: 61; }
 .home-intro-right { --x: -659; }        /* 61 - 720: starts in the left half */
 
-/* The left half of the first screen is orange, so its texts there are cream */
+/* The texts on the left half of the first screen take the right half's color (and the other way around) */
 .split-left .screen-hero .cool-stuff,
 .split-left .screen-hero .scroll-down,
 .split-left .screen-hero .home-intro { color: var(--color-hero-left-text); }
@@ -2868,13 +2908,21 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
   border: 1px solid var(--color-black);
 }
 
-/* Style guide: the photos of the mouse's tail, small, side by side */
-.guide-trail {
+/* Style guide: the floating pictures of the home page, each on its screen's two colors */
+.guide-bounce {
   display: flex;
-  align-items: flex-end;
+  flex-wrap: wrap;
   gap: var(--space-small);
 }
-.guide-trail img { height: calc(120 * var(--u)); width: auto; }
+.guide-bounce-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(240 * var(--u));
+  height: calc(160 * var(--u));
+  background: linear-gradient(to right, var(--hero-left) 50%, var(--hero-right) 50%);
+}
+.guide-bounce-item img { max-width: 60%; max-height: 80%; width: auto; height: auto; }
 
 /* Style guide: the video time bar, on a black strip like the bottom of the video */
 .guide-time-bar {

@@ -1,16 +1,8 @@
-// Home page, first screen: a tail of photos (in color) that follows the mouse.
-// The photos are the files in the folder images/tail/, named by number: 1.webp, 2.webp, 3.png…
-// (WebP, PNG or JPG). To add a photo, put it in the folder with the next number; nothing else to change.
-// The script looks for 1, 2, 3… and stops at the first number that isn't there.
-// Each photo is sized to fit in the same box (--mouse-trail-box-width × --mouse-trail-box-height, in styles.css),
-// keeping its own shape, like the photos in the bank frame in Figma ("Frame 169").
-// The about page has a tail too, made of its mouse picture (data-trail="about" on the area).
-// While the mouse moves over the first screen (both halves), a photo is left behind it every time
-// it has moved far enough that the new photo covers only --mouse-trail-overlap of the one before.
-// The photos come one after the other (1, 2, 3, 4, 1, 2…). Each stays --mouse-trail-stay-time,
-// then fades away (--mouse-trail-fade-time). Their size: --mouse-trail-size of the old changing photos.
-// On the home page, now and then a photo comes out a bit smaller, at random (10% or 15% smaller:
-// --mouse-trail-smaller, --mouse-trail-smallest), so the tail has a range of sizes.
+// About page: a tail of the page's mouse picture that follows the mouse (data-trail="about" on the area).
+// (The home page had a tail of project photos too; now it has a floating picture instead: bouncing-picture.js.)
+// While the mouse moves over the area, a picture is left behind it every time it has moved far enough
+// that the new picture covers only --mouse-trail-overlap of the one before.
+// Each stays --mouse-trail-stay-time, then fades away (--mouse-trail-fade-time).
 // Only with a real mouse (not on touch screens), and not for people who asked for less motion.
 
 (function () {
@@ -18,88 +10,30 @@
   const lessMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!canHover || lessMotion) return;
 
-  const trails = [...document.querySelectorAll('.mouse-trail')]; // one layer in each half, under the text
-  const areas = [...document.querySelectorAll('.mouse-trail-area')]; // the two halves of the first screen
+  const trails = [...document.querySelectorAll('.mouse-trail')]; // the layer the pictures go in, under the text
+  const areas = [...document.querySelectorAll('.mouse-trail-area')]; // where the mouse leaves a tail
 
   if (areas.length === 0) return;
   const rootStyle = getComputedStyle(document.documentElement);
 
-  // The tails: the photos of each one, how wide each photo is (in Figma pixels),
-  // its width ÷ height, and how much to shrink them all (size)
-  const tails = {
-    // Home: the photos from images/tail/ (found below, as they load), shrunk to --mouse-trail-size
-    home: {
-      size: parseFloat(rootStyle.getPropertyValue('--mouse-trail-size')),
-      varySizes: true,
-      folder: 'images/tail/',
-      photos: [],
-    },
-    // About: the page's mouse picture, as big as the mouse (.cursor-about in styles.css)
-    about: {
-      size: 1,
-      photos: [
-        { src: 'images/cursor-about.webp', width: 65, ratio: 195 / 303 },
-      ],
-    },
-  };
-  const tail = tails[areas[0].dataset.trail || 'home'];
-  const photos = tail.photos;
-  const size = tail.size;
+  // The tail's picture: the page's mouse picture, as big as the mouse (.cursor-about in styles.css):
+  // its width (in Figma pixels) and its width ÷ height
+  const photos = [
+    { src: 'images/cursor-about.webp', width: 65, ratio: 195 / 303 },
+  ];
   const overlap = parseFloat(rootStyle.getPropertyValue('--mouse-trail-overlap')); // share that overlaps
   const stayTime = parseFloat(rootStyle.getPropertyValue('--mouse-trail-stay-time')) * 1000;
 
-  // Now and then a smaller photo: the size of the next photo, as a share of the full size
-  const smaller = parseFloat(rootStyle.getPropertyValue('--mouse-trail-smaller'));
-  const smallest = parseFloat(rootStyle.getPropertyValue('--mouse-trail-smallest'));
-  const smallerChance = parseFloat(rootStyle.getPropertyValue('--mouse-trail-smaller-chance'));
-  function pickShare() {
-    if (!tail.varySizes) return 1;
-    const roll = Math.random();
-    if (roll < smallerChance) return smallest;          // 15% smaller
-    if (roll < smallerChance * 2) return smaller;       // 10% smaller
-    return 1;                                           // the full size
-  }
-
   let next = 0;       // which photo comes next
-  let nextShare = pickShare(); // how big the next photo is (chosen once, when the photo before it is left)
   let last = null;    // where the last photo was left: { x, y, width, height }
 
   // Load the photos ahead of time, so they show at once
   for (const photo of photos) new Image().src = photo.src;
 
-  // Home: find the photos in the folder, 1, 2, 3… (each as PNG, JPG or JPEG), until a number is missing.
-  // Each one is sized to fit in the box, keeping its shape.
-  if (tail.folder) {
-    const boxWidth = parseFloat(rootStyle.getPropertyValue('--mouse-trail-box-width'));
-    const boxHeight = parseFloat(rootStyle.getPropertyValue('--mouse-trail-box-height'));
-    const load = (src) => new Promise((resolve) => {
-      const image = new Image();
-      image.onload = () => resolve(image);
-      image.onerror = () => resolve(null);
-      image.src = src;
-    });
-    (async () => {
-      for (let number = 1; ; number++) {
-        let image = null;
-        for (const type of ['webp', 'png', 'jpg', 'jpeg']) {
-          image = await load(`${tail.folder}${number}.${type}`);
-          if (image) break;
-        }
-        if (!image) break; // no photo with this number: that was the last one
-        const fit = Math.min(boxWidth / image.naturalWidth, boxHeight / image.naturalHeight);
-        photos.push({
-          src: image.src,
-          width: image.naturalWidth * fit,
-          ratio: image.naturalWidth / image.naturalHeight,
-        });
-      }
-    })();
-  }
-
   // The size of the next photo on the screen
   function nextSize() {
     const unit = window.innerWidth / 1440; // 1 Figma pixel
-    const width = photos[next].width * size * nextShare * unit;
+    const width = photos[next].width * unit;
     return { width, height: width / photos[next].ratio };
   }
 
@@ -107,8 +41,7 @@
   function leavePhoto(x, y) {
     const { width, height } = nextSize();
 
-    // The same photo in both halves, each placed relative to its own half
-    // (each half shows only the part of it that falls inside)
+    // The picture in each tail layer, placed relative to the layer
     for (const trail of trails) {
       const half = trail.getBoundingClientRect();
       const image = document.createElement('img');
@@ -129,7 +62,6 @@
 
     last = { x, y, width, height };
     next = (next + 1) % photos.length;
-    nextShare = pickShare();
   }
 
   // How long a photo is in the direction (dx, dy): its width when moving sideways,
@@ -142,7 +74,6 @@
   }
 
   window.addEventListener('mousemove', (event) => {
-    if (photos.length === 0) return; // the photos haven't loaded yet
     const isOverFirstScreen = areas.some(area => area.contains(event.target));
     if (!isOverFirstScreen) { last = null; return; } // left the first screen: the tail starts again next time
 

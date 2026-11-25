@@ -8,12 +8,13 @@
 // so each one can start moving a moment after the one before it.
 
 // Put a text into an element, one <span> per letter
-function splitIntoLetters(element, text) {
+// (firstPlace: the place of its first letter in the wave; more than 0 when the text continues another one)
+function splitIntoLetters(element, text, firstPlace = 0) {
   element.textContent = '';
   [...text].forEach((character, index) => {
     const letter = document.createElement('span');
     letter.className = 'roll-letter';
-    letter.style.setProperty('--i', index);
+    letter.style.setProperty('--i', firstPlace + index);
     letter.textContent = character;
     element.appendChild(letter);
   });
@@ -70,5 +71,36 @@ function splitIntoLetters(element, text) {
     roll.append(leaving, coming);
     link.textContent = '';
     link.appendChild(roll);
+  }
+
+  // Home page: "scroll down" at the bottom of the first screen. It isn't a button, but it has the wave too.
+  // It is two texts, "scroll" in the left half and "down" in the right half, so they act as one:
+  // the mouse over either one plays the wave on both, and "down" goes on where "scroll" ends.
+  // (Clicking the floating picture plays it too: bouncing-picture.js adds "is-rolling" for a moment.)
+  const scrollDown = [...document.querySelectorAll('.scroll-down')];
+  let place = 0; // where the next text's first letter is in the wave
+  for (const part of scrollDown) {
+    const text = part.textContent.trim();
+    const hiddenText = document.createElement('span'); // for screen readers: the word as a whole
+    hiddenText.className = 'visually-hidden';
+    hiddenText.textContent = text;
+
+    const roll = document.createElement('span');
+    roll.className = 'roll';
+    roll.setAttribute('aria-hidden', 'true');
+    const leaving = document.createElement('span');
+    leaving.className = 'roll-line roll-out';
+    splitIntoLetters(leaving, text, place);
+    const coming = document.createElement('span');
+    coming.className = 'roll-line roll-in';
+    splitIntoLetters(coming, text, place);
+    roll.append(leaving, coming);
+
+    part.textContent = '';
+    part.append(hiddenText, roll);
+    place += text.length + 1; // and a space between the two words
+
+    part.addEventListener('mouseenter', () => scrollDown.forEach(each => each.classList.add('is-rolling')));
+    part.addEventListener('mouseleave', () => scrollDown.forEach(each => each.classList.remove('is-rolling')));
   }
 })();
