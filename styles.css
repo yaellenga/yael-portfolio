@@ -1403,13 +1403,17 @@ a:focus-visible .roll-in .roll-letter,
 .video-button svg { width: 55%; height: 55%; }
 
 /* Hamotzi: the buttons in a light grey with grain, like the logo
-   (the enlarge icon in the grey of "More stuff"); on hover they turn cream */
-.hamotzi-video .video-button {
+   (the enlarge icon in the grey of "More stuff"); on hover they turn orange (below).
+   .guide-hamotzi: the same look for the samples in the style guide */
+.guide-hamotzi { --project-nav-color: var(--color-hamotzi-nav-grey); }
+.hamotzi-video .video-button,
+.guide-hamotzi .video-button {
   background: var(--hamotzi-grain), var(--color-hamotzi-button-grey);
   color: var(--project-nav-color);
 }
 /* On hover: the buttons' orange, with the same grain (the enlarge button, and the play button on the phone) */
-.hamotzi-video .video-button:hover {
+.hamotzi-video .video-button:hover,
+.guide-hamotzi .video-button:hover {
   background: var(--hamotzi-grain), var(--color-home-orange);
 }
 
@@ -1424,12 +1428,14 @@ a:focus-visible .roll-in .roll-letter,
 
 /* Hamotzi: the square you drag on the time bar, in the same grey with grain as the buttons
    (lighter, cream, while the mouse is over the bar or it is being dragged) */
-.hamotzi-video .video-time-handle {
+.hamotzi-video .video-time-handle,
+.guide-hamotzi .video-time-handle {
   background: var(--hamotzi-grain), var(--color-hamotzi-button-grey);
 }
 /* On hover and while dragging: the buttons' orange (like the "play" / "pause" mouse word), with the same grain */
 .hamotzi-video .video-time-bar:hover .video-time-handle,
-.hamotzi-video .video-time-bar.is-dragging .video-time-handle {
+.hamotzi-video .video-time-bar.is-dragging .video-time-handle,
+.guide-hamotzi .video-time-bar:hover .video-time-handle {
   background: var(--hamotzi-grain), var(--color-home-orange);
 }
 

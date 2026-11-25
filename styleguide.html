@@ -107,7 +107,7 @@
         <p class="handwriting">Cool stuff by</p>
         <p class="project-text">.scroll-down — "scroll" and "down" at the bottom of the first screen, across the middle; the wave on hover over either one plays on both (letter-roll.js), and so does a click on the floating picture</p>
         <div class="guide-dark"><p class="handwriting scroll-down">scroll down</p></div>
-        <p class="project-text">.home-intro — the big text on the first screen (Fira Sans Condensed Bold 80): cream on the orange left half, orange on the cream right half</p>
+        <p class="project-text">.home-intro — the big text on the first screen (Fira Sans Condensed Bold 80). On the computer its colors change with the floating picture: on each half it takes the other half's color (see "Floating picture" below). The mouse passes through it to the picture under it.</p>
         <p class="home-intro">A graphic &amp; digital designer</p>
         <p class="project-text">.project-label</p>
         <div class="guide-dark"><p class="project-label">trac.<br>ux\ui<br>app design</p></div>
@@ -150,12 +150,14 @@
         <p class="side-year">2025</p>
         <p class="project-text">.side-detail — side column: the type and the credits</p>
         <p class="side-detail">Student Project with Mia Gaon</p>
-        <p class="project-text">.side-link — side column: "next project" (to the next project: trac. → Hamotzi → Lets Talk About It → trac.) and the links at the bottom</p>
+        <p class="project-text">.side-link — side column: "next project" (to the next project: trac. → Hamotzi → Lets Talk About It → Davar Echad → trac.) and the links at the bottom</p>
         <p><a class="side-link handwriting-link" href="hamotzi.html">next project</a></p>
         <p class="project-text">.side-title — side column: the title at the bottom</p>
         <p class="side-title guide-uppercase">A songwriting app for independent musicians</p>
         <p class="project-text">.side-text — side column: the text at the bottom</p>
         <p class="side-text guide-uppercase">trac. is an app that keeps your songwriting organized while you keep creating.</p>
+        <p class="project-text">.side-text on Davar Echad and Lets Talk About It: Fira Sans Condensed Light 12, in regular letters (not capitals); their links ("More Cool Stuff", "Yael Lenga", the contact links, "next project" and the links at the bottom) are in the buttons' orange</p>
+        <div class="davar-page"><p class="side-text">Davar Echad is a contemporary news rebrand designed to make current events more accessible and less overwhelming.</p></div>
       </div>
 
       <div class="guide-group">
@@ -341,8 +343,8 @@
         </div>
       </div>
 
-      <!-- Video player buttons (Hamotzi page): move the mouse over them to see them invert -->
-      <div class="guide-group">
+      <!-- Video player buttons (Hamotzi page): move the mouse over them to see them turn orange -->
+      <div class="guide-group guide-hamotzi">
         <p class="project-bold-text">Video player buttons</p>
         <p class="project-text">On the computer, the play button is replaced by the mouse itself: over the video it becomes the word "play" or "pause" (what a click will do), in the handwriting-style font, the buttons' orange, as big as "next project" (.video-mouse-word, video-player.js). The play button below stays on the phone.</p>
         <p class="project-text"><span class="video-mouse-word is-visible" style="position: static; transform: none">play</span> &nbsp; <span class="video-mouse-word is-visible" style="position: static; transform: none">pause</span></p>
@@ -354,7 +356,8 @@
             <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg>
           </button>
         </div>
-        <p class="project-text">.video-time-bar (drag it on the Hamotzi page to move through the video)</p>
+        <p class="project-text">The buttons are grey with grain; on hover the enlarge button (and the play button, on the phone) turns the buttons' orange, with the same grain.</p>
+        <p class="project-text">.video-time-bar (drag it on the Hamotzi page to move through the video); its square turns orange on hover and while dragging</p>
         <div class="guide-time-bar">
           <div class="video-time-bar" style="--played: 0.4" aria-hidden="true">
             <div class="video-time-track"><div class="video-time-played"></div></div>
@@ -368,6 +371,7 @@
       <div class="guide-group">
         <p class="project-bold-text">Floating picture (home)</p>
         <p class="project-text">Floats around the first screen like the old DVD screen saver; at each edge it bounces back, changes to the next picture, and the screen changes to that picture's two colors. With the mouse over it, it freezes; clicking it plays the wave on "scroll down" (bouncing-picture.js).</p>
+        <p class="project-text">All five pictures are on the page from the start, each at its own size, and only one shows: at an edge the next one takes its place in the same moment, against the edge that was hit and centered where the old one was, so it never jumps. Speed: --bouncing-picture-speed (180 Figma pixels a second).</p>
         <div class="guide-bounce">
           <div class="guide-bounce-item" style="--hero-left: var(--color-hero-1-left); --hero-right: var(--color-hero-1-right)"><img src="images/tail/1.webp" loading="lazy" alt="Picture 1"></div>
           <div class="guide-bounce-item" style="--hero-left: var(--color-hero-2-left); --hero-right: var(--color-hero-2-right)"><img src="images/tail/2.webp" loading="lazy" alt="Picture 2"></div>
@@ -454,6 +458,13 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- The site's icon (favicon): in the browser tab of every page, and on a phone's home screen -->
+      <div class="guide-group">
+        <p class="project-bold-text">Site icon</p>
+        <p class="project-text">Yael as a girl (Figma 514:5066), cropped square around the face: images/favicon.png (64×64, the browser tab) and images/apple-touch-icon.png (180×180, a phone's home screen). Every page links both in its &lt;head&gt;.</p>
+        <p><img src="images/apple-touch-icon.png" width="90" height="90" alt="The site icon"> &nbsp; <img src="images/favicon.png" width="32" height="32" alt="The site icon at the size of a browser tab"></p>
       </div>
 
       <!-- Loader (page-loader.js): what shows while a page loads, if it takes a while -->
