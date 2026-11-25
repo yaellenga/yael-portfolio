@@ -16,9 +16,9 @@
 // picture shows at the new one's size or spot.
 // The new picture takes the old one's place against the edge it hit, centered where the old one was
 // along that edge (so it doesn't jump sideways).
-// While the mouse is over the picture, it freezes in place, and goes on when the mouse leaves it.
-// Clicking the picture plays the wave on "scroll down" at the bottom of the screen, as if the mouse were over it
-// (letter-roll.js): the letters go up and come back from below, stay a moment, and then go back.
+// While the mouse is over the picture, it freezes in place, and goes on when the mouse leaves it;
+// meanwhile "scroll down" at the bottom of the screen plays its wave, as if the mouse were over it (letter-roll.js).
+// Clicking the picture opens its project's page (the "page" of each picture in the list below).
 // For people who asked their computer for less motion, the first picture stays still.
 
 (function () {
@@ -28,11 +28,11 @@
 
   // The pictures, in order: the file, its size in Figma pixels, its rounded corners
   const pictures = [
-    { src: 'images/tail/1.webp', width: 313, height: 318, corners: 0 },  // Hamotzi: the holiday table
-    { src: 'images/tail/2.webp', width: 380, height: 307, corners: 0 },  // trac.: the landing page on a computer
-    { src: 'images/tail/3.webp', width: 337, height: 275, corners: 0 },  // Hamotzi: the knife and the challah
-    { src: 'images/tail/4.webp', width: 166, height: 347, corners: 27 }, // Lets Talk About It: the app on a phone
-    { src: 'images/tail/5.webp', width: 266, height: 402, corners: 0 },  // Davar Echad: the newspaper
+    { src: 'images/tail/1.webp', width: 313, height: 318, corners: 0,  page: 'hamotzi.html' },     // Hamotzi: the holiday table
+    { src: 'images/tail/2.webp', width: 380, height: 307, corners: 0,  page: 'trac.html' },        // trac.: the landing page on a computer
+    { src: 'images/tail/3.webp', width: 337, height: 275, corners: 0,  page: 'hamotzi.html' },     // Hamotzi: the knife and the challah
+    { src: 'images/tail/4.webp', width: 166, height: 347, corners: 27, page: 'lets-talk.html' },   // Lets Talk About It: the app on a phone
+    { src: 'images/tail/5.webp', width: 266, height: 402, corners: 0,  page: 'davar-echad.html' }, // Davar Echad: the newspaper
   ];
 
   const rootStyle = getComputedStyle(document.documentElement);
@@ -51,26 +51,16 @@
     image.style.borderRadius = `calc(${picture.corners} * var(--u))`;
     layer.appendChild(image);
     // The mouse over the picture (in either half): it freezes in place until the mouse leaves
-    image.addEventListener('mouseenter', () => { isFrozen = true; });
-    image.addEventListener('mouseleave', () => { isFrozen = false; });
-    image.addEventListener('click', playScrollDownWave);
+    image.addEventListener('mouseenter', () => { isFrozen = true; setScrollDownWave(true); });
+    image.addEventListener('mouseleave', () => { isFrozen = false; setScrollDownWave(false); });
+    // Clicking it: its project's page
+    image.addEventListener('click', () => { window.location.href = picture.page; });
     return image;
   }));
 
-  // Clicking the picture: the wave on "scroll down", as if the mouse were over it, and back after a moment
-  // (long enough for the whole wave to come up, and then a pause: --scroll-down-wave-hold)
-  let waveTimer = null;
-  function playScrollDownWave() {
-    const scrollDown = [...document.querySelectorAll('.scroll-down')];
-    const letters = document.querySelectorAll('.scroll-down .roll-in .roll-letter').length;
-    const rollTime = parseFloat(rootStyle.getPropertyValue('--roll-time')) * 1000;
-    const stagger = parseFloat(rootStyle.getPropertyValue('--roll-stagger')) * 1000;
-    const hold = parseFloat(rootStyle.getPropertyValue('--scroll-down-wave-hold')) * 1000;
-    scrollDown.forEach(each => each.classList.add('is-rolling'));
-    clearTimeout(waveTimer);
-    waveTimer = setTimeout(() => {
-      scrollDown.forEach(each => { if (!each.matches(':hover')) each.classList.remove('is-rolling'); });
-    }, rollTime + stagger * letters + hold);
+  // "scroll down" plays its wave while the mouse is over the picture (letter-roll.js: "is-rolling" on both its words)
+  function setScrollDownWave(isOn) {
+    document.querySelectorAll('.scroll-down').forEach((each) => each.classList.toggle('is-rolling', isOn));
   }
 
   let isFrozen = false;            // the mouse is over the picture: it stays where it is

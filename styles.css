@@ -134,7 +134,7 @@
 
   /* Project pages (like "project page- trac"), also in Figma pixels × --u */
   --home-intro-size: calc(80 * var(--u)); /* home: the big text across both halves */
-  --scroll-down-size: calc(20 * var(--u)); /* home: "scroll down" at the bottom of the first screen */
+  --scroll-down-size: calc(22 * var(--u)); /* home: "scroll down" at the bottom of the first screen (Figma: 20, made 2 bigger) */
   --trac-group-gap: 45.73;                  /* home, trac.: the space between the headline, the tag and the phone (Figma pixels; the headline-to-tag space in Figma) */
   --trac-screen-padding: 1cm;               /* home, trac.: the least space above the headline and under the phone (1 cm, about 38 pixels) */
   --project-name-size: calc(40 * var(--u));
@@ -219,7 +219,6 @@
   --scroll-hint-delay: 0.6s;           /* ...after waiting this long once the page has loaded */
   --home-return-peek: 0.12;            /* home, back from a project: opens this share of a screen past it, showing the next project */
   --cool-stuff-underline-time: 0.4s;   /* home: the underline under "Cool stuff by" fades in this fast after the bounce */
-  --scroll-down-wave-hold: 0.6s;       /* home: after a click on the floating picture, the wave on "scroll down" stays up this long before going back */
   --bouncing-picture-speed: 180;       /* home: the floating picture on the first screen moves this fast (Figma pixels a second) */
   --mouse-trail-overlap: 0.25;         /* about: each picture in the mouse's tail covers this share of the one before */
   --mouse-trail-stay-time: 1.7s;        /* about: each picture stays this long... */
@@ -524,11 +523,11 @@ body {
   color: var(--color-hero-text);
   white-space: nowrap;
 }
-.scroll-down-left  { --x: 667.8; --width: 46.2; } /* ends 6 before the middle (its width in DM Serif Display italic: 46.2) */
-/* The wave (letter-roll.js): the mouse over "scroll" or "down", or a click on the floating picture, adds "is-rolling" to both */
+.scroll-down-left  { --x: 663.18; --width: 50.82; } /* ends 6 before the middle (its width in DM Serif Display italic at 22: 50.82) */
+/* The wave (letter-roll.js): the mouse over "scroll" or "down", or over the floating picture (bouncing-picture.js), adds "is-rolling" to both */
 .scroll-down.is-rolling .roll-out .roll-letter { transform: translateY(calc(-1 * var(--roll-distance))); }
 .scroll-down.is-rolling .roll-in .roll-letter { transform: none; }
-.scroll-down-right { --x: 5;   --width: 48; }
+.scroll-down-right { --x: 5;   --width: 52.8; }    /* (its width at 22) */
 
 .home-name {
   --x: var(--name-gap-half); --y: 25; --width: 315; /* starts just after the middle (this is the right half) */
@@ -552,7 +551,7 @@ body {
   will-change: transform;               /* it moves all the time: let the browser move it smoothly */
   visibility: hidden;                   /* all five are on the page; only the current one shows... */
   pointer-events: auto;                 /* the picture itself does catch the mouse: it freezes while the mouse is over it */
-  cursor: pointer;                      /* and it can be clicked (it plays the wave on "scroll down") */
+  cursor: pointer;                      /* and it can be clicked (it opens its project's page) */
 }
 .bouncing-picture.is-showing { visibility: visible; } /* ...(bouncing-picture.js) */
 

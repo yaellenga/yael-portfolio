@@ -76,7 +76,7 @@ function splitIntoLetters(element, text, firstPlace = 0) {
   // Home page: "scroll down" at the bottom of the first screen. It isn't a button, but it has the wave too.
   // It is two texts, "scroll" in the left half and "down" in the right half, so they act as one:
   // the mouse over either one plays the wave on both, and "down" goes on where "scroll" ends.
-  // (Clicking the floating picture plays it too: bouncing-picture.js adds "is-rolling" for a moment.)
+  // (The mouse over the floating picture plays it too: bouncing-picture.js.)
   const scrollDown = [...document.querySelectorAll('.scroll-down')];
   let place = 0; // where the next text's first letter is in the wave
   for (const part of scrollDown) {
