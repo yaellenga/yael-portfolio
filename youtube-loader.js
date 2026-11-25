@@ -8,6 +8,8 @@
 //     (or a few seconds after its player is ready, if it doesn't start).
 //   - a video that waits for a click (Hamotzi): ready when its player has loaded.
 // YouTube tells this through messages, so the video's address has enablejsapi=1 in it.
+// A YouTube video added to the page later (the Hamotzi backup, video-backup.js) gets its loader
+// through window.addYouTubeLoader(video).
 
 (function () {
   const rootStyle = getComputedStyle(document.documentElement);
@@ -15,7 +17,8 @@
   const longestWait = 15000;   // if YouTube never says it's ready, take the loader away anyway after this long
   const notPlayingWait = 4000; // a video that should play by itself: how long to wait for it to start, once its player is ready
 
-  for (const video of document.querySelectorAll('iframe.youtube-video')) {
+  // The loader for one YouTube video (an <iframe>)
+  function addYouTubeLoader(video) {
     const playsByItself = video.src.includes('autoplay=1');
 
     // The loader, on top of the video, in the same frame
@@ -88,4 +91,8 @@
 
     setTimeout(ready, longestWait);
   }
+
+  // Every YouTube video already on the page, and any added later
+  document.querySelectorAll('iframe.youtube-video').forEach(addYouTubeLoader);
+  window.addYouTubeLoader = addYouTubeLoader;
 })();

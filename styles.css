@@ -212,6 +212,8 @@
   --loader-wait-time: 0.3s;            /* loader: the number shows only if the page isn't ready after this long */
   --loader-picture-time: 0.5s;         /* loader: at 100%, the about page's mouse picture shows this long before the page opens */
   --loader-fade-time: 0.3s;            /* loader: how fast it fades away to show the page */
+  --video-backup-wait: 10s;            /* Hamotzi: if the video hasn't started this long after pressing play... */
+  --video-backup-note-time: 3s;        /* ...a note shows this long, and then the video comes from YouTube (video-backup.js) */
   --scroll-hint-distance: 0.08;        /* home: on opening, the page scrolls down this share of the window height... */
   --scroll-hint-time: 0.8s;            /* ...and back with a small bounce, all of it taking this long */
   --scroll-hint-delay: 0.6s;           /* ...after waiting this long once the page has loaded */
@@ -1302,11 +1304,14 @@ a:focus-visible .roll-in .roll-letter,
   75%, 92.857% { transform: translateY(calc(-345.5 * var(--k))); }
   100%         { transform: translateY(calc(-483.5 * var(--k))); }
 }
+/* (The second list starts one word lower than it used to: it used to start above the first word, so for the first
+   step the top spot was empty, and the jump back to the start lost a word.
+   The column is כבד, רגיל, בינוני, כבד, רגיל, בינוני…, so the 4th step looks exactly like the 1st.) */
 @keyframes davar-haim-words {
-  0%, 23.81%   { transform: translateY(calc(208 * var(--k))); }
-  33.33%, 57.14% { transform: translateY(calc(69.5 * var(--k))); }
-  66.67%, 90.48% { transform: translateY(calc(-68.5 * var(--k))); }
-  100%         { transform: translateY(calc(-207.5 * var(--k))); }
+  0%, 23.81%   { transform: translateY(calc(69.5 * var(--k))); }
+  33.33%, 57.14% { transform: translateY(calc(-68.5 * var(--k))); }
+  66.67%, 90.48% { transform: translateY(calc(-207.5 * var(--k))); }
+  100%         { transform: translateY(calc(-345.5 * var(--k))); }
 }
 
 /* 2. The heart arrows next to the lists: they jump up and spring back down, once for each word,
@@ -1401,8 +1406,9 @@ a:focus-visible .roll-in .roll-letter,
   background: var(--hamotzi-grain), var(--color-hamotzi-button-grey);
   color: var(--project-nav-color);
 }
+/* On hover: the buttons' orange, with the same grain (the enlarge button, and the play button on the phone) */
 .hamotzi-video .video-button:hover {
-  background: var(--hamotzi-grain), var(--color-project-cream);
+  background: var(--hamotzi-grain), var(--color-home-orange);
 }
 
 /* Hamotzi play button: the triangle is cut out of the square, so the video shows through it.
@@ -1419,9 +1425,10 @@ a:focus-visible .roll-in .roll-letter,
 .hamotzi-video .video-time-handle {
   background: var(--hamotzi-grain), var(--color-hamotzi-button-grey);
 }
+/* On hover and while dragging: the buttons' orange (like the "play" / "pause" mouse word), with the same grain */
 .hamotzi-video .video-time-bar:hover .video-time-handle,
 .hamotzi-video .video-time-bar.is-dragging .video-time-handle {
-  background: var(--hamotzi-grain), var(--color-project-cream);
+  background: var(--hamotzi-grain), var(--color-home-orange);
 }
 
 /* Play: in the middle of the video; hidden while it plays */
@@ -1433,6 +1440,35 @@ a:focus-visible .roll-in .roll-letter,
   transform: translate(-50%, -50%);
 }
 .video-player.is-playing .video-play { display: none; }
+
+/* On the computer, with a real mouse: over the video the mouse is the word "play" or "pause" (video-player.js),
+   so the play button in the middle is gone (it stays for the keyboard: still there, just not seen) */
+@media (hover: hover) and (pointer: fine) {
+  .video-player.has-mouse-word .video-player-video { cursor: none; }
+  .video-player.has-mouse-word .video-play {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    opacity: 0;
+  }
+}
+/* The word itself: in the handwriting-style font, in the buttons' orange, as big as "next project",
+   with its middle on the mouse's tip */
+.video-mouse-word {
+  position: fixed;
+  z-index: 200;                          /* above the enlarged video too */
+  transform: translate(-50%, -50%);
+  pointer-events: none;                  /* the click goes to the video under it */
+  font-family: var(--font-handwriting);
+  font-style: var(--font-handwriting-style);
+  font-size: var(--side-link-size);
+  color: var(--color-home-orange);
+  white-space: nowrap;
+  visibility: hidden;
+}
+.video-mouse-word.is-visible { visibility: visible; }
 
 /* Enlarge: in the bottom-right corner */
 .video-enlarge {
@@ -2106,7 +2142,7 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
                            clip-path: inset(0 37.5% 0 0); }  /* only "never lose a" (the drawing's first 85 of 136) */
 .trac-phone-tag-again    { --x: 83.302;  --y: 2103.2; --width: 136; --height: 12;
                            clip-path: inset(0 0 0 62.5%); }  /* only "again.": 3 further right than in Figma */
-.trac-phone-tag-word     { --x: 149.557; --y: 2101.45; --width: 34.602; }
+.trac-phone-tag-word     { --x: 149.557; --y: 2099.7; --width: 34.602; } /* 1.75 higher than in Figma, so the bottom of the word sits on the sentence's line */
 .trac-phone-tag-plug     { --x: 258.566; --y: 2102.5; --width: 50;  --height: 16; }
 .trac-phone-tag-cable    { --x: 306.082; --y: 2106.28;  --width: 87;  --height: 7; }
 
@@ -2892,6 +2928,26 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
 .video-loader.is-at-picture .video-loader-text { visibility: hidden; }
 /* A frame around the video's edges while it loads (Hamotzi); it goes away with the loader */
 .video-loader.has-frame { box-shadow: inset 0 0 0 1px var(--color-black); }
+/* The note when a video takes too long and its YouTube backup comes instead (video-backup.js):
+   over the video, in its frame, like the loader: cream, with the text in the middle in the handwriting-style font */
+.video-backup-note {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;                        /* its two lines together, in the middle */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10%;
+  text-align: center;
+  background-color: var(--color-project-cream);
+  box-shadow: inset 0 0 0 1px var(--color-black); /* the same frame as the loader that comes after it */
+  font-family: var(--font-handwriting);
+  font-style: var(--font-handwriting-style);
+  font-size: var(--handwriting-size);
+  color: var(--color-black);
+}
+.video-backup-note-line { display: block; } /* each of its two lines on a line of its own */
 /* The frame the computer's video sits in, so the loader covers just the video */
 .mockup-site { position: relative; }
 
@@ -2906,6 +2962,12 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
   width: calc(300 * var(--u));
   height: calc(200 * var(--u));
   border: 1px solid var(--color-black);
+}
+/* Style guide: the video backup note, in a box the size of the loader boxes */
+.guide-backup {
+  position: relative;
+  width: calc(450 * var(--u));
+  height: calc(253 * var(--u));
 }
 
 /* Style guide: the floating pictures of the home page, each on its screen's two colors */

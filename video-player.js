@@ -5,6 +5,19 @@
 //   The same button, a click on the dimmed screen, or the Esc key make it small again.
 // - Time bar: shows how far the video has played. Drag it, or click on it, to move forward or back.
 //   With the keyboard: the arrow keys move 5 seconds.
+// - On the computer (with a real mouse), over the video the mouse becomes the word "play" or "pause"
+//   (what a click will do), in the handwriting-style font, instead of the play button in the middle.
+//   Over the time bar and the enlarge button the mouse is the usual one. Not on touch screens.
+
+// The word that takes the mouse's place over a video (one for the page, made only with a real mouse)
+const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+let mouseWord = null;
+if (canHover) {
+  mouseWord = document.createElement('span');
+  mouseWord.className = 'video-mouse-word';
+  mouseWord.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(mouseWord);
+}
 
 for (const player of document.querySelectorAll('.video-player')) {
   const video = player.querySelector('.video-player-video');
@@ -20,6 +33,28 @@ for (const player of document.querySelectorAll('.video-player')) {
   video.addEventListener('play', () => player.classList.add('is-playing'));
   video.addEventListener('pause', () => player.classList.remove('is-playing'));
   video.addEventListener('ended', () => player.classList.remove('is-playing'));
+
+  // The mouse as a word over the video: "play" when it is stopped, "pause" while it plays
+  // (only in the computer version of the page: the phone version has no special mice)
+  if (mouseWord && !player.closest('.phone-project')) {
+    player.classList.add('has-mouse-word'); // (styles.css hides the usual mouse and the play button)
+    const showWord = (event) => {
+      mouseWord.textContent = video.paused ? 'play' : 'pause';
+      mouseWord.style.left = `${event.clientX}px`;
+      mouseWord.style.top = `${event.clientY}px`;
+      mouseWord.classList.add('is-visible');
+    };
+    video.addEventListener('mousemove', showWord);
+    video.addEventListener('mouseenter', showWord);
+    video.addEventListener('mouseleave', () => mouseWord.classList.remove('is-visible'));
+    // After a click the word changes at once, without waiting for the mouse to move
+    for (const change of ['play', 'pause', 'ended']) {
+      video.addEventListener(change, () => { mouseWord.textContent = video.paused ? 'play' : 'pause'; });
+    }
+    // The video is taken off the page (its YouTube backup came instead, video-backup.js): no word
+    new MutationObserver(() => { if (!video.isConnected) mouseWord.classList.remove('is-visible'); })
+      .observe(player, { childList: true });
+  }
 
   // Enlarge and make small again
   function setEnlarged(enlarged) {
