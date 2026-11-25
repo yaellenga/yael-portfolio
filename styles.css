@@ -550,9 +550,11 @@ body {
   max-width: none;
   object-fit: cover;                    /* fills its Figma size; a picture of another shape is cropped a little */
   will-change: transform;               /* it moves all the time: let the browser move it smoothly */
+  visibility: hidden;                   /* all five are on the page; only the current one shows... */
   pointer-events: auto;                 /* the picture itself does catch the mouse: it freezes while the mouse is over it */
   cursor: pointer;                      /* and it can be clicked (it plays the wave on "scroll down") */
 }
+.bouncing-picture.is-showing { visibility: visible; } /* ...(bouncing-picture.js) */
 
 /* Each picture's screen has its own two colors: the left half in one, the right half in the other,
    and the texts on each half in the other half's color (bouncing-picture.js sets data-hero-picture) */

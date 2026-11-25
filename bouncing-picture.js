@@ -11,6 +11,11 @@
 //
 // The screen is split in two halves (two columns), so the picture is in both halves:
 // one copy in each, and each half shows only the part of it that falls inside.
+// All five pictures are on the page from the start (hidden), each at its own size, so changing picture
+// is only hiding one and showing the next, in the same moment: there is never a moment where the old
+// picture shows at the new one's size or spot.
+// The new picture takes the old one's place against the edge it hit, centered where the old one was
+// along that edge (so it doesn't jump sideways).
 // While the mouse is over the picture, it freezes in place, and goes on when the mouse leaves it.
 // Clicking the picture plays the wave on "scroll down" at the bottom of the screen, as if the mouse were over it
 // (letter-roll.js): the letters go up and come back from below, stay a moment, and then go back.
@@ -34,18 +39,23 @@
   const speed = parseFloat(rootStyle.getPropertyValue('--bouncing-picture-speed')); // Figma pixels per second
   const lessMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // One <img> in each half
-  const copies = layers.map((layer) => {
+  // Every picture, in each half: copies[half][picture]. Only the current picture shows (.is-showing).
+  const copies = layers.map((layer) => pictures.map((picture) => {
     const image = document.createElement('img');
     image.className = 'bouncing-picture';
     image.alt = '';
+    image.src = picture.src;
+    image.decoding = 'sync'; // ready to show at once when its turn comes
+    image.style.width = `calc(${picture.width} * var(--u))`;
+    image.style.height = `calc(${picture.height} * var(--u))`;
+    image.style.borderRadius = `calc(${picture.corners} * var(--u))`;
     layer.appendChild(image);
     // The mouse over the picture (in either half): it freezes in place until the mouse leaves
     image.addEventListener('mouseenter', () => { isFrozen = true; });
     image.addEventListener('mouseleave', () => { isFrozen = false; });
     image.addEventListener('click', playScrollDownWave);
     return image;
-  });
+  }));
 
   // Clicking the picture: the wave on "scroll down", as if the mouse were over it, and back after a moment
   // (long enough for the whole wave to come up, and then a pause: --scroll-down-wave-hold)
@@ -63,9 +73,6 @@
     }, rollTime + stagger * letters + hold);
   }
 
-  // Load all the pictures ahead of time, so each one shows at once when its turn comes
-  for (const picture of pictures) new Image().src = picture.src;
-
   let isFrozen = false;            // the mouse is over the picture: it stays where it is
   let current = 0;                 // which picture is showing now
   let x = 776, y = 231;            // where its top-left corner is, in Figma pixels (the spot in the first Figma frame)
@@ -78,23 +85,17 @@
     return { width: 1440, height: half.height / unit, unit };
   }
 
-  // Show the current picture and its colors
+  // Show the current picture (in both halves, the others hidden) and its colors
   function showPicture() {
-    const picture = pictures[current];
-    for (const image of copies) {
-      image.src = picture.src;
-      image.style.width = `calc(${picture.width} * var(--u))`;
-      image.style.height = `calc(${picture.height} * var(--u))`;
-      image.style.borderRadius = `calc(${picture.corners} * var(--u))`;
-    }
+    copies.forEach((half) => half.forEach((image, index) => image.classList.toggle('is-showing', index === current)));
     main.dataset.heroPicture = current + 1;
   }
 
-  // Put both copies at the picture's spot (each one relative to its own half)
+  // Put the current picture's two copies at its spot (each one relative to its own half)
   function place() {
     const { unit } = screenSize();
-    copies[0].style.transform = `translate(${x * unit}px, ${y * unit}px)`;          // left half
-    copies[1].style.transform = `translate(${(x - 720) * unit}px, ${y * unit}px)`;  // right half: 720 further left
+    copies[0][current].style.transform = `translate(${x * unit}px, ${y * unit}px)`;          // left half
+    copies[1][current].style.transform = `translate(${(x - 720) * unit}px, ${y * unit}px)`;  // right half: 720 further left
   }
 
   // Keep the picture inside the screen (after it changes size, or the window does)
@@ -130,11 +131,25 @@
     if (y <= 0)                             { y = 0; moveY = 1; hit = true; }
     if (y + picture.height >= height)       { y = height - picture.height; moveY = -1; hit = true; }
 
-    // ...and change to the next picture and its colors (once, even when it hits a corner)
+    // ...and change to the next picture and its colors (once, even when it hits a corner).
+    // The new one sits against the same edge, centered where the old one was (then kept inside the screen).
     if (hit) {
+      const centerX = x + picture.width / 2, centerY = y + picture.height / 2;
+      const hitLeft = x <= 0, hitRight = x + picture.width >= width;
+      const hitTop = y <= 0, hitBottom = y + picture.height >= height;
       current = (current + 1) % pictures.length;
-      showPicture();
+      const next = pictures[current];
+      x = hitLeft ? 0 : hitRight ? width - next.width : centerX - next.width / 2;
+      y = hitTop ? 0 : hitBottom ? height - next.height : centerY - next.height / 2;
       keepInside();
+      // If being kept inside put it against another edge too (a bigger picture near a corner),
+      // it goes away from that edge as well, as part of the same bounce (and doesn't count as another hit)
+      if (x <= 0) moveX = 1;
+      if (x + next.width >= width) moveX = -1;
+      if (y <= 0) moveY = 1;
+      if (y + next.height >= height) moveY = -1;
+      place();        // first at its spot...
+      showPicture();  // ...then shown, in the same moment
     }
 
     place();
