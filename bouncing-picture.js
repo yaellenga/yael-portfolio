@@ -16,8 +16,10 @@
 // picture shows at the new one's size or spot.
 // The new picture takes the old one's place against the edge it hit, centered where the old one was
 // along that edge (so it doesn't jump sideways).
-// While the mouse is over the picture, it freezes in place, and goes on when the mouse leaves it;
-// meanwhile "scroll down" at the bottom of the screen plays its wave, as if the mouse were over it (letter-roll.js).
+// While the mouse is over the picture, it freezes in place, and goes on when the mouse leaves it.
+// When the mouse comes onto the picture, "scroll down" at the bottom of the screen plays its whole wave once
+// (letter-roll.js): the letters go up, the word comes back from below, and then it goes back, without waiting
+// for the mouse to leave the picture.
 // Clicking the picture opens its project's page (the "page" of each picture in the list below).
 // For people who asked their computer for less motion, the first picture stays still.
 
@@ -51,16 +53,27 @@
     image.style.borderRadius = `calc(${picture.corners} * var(--u))`;
     layer.appendChild(image);
     // The mouse over the picture (in either half): it freezes in place until the mouse leaves
-    image.addEventListener('mouseenter', () => { isFrozen = true; setScrollDownWave(true); });
-    image.addEventListener('mouseleave', () => { isFrozen = false; setScrollDownWave(false); });
+    image.addEventListener('mouseenter', () => { isFrozen = true; playScrollDownWave(); });
+    image.addEventListener('mouseleave', () => { isFrozen = false; });
     // Clicking it: its project's page
     image.addEventListener('click', () => { window.location.href = picture.page; });
     return image;
   }));
 
-  // "scroll down" plays its wave while the mouse is over the picture (letter-roll.js: "is-rolling" on both its words)
-  function setScrollDownWave(isOn) {
-    document.querySelectorAll('.scroll-down').forEach((each) => each.classList.toggle('is-rolling', isOn));
+  // "scroll down" plays its whole wave once (letter-roll.js: "is-rolling" on both its words): on, and off again
+  // as soon as the last letter has come up (--roll-time, plus --roll-stagger for each letter before it)
+  let waveTimer = null;
+  function playScrollDownWave() {
+    const scrollDown = [...document.querySelectorAll('.scroll-down')];
+    const letters = document.querySelectorAll('.scroll-down .roll-in .roll-letter').length;
+    const rollTime = parseFloat(rootStyle.getPropertyValue('--roll-time')) * 1000;
+    const stagger = parseFloat(rootStyle.getPropertyValue('--roll-stagger')) * 1000;
+    scrollDown.forEach((each) => each.classList.add('is-rolling'));
+    clearTimeout(waveTimer);
+    waveTimer = setTimeout(() => {
+      // back down (unless the mouse is on "scroll down" itself: then its own hover keeps it up)
+      scrollDown.forEach((each) => { if (!each.matches(':hover')) each.classList.remove('is-rolling'); });
+    }, rollTime + stagger * letters);
   }
 
   let isFrozen = false;            // the mouse is over the picture: it stays where it is
