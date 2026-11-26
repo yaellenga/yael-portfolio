@@ -196,7 +196,7 @@
   --project-side-details-top: 183;     /* the year (the first of the details under the logo) from the top */
   --project-side-details-gap: 10;      /* between the year, the type, the credits and "next project" */
   --project-side-bottom: 28;           /* the title, text and links at the bottom: their bottom, from the bottom of the window */
-  --project-side-min-gap: 30;          /* on short windows: the least space between the details and the title (then the column scrolls) */
+  --project-side-min-gap: 30;          /* on short windows: the least space between the details and the title */
   --project-side-title-width: 228;     /* the title at the bottom (breaks into two lines, as in Figma) */
   --project-side-text-width: 317;      /* the text at the bottom, and the row of links under it */
   --project-side-title-gap: 15;        /* between the title and the text */
@@ -1029,7 +1029,7 @@ a:focus-visible .roll-in .roll-letter,
 /* ---------- Side column (left) ----------
    Fixed to the window, as tall as it. Its top part stays at the top and its bottom part
    at the bottom of the window. On a short window, where they would meet, they keep
-   --project-side-min-gap between them and the column scrolls by itself instead. */
+   --project-side-min-gap between them. The column never scrolls. */
 .project-side {
   position: fixed;
   z-index: 2;
@@ -1037,15 +1037,13 @@ a:focus-visible .roll-in .roll-letter,
   bottom: 0;
   left: 0;
   width: var(--side-width);
-  overflow-y: auto;
-  scrollbar-width: none;     /* it scrolls only on short windows, without a scroll bar */
+  overflow: clip;            /* the column never scrolls (not even by itself, to show a link the keyboard reached) */
   display: flex;
   flex-direction: column;
   padding-left: calc(var(--project-side-left) * var(--s));
   padding-bottom: calc(var(--project-side-bottom) * var(--s));
   background-color: var(--color-project-cream);
 }
-.project-side::-webkit-scrollbar { display: none; }
 /* The hidden copy of each link's letters waits just under the link (for the wave on hover).
    Under the links at the bottom, it reached a little past the bottom of the window, so the column
    thought it had more to show and scrolled by itself. Cut at the link's edge (with room for the letters' tails),
