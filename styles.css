@@ -1179,7 +1179,8 @@ a:focus-visible .roll-in .roll-letter,
   .side-text-more { transition: none; } /* for people who asked for less motion: open at once */
 }
 
-/* trac.: the first lines of its last text sit closer together, as in Figma */
+/* trac. on the phone: "too many versions / too many places / & too easy to lose" sit closer together, as in Figma
+   (on the computer they are one line) */
 .trac-tight-lines { display: block; line-height: 0.94; }
 
 /* An empty line inside a text, between two paragraphs */
