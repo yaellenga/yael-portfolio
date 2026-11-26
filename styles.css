@@ -1488,8 +1488,8 @@ a:focus-visible .roll-in .roll-letter,
     opacity: 0;
   }
 }
-/* The word itself: in the handwriting-style font, in the buttons' orange, as big as "next project",
-   with its middle on the mouse's tip */
+/* The word itself: in the handwriting-style font, in the buttons' orange, as big as "phone" at the top
+   (the contact links: .top-link), with its middle on the mouse's tip */
 .video-mouse-word {
   position: fixed;
   z-index: 200;                          /* above the enlarged video too */
@@ -1497,7 +1497,7 @@ a:focus-visible .roll-in .roll-letter,
   pointer-events: none;                  /* the click goes to the video under it */
   font-family: var(--font-handwriting);
   font-style: var(--font-handwriting-style);
-  font-size: var(--side-link-size);
+  font-size: calc(var(--project-text-size, 20px) * var(--top-link-scale, 1));
   color: var(--color-home-orange);
   white-space: nowrap;
   visibility: hidden;
