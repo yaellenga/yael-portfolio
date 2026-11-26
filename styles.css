@@ -55,7 +55,7 @@
   --color-hamotzi-charcoal: #313131;    /* boxes behind TRADITION and SIN */
   --color-hamotzi-off-white: #fdfdfd;   /* text on the charcoal boxes */
   --color-hamotzi-graphite: #353535;    /* text on the cream box (CRIME) */
-  --color-hamotzi-nav-grey: #575455;    /* "More stuff", "Yael Lenga" and the top links */
+  --color-hamotzi-nav-grey: #575455;    /* the enlarge icon on the video (the links were this grey; they are orange now) */
   --color-hamotzi-button-grey: #b2b1b1; /* the video's play and enlarge buttons */
   /* Grain, like the photocopied paper of the Hamotzi logo: fine grey specks, partly see-through.
      Laid over a color, it makes it look printed. */
@@ -200,7 +200,7 @@
   --project-side-title-width: 228;     /* the title at the bottom (breaks into two lines, as in Figma) */
   --project-side-text-width: 317;      /* the text at the bottom, and the row of links under it */
   --project-side-title-gap: 15;        /* between the title and the text */
-  --project-side-links-gap: 14;        /* between the text and the links */
+  --project-side-links-gap: 15;        /* between the text and the links */
   --video-play-size: 90;               /* the play button (a square) */
   --video-enlarge-size: 44;            /* the enlarge button (a square) */
   --video-time-bar-height: 4;          /* the time bar under the video: its line... */
@@ -1123,13 +1123,14 @@ a:focus-visible .roll-in .roll-letter,
   line-height: 1;
 }
 
-/* The running text */
+/* The running text: Fira Sans Condensed Light, in regular letters (not capitals), on every project page */
 .side-text {
   margin-top: calc(var(--project-side-title-gap) * var(--s));
-  font-family: var(--font-label);
-  font-weight: 400;
+  font-family: var(--font-condensed);
+  font-weight: 300;
   font-size: var(--side-paragraph-size);
   line-height: 1.24;
+  text-transform: none;
 }
 
 /* The links under the text, spread across its width (the first at its left edge, the last at its right) */
@@ -1142,43 +1143,14 @@ a:focus-visible .roll-in .roll-letter,
   text-transform: none;
 }
 
-/* A text in parts, longer than its spot (trac., Lets Talk About It): a window onto it, --window-height high, as in Figma.
-   Each part fits in the window, and the window shows one part at a time. When the page reaches the
-   picture a part belongs to (data-appears-with), the text moves up to that part by itself, with a small
-   bounce, however fast or slow the page is scrolled; and back when scrolling back up (scroll-text.js).
-   Its height and gaps are in text pixels, like the text, so the parts always fit. */
-/* Davar Echad, Lets Talk About It and trac.: the running text in Fira Sans Condensed Light, in regular letters (not capitals) */
-.davar-page .side-text,
-.lets-talk-page .side-text,
-.trac-page .side-text {
-  font-family: var(--font-condensed);
-  font-weight: 300;
-  text-transform: none;
-}
-
-.side-text-window {
-  --text-switch-time: 0.55s;  /* how long the move to the next part takes */
-  height: calc(var(--window-height) * var(--t));
-  margin-top: calc(var(--project-side-title-gap) * var(--s));
-  overflow: hidden;
-}
-.side-text-track {
-  /* goes just a little past the new part and comes back: a small bounce */
-  transition: transform var(--text-switch-time) cubic-bezier(0.3, 1.15, 0.6, 1);
-}
-@media (prefers-reduced-motion: reduce) {
-  .side-text-track { transition: none; } /* for people who asked for less motion: switch at once */
-}
-.side-text-window .side-text { margin-top: 0; }
-.side-text-window .side-text + .side-text { margin-top: calc(var(--paragraph-gap) * var(--t)); }
-
-/* A text that grows (trac.): the first paragraph shows from the start, and each one after it
+/* A text that grows (trac., Lets Talk About It): the first paragraph shows from the start, and each one after it
    (.side-text-more) opens under it when the page reaches its picture (data-appears-with, scroll-text.js:
    .is-shown). It opens from nothing to its full height, so the text under the title gets taller,
    and since the title and text sit at the bottom of the column, the whole text and the title go up.
    Nothing is cut off. --paragraph-gap: the space above each new paragraph (in text pixels). */
 .side-text-stack {
   --text-grow-time: 0.55s;   /* how long a paragraph takes to open */
+  --paragraph-gap: 15;       /* between its paragraphs */
   margin-top: calc(var(--project-side-title-gap) * var(--s));
 }
 .side-text-stack .side-text { margin-top: 0; }
@@ -1229,24 +1201,47 @@ a:focus-visible .roll-in .roll-letter,
   --project-nav-color: var(--color-home-orange); /* the links in orange (was the project's green) */
   --project-side-details-top: 177;
   --project-side-text-width: 310;
-  --project-side-links-gap: 15;       /* 15 between the text and the links under it */
   --logo-x: 35; --logo-y: 108; --logo-width: 152.907; --logo-height: 52.793;
 }
-/* The growing text: 15 between its paragraphs */
-.trac-text-stack { --paragraph-gap: 15; }
 
 /* ---------- Hamotzi (hamotzi.html) ----------
-   The video, and two stills side by side under it */
+   The video; under it the series on Kan and its poster on the street; the comparisons (four stills, two by two);
+   and some of the process (the camera on set, with four shots beside it). Each group of stills has a small note above it. */
 .hamotzi-page {
-  --project-nav-color: var(--color-hamotzi-nav-grey);
-  --project-side-bottom: 33;          /* no links under the text: it ends a little higher, as in Figma */
-  --media-height: 924;
+  --project-nav-color: var(--color-home-orange); /* the links in orange (was grey) */
+  --project-side-bottom: 52;          /* no links under the text: it ends higher, as in Figma */
+  --project-side-text-width: 310;     /* the text as wide as in Figma (the title stays 228) */
+  --media-height: 2427;               /* in Figma 2624, but with 40 under the video instead of 237 */
   --logo-x: 20; --logo-y: 117; --logo-width: 230; --logo-height: 49.194;
 }
-.hamotzi-video-spot { --x: 0;   --y: 0;   --width: 1080; --height: 607; }
-.hamotzi-still-1    { --x: 0;   --y: 614; --width: 539;  --height: 303; }
-.hamotzi-still-2    { --x: 542; --y: 614; --width: 538;  --height: 303; }
-.hamotzi-still { display: block; object-fit: cover; }
+.hamotzi-video-spot      { --x: 0;   --y: 0;    --width: 1080; --height: 607; }
+/* Everything under the video starts 40 under it (in Figma it is lower: each spot here is 197 higher) */
+.hamotzi-kan             { --x: 0;   --y: 647;  --width: 766;  --height: 431; }
+.hamotzi-street-poster   { --x: 786; --y: 647;  --width: 294;  --height: 427; } /* in Figma it goes on past the page's edge: only this much shows */
+.hamotzi-caption-compare { --x: 0;   --y: 1112; }
+.hamotzi-compare-1       { --x: 0;   --y: 1139; --width: 526;  --height: 296; }
+.hamotzi-compare-2       { --x: 554; --y: 1139; --width: 526;  --height: 296; }
+.hamotzi-compare-3       { --x: 0;   --y: 1464; --width: 525;  --height: 295; }
+.hamotzi-compare-4       { --x: 555; --y: 1464; --width: 525;  --height: 295; }
+.hamotzi-caption-process { --x: 0;   --y: 1789; }
+.hamotzi-process-camera  { --x: 145; --y: 1815; --width: 380;  --height: 612; }
+.hamotzi-process-1       { --x: 553; --y: 1815; --width: 213;  --height: 133; }
+.hamotzi-process-2       { --x: 553; --y: 1968; --width: 213;  --height: 133; }
+.hamotzi-process-3       { --x: 555; --y: 2121; --width: 211;  --height: 133; }
+.hamotzi-process-4       { --x: 555; --y: 2275; --width: 211;  --height: 152; }
+.hamotzi-picture { display: block; object-fit: cover; }
+/* The paragraphs that open later are a little narrower than the first, as in Figma */
+.hamotzi-page .side-text-more .side-text { width: calc(301 * var(--t)); }
+
+/* The small notes above the stills: like the details under the logo (Carlito Bold 12, all capitals) */
+.hamotzi-caption {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--side-text-size);
+  line-height: 1.24;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 
 /* The video fills its spot (when enlarged it moves out of it, see below) */
 .hamotzi-video {
@@ -1378,12 +1373,11 @@ a:focus-visible .roll-in .roll-letter,
 }
 
 /* The computer's spot: as wide as the rectangle in Figma (982), and as tall as the computer
-   is at that width (982 × 0.7806). Everything under it moves down by the difference (234.5). */
-/* The side text in two parts (scroll-text.js, as on trac.): the window is as high as the first part */
-.lets-talk-text-window { --window-height: 104; --paragraph-gap: 52; }
+   is at that width (982 × 0.7806). Everything under it moves down by the difference (234.5).
+   It sits in the middle of the media: 49 from each side ((1080 - 982) / 2). */
 
 .lets-talk-computer-spot {
-  --x: 0; --y: 0; --width: 982; --height: 766.5;
+  --x: 49; --y: 0; --width: 982; --height: 766.5;
   container-type: size; /* lets the computer measure this spot (cqw, cqh) */
   display: flex;
   justify-content: center;
@@ -1435,18 +1429,18 @@ a:focus-visible .roll-in .roll-letter,
 .video-button svg { width: 55%; height: 55%; }
 
 /* Hamotzi: the buttons in a light grey with grain, like the logo
-   (the enlarge icon in the grey of "More stuff"); on hover they turn orange (below).
+   (the enlarge icon in the dark grey that the links used to be); on hover they turn orange (below).
    .guide-hamotzi: the same look for the samples in the style guide */
-.guide-hamotzi { --project-nav-color: var(--color-hamotzi-nav-grey); }
 .hamotzi-video .video-button,
 .guide-hamotzi .video-button {
   background: var(--hamotzi-grain), var(--color-hamotzi-button-grey);
-  color: var(--project-nav-color);
+  color: var(--color-hamotzi-nav-grey);
 }
-/* On hover: the buttons' orange, with the same grain (the enlarge button, and the play button on the phone) */
+/* On hover: exactly the buttons' orange, without the grain (which made it darker)
+   (the enlarge button, and the play button on the phone) */
 .hamotzi-video .video-button:hover,
 .guide-hamotzi .video-button:hover {
-  background: var(--hamotzi-grain), var(--color-home-orange);
+  background: var(--color-home-orange);
 }
 
 /* Hamotzi play button: the triangle is cut out of the square, so the video shows through it.
@@ -1464,11 +1458,11 @@ a:focus-visible .roll-in .roll-letter,
 .guide-hamotzi .video-time-handle {
   background: var(--hamotzi-grain), var(--color-hamotzi-button-grey);
 }
-/* On hover and while dragging: the buttons' orange (like the "play" / "pause" mouse word), with the same grain */
+/* On hover and while dragging: exactly the buttons' orange (like the "play" / "pause" mouse word), without the grain */
 .hamotzi-video .video-time-bar:hover .video-time-handle,
 .hamotzi-video .video-time-bar.is-dragging .video-time-handle,
 .guide-hamotzi .video-time-bar:hover .video-time-handle {
-  background: var(--hamotzi-grain), var(--color-home-orange);
+  background: var(--color-home-orange);
 }
 
 /* Play: in the middle of the video; hidden while it plays */

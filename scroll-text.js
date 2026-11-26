@@ -1,44 +1,31 @@
-// Project page, side column: a text in parts, longer than its spot (.side-text-window).
-// Each part fits in the spot, and the spot shows one part at a time.
-// Each part after the first belongs to a picture on the right (data-appears-with="…").
-// When the top of that picture reaches the middle of the window, the text moves up to that part
-// by itself, with a small bounce, however the page goes on scrolling (the movement and the bounce
-// are the transition in styles.css, .side-text-track). Scrolling back up brings the earlier part back.
-//
-// A text that grows (.side-text-stack, trac.): each paragraph after the first (.side-text-more) belongs to
-// a picture on the right too. When the top of that picture reaches the middle of the window, the paragraph
-// opens under the text (.is-shown) and pushes the text and the title up. Scrolling back up closes it again.
+// Project page, side column: a text that grows (.side-text-stack, on trac. and Lets Talk About It).
+// The first paragraph shows from the start. Each paragraph after it (.side-text-more) belongs to a picture
+// on the right (data-appears-with="…"). When the top of that picture reaches the middle of the window,
+// the paragraph opens under the text (.is-shown) and pushes the text and the title up
+// (the opening is the transition in styles.css, .side-text-more). Scrolling back up closes it again.
+// With data-appears-at="first-line", it opens when its picture (or note) reaches the spot where the paragraph's
+// first line will be once it is open, so the two lines are side by side at that moment.
 
-const textWindows = [...document.querySelectorAll('.side-text-window')];
 const growingParagraphs = [...document.querySelectorAll('.side-text-stack .side-text-more')];
 
-function showParts() {
-  const middle = window.innerHeight / 2;
-
-  for (const textWindow of textWindows) {
-    const track = textWindow.querySelector('.side-text-track');
-    const parts = [...track.children];
-
-    // The last part whose picture has reached the middle of the window (the first part if none)
-    let current = parts[0];
-    for (const part of parts) {
-      const picture = part.dataset.appearsWith && document.querySelector(part.dataset.appearsWith);
-      if (picture && picture.getBoundingClientRect().top <= middle) current = part;
-    }
-
-    // Move the text up so that this part starts at the top of the spot
-    // (measured from the first part, which sits at the top when the text hasn't moved)
-    track.style.transform = `translateY(${parts[0].offsetTop - current.offsetTop}px)`;
-  }
-
-  // The growing text: open each paragraph whose picture has reached the middle of the window
+function showParagraphs() {
   for (const paragraph of growingParagraphs) {
     const picture = document.querySelector(paragraph.dataset.appearsWith);
-    paragraph.classList.toggle('is-shown', !!picture && picture.getBoundingClientRect().top <= middle);
+    const line = paragraph.dataset.appearsAt === 'first-line' ? firstLineSpot(paragraph) : window.innerHeight / 2;
+    paragraph.classList.toggle('is-shown', !!picture && picture.getBoundingClientRect().top <= line);
   }
 }
 
-window.addEventListener('scroll', showParts, { passive: true });
-window.addEventListener('resize', showParts);
-document.fonts.ready.then(showParts); // the parts' spots change once the font has loaded
-showParts();
+// Where the top of the paragraph's first line will be once it is open (from the top of the window).
+// The text sits at the bottom of the column, so its bottom stays in place and a new paragraph fills in above it:
+// the bottom of the text, minus the paragraph's full height, plus the space above it (its ::before, in styles.css).
+function firstLineSpot(paragraph) {
+  const text = paragraph.firstElementChild;
+  const spaceAbove = parseFloat(getComputedStyle(text, '::before').height) || 0;
+  const bottom = paragraph.closest('.side-text-stack').getBoundingClientRect().bottom;
+  return bottom - text.scrollHeight + spaceAbove;
+}
+
+window.addEventListener('scroll', showParagraphs, { passive: true });
+window.addEventListener('resize', showParagraphs);
+showParagraphs();
