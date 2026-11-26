@@ -146,7 +146,7 @@
   --project-small-text-size: calc(12 * var(--u)); /* the texts in the left column */
   /* The side column of the project pages: small texts, never smaller than --text-min-size (12px) */
   --side-text-size: max(var(--text-min-size), calc(12 * var(--u)));   /* the details under the logo */
-  --side-paragraph-size: max(var(--text-min-size), calc(12 * var(--u))); /* the text about the project (project pages keep it at 12px) */
+  --side-paragraph-size: max(var(--text-min-size), calc(14 * var(--u))); /* the text about the project (project pages keep it at 14px) */
   --side-year-size: max(var(--text-min-size), calc(16 * var(--u)));   /* the year */
   --side-link-size: max(var(--text-min-size), calc(16 * var(--u)));   /* "next project" and the links at the bottom */
 
@@ -913,8 +913,9 @@ a:focus-visible .roll-in .roll-letter,
   --project-handwriting-size: calc(40.6125 * var(--t)); /* "More stuff" and "Yael Lenga": 45 in Figma, 5% smaller, and 5% smaller again */
   --top-link-scale: 0.95;                      /* phone, email, LinkedIn, Cv: 5% smaller than in Figma (and the spaces between them) */
   --project-text-size: calc(20 * var(--t));   /* the title, and the contact links */
-  --side-text-size: calc(12 * var(--t));      /* the details under the logo */
-  --side-paragraph-size: calc(12 * var(--t)); /* the text about the project */
+  --side-text-size: calc(12 * var(--t));      /* small labels (the notes above the stills on Hamotzi) */
+  --side-detail-size: calc(14 * var(--t));    /* the details under the logo (the project's type and credits): 2 bigger than in Figma (12) */
+  --side-paragraph-size: calc(14 * var(--t)); /* the text about the project: 2 bigger than in Figma (12) */
   --side-year-size: calc(16 * var(--t));      /* the year */
   --side-link-size: calc(16 * var(--t));      /* "next project" and the links */
 }
@@ -1088,7 +1089,7 @@ a:focus-visible .roll-in .roll-letter,
 .side-detail {
   font-family: var(--font-label);
   font-weight: 700;
-  font-size: var(--side-text-size);
+  font-size: var(--side-detail-size, var(--side-text-size));
   line-height: 1;
   text-transform: uppercase;
 }
@@ -1183,6 +1184,9 @@ a:focus-visible .roll-in .roll-letter,
 
 /* An empty line inside a text, between two paragraphs */
 .side-new-paragraph { display: block; margin-top: 1.24em; }
+/* trac.: 12 between the paragraphs (not 15), so all of its text fits next to the media */
+.trac-page .side-text-stack { --paragraph-gap: 12; }
+.trac-page .side-new-paragraph { margin-top: calc(12 * var(--t)); }
 
 /* ---------- Media (right) ----------
    The project's own pictures and videos. They start under the top area, next to the side column,
