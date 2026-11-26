@@ -2103,7 +2103,8 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
 
 /* ---------- trac. on the phone (Figma: "trac phone") ---------- */
 .trac-phone {
-  --phone-page-height: 2234.68; /* 2189 in Figma, plus the space added after the texts (3 + 3, then an empty line after the first and the last) */
+  --phone-page-height: 2432.96; /* 2189 in Figma, plus the space added after the texts (3 + 3, then an empty line after the first and the last),
+                                   plus the texts added from the computer version ("In our startup course…", 198.28 in the first text) */
   --phone-project-color: var(--color-trac-orange);
 }
 .trac-phone-more  { --x: 25;  --y: 42; --width: 90; } /* wider than in Figma (70), so it is never more than two lines */
@@ -2141,44 +2142,45 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
 
 .trac-phone-intro { --x: 25; --y: 630; --width: 339; }
 
-/* Write / Record / Refine (from here down, an empty line (19.84) lower than in Figma: more space after the first text) */
-.trac-phone-write-box  { --x: 0;   --y: 768.84; --width: 131; --height: 113; }
-.trac-phone-record-box { --x: 131; --y: 768.84; --width: 131; --height: 113; }
-.trac-phone-refine-box { --x: 262; --y: 768.84; --width: 131; --height: 113; }
+/* Write / Record / Refine (from here down, an empty line (19.84) lower than in Figma: more space after the first text,
+   and 198.28 lower again: "In our startup course…" added to the first text, from the computer version) */
+.trac-phone-write-box  { --x: 0;   --y: 967.12; --width: 131; --height: 113; }
+.trac-phone-record-box { --x: 131; --y: 967.12; --width: 131; --height: 113; }
+.trac-phone-refine-box { --x: 262; --y: 967.12; --width: 131; --height: 113; }
 /* The words (the same drawings as on the computer), at their Figma width, their middles at the same height */
-.trac-phone-word-write  { --x: 44;  --y: 819.63; --width: 43.658; --height: 14.423; }
-.trac-phone-word-record { --x: 169; --y: 818.12; --width: 55.918; --height: 17.429; }
-.trac-phone-word-refine { --x: 303; --y: 818.14;  --width: 48.579; --height: 17.402; }
+.trac-phone-word-write  { --x: 44;  --y: 1017.91; --width: 43.658; --height: 14.423; }
+.trac-phone-word-record { --x: 169; --y: 1016.4; --width: 55.918; --height: 17.429; }
+.trac-phone-word-refine { --x: 303; --y: 1016.42;  --width: 48.579; --height: 17.402; }
 
-.trac-phone-notes   { --x: 198; --y: 862.84; --width: 173; --height: 110; }
-.trac-phone-problem { --x: 25;  --y: 908.84; --width: 352; }
+.trac-phone-notes   { --x: 198; --y: 1061.12; --width: 173; --height: 110; }
+.trac-phone-problem { --x: 25;  --y: 1107.12; --width: 352; }
 
 /* The four icons (from here down, 3 lower than in Figma: more space after "…the usual mess in between.") */
-.trac-phone-logo-box       { --x: 0;   --y: 1092.84; --width: 197; --height: 130; }
-.trac-phone-mic-box        { --x: 197; --y: 1092.84; --width: 196; --height: 130; }
-.trac-phone-drum-box       { --x: 0;   --y: 1222.84; --width: 197; --height: 130; }
-.trac-phone-headphones-box { --x: 197; --y: 1222.84; --width: 196; --height: 130; }
-.trac-phone-icon-logo       { --x: 70;     --y: 1147.84; --width: 57.904; --height: 19.987; }
-.trac-phone-icon-mic        { --x: 265;    --y: 1112.84; --width: 59.617; --height: 89.94; }
-.trac-phone-icon-drum       { --x: 49.993; --y: 1251.84; --width: 97.135; --height: 72.517; }
-.trac-phone-icon-headphones { --x: 245;    --y: 1254.84; --width: 99.984; --height: 66.153; }
+.trac-phone-logo-box       { --x: 0;   --y: 1291.12; --width: 197; --height: 130; }
+.trac-phone-mic-box        { --x: 197; --y: 1291.12; --width: 196; --height: 130; }
+.trac-phone-drum-box       { --x: 0;   --y: 1421.12; --width: 197; --height: 130; }
+.trac-phone-headphones-box { --x: 197; --y: 1421.12; --width: 196; --height: 130; }
+.trac-phone-icon-logo       { --x: 70;     --y: 1346.12; --width: 57.904; --height: 19.987; }
+.trac-phone-icon-mic        { --x: 265;    --y: 1311.12; --width: 59.617; --height: 89.94; }
+.trac-phone-icon-drum       { --x: 49.993; --y: 1450.12; --width: 97.135; --height: 72.517; }
+.trac-phone-icon-headphones { --x: 245;    --y: 1453.12; --width: 99.984; --height: 66.153; }
 
-.trac-phone-credits { --x: 25; --y: 1389.84; --width: 352; }
+.trac-phone-credits { --x: 25; --y: 1588.12; --width: 352; }
 
 /* From here down, 3 and an empty line more: more space after "…full-flow prototype." (the last text) */
-.trac-phone-computer { --x: 18.18; --y: 1598.68; --width: 359.33; --height: 391.31; }
+.trac-phone-computer { --x: 18.18; --y: 1796.96; --width: 359.33; --height: 391.31; }
 
 /* The closing banner */
-.trac-phone-banner-title { --x: 72.449;  --y: 1962.75; --width: 254; --height: 105; }
-.trac-phone-tag-pill     { --x: 72.588;  --y: 2098.39; --width: 163.608; --height: 21.275;
+.trac-phone-banner-title { --x: 72.449;  --y: 2161.03; --width: 254; --height: 105; }
+.trac-phone-tag-pill     { --x: 72.588;  --y: 2296.67; --width: 163.608; --height: 21.275;
                            border-radius: calc(7.253 * var(--u)); background-color: var(--color-trac-green); }
-.trac-phone-tag-text     { --x: 80.302;  --y: 2103.2; --width: 136; --height: 12;
+.trac-phone-tag-text     { --x: 80.302;  --y: 2301.48; --width: 136; --height: 12;
                            clip-path: inset(0 37.5% 0 0); }  /* only "never lose a" (the drawing's first 85 of 136) */
-.trac-phone-tag-again    { --x: 83.302;  --y: 2103.2; --width: 136; --height: 12;
+.trac-phone-tag-again    { --x: 83.302;  --y: 2301.48; --width: 136; --height: 12;
                            clip-path: inset(0 0 0 62.5%); }  /* only "again.": 3 further right than in Figma */
-.trac-phone-tag-word     { --x: 149.557; --y: 2099.7; --width: 34.602; } /* 1.75 higher than in Figma, so the bottom of the word sits on the sentence's line */
-.trac-phone-tag-plug     { --x: 258.566; --y: 2102.5; --width: 50;  --height: 16; }
-.trac-phone-tag-cable    { --x: 306.082; --y: 2106.28;  --width: 87;  --height: 7; }
+.trac-phone-tag-word     { --x: 149.557; --y: 2297.98; --width: 34.602; } /* 1.75 higher than in Figma, so the bottom of the word sits on the sentence's line */
+.trac-phone-tag-plug     { --x: 258.566; --y: 2300.78; --width: 50;  --height: 16; }
+.trac-phone-tag-cable    { --x: 306.082; --y: 2304.56;  --width: 87;  --height: 7; }
 
 /* Words that change by themselves, one after the other, each one for --word-swap-time (like the Figma
    component "trac song verse etc"). They are drawings 109 wide (the component's size),
@@ -2210,13 +2212,13 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
 }
 
 /* The links at the bottom */
-.trac-phone-prototype    { --x: 25;  --y: 2164.68; --width: 99; }
-.trac-phone-landing      { --x: 150; --y: 2164.68; --width: 94; }
-.trac-phone-presentation { --x: 281; --y: 2164.68; --width: 87; }
+.trac-phone-prototype    { --x: 25;  --y: 2362.96; --width: 99; }
+.trac-phone-landing      { --x: 150; --y: 2362.96; --width: 94; }
+.trac-phone-presentation { --x: 281; --y: 2362.96; --width: 87; }
 
 /* ---------- Lets Talk About It on the phone (Figma: "lets talk phone") ---------- */
 .lets-talk-phone {
-  --phone-page-height: 2024.84; /* 2005 in Figma, and an empty line added after the first text */
+  --phone-page-height: 2005; /* 2005 in Figma, and an empty line added after the first text, which is now one line shorter (the computer version's text) */
   --phone-nav-height: 95;
   --phone-project-color: var(--color-home-orange);
 }
@@ -2248,26 +2250,26 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
 
 .lets-talk-phone-intro { --x: 25; --y: 523; --width: 339; }
 
-/* The two hosts (from here down, an empty line (19.84) lower than in Figma: more space after the first text) */
-.lets-talk-phone-box-yoram { --x: 0;   --y: 776.84; --width: 197; --height: 236; background-color: var(--color-lets-talk-navy); }
-.lets-talk-phone-box-naomi { --x: 197; --y: 776.84; --width: 196; --height: 236; background-color: var(--color-lets-talk-light); }
-.lets-talk-phone-hosts     { --x: 24;  --y: 791.293; --width: 348.878; --height: 204.547; }
+/* The two hosts (an empty line after the first text, as before: the text is now one line shorter, so everything from here down is one line higher) */
+.lets-talk-phone-box-yoram { --x: 0;   --y: 757; --width: 197; --height: 236; background-color: var(--color-lets-talk-navy); }
+.lets-talk-phone-box-naomi { --x: 197; --y: 757; --width: 196; --height: 236; background-color: var(--color-lets-talk-light); }
+.lets-talk-phone-hosts     { --x: 24;  --y: 771.45; --width: 348.878; --height: 204.547; }
 
-.lets-talk-phone-credits { --x: 25; --y: 1061.84; --width: 352; }
+.lets-talk-phone-credits { --x: 25; --y: 1042; --width: 352; }
 
 /* The four phones */
-.lets-talk-phone-app-1 { --x: 21;      --y: 1212.84; --width: 173;     --height: 349; }
-.lets-talk-phone-app-2 { --x: 203.554; --y: 1212.84; --width: 164.306; --height: 344; }
-.lets-talk-phone-app-3 { --x: 25;      --y: 1579.84; --width: 167;     --height: 350; }
-.lets-talk-phone-app-4 { --x: 202;     --y: 1581.84; --width: 166;     --height: 349; }
+.lets-talk-phone-app-1 { --x: 21;      --y: 1193; --width: 173;     --height: 349; }
+.lets-talk-phone-app-2 { --x: 203.554; --y: 1193; --width: 164.306; --height: 344; }
+.lets-talk-phone-app-3 { --x: 25;      --y: 1560; --width: 167;     --height: 350; }
+.lets-talk-phone-app-4 { --x: 202;     --y: 1562; --width: 166;     --height: 349; }
 
 /* The links at the bottom */
-.lets-talk-phone-website   { --x: 25;  --y: 1964.84; --width: 99; }
-.lets-talk-phone-prototype { --x: 269; --y: 1964.84; --width: 99; }
+.lets-talk-phone-website   { --x: 25;  --y: 1945; --width: 99; }
+.lets-talk-phone-prototype { --x: 269; --y: 1945; --width: 99; }
 
 /* ---------- Hamotzi on the phone (Figma: "hamotzi phone") ---------- */
 .hamotzi-phone {
-  --phone-page-height: 860; /* 852 in Figma, and 8 */
+  --phone-page-height: 1998.22; /* 1937 in Figma: 44 under the last pictures */
   --phone-nav-height: 95;
   --phone-project-color: var(--color-home-orange);
 }
@@ -2290,7 +2292,37 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
 }
 .hamotzi-phone-video-spot .hamotzi-video { height: 100%; aspect-ratio: auto; }
 
-.hamotzi-phone-text { --x: 25; --y: 468; --width: 339; } /* 460 in Figma, 8 lower */
+/* From here down, from the Figma frame "Phone / Hamotzi" (461:2), 24 lower like the top.
+   The texts are a little bigger than in Figma (16, not 14), so they take more lines: everything after a text
+   keeps Figma's space from the text's end (48 to the Kan picture, 47 after it, 42 to "working on…", 48, 43). */
+.hamotzi-phone-text       { --x: 25; --y: 477; --width: 339; }
+.hamotzi-phone-kan        { --x: 0;  --y: 683.63; --width: 393; --height: 221; }
+.hamotzi-phone-challenges { --x: 25; --y: 951.63; --width: 339; }
+
+.hamotzi-phone-caption-compare { --x: 25; --y: 1191.91; }
+.hamotzi-phone-compare-1 { --x: 0;   --y: 1213.91; --width: 191; --height: 107; }
+.hamotzi-phone-compare-2 { --x: 200; --y: 1213.91; --width: 191; --height: 107; }
+.hamotzi-phone-compare-3 { --x: 0;   --y: 1340.91; --width: 191; --height: 107; }
+.hamotzi-phone-compare-4 { --x: 200; --y: 1340.91; --width: 191; --height: 108; }
+
+.hamotzi-phone-role { --x: 25; --y: 1495.91; --width: 339; }
+
+.hamotzi-phone-caption-process { --x: 25; --y: 1618.22; }
+.hamotzi-phone-process-camera { --x: 81;  --y: 1648.22; --width: 190; --height: 306; }
+.hamotzi-phone-process-1      { --x: 285; --y: 1648.22; --width: 107; --height: 66; }
+.hamotzi-phone-process-2      { --x: 285; --y: 1724.22; --width: 107; --height: 67; }
+.hamotzi-phone-process-3      { --x: 286; --y: 1801.22; --width: 106; --height: 66; }
+.hamotzi-phone-process-4      { --x: 286; --y: 1878.22; --width: 106; --height: 76; }
+
+/* "Working on the comparisons" and "some of the process": Carlito Bold 12, all capitals, as in Figma */
+.hamotzi-phone-caption {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: max(var(--text-min-size), calc(12 * var(--u)));
+  line-height: 1.24;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 
 /* ---------- Davar Echad on the phone (Figma: "davar phone") ---------- */
 .davar-phone {
