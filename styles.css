@@ -591,7 +591,8 @@ body {
    Its size, spacing and spot are those of the text in Figma (Fira Sans Condensed Bold, 80).
    Pinned to the bottom of the screen, like "scroll down" under it, so the space between them never changes. */
 .home-intro {
-  --width: 1411; --from-bottom: 296;     /* the top of its box: 668 of 964, as in Figma */
+  --width: 1440; --from-bottom: 296;     /* the top of its box: 668 of 964, as in Figma; as wide as the screen */
+  text-align: center;                   /* each line in the middle of the screen */
   font-family: var(--font-condensed);
   font-weight: 700;
   font-size: var(--home-intro-size);
@@ -602,8 +603,8 @@ body {
   color: var(--color-hero-text);
   pointer-events: none;                 /* the mouse passes through it to the floating picture under it (to freeze or click it) */
 }
-.home-intro-left  { --x: 238; }
-.home-intro-right { --x: -482; }        /* 238 - 720: starts in the left half */
+.home-intro-left  { --x: 0; }
+.home-intro-right { --x: -720; }        /* 0 - 720: starts at the left edge of the screen, in the left half */
 
 /* The texts on the left half of the first screen take the right half's color (and the other way around) */
 .split-left .screen-hero .cool-stuff,
@@ -960,6 +961,9 @@ a:focus-visible .roll-in .roll-letter,
   right: calc((1440 - var(--project-top-my-name-right)) * var(--u));
   width: auto;
 }
+/* On project pages it says "About Me", and on hover "Yael Lenga" comes up (data-hover-text, letter-roll.js).
+   The two are in the same spot; both end at the right edge, so "About Me" stays lined up above the contact links */
+.project-page .top-my-name .roll { justify-items: end; }
 .top-links        { --x: var(--project-top-links-left); --y: var(--project-top-links-top); --width: var(--project-top-links-width); }
 
 /* "More stuff", "Yael Lenga" and the contact links take the project's own color */
@@ -1008,7 +1012,7 @@ a:focus-visible .roll-in .roll-letter,
 .top-link { flex-shrink: 0; }           /* the links never get squeezed: the ones before them move over instead */
 .top-link-phone    { --closed: 52; --open: 140; } /* "phone" → the phone number (wide enough for "number copied" too); widths of the words in DM Serif Display italic */
 .top-link-email    { --closed: 48; --open: 206; } /* "email" → the address (with a little room, so the whole address shows) */
-.top-link-linkedin { --closed: 75; --open: 95; }  /* "LinkedIn" → "Yael lenga" (just as wide as the name, so phone and email move only a little) */
+.top-link-linkedin { --closed: 75; --open: 95; }  /* "LinkedIn" → "Yael Lenga" (just as wide as the name, so phone and email move only a little) */
 .top-link-cv       { padding-left: 0.3em; } /* the same room on its left as the other three have (letter-roll.js), so the spaces match */
 /* The word and what it stands for: both end at the link's right edge (the long one sticks out to the left, hidden) */
 .top-link-label,
@@ -1262,14 +1266,14 @@ a:focus-visible .roll-in .roll-letter,
   --project-nav-color: var(--color-home-orange); /* the links in orange (was the project's pink) */
   --project-side-title-width: 305;      /* a wider title box (two lines), so "'Davar'" fits on the line before it */
   --project-side-details-top: 224.71;   /* the year, under the logo */
-  --media-height: 5449.56;              /* the brand book ends at 639.96 + 4809.6 */
+  --media-height: 5435.6;               /* the brand book ends at 626 + 4809.6 */
   --logo-x: 35; --logo-y: 120; --logo-width: 125.19; --logo-height: 86.419; /* the top of its letters at the top of the media */
 }
 .davar-video-spot { --x: 2; --y: 0; --width: 1078; --height: 606; }
 .davar-video-spot .project-video { object-fit: cover; }
 /* The brand book: six pictures one under the other, the full width of the media */
 .davar-book {
-  --x: 0; --y: 639.96; --width: 1080;
+  --x: 0; --y: 626; --width: 1080;     /* 20 under the video (606) */
   display: flex;
   flex-direction: column;
 }
@@ -1373,16 +1377,17 @@ a:focus-visible .roll-in .roll-letter,
 .lets-talk-page {
   --project-nav-color: var(--color-home-orange); /* the links in orange (was the project's blue) */
   --project-side-text-width: 307;
-  --media-height: 1719.5;
+  --project-side-title-width: 307;      /* a wider title box (as wide as the text), so the title is two lines: "…for this podcast" */
+  --media-height: 1681.17;
   --logo-x: 30; --logo-y: 78.293; --logo-width: 288; --logo-height: 86.419;
 }
 
-/* The computer's spot: as wide as the rectangle in Figma (982), and as tall as the computer
-   is at that width (982 × 0.7806). Everything under it moves down by the difference (234.5).
-   It sits in the middle of the media: 49 from each side ((1080 - 982) / 2). */
+/* The computer's spot: 5% smaller than the rectangle in Figma (982 → 932.9), and as tall as the computer
+   is at that width (932.9 × 0.7806 = 728.17). Everything under it keeps the same 22 space under it.
+   It sits in the middle of the media: 73.55 from each side ((1080 - 932.9) / 2). */
 
 .lets-talk-computer-spot {
-  --x: 49; --y: 0; --width: 982; --height: 766.5;
+  --x: 73.55; --y: 0; --width: 932.9; --height: 728.17;
   container-type: size; /* lets the computer measure this spot (cqw, cqh) */
   display: flex;
   justify-content: center;
@@ -1393,16 +1398,16 @@ a:focus-visible .roll-in .roll-letter,
   --mockup-width: min(100cqw, 100cqh / 0.7806);
 }
 
-.lets-talk-box-yoram { --x: 0;   --y: 788.5; --width: 540; --height: 419; background-color: var(--color-lets-talk-navy); }
-.lets-talk-box-naomi { --x: 540; --y: 788.5; --width: 540; --height: 419; background-color: var(--color-lets-talk-light); }
+.lets-talk-box-yoram { --x: 0;   --y: 750.17; --width: 540; --height: 419; background-color: var(--color-lets-talk-navy); }
+.lets-talk-box-naomi { --x: 540; --y: 750.17; --width: 540; --height: 419; background-color: var(--color-lets-talk-light); }
 /* Their names, drawings and texts (one picture over both boxes: the fonts are not on the web).
    The texts in it are 16px (smaller than in Figma), in the same widths. */
-.lets-talk-hosts     { --x: 47;  --y: 792.5; --width: 996; --height: 387; }
+.lets-talk-hosts     { --x: 47;  --y: 754.17; --width: 996; --height: 387; }
 
-.lets-talk-phone-1   { --x: 39;  --y: 1261.5; --width: 164.871; --height: 346.228; }
-.lets-talk-phone-2   { --x: 285; --y: 1261.5; --width: 164.871; --height: 346.228; }
-.lets-talk-phone-3   { --x: 532; --y: 1261.5; --width: 172.789; --height: 349; }
-.lets-talk-phone-4   { --x: 786; --y: 1261.5; --width: 165.164; --height: 345.797; }
+.lets-talk-phone-1   { --x: 39;  --y: 1223.17; --width: 164.871; --height: 346.228; }
+.lets-talk-phone-2   { --x: 285; --y: 1223.17; --width: 164.871; --height: 346.228; }
+.lets-talk-phone-3   { --x: 532; --y: 1223.17; --width: 172.789; --height: 349; }
+.lets-talk-phone-4   { --x: 786; --y: 1223.17; --width: 165.164; --height: 345.797; }
 
 /* ---------- Video player: play and enlarge buttons (video-player.js) ---------- */
 .video-player { background-color: var(--color-black); }
