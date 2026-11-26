@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 
-  <!-- All the site's fonts: DM Serif Display italic (the handwriting-style texts), Carlito (text), Fira Sans Condensed (the big text on the home page, the running text on Davar Echad and Lets Talk), Advent Pro (Process page) -->
+  <!-- All the site's fonts: DM Serif Display italic (the handwriting-style texts), Carlito (text), Fira Sans Condensed (the big text on the home page, the running text on Davar Echad, Lets Talk and trac.), Advent Pro (Process page) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=DM+Serif+Display:ital@1&family=Advent+Pro:wght@700;800&family=Fira+Sans+Condensed:wght@300;700&display=swap" rel="stylesheet">
@@ -156,7 +156,7 @@
         <p class="side-title guide-uppercase">A songwriting app for independent musicians</p>
         <p class="project-text">.side-text — side column: the text at the bottom</p>
         <p class="side-text guide-uppercase">trac. is an app that keeps your songwriting organized while you keep creating.</p>
-        <p class="project-text">.side-text on Davar Echad and Lets Talk About It: Fira Sans Condensed Light 12, in regular letters (not capitals); their links ("More Cool Stuff", "Yael Lenga", the contact links, "next project" and the links at the bottom) are in the buttons' orange</p>
+        <p class="project-text">.side-text on Davar Echad, Lets Talk About It and trac.: Fira Sans Condensed Light 12, in regular letters (not capitals); on all three, their links ("More Cool Stuff", "Yael Lenga", the contact links, "next project" and the links at the bottom) are in the buttons' orange</p>
         <div class="davar-page"><p class="side-text">Davar Echad is a contemporary news rebrand designed to make current events more accessible and less overwhelming.</p></div>
       </div>
 
@@ -296,7 +296,8 @@
       </div>
 
       <!-- Side column (project pages): the details at the top, the title, text and links at the bottom.
-           A text in parts, longer than its spot (.side-text-window), shows one part at a time; on the page, when its picture is reached, the next part moves in by itself with a small bounce (scroll-text.js). -->
+           A text in parts, longer than its spot (.side-text-window, Lets Talk About It), shows one part at a time; on the page, when its picture is reached, the next part moves in by itself with a small bounce (scroll-text.js).
+           A text that grows (.side-text-stack, trac.): on the page, when a paragraph's picture is reached, it opens under the text, 15 below it, and pushes the text and the title up (scroll-text.js). Here all of it is open. -->
       <div class="guide-group">
         <p class="project-bold-text">Side column</p>
         <div class="guide-pair">
@@ -315,7 +316,7 @@
             </div>
           </div>
           <div class="guide-stack">
-            <p class="project-text">Long, with a text window and links</p>
+            <p class="project-text">Long, with a growing text and links</p>
             <div class="guide-side-column">
               <div class="side-details">
                 <p class="side-year">2026</p>
@@ -325,11 +326,11 @@
               </div>
               <div class="side-about">
                 <h3 class="side-title">A songwriting app for independent musicians</h3>
-                <div class="side-text-window trac-text-window">
-                  <div class="side-text-track">
-                    <p class="side-text">trac. is an app that keeps your songwriting organized while you keep creating. Write lyrics, capture ideas, record drafts, and build your projects without the usual mess in between.
-                      <span class="side-new-paragraph">When creating music, short or quick materials are created along the way. Musicians often keep these materials across many platforms.</span></p>
-                    <p class="side-text">I designed this app end-to-end alongside a fellow designer.</p>
+                <div class="side-text-stack trac-text-stack">
+                  <p class="side-text">trac. is an app that keeps your songwriting organized while you keep creating.
+                    <span class="side-new-paragraph">I designed this app end-to-end alongside a fellow designer.</span></p>
+                  <div class="side-text-more is-shown">
+                    <p class="side-text">In our startup course, we were asked to design an app that stores information.</p>
                   </div>
                 </div>
                 <nav class="side-links" aria-label="Links (example)">

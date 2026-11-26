@@ -4,8 +4,13 @@
 // When the top of that picture reaches the middle of the window, the text moves up to that part
 // by itself, with a small bounce, however the page goes on scrolling (the movement and the bounce
 // are the transition in styles.css, .side-text-track). Scrolling back up brings the earlier part back.
+//
+// A text that grows (.side-text-stack, trac.): each paragraph after the first (.side-text-more) belongs to
+// a picture on the right too. When the top of that picture reaches the middle of the window, the paragraph
+// opens under the text (.is-shown) and pushes the text and the title up. Scrolling back up closes it again.
 
 const textWindows = [...document.querySelectorAll('.side-text-window')];
+const growingParagraphs = [...document.querySelectorAll('.side-text-stack .side-text-more')];
 
 function showParts() {
   const middle = window.innerHeight / 2;
@@ -24,6 +29,12 @@ function showParts() {
     // Move the text up so that this part starts at the top of the spot
     // (measured from the first part, which sits at the top when the text hasn't moved)
     track.style.transform = `translateY(${parts[0].offsetTop - current.offsetTop}px)`;
+  }
+
+  // The growing text: open each paragraph whose picture has reached the middle of the window
+  for (const paragraph of growingParagraphs) {
+    const picture = document.querySelector(paragraph.dataset.appearsWith);
+    paragraph.classList.toggle('is-shown', !!picture && picture.getBoundingClientRect().top <= middle);
   }
 }
 

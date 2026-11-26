@@ -1149,9 +1149,10 @@ a:focus-visible .roll-in .roll-letter,
    picture a part belongs to (data-appears-with), the text moves up to that part by itself, with a small
    bounce, however fast or slow the page is scrolled; and back when scrolling back up (scroll-text.js).
    Its height and gaps are in text pixels, like the text, so the parts always fit. */
-/* Davar Echad and Lets Talk About It: the running text in Fira Sans Condensed Light, in regular letters (not capitals) */
+/* Davar Echad, Lets Talk About It and trac.: the running text in Fira Sans Condensed Light, in regular letters (not capitals) */
 .davar-page .side-text,
-.lets-talk-page .side-text {
+.lets-talk-page .side-text,
+.trac-page .side-text {
   font-family: var(--font-condensed);
   font-weight: 300;
   text-transform: none;
@@ -1173,6 +1174,40 @@ a:focus-visible .roll-in .roll-letter,
 .side-text-window .side-text { margin-top: 0; }
 .side-text-window .side-text + .side-text { margin-top: calc(var(--paragraph-gap) * var(--t)); }
 
+/* A text that grows (trac.): the first paragraph shows from the start, and each one after it
+   (.side-text-more) opens under it when the page reaches its picture (data-appears-with, scroll-text.js:
+   .is-shown). It opens from nothing to its full height, so the text under the title gets taller,
+   and since the title and text sit at the bottom of the column, the whole text and the title go up.
+   Nothing is cut off. --paragraph-gap: the space above each new paragraph (in text pixels). */
+.side-text-stack {
+  --text-grow-time: 0.55s;   /* how long a paragraph takes to open */
+  margin-top: calc(var(--project-side-title-gap) * var(--s));
+}
+.side-text-stack .side-text { margin-top: 0; }
+.side-text-more {
+  display: grid;
+  grid-template-rows: 0fr;   /* closed: no height */
+  opacity: 0;
+  transition: grid-template-rows var(--text-grow-time) ease-out, opacity var(--text-grow-time) ease-out;
+}
+.side-text-more.is-shown {
+  grid-template-rows: 1fr;   /* open: as tall as its paragraph */
+  opacity: 1;
+}
+.side-text-more > .side-text {
+  min-height: 0;
+  overflow: hidden;
+}
+/* The space above it is inside it, so it is hidden with it while it is closed */
+.side-text-more > .side-text::before {
+  content: '';
+  display: block;
+  height: calc(var(--paragraph-gap) * var(--t));
+}
+@media (prefers-reduced-motion: reduce) {
+  .side-text-more { transition: none; } /* for people who asked for less motion: open at once */
+}
+
 /* trac.: the first lines of its last text sit closer together, as in Figma */
 .trac-tight-lines { display: block; line-height: 0.94; }
 
@@ -1193,14 +1228,14 @@ a:focus-visible .roll-in .roll-letter,
 
 /* ---------- trac. (trac.html) ---------- */
 .trac-page {
-  --project-nav-color: var(--color-trac-green);
+  --project-nav-color: var(--color-home-orange); /* the links in orange (was the project's green) */
   --project-side-details-top: 177;
   --project-side-text-width: 310;
-  --project-side-links-gap: 0;
+  --project-side-links-gap: 15;       /* 15 between the text and the links under it */
   --logo-x: 35; --logo-y: 108; --logo-width: 152.907; --logo-height: 52.793;
 }
-/* The text window: 166 high; between its parts, the space they have in Figma */
-.trac-text-window { --window-height: 166; --paragraph-gap: 52; }
+/* The growing text: 15 between its paragraphs */
+.trac-text-stack { --paragraph-gap: 15; }
 
 /* ---------- Hamotzi (hamotzi.html) ----------
    The video, and two stills side by side under it */

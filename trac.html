@@ -11,7 +11,7 @@
   <!-- Fonts from Google Fonts: DM Serif Display italic (the handwriting-style texts) and Carlito (text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=DM+Serif+Display:ital@1&family=Fira+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -71,16 +71,21 @@
     <div class="side-about">
       <h2 class="side-title">A songwriting app for independent musicians</h2>
 
-      <!-- The text is longer than its spot: three parts, each one fits in it. At the pile of papers,
-           and then at the icons, the next part moves in by itself with a small bounce (scroll-text.js) -->
-      <div class="side-text-window trac-text-window">
-        <div class="side-text-track">
-          <p class="side-text">trac. is an app that keeps your songwriting organized while you keep creating. Write lyrics, capture ideas, record drafts, and build your projects without the usual mess in between.
-            <span class="side-new-paragraph">When creating music, short or quick materials are created along the way. Musicians often keep these materials across many platforms. Inaccessible materials, lost, ruined or forgotten,<br>make the workflow more challenging.</span></p>
-          <p class="side-text" data-appears-with=".trac-notes-green">I designed this app end-to-end alongside a fellow designer. We shared responsibility across the process, from research and small-scale studies to ideation, prototyping, and defining the app’s visual language.
-            <span class="side-new-paragraph">I took lead on key parts of the design process, in development of the visual language, designing the landing page, and building the final full-flow prototype.</span></p>
-          <p class="side-text" data-appears-with=".trac-icon-mic"><span class="trac-tight-lines">too many versions too many places &amp;&nbsp; too easy to lose</span>
-            <span class="side-new-paragraph">Our Solution:<br>Write lyrics, capture ideas, record drafts and build your projects without the usual mess in between.</span></p>
+      <!-- The text grows as the page goes down: at the pile of papers, at Write / Record / Refine,
+           and at the icons, one more paragraph opens under the text (15 below it) and pushes the whole text,
+           with the title, up. Scrolling back up closes it again (scroll-text.js) -->
+      <div class="side-text-stack trac-text-stack">
+        <p class="side-text">trac. is an app that keeps your songwriting organized while you keep creating. Write lyrics, capture ideas, record drafts, and build your projects without the usual mess in between.
+          <span class="side-new-paragraph">I designed this app end-to-end alongside a fellow designer. We shared responsibility across the process, from research and small-scale studies to ideation, prototyping, and defining the app’s visual language.</span></p>
+        <div class="side-text-more" data-appears-with=".trac-notes-green">
+          <p class="side-text">In our startup course, we were asked to design an app that stores information. After our research, we detected this problem independent musicians have - ideas don't wait for a good moment. A melody hits on the bus, a line comes mid-conversation. Musicians do capture them: a voice memo here, a photo there. Then they forget it exists, or where they saved it.</p>
+        </div>
+        <div class="side-text-more" data-appears-with=".trac-write-box">
+          <p class="side-text"><span class="trac-tight-lines">too many versions<br>too many places<br>&amp;&nbsp; too easy to lose</span>
+            <span class="side-new-paragraph">Our Solution:<br>Write lyrics, capture ideas, record drafts and build your projects all in one place without the usual mess in between.</span></p>
+        </div>
+        <div class="side-text-more" data-appears-with=".trac-icon-mic">
+          <p class="side-text">I took lead on key parts of the design process, in development of the visual language, designing the landing page, and building the final full-flow prototype.</p>
         </div>
       </div>
 
