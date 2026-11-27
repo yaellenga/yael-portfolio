@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yael Lenga — Process (suggestion)</title>
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+  <!-- Fonts from Google Fonts: DM Serif Display italic (the handwriting-style texts), Carlito (labels),
+       Fira Sans Condensed (the big week numbers, Bold; the running text, Light) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Carlito:wght@400;700&family=DM+Serif+Display:ital@1&family=Fira+Sans+Condensed:wght@300;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="process-page">
+
+  <!-- SUGGESTION for the process page (process.html stays as it is until you decide).
+       Like a project page, the screen is split: on the left the dry facts stay still
+       (the weeks, with the one you are looking at in orange), and on the right the weeks scroll by,
+       each one with its screenshots from Figma on a colored box (the home page's colors). From the Figma frame
+       "Desktop / Process (suggestion)" (564:2).
+
+       HOW TO ADD A NEW WEEK
+       1. Copy one <section class="process-week"> block and paste it at the bottom.
+       2. Change its id (week-8…), the date, the title and the screenshots.
+       3. Pick its color: style="--week-color: var(--color-hero-…)"; on a dark color add "is-dark" to its class (white captions).
+       4. Add a line for it in the list on the left (<a href="#week-8">…</a>). -->
+
+  <!-- At the top, all the time: back to the home page, and to the about page -->
+  <header class="process-top">
+    <a class="process-top-link handwriting-link" href="index.html">More Cool Stuff</a>
+    <a class="process-top-link handwriting-link" href="about.html" data-hover-text="Yael Lenga">About Me</a>
+  </header>
+
+  <div class="process-split">
+
+    <!-- LEFT: stays still -->
+    <aside class="process-side">
+      <h1 class="process-side-title">process</h1>
+      <!-- The weeks: the one on the screen now is orange, its square bigger (process-weeks.js); a click scrolls to it -->
+      <nav class="process-week-list" aria-label="Weeks">
+        <a class="process-week-link" href="#week-1" style="--week-color: var(--color-hero-1-left)"><span class="process-week-link-number">01</span> 19.10 <span class="process-week-link-name">coming soon</span></a>
+        <a class="process-week-link" href="#week-2" style="--week-color: var(--color-hero-2-right)"><span class="process-week-link-number">02</span> 26.10 <span class="process-week-link-name">two directions</span></a>
+        <a class="process-week-link" href="#week-3" style="--week-color: var(--color-hero-3-right)"><span class="process-week-link-number">03</span> 02.11 <span class="process-week-link-name">first pages</span></a>
+        <a class="process-week-link" href="#week-4" style="--week-color: var(--color-hero-4-left)"><span class="process-week-link-number">04</span> 09.11 <span class="process-week-link-name">the projects come in</span></a>
+        <a class="process-week-link" href="#week-5" style="--week-color: var(--color-hero-2-left)"><span class="process-week-link-number">05</span> 16.11 <span class="process-week-link-name">splitting the screen</span></a>
+        <a class="process-week-link" href="#week-6" style="--week-color: var(--color-hero-3-left)"><span class="process-week-link-number">06</span> 23.11 <span class="process-week-link-name">final frames</span></a>
+        <a class="process-week-link" href="#week-7" style="--week-color: var(--color-hero-1-right)"><span class="process-week-link-number">07</span> 30.11 <span class="process-week-link-name">final hand-in</span></a>
+      </nav>
+    </aside>
+
+    <!-- RIGHT: the weeks scroll by -->
+    <main class="process-weeks">
+
+      <section class="process-week is-dark" id="week-1" style="--week-color: var(--color-hero-1-left)">
+        <header class="process-week-head">
+          <p class="process-week-date"><time datetime="2026-10-19">19/10</time></p>
+          <h2 class="process-week-title">coming soon</h2>
+        </header>
+        <div class="process-week-box">
+          <figure class="process-shot"><img src="images/process-w1-coming-soon.webp" width="1440" height="1024" alt="The coming soon page: a word search with the words coming, soon, portfolio and stay tuned"><figcaption>coming soon page</figcaption></figure>
+          <figure class="process-shot"><img src="images/process-w1-references.webp" width="1440" height="936" alt="A board of references: portfolio sites and posters"><figcaption>references</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="process-week" id="week-2" style="--week-color: var(--color-hero-2-right)">
+        <header class="process-week-head">
+          <p class="process-week-date"><time datetime="2026-10-26">26/10</time></p>
+          <h2 class="process-week-title">two directions</h2>
+        </header>
+        <div class="process-week-box">
+          <figure class="process-shot"><img src="images/process-w2-direction-1.webp" width="1301" height="870" loading="lazy" alt="Direction 1: a dark page presenting the trac. project"><figcaption>direction 1</figcaption></figure>
+          <figure class="process-shot"><img src="images/process-w2-direction-2.webp" width="1411" height="944" loading="lazy" alt="Direction 2: colored blocks with the trac. project"><figcaption>direction 2</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="process-week is-dark" id="week-3" style="--week-color: var(--color-hero-3-right)">
+        <header class="process-week-head">
+          <p class="process-week-date"><time datetime="2026-11-02">02/11</time></p>
+          <h2 class="process-week-title">first pages</h2>
+        </header>
+        <div class="process-week-box">
+          <figure class="process-shot"><img src="images/process-w3-home.webp" width="1440" height="982" loading="lazy" alt="A home page of colored blocks, with Good stuff by Yael Lenga at the top"><figcaption>home</figcaption></figure>
+          <figure class="process-shot"><img src="images/process-w3-project.webp" width="1214" height="812" loading="lazy" alt="A first project page for trac., with colored blocks"><figcaption>project page</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="process-week is-dark" id="week-4" style="--week-color: var(--color-hero-4-left)">
+        <header class="process-week-head">
+          <p class="process-week-date"><time datetime="2026-11-09">09/11</time></p>
+          <h2 class="process-week-title visually-hidden">the projects come in</h2>
+        </header>
+        <div class="process-week-box">
+          <figure class="process-shot"><img src="images/process-w4-home.webp" width="1440" height="964" loading="lazy" alt="The home page with Lets Talk About It: a drawing of a tree on green"><figcaption>home</figcaption></figure>
+          <figure class="process-shot"><img src="images/process-w4-trac.webp" width="1214" height="812" loading="lazy" alt="The trac. project page: the text on the left, the app on pink on the right"><figcaption>trac.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="process-week" id="week-5" style="--week-color: var(--color-hero-2-left)">
+        <header class="process-week-head">
+          <p class="process-week-date"><time datetime="2026-11-16">16/11</time></p>
+          <h2 class="process-week-title visually-hidden">splitting the screen</h2>
+        </header>
+        <div class="process-week-box process-week-box-one">
+          <figure class="process-shot"><img src="images/process-w5-trac.webp" width="1442" height="965" loading="lazy" alt="The trac. project page split in two: text on the left, the app on pink on the right"><figcaption>trac.</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="process-week" id="week-6" style="--week-color: var(--color-hero-3-left)">
+        <header class="process-week-head">
+          <p class="process-week-date"><time datetime="2026-11-23">23/11</time></p>
+          <h2 class="process-week-title visually-hidden">final frames</h2>
+        </header>
+        <div class="process-week-box">
+          <figure class="process-shot"><img src="images/process-w6-home.webp" width="1440" height="964" loading="lazy" alt="The final home page: orange and cream halves, with the big text across both"></figure>
+          <figure class="process-shot"><img src="images/process-w6-trac.webp" width="1220" height="816" loading="lazy" alt="The final trac. page: the app on yellow"></figure>
+          <figure class="process-shot"><img src="images/process-w6-davar.webp" width="1440" height="964" loading="lazy" alt="The Davar Echad page: the logo on white"></figure>
+          <figure class="process-shot"><img src="images/process-w6-scroll.webp" width="1395" height="934" loading="lazy" alt="The home page scrolling down: the projects in colored squares"></figure>
+        </div>
+      </section>
+
+      <section class="process-week" id="week-7" style="--week-color: var(--color-hero-1-right)">
+        <header class="process-week-head">
+          <p class="process-week-date"><time datetime="2026-11-30">30/11</time></p>
+          <h2 class="process-week-title visually-hidden">final hand-in</h2>
+        </header>
+        <div class="process-week-box">
+          <figure class="process-shot"><img src="images/process-w7-home.webp" width="1395" height="936" loading="lazy" alt="The home page in blue and pink, with the computer floating on it"></figure>
+          <figure class="process-shot"><img src="images/process-w7-shot-2.webp" width="1716" height="1152" loading="lazy" alt="The final trac. page"></figure>
+          <figure class="process-shot"><img src="images/process-w7-shot-1.webp" width="1688" height="1152" loading="lazy" alt="The Hamotzi page: a hand rolling up a white sleeve over a tattoo"></figure>
+          <figure class="process-shot"><img src="images/process-w7-shot-3.webp" width="1716" height="1152" loading="lazy" alt="The phone frames: home, about and trac."></figure>
+          <figure class="process-shot"><img src="images/process-w6-davar.webp" width="1440" height="964" loading="lazy" alt="The Davar Echad page: the logo on white"></figure>
+          <figure class="process-shot"><img src="images/process-w6-scroll.webp" width="1395" height="934" loading="lazy" alt="The home page scrolling down: the projects in colored squares"></figure>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="letter-roll.js"></script>
+  <script src="process-weeks.js"></script>
+</body>
+</html>

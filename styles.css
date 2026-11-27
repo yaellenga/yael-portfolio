@@ -3069,3 +3069,193 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
   height: calc((var(--video-enlarge-size) + 40) * var(--u));
   background-color: var(--color-black);
 }
+
+/* =========================================================
+   Process page — SUGGESTION (process-suggestion.html), from the Figma frame "Desktop / Process (suggestion)" (564:2)
+   Split like a project page: on the left the weeks stay still, on the right they scroll by,
+   each with its Figma screenshots on a box in the week's color (--week-color, the home page's colors).
+   ========================================================= */
+.process-page {
+  --process-side-width: calc(360 * var(--u));   /* the still column on the left, as wide as on the project pages */
+  --process-top-height: calc(120 * var(--u));   /* the strip at the top, as on the project pages */
+  --process-gutter: calc(40 * var(--u));        /* the space on the right of the weeks */
+  margin: 0;
+  background-color: var(--color-project-cream);
+  color: var(--color-black);
+}
+
+/* At the top, all the time: "More Cool Stuff" and "About Me", in orange handwriting, on a cream strip */
+.process-top {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  height: var(--process-top-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: calc(18 * var(--u)) calc(35 * var(--u)) 0;
+  background-color: var(--color-project-cream);
+}
+.process-top-link {
+  font-family: var(--font-handwriting);
+  font-style: var(--font-handwriting-style);
+  font-size: calc(43 * var(--u));
+  color: var(--color-home-orange);
+}
+
+.process-split { display: flex; }
+
+/* LEFT: stays still under the top strip: "PROCESS" at the top, the weeks at the bottom */
+.process-side {
+  position: sticky;
+  top: var(--process-top-height);
+  flex: 0 0 var(--process-side-width);
+  height: calc(100vh - var(--process-top-height));
+  box-sizing: border-box;
+  padding: 0 calc(25 * var(--u)) calc(40 * var(--u)) calc(35 * var(--u));
+  display: flex;
+  flex-direction: column;
+}
+.process-side-title {
+  margin: 0;
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: calc(72 * var(--u));
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+/* The weeks: number and date bold, the name regular, all capitals. A square in the week's color before each;
+   the one on the screen now is orange, its square bigger (16 instead of 10). */
+.process-week-list {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: calc(10 * var(--u));
+}
+.process-week-link {
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--u));
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: max(var(--text-min-size), calc(14 * var(--u)));
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-black);
+  transition: color 0.2s ease-out;
+}
+.process-week-link::before {
+  content: '';
+  flex: none;
+  width: calc(10 * var(--u));
+  height: calc(10 * var(--u));
+  background-color: var(--week-color);
+  transition: transform 0.2s ease-out;
+}
+.process-week-link-number { min-width: 2ch; }
+.process-week-link-name { font-weight: 400; }
+.process-week-link:hover,
+.process-week-link.is-current { color: var(--color-home-orange); }
+.process-week-link.is-current::before { transform: scale(1.6); }
+
+/* RIGHT: the weeks, one under the other, 120 apart */
+.process-weeks {
+  flex: 1;
+  min-width: 0;
+  padding: var(--process-top-height) var(--process-gutter) calc(160 * var(--u)) 0;
+}
+.process-week { scroll-margin-top: var(--process-top-height); }
+.process-week + .process-week { margin-top: calc(120 * var(--u)); }
+
+/* The week's head: its date, big, in the week's color, and next to it its name (lined up at the top) */
+.process-week-head {
+  display: flex;
+  align-items: flex-start;
+  gap: calc(20 * var(--u));
+}
+.process-week-date {
+  margin: 0;
+  font-family: var(--font-condensed);
+  font-weight: 700;
+  font-size: calc(160 * var(--u));
+  line-height: 0.78;
+  color: var(--week-color);
+}
+.process-week-title {
+  margin: 0;
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: calc(28 * var(--u));
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* The box in the week's color, 20 under the head, with the screenshots on it two by two
+   (one alone is bigger: .process-week-box-one) */
+.process-week-box {
+  margin-top: calc(20 * var(--u));
+  padding: calc(40 * var(--u));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(30 * var(--u));
+  background-color: var(--week-color);
+}
+.process-week-box-one { grid-template-columns: 1fr; padding-inline: calc(120 * var(--u)); }
+
+/* One screenshot, and its name under it (white on the dark boxes: .is-dark) */
+.process-shot { margin: 0; }
+.process-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1440 / 964;            /* all the same height, like screens */
+  object-fit: cover;
+  object-position: top;
+}
+.process-shot figcaption {
+  margin-top: calc(8 * var(--u));
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: max(var(--text-min-size), calc(12 * var(--u)));
+  text-transform: uppercase;
+}
+.process-week.is-dark .process-shot figcaption { color: var(--color-white); }
+
+@media (prefers-reduced-motion: reduce) {
+  .process-week-link, .process-week-link::before { transition: none; }
+}
+
+/* PHONE (screen held upright): one column. The top links stay at the top on a cream strip;
+   the weeks are a row under "PROCESS" (number and date only); the screenshots are one under the other. */
+@media (orientation: portrait) {
+  .process-page {
+    --u: calc(100vw / 393);
+    --process-top-height: calc(95 * var(--u));
+    --process-gutter: calc(25 * var(--u));
+  }
+  .process-top { padding: calc(42 * var(--u)) calc(25 * var(--u)) 0; }
+  .process-top-link { font-size: max(var(--text-min-size), calc(16 * var(--u))); }
+  .process-split { flex-direction: column; }
+  .process-side {
+    position: static;
+    height: auto;
+    padding: var(--process-top-height) var(--process-gutter) 0;
+  }
+  .process-side-title { font-size: calc(56 * var(--u)); }
+  .process-week-list {
+    margin-top: calc(20 * var(--u));
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: calc(10 * var(--u)) calc(16 * var(--u));
+  }
+  .process-week-link { white-space: nowrap; }
+  .process-week-link-name { display: none; }
+  .process-weeks { padding: calc(40 * var(--u)) 0 calc(80 * var(--u)); }
+  .process-week-head { padding-inline: var(--process-gutter); }
+  .process-week + .process-week { margin-top: calc(70 * var(--u)); }
+  .process-week-date { font-size: calc(90 * var(--u)); }
+  .process-week-title { font-size: max(var(--text-min-size), calc(18 * var(--u))); }
+  .process-week-box,
+  .process-week-box-one { grid-template-columns: 1fr; padding: calc(25 * var(--u)); gap: calc(20 * var(--u)); }
+}
