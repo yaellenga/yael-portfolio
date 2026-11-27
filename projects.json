@@ -1,0 +1,311 @@
+{
+  "about": "The projects on the site and their pictures, with the alt text of each picture (what a screen reader says instead of the picture). For now it is only a record: the pages don't read it; when an alt changes here, change it in the page too. shown: where the picture is on the site (desktop, phone or both). Pictures that are only decoration (the mice, the tab cut-outs, the changing words, the animations over the Davar Echad brand book) are not listed: their alt stays empty.",
+  "projects": [
+    {
+      "id": "trac",
+      "name": "trac.",
+      "page": "trac.html",
+      "year": 2025,
+      "type": [
+        "ux\\ui",
+        "app design"
+      ],
+      "partner": "Mia Gaon",
+      "images": [
+        {
+          "src": "images/trac-logo.svg",
+          "alt": "trac.",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/trac-phone-logo.svg",
+          "alt": "trac.",
+          "shown": "phone"
+        },
+        {
+          "src": "images/trac-small-screens.webp",
+          "alt": "Five screens of the trac. app: home, new project, a song, its versions, and all projects",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/trac-phone-app-screens.webp",
+          "alt": "Screens of the trac. app on a phone",
+          "shown": "phone",
+          "note": "inside the small-screen buttons, which have their own labels, so in the HTML its alt stays empty"
+        },
+        {
+          "src": "images/trac-phone-screen-projects.webp",
+          "alt": "A song in the trac. app: \"welcome to the black parade\", with its lyrics, chords and voice recordings",
+          "shown": "phone",
+          "note": "inside a small-screen button, which has its own label, so in the HTML its alt stays empty"
+        },
+        {
+          "src": "images/trac-notes.webp",
+          "alt": "Crumpled paper notes and sticky notes with handwritten lyrics",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/trac-phone-notes.webp",
+          "alt": "Crumpled paper notes with handwritten lyrics",
+          "shown": "phone"
+        },
+        {
+          "src": "images/trac-word-write.svg",
+          "alt": "Write",
+          "shown": "both"
+        },
+        {
+          "src": "images/trac-word-record.svg",
+          "alt": "Record",
+          "shown": "both"
+        },
+        {
+          "src": "images/trac-word-refine.svg",
+          "alt": "Refine",
+          "shown": "both"
+        },
+        {
+          "src": "images/trac-icon-logo.svg",
+          "alt": "Icons from the app: a microphone, a drum, headphones and the trac. logo",
+          "shown": "both",
+          "note": "one sentence for all four icons, on the first of them; the other three (mic, drum, headphones) stay empty"
+        },
+        {
+          "src": "images/trac-banner-cream.webp",
+          "alt": "Songwriting, but simpler. Never lose a beat again.",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/trac-phone-banner-title.svg",
+          "alt": "Songwriting, but simpler.",
+          "shown": "phone"
+        },
+        {
+          "src": "images/trac-phone-tag-text.svg",
+          "alt": "Never lose a beat again.",
+          "shown": "phone"
+        },
+        {
+          "src": "images/trac-phone-computer.webp",
+          "alt": "The trac. landing page on a computer: anywhere, anytime",
+          "shown": "phone"
+        }
+      ]
+    },
+    {
+      "id": "hamotzi",
+      "name": "Hamotzi",
+      "nameHebrew": "המוציא",
+      "page": "hamotzi.html",
+      "year": 2024,
+      "type": [
+        "title sequence",
+        "video art direction & filming"
+      ],
+      "partner": "Yuval Israel",
+      "images": [
+        {
+          "src": "images/hamotzi-logo-small.webp",
+          "alt": "Hamotzi — המוציא",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/hamotzi-phone-logo.webp",
+          "alt": "Hamotzi — המוציא",
+          "shown": "phone"
+        },
+        {
+          "src": "images/hamotzi-video-frame.webp",
+          "alt": "The HOT logo, the first frame of the title sequence",
+          "shown": "both",
+          "note": "the poster of the video: a video poster has no alt, the video itself has its label (aria-label)"
+        },
+        {
+          "src": "images/hamotzi-kan.webp",
+          "alt": "The series Hamotzi on the Kan streaming site: its title over a hand holding a silver kiddush cup, with four episodes under it",
+          "shown": "both"
+        },
+        {
+          "src": "images/hamotzi-street-poster.webp",
+          "alt": "The poster of the series on a street billboard: a hand holding a silver kiddush cup on a white tablecloth",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/hamotzi-still-2.webp",
+          "alt": "A poker chip on a lace tablecloth, with an actor's name in Hebrew",
+          "shown": "both"
+        },
+        {
+          "src": "images/hamotzi-still-1.webp",
+          "alt": "A challah and a coin on a lace tablecloth, with an actor's name in Hebrew",
+          "shown": "both"
+        },
+        {
+          "src": "images/hamotzi-compare-3.webp",
+          "alt": "A hand stained red on a white lace tablecloth, with an actor's name in Hebrew",
+          "shown": "both"
+        },
+        {
+          "src": "images/hamotzi-compare-4.webp",
+          "alt": "Wine poured into a silver cup on a white tablecloth, with an actor's name in Hebrew",
+          "shown": "both"
+        },
+        {
+          "src": "images/hamotzi-process-camera.webp",
+          "alt": "Filming on set: a camera on a tripod over a table with a challah",
+          "shown": "both"
+        },
+        {
+          "src": "images/hamotzi-process-1.webp",
+          "alt": "Hands shuffling cards over stacks of poker chips on a green table",
+          "shown": "both"
+        },
+        {
+          "src": "images/hamotzi-process-2.webp",
+          "alt": "A slice of bread on a wooden table, with crumbs flying",
+          "shown": "both"
+        },
+        {
+          "src": "images/hamotzi-process-3.webp",
+          "alt": "Red wine poured into a glass",
+          "shown": "both"
+        },
+        {
+          "src": "images/hamotzi-process-4.webp",
+          "alt": "Old silver Shabbat dishes: a plate, a tray, cups and candlesticks",
+          "shown": "both"
+        }
+      ]
+    },
+    {
+      "id": "lets-talk",
+      "name": "Lets Talk About It",
+      "nameHebrew": "בואי נדבר על זה",
+      "page": "lets-talk.html",
+      "year": 2026,
+      "type": [
+        "podcast website",
+        "web&app design",
+        "illustration"
+      ],
+      "partner": "Hillel Buchris",
+      "images": [
+        {
+          "src": "images/lets-talk-logo-small.svg",
+          "alt": "Lets Talk About It — בואי נדבר על זה",
+          "shown": "both"
+        },
+        {
+          "src": "images/lets-talk-phone-computer.webp",
+          "alt": "",
+          "shown": "phone",
+          "note": "decorative: the frame of the computer; the website video plays on it"
+        },
+        {
+          "src": "images/lets-talk-hosts.webp",
+          "alt": "יורם: יורם יובל הוא פסיכיאטר, פסיכואנליטיקאי וחוקר מוח, מהקולות הבולטים בישראל בתחום הנפש והרגש. הוא מרצה בפקולטה לרפואה באוניברסיטה העברית בירושלים וחוקר את הקשר בין המוח, רגשות והתנהגות אנושית - במיוחד בתחומי האהבה והקשרים בין אנשים. נעמי: נעמי בת 10, בתו של יורם יובל. ילדה סקרנית, דעתנית ומלאת דמיון, עם יכולת נדירה לשאול שאלות פשוטות שנוגעות בדיוק בדברים הכי מורכבים. מתוך התבוננות חדה בבני אדם ובעולם שסביבה, היא מעלה מחשבות מפתיעות על טוב ורע, פחד, אהבה, חברות ותקווה - ועל הפער בין מה שאנשים אומרים למה שהם באמת מרגישים.",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/lets-talk-phone-hosts.webp",
+          "alt": "יורם: יורם יובל הוא פסיכיאטר, פסיכואנליטיקאי וחוקר מוח, מהקולות הבולטים בישראל בתחום הנפש והרגש. הוא מרצה בפקולטה לרפואה באוניברסיטה העברית בירושלים וחוקר את הקשר בין המוח, רגשות והתנהגות אנושית - במיוחד בתחומי האהבה והקשרים בין אנשים. נעמי: נעמי בת 10, בתו של יורם יובל. ילדה סקרנית, דעתנית ומלאת דמיון, עם יכולת נדירה לשאול שאלות פשוטות שנוגעות בדיוק בדברים הכי מורכבים. מתוך התבוננות חדה בבני אדם ובעולם שסביבה, היא מעלה מחשבות מפתיעות על טוב ורע, פחד, אהבה, חברות ותקווה - ועל הפער בין מה שאנשים אומרים למה שהם באמת מרגישים.",
+          "shown": "phone"
+        },
+        {
+          "src": "images/lets-talk-phone-1.webp",
+          "alt": "The upcoming events page, in Hebrew, with a ticket button for each event",
+          "shown": "both"
+        },
+        {
+          "src": "images/lets-talk-phone-2.webp",
+          "alt": "An episode page: an illustration of a father and son on a green background, with the episode player",
+          "shown": "both"
+        },
+        {
+          "src": "images/lets-talk-phone-3.webp",
+          "alt": "The list of episodes of season 1, in Hebrew, with a summary and a play button",
+          "shown": "both"
+        },
+        {
+          "src": "images/lets-talk-phone-4.webp",
+          "alt": "An episode page: an illustration of a boy pulling a friend on a float by the pool, with the episode player",
+          "shown": "both"
+        }
+      ]
+    },
+    {
+      "id": "davar-echad",
+      "name": "Davar Echad",
+      "nameHebrew": "דבר אחד",
+      "page": "davar-echad.html",
+      "year": 2026,
+      "type": [
+        "branding"
+      ],
+      "partner": "Yael Gosling",
+      "images": [
+        {
+          "src": "images/davar-logo.webp",
+          "alt": "Davar Echad — דבר אחד",
+          "shown": "both"
+        },
+        {
+          "src": "images/davar-brand-video-poster.webp",
+          "alt": "The Davar Echad logo on white",
+          "shown": "both",
+          "note": "the poster of the video: a video poster has no alt, the video itself has its label (aria-label)"
+        },
+        {
+          "src": "images/davar-book-1.webp",
+          "alt": "Brand book: the idea — one news item from each subject, quick and accessible; the values (quick, accessible, social) and the color palette",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/davar-book-2.webp",
+          "alt": "Brand book: the shape language of speech bubbles and arrows, and posters made of them",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/davar-book-3.webp",
+          "alt": "Brand book: the typography, and posters with the brand's slogans in Hebrew",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/davar-book-4.webp",
+          "alt": "Brand book: the newspaper, a newspaper stand, a laptop and a phone with the brand",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/davar-book-5.webp",
+          "alt": "Brand book: a billboard in the subway, printed tape with the brand's pattern, and a truck with the brand",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/davar-book-6.webp",
+          "alt": "Brand book: a truck in the brand's colors, and the logo at the end",
+          "shown": "desktop"
+        },
+        {
+          "src": "images/davar-phone-values.svg",
+          "alt": "מהיר, נגיש, חברתי — quick, accessible, social",
+          "shown": "phone"
+        },
+        {
+          "src": "images/davar-phone-comp-poster.webp",
+          "alt": "The brand's arrows in its colors, with the news subjects",
+          "shown": "phone"
+        },
+        {
+          "src": "images/davar-phone-posters.webp",
+          "alt": "Three posters of the brand: speech bubbles and arrows in the brand's colors",
+          "shown": "phone"
+        },
+        {
+          "src": "images/davar-phone-grid.webp",
+          "alt": "The brand in use: a stack of newspapers, the newspaper, a laptop and a phone with the brand, a billboard in the subway, printed tape and a truck",
+          "shown": "phone"
+        }
+      ]
+    }
+  ]
+}
