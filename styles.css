@@ -122,6 +122,10 @@
   /* Home page sizes (in Figma pixels × --u) */
   --column-width: calc(720 * var(--u));
   --handwriting-size: calc(55 * var(--u));
+  /* "Cool stuff by" and "Yael Lenga" at the top of the home and about pages: the same size as "More Cool Stuff" and
+     "About Me" on the project pages (--project-handwriting-size: 40.6125 × --t, which stops growing at 1440 wide
+     and stops shrinking at 10/12 of it) */
+  --nav-handwriting-size: calc(40.6125 * clamp(calc(10px / 12), 100vw / 1440, 1px));
   --label-size: calc(20 * var(--u));
   --year-size: calc(15 * var(--u));
 
@@ -501,6 +505,12 @@ body {
   line-height: 0.9;
   white-space: nowrap; /* "Yael Lenga" and "Cool stuff by" stay on one line, whatever the font */
 }
+/* Home: "Cool stuff by" and "Yael Lenga" at the top, as big as on the project pages */
+.cool-stuff,
+.home-name { font-size: var(--nav-handwriting-size); }
+/* "Cool stuff by" ends just before the middle, so it keeps the same small space from "Yael Lenga" at any size */
+.cool-stuff,
+.about-cool-stuff { text-align: right; }
 
 .cool-stuff {
   --width: 292; --y: 25;
@@ -2399,7 +2409,7 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
   font-family: var(--font-handwriting);
   font-style: var(--font-handwriting-style);
   font-weight: 400;
-  font-size: var(--handwriting-size);
+  font-size: var(--nav-handwriting-size);
   line-height: 0.9;
   white-space: nowrap;
 }
@@ -2583,7 +2593,7 @@ iframe.mockup-video { aspect-ratio: 1920 / 1046; border-left: 0; border-right: 0
   to { opacity: 0; }
 }
 
-.about-cool-stuff { --x: calc(720 - var(--name-gap-half) - 291.4); --y: 25; } /* as on the home page */
+.about-cool-stuff { --x: calc(720 - var(--name-gap-half) - 291.4); --y: 25; --width: 291.4; } /* as on the home page */
 .about-my-name    { --x: calc(720 + var(--name-gap-half)); --y: 25; }
 .about-info       { --x: 745;  --y: 178; --width: 453; }
 .about-reach-out  { --y: 533; }                         /* "reach out:" */
